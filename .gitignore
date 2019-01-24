@@ -6,7 +6,7 @@ dist
 # Node Modules #
 ################
 node_modules
-.*/**/\.zip
+webDev_backup.zip
 .*/**/node_modules
 
 # Log Files #

@@ -1,0 +1,44 @@
+<!--
+/*
+* COPYRIGHT. HSBC HOLDINGS PLC 2017. ALL RIGHTS RESERVED.
+
+* This software is only to be used for the purpose for which it has been
+* provided. No part of it is to be reproduced, disassembled, transmitted,
+* stored in a retrieval system nor translated in any human or computer
+* language in any way or for any other purposes whatsoever without the
+* prior written consent of HSBC Holdings plc.
+
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="module2.js"></script>-->
+</head>
+<body>
+
+
+<h1>INDEX2</h1>
+<div class="test"> <h1>INDEX1</h1></div>
+<h1>INDEX3</h1>
+
+
+<script>
+
+
+
+    document.querySelector('.test h1').style.height='234px'
+    console.log(document.querySelector('h1').clientHeight)
+    document.querySelectorAll('h1')[2].style.height=document.querySelector('h1').clientHeight+'px';
+
+    document.querySelector('.test h1').onclick=function(){
+        window.close();
+    }
+
+</script>
+
+</body>
+</html>

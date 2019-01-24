@@ -1,0 +1,17 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "webpack test",
+  "main": "2000",
+  "scripts": {
+    "build": "webpack"
+  },
+  "keywords": [
+    "123456"
+  ],
+  "author": "yao",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.5"
+  }
+}

@@ -1,0 +1,68 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        const getUserAgent = () => {
+            const u = navigator.userAgent.toLowerCase() || navigator.appVersion.toLowerCase();
+
+            return ({
+                    // toString: u,
+                    version: (u.match(/.+(?:rv|it|ra|ie)[/: ]([\d.]+)/) || [])[1],
+                    msie: /(msie|trident|edge)/.test(u) && !/opera/.test(u), //IE
+                    mozilla: /mozilla/.test(u) && !/(compatible|webkit)/.test(u), //Firefox
+                    safari: /safari/.test(u) && !/chrome/.test(u), //Safari
+                    chrome: /chrome/.test(u), //Chrome
+                    opera: /opera/.test(u), //Opera
+                    presto: u.indexOf('presto/') > -1, //Presto
+                    webKit: u.indexOf('applewebkit/') > -1, //Webkit
+                    gecko: u.indexOf('gecko/') > -1 && u.indexOf('khtml') === -1, //Gecko
+                    mobile: !!u.match(/applewebkit.*mobile.*/) || !!u.match(/windows phone.*iemobile.*/),
+                    iOS: !!u.match(/\(i[^;]+;( u;)? cpu.+mac os x/),
+                    aOS: u.indexOf('android') > -1,
+                    winPhone: !!u.match(/windows phone.*iemobile.*/),
+                    iPhone: u.indexOf('iphone') > -1,
+                    iPad: u.indexOf('ipad') > -1,
+                    webApp: !!u.match(/applewebkit.*mobile.*/) && u.indexOf('safari/') === -1,
+                    language: (navigator.browserLanguage || navigator.language).toLowerCase(),
+                    IEVersion: function () {
+                        let verNum = null;
+                        if (this.msie === true) {
+                            let v = u.match(/msie (\d+).(\d+)/);
+                            if (v !== null) {
+                                verNum = [parseInt(v[1] || 0, 10)];
+                            } else {
+                                v = u.match(/rv:/);
+                                if (v !== null) {
+                                    if (v.index > -1) verNum = u.substr(v.index + 3, 2);
+                                } else {
+                                    v = u.match(/edge/);
+                                    if (v.index > -1) verNum = u.substr(v.index + 5, 2);
+                                }
+                            }
+                        }
+                        return verNum;
+                    },
+                    iOSVersion: function () {
+                        const v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+                        if (v !== null) return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+                        return v;
+                    }
+                }
+            );
+        };
+
+        console.log(getUserAgent())
+    </script>
+</head>
+<body>
+
+</body>
+</html>

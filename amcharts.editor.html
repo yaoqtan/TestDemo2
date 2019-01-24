@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>date series, monthly | amCharts</title>
+	<meta name="description" content="date" />
+
+	<!-- amCharts javascript sources -->
+	<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+	<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+
+	<!-- amCharts plugins -->
+	<script type="text/javascript" src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+	<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css">
+<!--"menu": ["CSV", "XLSX",
+                        {
+                            "format": "Print",
+                            "label": "Print"
+                        }]-->
+	<!-- amCharts javascript code -->
+	<script type="text/javascript">
+        AmCharts.makeChart("chartdiv",
+            {
+                "type": "serial",
+                "categoryField": "category",
+                "startDuration": ".2",
+                "export": {
+                    "enabled": true,
+                },
+				"fontSize":20,
+                "responsive": {
+                    "enabled": true,
+                    "rules": [
+                        {
+                            "maxWidth": 1023,
+                            "fontSize": 14,
+                            "overrides": {
+                                "fontSize": 14,
+                                "categoryAxis": {
+
+                                    "fontSize": 14
+
+                                }
+
+                            }
+                        }
+                    ]
+                },
+
+                "titles": [
+                    {
+                        "id": "Title-1",
+                        "size": 15,
+                        "text": ""
+                    }
+                ],
+                "colors": [
+                    "#6E6A82",
+                    "#8d8d8d",
+                    "#5C5C5C",
+                    "#4a4084",
+
+                ],
+                "categoryAxis": {
+                    "gridPosition": "start",
+                    "tickPosition":"start",
+                    "gridThickness":0,
+                    "title":"Category Title",
+                    "titleFontSize":"18"
+                },
+                "trendLines": [],
+                "graphs": [
+                    {
+                        "balloonText": "[[title]] of [[category]]:[[value]]",
+                        "fillAlphas": 1,
+                        "id": "AmGraph-1",
+                        "title": "graph 1",
+                        "type": "column",
+                        "valueField": "column-1"
+                    },
+                    {
+                        "balloonText": "[[title]] of [[category]]:[[value]]",
+                        "fillAlphas": 1,
+                        "id": "AmGraph-2",
+                        "title": "graph 2",
+                        "type": "column",
+                        "valueField": "column-2"
+                    },
+                    {
+                        "balloonText": "[[title]] of [[category]]:[[value]]",
+                        "fillAlphas": 1,
+                        "id": "AmGraph-3",
+                        "title": "graph 3",
+                        "type": "column",
+                        "valueAxis": "ValueAxis-3",
+                        "valueField": "column-3"
+                    },
+                    {
+                        "animationPlayed": true,
+                        "balloonText": "[[title]] of [[category]]:[[value]]",
+                        "bullet": "round",
+                        "bulletBorderAlpha": 1,
+                        "bulletBorderColor": "#4a4084",
+                        "bulletBorderThickness": 3,
+                        "bulletColor": "#FFF",
+                        "id": "AmGraph-4",
+                        "labelText": "[[value]]",
+                        "lineThickness": 2,
+                        "title": "graph 4",
+                        "valueField": "column-4",
+
+                    }
+                ],
+                "guides": [],
+                "valueAxes": [
+                    {
+                        "id": "ValueAxis-1",
+                        "title": "Axis title",
+                        "axisThickness": 0,
+                        "tickLength": 0
+
+                    },
+                    {
+                        "id": "ValueAxis-1",
+                        "position": "right",
+                        "gridAlpha": 0,
+                        "title": "Axis title1",
+                        "axisThickness": 0,
+                        "tickLength": 0
+                    }
+                ],
+
+                "allLabels": [
+                    {
+                        "id": "Label-1",
+						"size":14,
+                        "text": "MWh",
+                        "x": "0",
+                        "y": 0,
+                    },
+                    {
+                        "id": "Label-1",
+                        "size":14,
+                        "text": "kWh/unit",
+                        "x": "90%",
+                        "y": 0,
+                    }
+                ],
+                "balloon": {},
+                "legend": {
+                    "enabled": true,
+                    "useGraphSettings": true,
+					"align":"center"
+                },
+                "dataProvider": [
+                    {
+                        "category": "category 1",
+                        "column-1": "21",
+                        "column-2": "20",
+                        "column-3": "12",
+                        "column-4": "14"
+                    },
+                    {
+                        "category": "category 2",
+                        "column-1": "11",
+                        "column-2": "6",
+                        "column-3": "12",
+                        "column-4": "4"
+                    },
+                    {
+                        "category": "category 3",
+                        "column-1": "15",
+                        "column-2": "12",
+                        "column-3": "11",
+                        "column-4": "16"
+                    }
+                ]
+            }
+        );
+
+	</script>
+</head>
+<body>
+<div  id="chartdiv" style="height: 400px; background-color: #FFFFFF;" ></div>
+<div id="btn">button</div>
+<div id = "print"> Print</div>
+
+
+<script>
+    let btn=document.getElementById('btn');
+    let print = document.getElementById('print');
+    print.onclick=function () {
+		window.print();
+    };
+    console.log(btn);
+    btn.onclick=function () {
+        console.log(1);
+        AmCharts.makeChart("chartdiv",{
+            "type": "serial",
+            "categoryField": "category",
+            "startDuration": 1,
+            "categoryAxis": {
+                "gridPosition": "start",
+                "tickPosition":"start",
+                "gridThickness":0
+            },
+            "export": {
+                "enabled": true,
+                "menu": ["CSV", "XLSX",
+                    {
+                        "format": "Print",
+                        "label": "Print"
+                    }]
+            },
+            "colors": [
+                "#6E6A82",
+                "#8d8d8d",
+                "#5C5C5C",
+                "#4a4084",
+
+            ],
+            "trendLines": [],
+            "graphs": [
+                {
+                    "balloonText": "[[title]] of [[category]]:[[value]]",
+                    "bullet": "round",
+                    "id": "AmGraph-1",
+                    "title": "graph 1",
+                    "valueField": "column-1"
+                },
+                {
+                    "balloonText": "[[title]] of [[category]]:[[value]]",
+                    "bullet": "square",
+                    "id": "AmGraph-2",
+                    "title": "graph 2",
+                    "valueField": "column-2"
+                }
+            ],
+            "guides": [],
+            "valueAxes": [
+                {
+                    "id": "ValueAxis-1",
+                    "title": "Axis title",
+                    "axisThickness": 0,
+                    "tickLength": 0
+                }
+            ],
+            "allLabels": [],
+            "balloon": {},
+            "legend": {
+                "enabled": true,
+                "useGraphSettings": true,
+                "align": "center"
+            },
+            "dataProvider": [
+                {
+                    "category": "category 17<br>Q1",
+                    "column-1": 8,
+                    "column-2": 5
+                },
+                {
+                    "category": "category 27<br>Q1",
+                    "column-1": 6,
+                    "column-2": 7
+                },
+                {
+                    "category": "category 37<br>Q1",
+                    "column-1": 2,
+                    "column-2": 3
+                },
+                {
+                    "category": "category 47<br>Q1",
+                    "column-1": 1,
+                    "column-2": 3
+                },
+                {
+                    "category": "category 57<br>Q1",
+                    "column-1": 2,
+                    "column-2": 1
+                },
+                {
+                    "category": "category 7<br>Q1",
+                    "column-1": 3,
+                    "column-2": 2
+                },
+                {
+                    "category": "category 7<br>Q1",
+                    "column-1": 6,
+                    "column-2": 8
+                }
+            ]
+        })
+    }
+</script>
+
+
+</body>
+
+
+
+</html>

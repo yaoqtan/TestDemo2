@@ -1,0 +1,106 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id = "form">
+    <input type="text" name = "user" value="sajlasjfsladfj" id = "user">
+    <input type="file" name="file" id="file">
+
+    <input type="file" name="file" id="input">
+
+    <a id = 'btn'> 提交</a>
+    <input type="submit">
+</form>
+
+
+<script>
+    let btn = document.querySelector('#btn');
+
+    btn.onclick=function () {
+        let user=document.querySelector('#user');
+        let form=document.querySelector('#form');
+        let file = document.querySelector('#file');
+
+        console.log(user.value);
+        console.log(file.value);
+        file.value=''
+
+        /*form.removeChild(file);
+        let newFile = document.createElement('input');
+        newFile.setAttribute('id','file');
+        newFile.setAttribute('new','file');
+        newFile.setAttribute('type','file');
+        form.appendChild(newFile);*/
+
+
+    }
+
+
+    document.getElementById("input").addEventListener("focus",function () {
+        console.log("focus");
+    });
+
+    document.getElementById("input").addEventListener("mousedown",function () {
+        console.log("mousedown");
+    });
+
+    document.getElementById("input").addEventListener("mouseup",function () {
+        console.log("mouseup");
+    });
+
+    document.getElementById("input").addEventListener("input",function () {
+        console.log("input");
+    });
+
+    document.getElementById("input").addEventListener("change",function () {
+        console.log("change");
+    });
+
+    document.getElementById("input").addEventListener("blur",function () {
+        console.log("blur");
+    });
+
+    document.getElementById("input").addEventListener("click",function (event) {
+        console.log(event);
+        console.log("click");
+    });
+
+    /*document.getElementById("user").addEventListener("keydown",function (event) {
+        let e = event || window.event || arguments.callee.caller.arguments[0];
+        //e.preventDefault();
+        if(e && e.keyCode===8){
+             //
+            document.getElementById("user").value=''
+            document.getElementById("user").setAttribute('readonly','readonly');
+
+        }else{
+            document.getElementById("user").removeAttribute('readonly');
+        }
+        console.log(e.keyCode)
+
+    });*/
+    document.getElementById("user").addEventListener("input",function (event) {
+        let e = event || window.event || arguments.callee.caller.arguments[0];
+
+
+        console.log(2)
+
+
+    });
+
+
+</script>
+
+
+
+</body>
+</html>

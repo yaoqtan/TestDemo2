@@ -1,0 +1,37 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./index.js"></script>
+    <script>
+        window.onload=function (event) {
+
+            let test1 = document.getElementById('test');
+
+
+            console.log(EventUtil.getEvent(event))
+            EventUtil.addHandler(test1,'click',test)
+
+
+
+
+
+        }
+
+
+        function test() {
+            console.log(1234123)
+        }
+    </script>
+</head>
+<body>
+<div id="test">asljslf</div>
+</body>
+</html>

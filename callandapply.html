@@ -1,0 +1,48 @@
+<!--
+/*
+* COPYRIGHT. HSBC HOLDINGS PLC 2017. ALL RIGHTS RESERVED.
+
+* This software is only to be used for the purpose for which it has been
+* provided. No part of it is to be reproduced, disassembled, transmitted,
+* stored in a retrieval system nor translated in any human or computer
+* language in any way or for any other purposes whatsoever without the
+* prior written consent of HSBC Holdings plc.
+
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        function sum(num1,num2){
+            return num1 + num2;
+        }
+
+        function callsum1(num1,num2){
+            console.log(this)
+            return sum.apply(this,[num1,num2]);//传入数组
+        }
+        function callsum2(num1,num2){
+            console.log(this)
+            return sum.apply(this,arguments);//传入arguments对象
+        }
+        function callsum(num1,num2){
+            return sum.call(this, num1, num2);
+        }
+
+
+        console.log(callsum1(10,10));
+        console.log(callsum2(10,10));
+        console.log(callsum(10,10));
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

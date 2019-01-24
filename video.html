@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <title>菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.bootcss.com/html5media/1.1.8/html5media.js"></script> 
+</head>
+<style>
+    .video-main{
+        width: 1200px;
+        height: 544px;
+        background-color:bisque;
+        position: relative;
+        overflow: hidden;
+    }
+    video{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height: 100%;
+        background-color:red;
+        position: absolute;
+        top:0;
+        left:0;
+    }
+</style>
+<body>
+
+<div style="text-align:center">
+    <button onclick="playPause()">播放/暂停</button>
+    <button onclick="makeBig()">放大</button>
+    <button onclick="makeSmall()">缩小</button>
+    <button onclick="makeNormal()">普通</button>
+    <br>
+    <div class="video-main">
+    <video id="video1" controls autoplay muted>
+        <source src="http://www.runoob.com/try/demo_source/movie.mp4" type="video/mp4">
+        <source src="http://www.runoob.com/try/demo_source/movie.ogg" type="video/ogg">
+        您的浏览器不支持 HTML5 video 标签。
+    </video>
+    </div>
+</div>
+
+<script>
+    var myVideo=document.querySelector('video');
+    console.log(myVideo);
+    function playPause()
+    {
+        if (myVideo.paused){
+            myVideo.play();
+        }
+        else{
+            myVideo.pause();
+        }
+
+        if(myVideo.ended){
+            console.log(23);
+        }
+    }
+
+    myVideo.onended=function () {
+        console.log(1231);
+        console.log(myVideo.ended)
+    }
+    myVideo.onpause=function () {
+        console.log(1232);
+        console.log(myVideo.ended)
+    }
+    myVideo.onplay=function () {
+        console.log(1234);
+        console.log(myVideo.ended)
+    }
+
+
+    function makeBig()
+    {
+        myVideo.width=560;
+    }
+
+    function makeSmall()
+    {
+        myVideo.width=320;
+    }
+
+    function makeNormal()
+    {
+        myVideo.width=420;
+    }
+</script>
+
+<iframe frameborder=0 src="http://v.qq.com/iframe/player.html?vid=b0187x1a1lk&tiny=0" allowfullscreen></iframe>
+
+</body>
+</html>

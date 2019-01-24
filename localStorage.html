@@ -1,0 +1,55 @@
+
+
+<!-- 保存数据：localStorage.setItem(key,value);
+ 读取数据：localStorage.getItem(key);
+ 删除单个数据：localStorage.removeItem(key);
+ 删除所有数据：localStorage.clear();
+ 得到某个索引的key：localStorage.key(index);-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+
+
+
+        function clickCounter()
+        {
+            //localStorage.clear();
+
+            if(typeof(Storage)!=="undefined")
+            {
+                if (localStorage.clickcount)
+                {
+                    localStorage.clickcount=Number(localStorage.clickcount)+1;
+                }else
+                {
+                    localStorage.clickcount=1;
+                }
+                document.getElementById("result").innerHTML=" 你已经点击了按钮 " + localStorage.clickcount + " 次 ";
+            }
+            else {
+                document.getElementById("result").innerHTML="对不起，您的浏览器不支持 web 存储。";
+            }
+
+            localStorage.setItem('name','yao');
+            localStorage.setItem('age','12');
+            console.log(localStorage.getItem('name'));
+            console.log(localStorage.key(1));
+            console.log(localStorage);
+            console.log(localStorage.length)
+        }
+    </script>
+</head>
+<body>
+    <p><button onclick="clickCounter()" type="button">点我！</button></p>
+    <div id="result"></div>
+    <p>点击该按钮查看计数器的增加。</p>
+    <p>关闭浏览器选项卡(或窗口),重新打开此页面,计数器将继续计数(不是重置)。</p>
+</body>
+</html>

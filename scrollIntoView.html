@@ -1,0 +1,73 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p{
+            margin:140px;
+        }
+        .test{
+            color: red;
+        }
+        .btn{
+            position: fixed;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            let btn = document.querySelector('.btn');
+            let test = document.querySelector('.test');
+            btn.onclick=function(){
+
+                test.scrollIntoView();
+                //test.scrollIntoView(false)
+
+                //test.scrollIntoView({behavior: "instant", block: "end", inline: "nearest"})
+            }
+            test.addEventListener('click',function(){
+                console.log(1324);
+            },false);
+
+
+
+
+        }
+
+
+
+
+    </script>
+</head>
+<body>
+<a class="btn">button</a>
+<p>1243</p>
+<p>124d3</p>
+<p>124asdfasf3</p>
+<p>1243</p>
+<p>12fd43</p>
+<p>1243</p>
+<p>12fas43</p>
+<p>1243</p>
+<p>12asdfsa43</p>
+<p>1243</p>
+<p>1243</p>
+<p>12asf43</p>
+<p>1243</p>
+<p>12sf43</p><p class="test">12asf43</p>
+<p>1243fd</p>
+<p>12fs43</p>
+<p>1243fd</p>
+<p>12fs43</p><p>1243fd</p>
+<p>12fs43</p><p>1243fd</p>
+<p>12fs43</p><p>1243fd</p>
+<p>12fs43</p>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!--
+/*
+* COPYRIGHT. HSBC HOLDINGS PLC 2017. ALL RIGHTS RESERVED.
+
+* This software is only to be used for the purpose for which it has been
+* provided. No part of it is to be reproduced, disassembled, transmitted,
+* stored in a retrieval system nor translated in any human or computer
+* language in any way or for any other purposes whatsoever without the
+* prior written consent of HSBC Holdings plc.
+
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+
+
+
+    </script>
+    <style>
+        @keyframes typing{
+            from{
+                width:0%
+            }
+            to{
+                width: 100%;
+            }
+        }
+        @keyframes caret{
+            50%{border-right-color: transparent;}
+        }
+        h1{
+            font:bold 100% "微软雅黑";
+            display:inline-block;
+        }
+        .type-effect{
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: .05rem solid;
+            display: inline-block;
+            animation: typing 1s steps(25),caret 1s steps(1) infinite;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <h1>
+        <span class="type-effect">CSS is Awesome [ˈɔsəm]！CSS is Awesome[ˈɔsəm]！CSS is Awesome[ˈɔsəm]！</span>
+    </h1>
+</div>
+</body>
+</html>

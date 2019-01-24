@@ -1,0 +1,44 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="mydiv" class="divclass" title="yao" lang="en" data="12" >test</div>
+<p>Hello world</p>
+
+
+<script>
+    let div = document.getElementById('mydiv');
+    console.log(div.id);
+    console.log(div.className);
+    console.log(div.title);
+    console.log(div.lang);
+    console.log(div.innerHTML);
+    console.log(div.tagName);
+    console.log(div.nodeType)
+    console.log(div.getAttribute('data'));
+    div.setAttribute('id','my');
+    console.log(div.getAttribute('id'));
+    console.log(div.getAttributeNode);
+    let newDiv = document.createElement('div');
+    newDiv.id='newmydiv';
+    newDiv.setAttribute('class','newClass');
+   // newDiv.innerHTML='234';
+    let textNode = document.createTextNode('hello!!!');
+    newDiv.appendChild(textNode);
+    let anTextNode = document.createTextNode(' world');
+    newDiv.appendChild(anTextNode);
+    document.body.appendChild(newDiv);
+
+</script>
+
+</body>
+</html>

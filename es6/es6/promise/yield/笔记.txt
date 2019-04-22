@@ -1,0 +1,5 @@
+generator
+
+yield传参
+
+yield返回

@@ -1,0 +1,50 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Date</title>
+</head>
+<body>
+
+<p>date</p>
+
+
+
+<script>
+    let date = new Date();
+    console.log('getTime:'+date.getTime());
+    console.log('从 Date 对象返回一个月中的某一天 (1 ~ 31):'+date.getDate());
+    console.log('从 Date 对象返回一周中的某一天 (0 ~ 6):'+date.getDay());
+    console.log('从 Date 对象以四位数字返回年份:'+date.getFullYear());
+    console.log('返回 Date 对象的小时 (0 ~ 23):'+date.getHours());
+    console.log('返回 Date 对象的分钟 (0 ~ 59):'+date.getMinutes());
+    console.log('返回 Date 对象的秒数 (0 ~ 59):'+date.getSeconds());
+    console.log('返回 Date 对象的毫秒(0 ~ 999):'+date.getMilliseconds());
+    console.log('从 Date 对象返回月份 (0 ~ 11):'+date.getMonth());
+    console.log('以 JSON 数据格式返回日期字符串:'+date.toJSON());
+
+    console.log('设置 Date 对象中月的某一天 (1 ~ 31):'+date.setDate('4'));
+
+    console.log('使用 ISO 标准返回字符串的日期格式:'+date.toISOString());
+
+
+    console.log('根据本地时间格式，把 Date 对象的日期部分转换为字符串：'+date.toLocaleDateString());
+    console.log('根据本地时间格式，把 Time 对象的日期部分转换为字符串：'+date.toLocaleTimeString());
+    console.log('据本地时间格式，把 Date 对象转换为字符串：'+date.toLocaleString());
+
+    console.log('把 Date 对象的日期部分转换为字符串：'+date.toDateString());
+    console.log('把 Time 对象的日期部分转换为字符串：'+date.toTimeString());
+    console.log('把 Date 对象转换为字符串：'+date.toString());
+
+
+
+</script>
+
+</body>
+</html>

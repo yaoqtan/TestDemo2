@@ -1,0 +1,14 @@
+.greeter{
+    background-color: #eee;
+    padding: 10px;
+    border: 3px solid #ccc;
+}
+html{
+    background: #ccc;
+}
+.h1{
+    background: red;
+}
+h1{
+    background: blue;
+}

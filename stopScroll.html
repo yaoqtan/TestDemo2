@@ -1,0 +1,136 @@
+<!--
+/*
+* COPYRIGHT. HSBC HOLDINGS PLC 2017. ALL RIGHTS RESERVED.
+
+* This software is only to be used for the purpose for which it has been
+* provided. No part of it is to be reproduced, disassembled, transmitted,
+* stored in a retrieval system nor translated in any human or computer
+* language in any way or for any other purposes whatsoever without the
+* prior written consent of HSBC Holdings plc.
+
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>遮罩层停止页面滚动</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no, user-scalable=no, width=device-width">
+<style>
+    body.scroll{
+        /*height: 100%;
+        overflow: hidden;*/
+        position: fixed;
+        bottom:0;
+        left:0;
+        right: 0;
+        height: 100%;
+        overflow: hidden;
+
+    }
+.remark{
+    position: fixed;
+    top:0;
+    right: 0;
+    bottom:0;
+    left:0;
+    background: rgba(0,0,0,.8);
+    z-index: 1;
+    overflow: scroll;
+    text-align: center;
+    display: none;
+    -webkit-overflow-scrolling : touch;
+
+}
+.remark.on{
+    display: block;
+}
+    p{
+        margin:30px;
+        font-size: 20px;
+    }
+</style>
+</head>
+<body>
+
+
+<div id = "container" class="container">
+
+</div>
+<div id = "remark" class="remark">
+    <div class="remarkMain"></div>
+</div>
+
+<script>
+    let container= document.getElementById('container');
+    let remark= document.getElementById('remark');
+    let remarkMain= document.getElementsByClassName('remarkMain')[0];
+    let body = document.getElementsByTagName('body')[0]
+    let scrollTop= '';
+    let scrollTop1='';
+    for(let i = 0;i<100;i++){
+        let p = document.createElement('p');
+        p.innerText=i;
+        container.appendChild(p);
+    }
+    for(let i = 0;i<100;i++){
+        let p = document.createElement('p');
+        p.innerText=i;
+        remarkMain.appendChild(p);
+
+    }
+    container.onclick=function () {
+        remark.classList='remark on';
+        body.classList='scroll';
+        //OpenMask()
+        document.getElementsByClassName('scroll')[0].style.top=-scrollTop+'px';
+        scrollTop1=scrollTop;
+
+    };
+    remark.onclick=function () {
+        //console.log(scrollTop)
+        remark.classList='remark';
+        body.classList='';
+        //CloseMask();
+        console.log(scrollTop1)
+        window.scrollTo(0, scrollTop1)
+    }
+
+
+    window.addEventListener('scroll', function () {
+        scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        console.log(scrollTop)
+    });
+
+
+
+</script>
+
+
+<div class="gtc-carouselContainer">
+    <div class="gtc-carouselContent">
+        <div class="gtc-carouselCaption">
+            <p>Caption</p>
+        </div>
+        <div class="gtc-carouselImage">
+            <img src="/api/v1/file/_C/SiteAs.jpg"/>
+            <video src ="video.mp4" ></video>
+        </div>
+    </div>
+
+    <div class="gtc-carouselContent">
+        <div class="gtc-carouselCaption">Caption2</div>
+        <div class="gtc-carouselImage">
+            <img src="https://www.linkreit.com/linkcorp/api/v1/file.jpg"/>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>

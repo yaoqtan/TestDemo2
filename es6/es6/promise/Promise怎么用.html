@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="jquery.js" charset="utf-8"></script>
+    <script>
+      let p = new Promise(function(resolve,reject){
+          $.ajax({
+              url: 'data/arr.txt',
+              dataType: 'json',
+              success(arr){
+                  resolve(arr);
+              },
+              error(err){
+                  reject(err);
+              }
+          })
+      });
+      p.then(function (arr) {
+          alert('chenggong'+arr)
+      },function (arr) {
+          alert('shibai'+arr)
+      })
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

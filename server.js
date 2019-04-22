@@ -41,9 +41,9 @@ http.createServer( function (request, response) {
 
             // 响应文件内容
 
-            let rs = fs.createReadStream('./1173632304.mp4');
+            /*let rs = fs.createReadStream('./1173632304.mp4');
 
-            rs.pipe(response);
+            rs.pipe(response);*/
 
 
             response.write(data.toString());

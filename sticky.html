@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Sticky</title>
+        <style>
+            body{color:#fff; font-family:arial; font-weight:bold; font-size:40px; }
+            .main-container{ max-width:600px; margin:10px auto 0; border:solid 10px green; padding:10px;}
+            .main-container *{padding:10px;background:#aaa; border:dashed 5px #000;}
+            .main-container * + *{margin-top:20px;}
+            .main-header{
+                height:50px; background:#aaa;
+                position:-webkit-sticky; position:sticky; top:0; border-color:red;
+            }
+            .main-content{
+                min-height:1000px;
+            }
+
+            .main-footer{position:-webkit-sticky; position:sticky; bottom:0; border-color:red;}
+        </style>
+    </head>
+    <body>
+        <div class="main-container">
+            <div class="main-header">HEADER</div>
+            <div class="main-content">MAIN CONTENT</div>
+            <div class="main-footer">FOOTER</div>
+        </div>
+
+
+    </body>
+</html>

@@ -1,0 +1,1 @@
+webpack app/main.js --output-filename bundle.js --output-path public --mode development

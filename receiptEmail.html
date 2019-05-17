@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        .receipt-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+            font-size: 16px;
+            line-height: 23px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+
+        .receipt-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+
+        .receipt-box table td:nth-child(1) {
+            width: 25%;
+        }
+
+        .receipt-box table td:nth-child(2) {
+            width: 75%;
+        }
+
+        .receipt-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        .receipt-box table tr.top table td {
+            padding-bottom: 20px;
+        }
+
+        .receipt-box table tr.top table td.title {
+            font-size: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+
+        .receipt-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .receipt-box table tr.details td {
+            padding-bottom: 20px;
+        }
+
+        .receipt-box table tr.item td {
+            border-bottom: none;
+        }
+
+        .receipt-box table tr.item.total td {
+            padding-top: 15px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .receipt-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        .flex-container {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+
+            -webkit-flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flex-label {
+            font-weight: bold;
+            text-align: center;
+            font-size: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<a href="https://ssl.comodo.com">
+    <img src="https://ssl.comodo.com/images/trusted-site-seal.png" alt="Comodo Trusted Site Seal" width="113" height="59" style="border: 0px;"></a><br> <span style="font-weight:bold; font-size:7pt"><a href="https://ssl.comodo.com">SSL Certificate</a></span><br>
+
+<a href="https://ssl.comodo.com">
+    <img src="https://ssl.comodo.com/images/trusted-site-seal.png" alt="Comodo Trusted Site Seal" width="113" height="59" style="border: 0px;"></a><br> <span style="font-weight:bold; font-size:7pt"><a href="https://ssl.comodo.com">SSL Certificate</a></span><br>
+
+
+<a href="https://ssl.comodo.com/free-ssl-certificate.php">
+    <img src="https://ssl.comodo.com/images/trusted-site-seal.png" alt="Comodo Trusted Site Seal" width="113" height="59" style="border: 0px;"></a><br> <span style="font-weight:bold; font-size:7pt"><a href="https://ssl.comodo.com/free-ssl-certificate.php">Free SSL</a></span><br>
+
+
+<a href="https://ssl.comodo.com/wildcard-ssl-certificates.php">
+    <img src="https://ssl.comodo.com/images/trusted-site-seal.png" alt="Comodo Trusted Site Seal" width="113" height="59" style="border: 0px;"></a><br> <span style="font-weight:bold; font-size:7pt"><a href="https://ssl.comodo.com/wildcard-ssl-certificates.php">Wildcard SSL</a></span><br>
+
+
+
+<div class="receipt-box">
+    ${transaction.payerLastNameHant} ${transaction.payerFirstNameHant} 様<br><br>
+
+    このたびはご購入いただきまして誠にありがとうございます。<br><br>
+    <div style="font-size:16px;font-weight: bold;">劇場で発券する必要がありません。入場時（スクリーン前）にQRコードを提示してください。</div>
+    <div style="font-size:14px;">入場の際（スクリーン前）に劇場スタッフにQRコード（携帯端末の画面 or メールの印刷）をご提示してご入場ください。</div><br>
+
+    <table cellpadding="0" cellspacing="0">
+        <tr class="heading">
+            <td colspan="2">ご購入内容</td>
+        </tr>
+        <tr class="item">
+            <td>購入番号</td>
+            <td>${transaction.searchId}</td>
+        </tr>
+        <tr class="item">
+            <td>映画館</td>
+            <td>${cinema.name}</td>
+        </tr>
+        <tr class="item">
+            <td>作品名</td>
+            <td>${movie.name}</td>
+        </tr>
+        <tr class="item">
+            <td>上映日</td>
+            <td>${dateTime[0]}</td>
+        </tr>
+        <tr class="item">
+            <td>時間</td>
+            <td>${dateTime[1]}</td>
+        </tr>
+        <tr class="item">
+            <td>座席番号</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr class="item total">
+            <td>合計金額</td>
+            <td>${transaction.total} 円</td>
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-size:16px;font-weight: bold;text-align: center;">劇場スタッフにみせる</div>
+    <br>
+
+    <div class="flex-container" style="display: block;text-align: center">
+
+        <div style="display: inline-block">
+            <div class="flex-label">D8</div>
+            <img src="https://chart.googleapis.com/chart?cht=qr&chld=l|1&chs=300x300&chl=V3,${ticket.reprintCount},${ticket.uuid}&choe=UTF=8"/>
+        </div>
+
+        <div style="display: inline-block">
+            <div class="flex-label">D8</div>
+            <img src="https://chart.googleapis.com/chart?cht=qr&chld=l|1&chs=300x300&chl=V3,${ticket.reprintCount},${ticket.uuid}&choe=UTF=8"/>
+        </div>
+        <div style="display: inline-block">
+            <div class="flex-label">D8</div>
+            <img src="https://chart.googleapis.com/chart?cht=qr&chld=l|1&chs=300x300&chl=V3,${ticket.reprintCount},${ticket.uuid}&choe=UTF=8"/>
+        </div>
+
+        <div style="display: inline-block">
+            <div class="flex-label">D8</div>
+            <img src="https://chart.googleapis.com/chart?cht=qr&chld=l|1&chs=300x300&chl=V3,${ticket.reprintCount},${ticket.uuid}&choe=UTF=8"/>
+        </div>
+        <div style="display: inline-block">
+            <div class="flex-label">D8</div>
+            <img src="https://chart.googleapis.com/chart?cht=qr&chld=l|1&chs=300x300&chl=V3,${ticket.reprintCount},${ticket.uuid}&choe=UTF=8"/>
+        </div>
+
+    </div>
+
+    ご不明な点がございましたら、
+    </br>
+    <#if cinema.phoneNumber?has_content>
+    TEL ${cinema.phoneNumber}までお問い合わせください。
+    </#if>
+</div>
+</body>
+</html>

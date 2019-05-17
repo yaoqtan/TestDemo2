@@ -90,9 +90,11 @@
           //e.target.blur()
       },
       reset () {
-        console.log(this.valid)
+        //console.log(this.valid)
 
-        console.log(this.nameRules);
+        console.log(process.env.NODE_ENV)
+
+        //console.log(this.nameRules);
         //this.$refs.form.reset()
       },
       resetValidation () {

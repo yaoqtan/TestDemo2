@@ -20,7 +20,8 @@
 </template>
 
 <script>
-import child from './components/Child.vue'
+import './../less/ParentChild.less'
+import child from './../components/Child.vue'
 export default {
   name: 'ParentChild',
   components:{

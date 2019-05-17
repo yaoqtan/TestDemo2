@@ -1,14 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import ParentChild from '@/ParentChild'
-import Vuetify from '@/Vuetify'
+import HelloWorld from '@/page/HelloWorld'
+import ParentChild from '@/page/ParentChild'
+import Vuetify from '@/page/Vuetify'
+import StoreTest from '@/page/StoreTest'
 
 Vue.use(Router);
 export default new Router({
   routes: [
     {
       path: '/',
+      name: 'HelloWorld',
+      component: HelloWorld
+    },
+    {
+      path: '/helloWorld',
       name: 'HelloWorld',
       component: HelloWorld
     },
@@ -21,6 +27,11 @@ export default new Router({
       path:"/vuetify",
       name:"Vuetify",
       component:Vuetify
+    },
+    {
+      path:"/storeTest",
+      name:"storeTest",
+      component:StoreTest
     }
   ]
 })

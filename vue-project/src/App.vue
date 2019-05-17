@@ -1,15 +1,21 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <!--<img src="./assets/logo.png">-->
+    <div>Vuex :<a href="https://segmentfault.com/a/1190000015782272" target="_blank">https://segmentfault.com/a/1190000015782272</a></div>
 
+    <div>{{details()}}</div>
     <router-view/>
   </div>
 </template>
 
 <script>
-import './ParentChild.less'
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+    details: function() {
+      return process.env.NODE_ENV
+    }
+  }
 }
 </script>
 

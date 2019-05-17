@@ -1,0 +1,28 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        async function basicDemo(){
+            let result = await Math.random();
+            //console.log(result);
+            return result
+        }
+        //basicDemo()
+        let basic = basicDemo();
+        basic.then(val=>{
+            console.log(val * 10)
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

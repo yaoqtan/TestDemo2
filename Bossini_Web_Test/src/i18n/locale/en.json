@@ -1,0 +1,130 @@
+{
+  "membership": {
+    "title": "Membership Benefits",
+    "items": [{
+      "title": "Welcome Offer",
+      "content": "Welcome E-coupons valued at up to HK$300."
+    }, {
+      "title": "Bossini B-points Reward",
+      "content": "Earn B-point on your every purchase.<br/>HK$50 Spend = 1 B-points<br/>B-Points can be used as HKD $1 in the next purchase.<br/>Every 1 B-points = HKD $1."
+    }, {
+      "title": "Birthday Offer",
+      "content": "Get birthday gift on birthday month."
+    }, {
+      "title": "Exclusive Privileges",
+      "content": "Coupons will be issued by various event through Bossini Plus Mobile App irregularly."
+    }, {
+      "title": "Latest News & Offer",
+      "content": "Get the latest news, check your rewards and receive personalised updates via Bossini Plus App."
+    }]
+  },
+  "settingQandA": [
+    {
+    "section": "About My Account",
+    "items": [{
+      "question": "How to update my personal information? ",
+      "answer": "Open your Bossini Plus Mobile App and select「My Profile 」, tap on \"pencil\" for edit."
+    }, {
+      "question": "How to update my email or phone number? ",
+      "answer": "Once your registration is completed, email or phone number can't be changed"
+    }, {
+      "question": "How to authorize or deauthorize Facebook or Google account ? ",
+      "answer": "Open your Bossini Plus Mobile App and select「My Profile 」, tap on \"Facebook \" or \"Google \" for connect or disconnect with Bossini Plus account."
+    }, {
+      "question": "what should I do if I forgot my password?  ",
+      "answer": "You can reset your password by the following steps:<br/>Step 1. Open your Bossini Plus Mobile App and go to「Login 」, tap on \"Forgot password\"<br/>Step 2. Enter your mobile number and will receive one-time verification code via SMSStep <br/>3. Enter new password and confirmed password to reset your password "
+    }, {
+      "question": "What should I do if  my account  has unauthorized activities?  ",
+      "answer": "If you suspect that your account has unauthorized activities, please contact Bossini Plus hotline at (852) 23711633 during our office hours for further assistance"
+    }, {
+      "question": "If my mobile device has been changed, how can I transfer my member account to new mobile device?",
+      "answer": "You can download Bossini Plus Mobile App on new device, and simply login with your Bossini Plus account to access your member card and eCoupon.  "
+    }, {
+      "question": "How to binding account between Bossni Plus App member and eShop member? ",
+      "answer": "Members who is registered with email on Bossini Plus Moblie App, can tap on the side menu and select「Linkup with eShop」or go to 「My Profile」and tap on linkup with eShop <br/>Members who is registered without email on Bossini Plus Moblie App, can go to 「My Profile」and input Bossini eShop email. After verification, Your Bossini Plus account will combine with eShop account.   "
+    }]
+  }, {
+    "section": "About Bossini Plus Membership",
+    "items": [{
+      "question": "How to become Bossini Plus member? ",
+      "answer": "Download Bossini Plus Mobile App, you can register as \"Bossini Plus\" memeber and enjoy privileges and offers.  "
+    }, {
+      "question": "How to get birthday offer? ",
+      "answer": "Register your Date of Birth at Bossini Plus Mobile App BEFORE your birthday and gain birthday gift on the 1st day of birthday month. (For example: a user whose birthday is in June will gain birthday gift on the 1st of June if he or she registers Date of Birth at Bossini Plus BEFORE the month of June.)<br/>If customer register your Date of Birth at Bossini Plus Mobile App WITHIN your birthday month and will gain birthday gift on the 1st day of next month.<br/>(For example: a user whose birthday is in June will gain birthday gift on the 1st of July if he or she registers Date of Birth at Bossini Plus WITHIN the month of June.)</br>• Date of Birth cannot be amended by user upon registration"
+    }, {
+      "question": "Does Membership have a valid period? ",
+      "answer": "For the membership validaity period, Bossini Plus basic membership is permanent once registered"
+    }, {
+      "question": "Can I use Bossini Plus Mobile App overseas? ",
+      "answer": "Bossini Plus membership can only be applied to Bossini Store in Hong Kong/Macau or Bossini eShop."
+    }, {
+      "question": "Why should I download Bossini Plus App? ",
+      "answer": "Download Bossini Plus Mobile App to gain B-points. Bossini B-Points will be rewarded and can be used as cash during your next purchase.<br>You could receive Bossini news and coupons, search for product information and stock availability to enjoy a more convenient and pleasant shopping.<br>•Product with available stock shown may be sold out in stores. Please contact our stores to check stock availability"
+    }]
+  }, {
+    "section": "About Bossini B-points Reward",
+    "items": [{
+      "question": "What is B-points? ",
+      "answer": "Bossini B-points can be gained by purchasing at Bossini retail stores/eShop and using Bossini Plus membership service. Every HKD$50 spend = 1 Bossini B-points will be rewarded and they can be used as cash during your next purchase."
+    }, {
+      "question": "How to earn B-points on any purchase?",
+      "answer": "Open your Bossini Plus Moblie App, go to 「Membership」 and present the QR code at checkout in retail shop to earn B-points rewards. For every HK$50 spending, you will earn 1 Bossini B-points. (Mobile screenshot, printed paper and oral indication of ID number are not acceptable.)<br/>Please make sure that you have connected your eShop account with Bossini Plus app to earn B-points rewards on your spending.   "
+    }, {
+      "question": "How to use B-points?",
+      "answer": "Every 1 Bossini B-points = HKD$1 =MOP$1.  Bossini B-points can be used as cash on your purchase at Bossini store or Bossini eShop. Please make sure that you have connected your eShop account with Bossini Plus app to use B-points for any purchase.  "
+    }, {
+      "question": "Does B-points have a valid period? ",
+      "answer": "B-Points earned from 1 July of each year till 31 May of the following year are valid until 30 June of the following year. The corresponding unused Points will expire automatically on 1 July of the following year.<br/>B-Points earned from 1 -30 June of each year are valid until 30 June of the following year. That means, B-points which is earned with 1-30 June of each years,  can be carried forward to following year. "
+    }, {
+      "question": "How will B-points gained through in-store/online purchase on June be calculated?",
+      "answer": "B-Points earned from 1 -30 June of each year are valid until 30 June of the following year. That means, B-points which is earned with 1-30 June of each years,  can be carried forward to following year."
+    }, {
+      "question": "How to check the past transaction records? ",
+      "answer": "You can check 10 most recent transactions record (included transaction date, stores and points earned) in 「Transaction Record」."
+    }, {
+      "question": "Will B-points be issued immediately after payment? ",
+      "answer": "For In-store purchase, B-points will be credit to your account after 2 working days. For Online purchase, B-points will be credit to your account after 2 working days once shipment dispatched. If you have any enquiry, please contact our customer service at tel: 2371 1633 for further assistance. "
+    }, {
+      "question": "Can I enjoy the member offer/earn B-points if I forget to bring my member card? ",
+      "answer": "If you are unable to present valid Bossini Plus member card at checkout, you can't enjoy the membership offer and earn or redeem the B-points fot the transaction. "
+    }, {
+      "question": "How to deal with my B-points when refund & exchange",
+      "answer": "B-points arrangement for the case of refund or return:<br/>B-points awarded for that purchase will be deducted from your account when the refund is made.Used B-points will not be reissued. "
+    }]
+  }, {
+    "section": "About eCoupon",
+    "items": [{
+      "question": "How to use my eCoupons on Bossini eShop",
+      "answer": "Open your Bossini Plus Moblie App and go to 「Coupon」. Tap on the coupon to view the eCoupon code, valid date and offer detail . Please apply the eCoupon code to enjoy the offer before checkout on bossini eShop. "
+    }, {
+      "question": "How to use my eCoupons at Bossini retail shop ",
+      "answer": "Open your Bossini Plus Moblie App and go to 「Coupon」. Tap on the coupon to view the eCoupon QR code, valid date and offer detail . Please present the QR code to enjoy the offer to our staff at checkout.  "
+    }, {
+      "question": "Why I can't found my coupon ",
+      "answer": "All eCoupons have a valid period. After the valid date, the used/expired eCoupons will be automatically moved to ”Used/Expired” section in 「Coupon」."
+    }, {
+      "question": "How to get e-Coupon ",
+      "answer": "Coupons will be issued by various event through Bossini Plus Mobile App irregularly."
+    }]
+  }, {
+    "section": "About Customer Service",
+    "items": [{
+      "question": "How can I enquire about Bossini Plus membership?",
+      "answer": "Coupons will be issued by various event through Bossini Plus Mobile App irregularly."
+    }]
+  }, {
+    "section": "About Bossini Plus Mobile App",
+    "items": [{
+      "question": "What operating system does Bossini Plus Mobile App support?",
+      "answer": "iOS10.0 or above, Android 6.0 or above (Operation of Apps may vary according to different devices)."
+    }, {
+      "question": "What kind of network connection is required to access Bossini Plus Mobile App?",
+      "answer": "Bossini Plus Mobile App can be accessed via LTE, 3G or Wi-Fi network.<br/>Some services may not operate normally if there is no network connection."
+    }]
+  }],
+  "settingContactUs": {
+    "title": "Customer Service",
+    "content1": "If you have any enquiry regarding Bossini Plus Mobile App, please feel free to contact our customer service team. We will do our best to response your enquiry as soon as possible.<br/>Tel: +852 2371 1633",
+    "content2":"If you have any enquiry regarding your online order or feedback on our online shop, please feel free to contact us.<br/>Tel: +852 2371 1696<br/>Email: onlineshop@bossini.com"
+  }
+}

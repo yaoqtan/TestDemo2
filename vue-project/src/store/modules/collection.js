@@ -13,6 +13,7 @@ const mutations={
 };
 const actions={
   invokePushItems(context,item){
+    console.log(context)
     context.commit('pushCollects',item);
   }
 };

@@ -1,0 +1,75 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+       // console.log(...Array(30).keys())
+
+
+        let obj = [{a:3,b:23},{a:2,b:25},{a:3,b:25},{a:1,b:29},{a:2,b:12},{a:3,b:24},{a:1,b:12},{a:2,b:90},{a:1,b:76}]
+        let arr = Array.from(new Set(obj.map(item=>item.a)));
+        //console.log(arr)
+        let newObj=[]
+        /*arr.map((val,index)=>{
+            newObj.push({
+                key:val,
+                arr:[]
+            });
+            obj.map(val1=>{
+                if(val=== val1.a){
+                    newObj[index].arr.push({
+                        val1
+                    })
+                }
+            })
+        })*/
+        arr.map((val)=>{
+            obj.map(val1=>{
+                if(val=== val1.a) newObj.push(val1)
+
+            })
+        });
+        //console.log(newObj)
+        /*--------------------------------------------*/
+
+        //console.log(Math.random().toString(36).substring(2))
+
+        /*--------------------------------------------*/
+
+        /*获取URL的查询参数*/
+       let q={};
+       location.search.replace(/([^?&=]+)=([^&]+)/g,(_,k,v)=>q[k]=v);
+       //console.log(location)
+       //console.log(q)
+        /*============================================*/
+
+
+       //随机更改数组元素顺序，混淆数组
+       let a = (arr) => arr.slice().sort(() => Math.random() - 0.5)
+       let b = a([1,2,3,4,5])
+       //console.log(b)
+
+       //for(i=0;++i<101;console.log(i%5?f||i:f+'Buzz'))f=i%3?'':'Fizz'
+        /*console.log((_=>[..."`1234567890-=~~QWERTYUIOP[]\\~ASDFGHJKL;'~~ZXCVBNM,./~"].map(x=>(o+=`/${b='_'.repeat(w=x<y?2:' 667699'[x=["BS","TAB","CAPS","ENTER"][p++]||'SHIFT',p])}\\|`,m+=y+(x+'    ').slice(0,w)+y+y,n+=y+b+y+y,l+=' __'+b)[73]&&(k.push(l,m,n,o),l='',m=n=o=y),m=n=o=y='|',p=l=k=[])&&k.join`
+`)())*/
+
+
+       var re1=/1/;   //匹配两位一个数字和一个忽略大小写的字母
+       var res1=re1.exec('aa21edj3djie7788');
+       var res2=re1.exec('458949468974484');
+       //console.log(res1)
+        //console.log(res2)
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

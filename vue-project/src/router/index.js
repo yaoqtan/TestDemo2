@@ -4,6 +4,7 @@ import HelloWorld from '@/page/HelloWorld'
 import ParentChild from '@/page/ParentChild'
 import Vuetify from '@/page/Vuetify'
 import StoreTest from '@/page/StoreTest'
+import Todo from '@/page/Todo'
 
 Vue.use(Router);
 export default new Router({
@@ -32,6 +33,11 @@ export default new Router({
       path:"/storeTest",
       name:"storeTest",
       component:StoreTest
+    },
+    {
+      path:"/todo",
+      name:"Todo",
+      component:Todo
     }
   ]
 })

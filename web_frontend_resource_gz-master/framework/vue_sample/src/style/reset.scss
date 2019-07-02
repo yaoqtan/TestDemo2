@@ -1,0 +1,131 @@
+@import "./vars.scss";
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+body {
+    background: $backgroundColor;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: $fontSize;
+    color: $fontColor;
+    font-family: Roboto, sans-serif;
+    line-height: 1.2;
+    text-align: left;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+fieldset, img {
+    vertical-align: top;
+    max-width: 100%;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    font-size: 0;
+    display: block;
+    height: 0;
+    clear: both;
+    content: "";
+}
+
+input, textarea, select {
+    -webkit-appearance: none;
+    font-size: $fontSize;
+    font-style: inherit;
+    font-family: inherit;
+}
+
+em, i {
+    font-style: inherit;
+}
+
+.autobox {
+    text-align: center;
+    font-size: 0;
+
+    & > * {
+        display: inline-block;
+        font-size: $fontSize;
+        vertical-align: middle;
+    }
+
+    &:after {
+        display: inline-block;
+        height: 100%;
+        width: 0;
+        vertical-align: middle;
+        visibility: hidden;
+        content: "";
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #ccc;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+    height: 5px;
+    background-color: #999;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    width: 5px;
+    background-color: #ccc;
+    border-radius: 6px;
+}
+
+.myContainer {
+    max-width: 1000px;
+    margin: 0 auto;
+
+    &:after {
+        visibility: hidden;
+        font-size: 0;
+        display: block;
+        height: 0;
+        clear: both;
+        content: "";
+    }
+}
+
+.clearfix {
+
+    &::after {
+        visibility: hidden;
+        font-size: 0;
+        display: block;
+        height: 0;
+        clear: both;
+        content: "";
+    }
+}

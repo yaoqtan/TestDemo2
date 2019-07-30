@@ -1,0 +1,73 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>封装js发送http请求</title>
+
+    <script>
+        const http ={
+            quest:function (option, callback) {
+                let url = option.url;
+                let method = option.method;
+                let data = option.data;
+                let timeout = option.timeout || 0;
+
+                let xhr = new XMLHttpRequest();
+                (timeout > 0) && (xhr.timeout = timeout);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+                        if (xhr.status >= 200 && xhr.status < 400) {
+                            var result = xhr.responseText;
+                            try {result = JSON.parse(xhr.responseText);} catch (e) {}
+                            callback && callback(null, result);
+                        } else {
+                            callback && callback('status: ' + xhr.status);
+                        }
+                    }
+                }.bind(this);
+                xhr.open(method, url, true);
+                if(typeof data === 'object'){
+                    try{
+                        data = JSON.stringify(data);
+                    }catch(e){}
+                }
+                xhr.send(data);
+                xhr.ontimeout = function () {
+                    callback && callback('timeout');
+                };
+            },
+
+            get  :function (url, callback) {
+                var option = url.url ? url : { url: url };
+                option.method = 'get';
+                this.quest(option, callback);
+            },
+
+            post:function (option, callback) {
+                option.method = 'post';
+                this.quest(option, callback);
+            }
+        };
+
+
+        http.get('https://api.ipify.org?format=jsonp',function(err,result){
+                console.log(err,result)
+        });
+
+        http.post('https://api.ipify.org?format=jsonp',function(err,result){
+            console.log(err,result)
+        });
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

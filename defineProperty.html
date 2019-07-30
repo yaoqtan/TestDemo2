@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title></title>
+        <script>
+        var obj = {};
+        var descriptor = Object.create(null); // 没有继承的属性
+            // 默认没有 enumerable，没有 configurable，没有 writable
+            descriptor.value = 'static';
+            Object.defineProperty(obj, 'key', descriptor);
+        
+            
+        console.log(obj)
+        
+
+
+
+
+        </script>
+    </head>
+</html>

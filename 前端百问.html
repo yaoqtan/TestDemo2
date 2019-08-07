@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>
+
+    </title>
+    <script>
+        /*function Foo() {
+            Foo.a = function() {
+                console.log(1)
+            }
+            this.a = function() {
+                console.log(2)
+            }
+        }
+        Foo.prototype.a = function() {
+            console.log(3)
+        }
+        Foo.a = function() {
+            console.log(4)
+        }
+        Foo.a();
+        let obj = new Foo();
+        obj.a();
+        Foo.a();
+*/
+
+const arr1 =  ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'];
+const arr2=['A', 'B', 'C', 'D'];
+const arr3=arr1.concat(arr2);
+
+console.log(arr3.sort((v2, v1) => (
+    v2.codePointAt(0) - v1.codePointAt(0) ||
+    v1.length - v2.length ||
+    v2.codePointAt(1) - v1.codePointAt(1)
+)))
+
+
+        const letter='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+        console.log('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.toLocaleLowerCase())
+        console.log(letter,)
+        for(let a=0;a<letter.length;a++){
+            //console.log(letter[a].codePointAt(0))
+        }
+
+        /*for (var i = 0; i< 10; i++){
+            setTimeout(() => {
+                console.log(i);
+            }, 50)
+        }
+        for (let i = 0; i< 10; i++){
+            setTimeout(() => {
+                console.log(i);
+            }, 50)
+        }*/
+
+        /*for (var i = 0; i< 10; i++){
+            ((i) => {
+                setTimeout(() => {
+                    console.log(i);
+                }, 80)
+            })(i)
+        }
+        for (var i = 0; i < 10; i++) {
+            setTimeout(((i) => {
+                console.log(i);
+            })(i), 50)
+        }
+*/
+/*
+        var b = 10;
+        (function b() {
+              b = 20;
+            console.log(b)
+        })()
+*/
+
+       /* console.log([3, 15, 8, 29, 102, 22].sort((a,b)=> a-b))*/
+
+
+        /*let obj = {1:222, 2:123, 5:888};
+
+        let result = [...Array(12)].map((_,index)=>obj[index+1]||null)
+        console.log([...Array(12)])
+        console.log(result)*/
+
+        function processString(s){
+            let arr = s.split('');
+            let new_arr = arr.map(item => {
+                return(
+                    item === item.toUpperCase() ?
+                             item.toLowerCase() :
+                             item.toUpperCase()
+                )});
+            return new_arr.join('')
+        }
+        console.log(processString('aBC'))
+
+
+
+
+      /*
+        作者：木易杨说
+        链接：https://juejin.im/post/5d23e750f265da1b855c7bbe
+            来源：掘金
+        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。*/
+    </script>
+</head>
+</html>

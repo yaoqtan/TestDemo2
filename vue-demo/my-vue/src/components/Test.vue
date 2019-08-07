@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  const ipify = require('ipify');
   export default {
     name: 'Test',
     data () {
@@ -12,6 +13,8 @@
         msg: 'H1 test'
       }
     }
+
+
   }
 </script>
 

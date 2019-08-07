@@ -1,0 +1,23 @@
+<div class= "container">
+{{each data}}
+  <div class= "section">
+    <div class = "title">
+      <h3 class= "body1">{{$value.section}}</h3>
+    </div>
+    {{each $value.items}}
+      <div class="content">
+        <div class="items">
+          <div class = "question">
+            <p class="body2">{{$index+1}}. {{#$value.question}}</p>
+          </div>
+          <div class = "answer">
+            <p class="body2">{{#$value.answer}}</p>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{/each}}
+
+
+</div>

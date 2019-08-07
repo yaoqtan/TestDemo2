@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <title>Ip</title>
+    <script src="http://pv.sohu.com/cityjson"></script>
+    <script type="text/javascript">
+      console.log(returnCitySN["cip"]+','+returnCitySN["cname"])
+
+    </script>
+
+<!--
+    <script type="application/javascript">
+        function getip(json){
+            console.log("My IP address is: ", json.ip);
+            window.IP=json.ip
+            console.log(window)
+        }
+    </script>
+    <script type="application/javascript" src="https://api.ip.sb/jsonip?callback=getip"></script>
+-->
+
+
+
+
+       <script type="application/javascript">
+             function getIP(json) {
+               console.log("My public IP address is: ", json.ip);
+                 window.IP=json.ip
+                 console.log(window)
+             }
+
+       </script>
+    <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
+
+
+</head>
+
+</html>

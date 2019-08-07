@@ -1,0 +1,39 @@
+{
+  "name": "bossini_web",
+  "version": "1.0.0",
+  "description": "bossini_web",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development webpack-dev-server",
+    "build": "NODE_ENV=production webpack",
+    "start": "webpack --mode=development --config webpack.config.js ",
+    "watch": "webpack --mode=development --watch ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "art-template-loader": "^1.4.3",
+    "clean-webpack-plugin": "^2.0.1",
+    "css-loader": "^1.0.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "i18n-webpack-plugin": "^1.0.0",
+    "imagemin": "^5.3.1",
+    "imagemin-pngquant": "^5.1.0",
+    "img-loader": "^3.0.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.5",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.8"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "art-template": "^4.13.2"
+  }
+}

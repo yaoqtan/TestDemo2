@@ -12,11 +12,18 @@
     <script src="./data.js"></script>
     <script>
         if(data){
-            console.log(data)
+
+            console.log(data);
+            console.log(data.sections.sort((a,b)=>a.y-b.y))
+
+            /*console.log(data)
             console.log(data.sections.reduce((prev, curr) => [...prev, ...curr.seats],[]))
             console.log(data.sections.reduce((prev, curr) => [...prev, ...curr.seats],[]).reduce((prev, curr) => [...prev, ...curr.s], []))
 
             console.log(data.sections.reduce((prev, curr) => [...prev, ...curr.seats],[]).map(item=>item.s).some(item=>item==='S'))
+            */
+
+
         }
 
         const a1=[{a:1,b:2},{a:3,b:4},{a:5,b:6}]

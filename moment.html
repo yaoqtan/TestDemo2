@@ -1,0 +1,34 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script>
+        console.log(moment().format())
+        console.log(moment(new Date()).isValid())
+        console.log(moment("1995-12-25",'MM-DD-YYYY'))
+        console.log(moment.unix(1318781876.721))
+        console.log(moment('1995-12-25').millisecond())
+        console.log(moment().second())
+        console.log(moment().minute())
+        console.log(moment().hour())
+        console.log(moment().date())
+        console.log(moment().toISOString())
+        console.log(moment().toObject() )
+
+        console.log(moment().subtract(-1,'days'))
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

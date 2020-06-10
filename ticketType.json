@@ -1,0 +1,930 @@
+{
+  "advanceTicketItemRs": [
+    {
+      "advanceTicketTypeGroupR": {
+        "advanceTicketTypeGroup": {
+          "advanceType": "NATIONWIDE",
+          "bgColor": "string",
+          "createAt": "2019-12-17T09:02:19.806Z",
+          "fontColor": "string",
+          "imgUrl": "string",
+          "name": "string",
+          "sort": 0,
+          "status": "DELETE",
+          "updateAt": "2019-12-17T09:02:19.806Z",
+          "uuid": "string"
+        },
+        "advanceTicketTypeRs": [
+          {
+            "advanceTicketType": {
+              "basePrice": 0,
+              "bgColor": "string",
+              "createAt": "2019-12-17T09:02:19.806Z",
+              "description": "string",
+              "fontColor": "string",
+              "imageUrl": "string",
+              "name": "string",
+              "sort": 0,
+              "status": "DELETE",
+              "taxRate": 0,
+              "unitPrice": 0,
+              "unitRounding": 0,
+              "updateAt": "2019-12-17T09:02:19.806Z",
+              "uuid": "string"
+            },
+            "modifierGroupRs": [
+              {
+                "modifierGroup": {
+                  "bgColor": "string",
+                  "createAt": "2019-12-17T09:02:19.806Z",
+                  "fontColor": "string",
+                  "maxOfSelection": 0,
+                  "minOfSelection": 0,
+                  "name": "string",
+                  "sort": 0,
+                  "status": "DELETE",
+                  "updateAt": "2019-12-17T09:02:19.806Z",
+                  "uuid": "string"
+                },
+                "modifierRs": [
+                  {
+                    "modifier": {
+                      "bgColor": "string",
+                      "createAt": "2019-12-17T09:02:19.806Z",
+                      "fontColor": "string",
+                      "name": "string",
+                      "sort": 0,
+                      "status": "DELETE",
+                      "unitPrice": 0,
+                      "updateAt": "2019-12-17T09:02:19.806Z",
+                      "uuid": "string"
+                    },
+                    "price": {
+                      "unitPrice": 0,
+                      "unitRounding": 0,
+                      "unitTax": 0,
+                      "unitTotal": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "price": {
+              "unitPrice": 0,
+              "unitRounding": 0,
+              "unitTax": 0,
+              "unitTotal": 0
+            }
+          }
+        ]
+      },
+      "advanceTicketTypeR": {
+        "advanceTicketType": {
+          "basePrice": 0,
+          "bgColor": "string",
+          "createAt": "2019-12-17T09:02:19.806Z",
+          "description": "string",
+          "fontColor": "string",
+          "imageUrl": "string",
+          "name": "string",
+          "sort": 0,
+          "status": "DELETE",
+          "taxRate": 0,
+          "unitPrice": 0,
+          "unitRounding": 0,
+          "updateAt": "2019-12-17T09:02:19.806Z",
+          "uuid": "string"
+        },
+        "modifierGroupRs": [
+          {
+            "modifierGroup": {
+              "bgColor": "string",
+              "createAt": "2019-12-17T09:02:19.806Z",
+              "fontColor": "string",
+              "maxOfSelection": 0,
+              "minOfSelection": 0,
+              "name": "string",
+              "sort": 0,
+              "status": "DELETE",
+              "updateAt": "2019-12-17T09:02:19.806Z",
+              "uuid": "string"
+            },
+            "modifierRs": [
+              {
+                "modifier": {
+                  "bgColor": "string",
+                  "createAt": "2019-12-17T09:02:19.806Z",
+                  "fontColor": "string",
+                  "name": "string",
+                  "sort": 0,
+                  "status": "DELETE",
+                  "unitPrice": 0,
+                  "updateAt": "2019-12-17T09:02:19.806Z",
+                  "uuid": "string"
+                },
+                "price": {
+                  "unitPrice": 0,
+                  "unitRounding": 0,
+                  "unitTax": 0,
+                  "unitTotal": 0
+                }
+              }
+            ]
+          }
+        ],
+        "price": {
+          "unitPrice": 0,
+          "unitRounding": 0,
+          "unitTax": 0,
+          "unitTotal": 0
+        }
+      }
+    }
+  ],
+  "commercialItemRs": [
+    {
+      "movieR": {
+        "movie": {
+          "createAt": "2019-12-17T09:02:19.806Z",
+          "durationMin": 0,
+          "name": "string",
+          "openDate": "2019-12-17T09:02:19.806Z",
+          "posterUrl": "string",
+          "publish": "RELEASE",
+          "sort": 0,
+          "status": "DELETE",
+          "updateAt": "2019-12-17T09:02:19.806Z",
+          "uuid": "string"
+        },
+        "typeRs": [
+          {
+            "commercialTypeGroupR": {
+              "commercialTypeGroup": {
+                "bgColor": "string",
+                "createAt": "2019-12-17T09:02:19.807Z",
+                "fontColor": "string",
+                "imgUrl": "string",
+                "name": "string",
+                "sort": 0,
+                "status": "DELETE",
+                "updateAt": "2019-12-17T09:02:19.807Z",
+                "uuid": "string"
+              },
+              "commercialTypeRs": [
+                {
+                  "commercialType": {
+                    "bgColor": "string",
+                    "commodityCode": "string",
+                    "createAt": "2019-12-17T09:02:19.807Z",
+                    "description": "string",
+                    "fontColor": "string",
+                    "imageUrl": "string",
+                    "movieRef": "string",
+                    "name": "string",
+                    "productCost": 0,
+                    "productType": "CONSIGNMENT",
+                    "publish": "RELEASE",
+                    "sort": 0,
+                    "status": "DELETE",
+                    "taxRate": 0,
+                    "unitPrice": 0,
+                    "unitRounding": 0,
+                    "updateAt": "2019-12-17T09:02:19.807Z",
+                    "uuid": "string"
+                  },
+                  "price": {
+                    "unitPrice": 0,
+                    "unitRounding": 0,
+                    "unitTax": 0,
+                    "unitTotal": 0
+                  }
+                }
+              ]
+            },
+            "commercialTypeR": {
+              "commercialType": {
+                "bgColor": "string",
+                "commodityCode": "string",
+                "createAt": "2019-12-17T09:02:19.807Z",
+                "description": "string",
+                "fontColor": "string",
+                "imageUrl": "string",
+                "movieRef": "string",
+                "name": "string",
+                "productCost": 0,
+                "productType": "CONSIGNMENT",
+                "publish": "RELEASE",
+                "sort": 0,
+                "status": "DELETE",
+                "taxRate": 0,
+                "unitPrice": 0,
+                "unitRounding": 0,
+                "updateAt": "2019-12-17T09:02:19.807Z",
+                "uuid": "string"
+              },
+              "price": {
+                "unitPrice": 0,
+                "unitRounding": 0,
+                "unitTax": 0,
+                "unitTotal": 0
+              }
+            }
+          }
+        ]
+      },
+      "noMovieR": {
+        "commercialTypeGroupR": {
+          "commercialTypeGroup": {
+            "bgColor": "string",
+            "createAt": "2019-12-17T09:02:19.807Z",
+            "fontColor": "string",
+            "imgUrl": "string",
+            "name": "string",
+            "sort": 0,
+            "status": "DELETE",
+            "updateAt": "2019-12-17T09:02:19.807Z",
+            "uuid": "string"
+          },
+          "commercialTypeRs": [
+            {
+              "commercialType": {
+                "bgColor": "string",
+                "commodityCode": "string",
+                "createAt": "2019-12-17T09:02:19.807Z",
+                "description": "string",
+                "fontColor": "string",
+                "imageUrl": "string",
+                "movieRef": "string",
+                "name": "string",
+                "productCost": 0,
+                "productType": "CONSIGNMENT",
+                "publish": "RELEASE",
+                "sort": 0,
+                "status": "DELETE",
+                "taxRate": 0,
+                "unitPrice": 0,
+                "unitRounding": 0,
+                "updateAt": "2019-12-17T09:02:19.807Z",
+                "uuid": "string"
+              },
+              "price": {
+                "unitPrice": 0,
+                "unitRounding": 0,
+                "unitTax": 0,
+                "unitTotal": 0
+              }
+            }
+          ]
+        },
+        "commercialTypeR": {
+          "commercialType": {
+            "bgColor": "string",
+            "commodityCode": "string",
+            "createAt": "2019-12-17T09:02:19.807Z",
+            "description": "string",
+            "fontColor": "string",
+            "imageUrl": "string",
+            "movieRef": "string",
+            "name": "string",
+            "productCost": 0,
+            "productType": "CONSIGNMENT",
+            "publish": "RELEASE",
+            "sort": 0,
+            "status": "DELETE",
+            "taxRate": 0,
+            "unitPrice": 0,
+            "unitRounding": 0,
+            "updateAt": "2019-12-17T09:02:19.807Z",
+            "uuid": "string"
+          },
+          "price": {
+            "unitPrice": 0,
+            "unitRounding": 0,
+            "unitTax": 0,
+            "unitTotal": 0
+          }
+        }
+      }
+    }
+  ],
+  "concessionItemRs": [
+    {
+      "concessionTypeGroupR": {
+        "concessionTypeGroup": {
+          "bgColor": "string",
+          "createAt": "2019-12-17T09:02:19.807Z",
+          "fontColor": "string",
+          "imgUrl": "string",
+          "name": "string",
+          "sort": 0,
+          "status": "DELETE",
+          "updateAt": "2019-12-17T09:02:19.807Z",
+          "uuid": "string"
+        },
+        "concessionTypeRs": [
+          {
+            "concessionType": {
+              "bgColor": "string",
+              "commodityCode": "string",
+              "createAt": "2019-12-17T09:02:19.807Z",
+              "description": "string",
+              "fontColor": "string",
+              "imageUrl": "string",
+              "movieRef": "string",
+              "name": "string",
+              "productCost": 0,
+              "productType": "CONSIGNMENT",
+              "publish": "RELEASE",
+              "sort": 0,
+              "status": "DELETE",
+              "taxRate": 0,
+              "unitPrice": 0,
+              "unitRounding": 0,
+              "updateAt": "2019-12-17T09:02:19.807Z",
+              "uuid": "string"
+            },
+            "modifierGroupRs": [
+              {
+                "modifierGroup": {
+                  "bgColor": "string",
+                  "createAt": "2019-12-17T09:02:19.807Z",
+                  "fontColor": "string",
+                  "maxOfSelection": 0,
+                  "minOfSelection": 0,
+                  "name": "string",
+                  "sort": 0,
+                  "status": "DELETE",
+                  "updateAt": "2019-12-17T09:02:19.807Z",
+                  "uuid": "string"
+                },
+                "modifierRs": [
+                  {
+                    "modifier": {
+                      "bgColor": "string",
+                      "createAt": "2019-12-17T09:02:19.807Z",
+                      "fontColor": "string",
+                      "name": "string",
+                      "sort": 0,
+                      "status": "DELETE",
+                      "unitPrice": 0,
+                      "updateAt": "2019-12-17T09:02:19.807Z",
+                      "uuid": "string"
+                    },
+                    "price": {
+                      "unitPrice": 0,
+                      "unitRounding": 0,
+                      "unitTax": 0,
+                      "unitTotal": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "price": {
+              "unitPrice": 0,
+              "unitRounding": 0,
+              "unitTax": 0,
+              "unitTotal": 0
+            }
+          }
+        ]
+      },
+      "concessionTypeR": {
+        "concessionType": {
+          "bgColor": "string",
+          "commodityCode": "string",
+          "createAt": "2019-12-17T09:02:19.807Z",
+          "description": "string",
+          "fontColor": "string",
+          "imageUrl": "string",
+          "movieRef": "string",
+          "name": "string",
+          "productCost": 0,
+          "productType": "CONSIGNMENT",
+          "publish": "RELEASE",
+          "sort": 0,
+          "status": "DELETE",
+          "taxRate": 0,
+          "unitPrice": 0,
+          "unitRounding": 0,
+          "updateAt": "2019-12-17T09:02:19.807Z",
+          "uuid": "string"
+        },
+        "modifierGroupRs": [
+          {
+            "modifierGroup": {
+              "bgColor": "string",
+              "createAt": "2019-12-17T09:02:19.807Z",
+              "fontColor": "string",
+              "maxOfSelection": 0,
+              "minOfSelection": 0,
+              "name": "string",
+              "sort": 0,
+              "status": "DELETE",
+              "updateAt": "2019-12-17T09:02:19.807Z",
+              "uuid": "string"
+            },
+            "modifierRs": [
+              {
+                "modifier": {
+                  "bgColor": "string",
+                  "createAt": "2019-12-17T09:02:19.807Z",
+                  "fontColor": "string",
+                  "name": "string",
+                  "sort": 0,
+                  "status": "DELETE",
+                  "unitPrice": 0,
+                  "updateAt": "2019-12-17T09:02:19.807Z",
+                  "uuid": "string"
+                },
+                "price": {
+                  "unitPrice": 0,
+                  "unitRounding": 0,
+                  "unitTax": 0,
+                  "unitTotal": 0
+                }
+              }
+            ]
+          }
+        ],
+        "price": {
+          "unitPrice": 0,
+          "unitRounding": 0,
+          "unitTax": 0,
+          "unitTotal": 0
+        }
+      }
+    }
+  ],
+  "couponTypeItemRs": {
+    "discountType": [
+      {
+        "couponTypeCategoryR": {
+          "couponTypeCategory": {
+            "bgColor": "string",
+            "createAt": "2019-12-17T09:02:19.807Z",
+            "fontColor": "string",
+            "imgUrl": "string",
+            "name": "string",
+            "sort": 0,
+            "status": "DELETE",
+            "updateAt": "2019-12-17T09:02:19.807Z",
+            "uuid": "string"
+          },
+          "couponTypeRs": [
+            {
+              "couponType": {
+                "baseType": "DISCOUNT",
+                "bgColor": "string",
+                "boxOffice": true,
+                "couponTypeCategoryRef": "string",
+                "createAt": "2019-12-17T09:02:19.807Z",
+                "description": "string",
+                "discount": 0,
+                "displayOnline": true,
+                "displayPos": true,
+                "displaySpecialSeat": true,
+                "displayVipSeat": true,
+                "finalPrice": 0,
+                "fontColor": "string",
+                "hasBeenUsed": true,
+                "imageUrl": "string",
+                "name": "string",
+                "noScheduleMonth": [
+                  "string"
+                ],
+                "noScheduleWeek": [
+                  "string"
+                ],
+                "providingDiscount": true,
+                "scheduleType": "NONE",
+                "scheduleValue": "string",
+                "sort": 0,
+                "status": "DELETE",
+                "updateAt": "2019-12-17T09:02:19.807Z",
+                "uuid": "string"
+              }
+            }
+          ]
+        },
+        "couponTypeR": {
+          "couponType": {
+            "baseType": "DISCOUNT",
+            "bgColor": "string",
+            "boxOffice": true,
+            "couponTypeCategoryRef": "string",
+            "createAt": "2019-12-17T09:02:19.807Z",
+            "description": "string",
+            "discount": 0,
+            "displayOnline": true,
+            "displayPos": true,
+            "displaySpecialSeat": true,
+            "displayVipSeat": true,
+            "finalPrice": 0,
+            "fontColor": "string",
+            "hasBeenUsed": true,
+            "imageUrl": "string",
+            "name": "string",
+            "noScheduleMonth": [
+              "string"
+            ],
+            "noScheduleWeek": [
+              "string"
+            ],
+            "providingDiscount": true,
+            "scheduleType": "NONE",
+            "scheduleValue": "string",
+            "sort": 0,
+            "status": "DELETE",
+            "updateAt": "2019-12-17T09:02:19.807Z",
+            "uuid": "string"
+          }
+        }
+      }
+    ],
+    "quotaType": [
+      {
+        "couponTypeCategoryR": {
+          "couponTypeCategory": {
+            "bgColor": "string",
+            "createAt": "2019-12-17T09:02:19.807Z",
+            "fontColor": "string",
+            "imgUrl": "string",
+            "name": "string",
+            "sort": 0,
+            "status": "DELETE",
+            "updateAt": "2019-12-17T09:02:19.807Z",
+            "uuid": "string"
+          },
+          "couponTypeRs": [
+            {
+              "couponType": {
+                "baseType": "DISCOUNT",
+                "bgColor": "string",
+                "boxOffice": true,
+                "couponTypeCategoryRef": "string",
+                "createAt": "2019-12-17T09:02:19.807Z",
+                "description": "string",
+                "discount": 0,
+                "displayOnline": true,
+                "displayPos": true,
+                "displaySpecialSeat": true,
+                "displayVipSeat": true,
+                "finalPrice": 0,
+                "fontColor": "string",
+                "hasBeenUsed": true,
+                "imageUrl": "string",
+                "name": "string",
+                "noScheduleMonth": [
+                  "string"
+                ],
+                "noScheduleWeek": [
+                  "string"
+                ],
+                "providingDiscount": true,
+                "scheduleType": "NONE",
+                "scheduleValue": "string",
+                "sort": 0,
+                "status": "DELETE",
+                "updateAt": "2019-12-17T09:02:19.807Z",
+                "uuid": "string"
+              }
+            }
+          ]
+        },
+        "couponTypeR": {
+          "couponType": {
+            "baseType": "DISCOUNT",
+            "bgColor": "string",
+            "boxOffice": true,
+            "couponTypeCategoryRef": "string",
+            "createAt": "2019-12-17T09:02:19.807Z",
+            "description": "string",
+            "discount": 0,
+            "displayOnline": true,
+            "displayPos": true,
+            "displaySpecialSeat": true,
+            "displayVipSeat": true,
+            "finalPrice": 0,
+            "fontColor": "string",
+            "hasBeenUsed": true,
+            "imageUrl": "string",
+            "name": "string",
+            "noScheduleMonth": [
+              "string"
+            ],
+            "noScheduleWeek": [
+              "string"
+            ],
+            "providingDiscount": true,
+            "scheduleType": "NONE",
+            "scheduleValue": "string",
+            "sort": 0,
+            "status": "DELETE",
+            "updateAt": "2019-12-17T09:02:19.807Z",
+            "uuid": "string"
+          }
+        }
+      }
+    ]
+  },
+  "ticketItemRs": [
+    {
+      "ticketTypeCategoryR": {
+        "ticketTypeCategory": {
+          "bgColor": "string",
+          "createAt": "2019-12-17T09:02:19.808Z",
+          "fontColor": "string",
+          "imgUrl": "string",
+          "name": "string",
+          "sort": 0,
+          "status": "DELETE",
+          "updateAt": "2019-12-17T09:02:19.808Z",
+          "uuid": "string"
+        },
+        "ticketTypeRs": [
+          {
+            "modifierGroupRs": [
+              {
+                "modifierGroup": {
+                  "bgColor": "string",
+                  "createAt": "2019-12-17T09:02:19.808Z",
+                  "fontColor": "string",
+                  "maxOfSelection": 0,
+                  "minOfSelection": 0,
+                  "name": "string",
+                  "sort": 0,
+                  "status": "DELETE",
+                  "updateAt": "2019-12-17T09:02:19.808Z",
+                  "uuid": "string"
+                },
+                "modifierRs": [
+                  {
+                    "modifier": {
+                      "bgColor": "string",
+                      "createAt": "2019-12-17T09:02:19.808Z",
+                      "fontColor": "string",
+                      "name": "string",
+                      "sort": 0,
+                      "status": "DELETE",
+                      "unitPrice": 0,
+                      "updateAt": "2019-12-17T09:02:19.808Z",
+                      "uuid": "string"
+                    },
+                    "price": {
+                      "unitPrice": 0,
+                      "unitRounding": 0,
+                      "unitTax": 0,
+                      "unitTotal": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "price": {
+              "unitPrice": 0,
+              "unitRounding": 0,
+              "unitTax": 0,
+              "unitTotal": 0
+            },
+            "ticketType": {
+              "bgColor": "string",
+              "boxOffice": true,
+              "boxOfficePrice": 0,
+              "couponCode": "string",
+              "createAt": "2019-12-17T09:02:19.808Z",
+              "description": "string",
+              "displayOnline": true,
+              "displayPos": true,
+              "displaySpecialSeat": true,
+              "displayVipSeat": true,
+              "fontColor": "string",
+              "imageUrl": "string",
+              "name": "string",
+              "noScheduleMonth": [
+                "string"
+              ],
+              "noScheduleWeek": [
+                "string"
+              ],
+              "scannerAlert": true,
+              "scheduleType": "NONE",
+              "scheduleValue": "string",
+              "sort": 0,
+              "status": "DELETE",
+              "taxRate": 0,
+              "ticketTypeCategoryRef": "string",
+              "unitPrice": 0,
+              "unitRounding": 0,
+              "updateAt": "2019-12-17T09:02:19.808Z",
+              "uuid": "string"
+            }
+          }
+        ]
+      },
+      "ticketTypeGroupR": {
+        "ticketTypeGroup": {
+          "baseType": "GENERAL",
+          "bgColor": "string",
+          "createAt": "2019-12-17T09:02:19.808Z",
+          "fontColor": "string",
+          "imgUrl": "string",
+          "masterGroup": true,
+          "name": "string",
+          "sort": 0,
+          "status": "DELETE",
+          "updateAt": "2019-12-17T09:02:19.808Z",
+          "uuid": "string"
+        },
+        "ticketTypeRs": [
+          {
+            "modifierGroupRs": [
+              {
+                "modifierGroup": {
+                  "bgColor": "string",
+                  "createAt": "2019-12-17T09:02:19.808Z",
+                  "fontColor": "string",
+                  "maxOfSelection": 0,
+                  "minOfSelection": 0,
+                  "name": "string",
+                  "sort": 0,
+                  "status": "DELETE",
+                  "updateAt": "2019-12-17T09:02:19.808Z",
+                  "uuid": "string"
+                },
+                "modifierRs": [
+                  {
+                    "modifier": {
+                      "bgColor": "string",
+                      "createAt": "2019-12-17T09:02:19.808Z",
+                      "fontColor": "string",
+                      "name": "string",
+                      "sort": 0,
+                      "status": "DELETE",
+                      "unitPrice": 0,
+                      "updateAt": "2019-12-17T09:02:19.808Z",
+                      "uuid": "string"
+                    },
+                    "price": {
+                      "unitPrice": 0,
+                      "unitRounding": 0,
+                      "unitTax": 0,
+                      "unitTotal": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "price": {
+              "unitPrice": 0,
+              "unitRounding": 0,
+              "unitTax": 0,
+              "unitTotal": 0
+            },
+            "ticketType": {
+              "bgColor": "string",
+              "boxOffice": true,
+              "boxOfficePrice": 0,
+              "couponCode": "string",
+              "createAt": "2019-12-17T09:02:19.809Z",
+              "description": "string",
+              "displayOnline": true,
+              "displayPos": true,
+              "displaySpecialSeat": true,
+              "displayVipSeat": true,
+              "fontColor": "string",
+              "imageUrl": "string",
+              "name": "string",
+              "noScheduleMonth": [
+                "string"
+              ],
+              "noScheduleWeek": [
+                "string"
+              ],
+              "scannerAlert": true,
+              "scheduleType": "NONE",
+              "scheduleValue": "string",
+              "sort": 0,
+              "status": "DELETE",
+              "taxRate": 0,
+              "ticketTypeCategoryRef": "string",
+              "unitPrice": 0,
+              "unitRounding": 0,
+              "updateAt": "2019-12-17T09:02:19.809Z",
+              "uuid": "string"
+            }
+          }
+        ]
+      },
+      "ticketTypeR": {
+        "modifierGroupRs": [
+          {
+            "modifierGroup": {
+              "bgColor": "string",
+              "createAt": "2019-12-17T09:02:19.809Z",
+              "fontColor": "string",
+              "maxOfSelection": 0,
+              "minOfSelection": 0,
+              "name": "string",
+              "sort": 0,
+              "status": "DELETE",
+              "updateAt": "2019-12-17T09:02:19.809Z",
+              "uuid": "string"
+            },
+            "modifierRs": [
+              {
+                "modifier": {
+                  "bgColor": "string",
+                  "createAt": "2019-12-17T09:02:19.809Z",
+                  "fontColor": "string",
+                  "name": "string",
+                  "sort": 0,
+                  "status": "DELETE",
+                  "unitPrice": 0,
+                  "updateAt": "2019-12-17T09:02:19.809Z",
+                  "uuid": "string"
+                },
+                "price": {
+                  "unitPrice": 0,
+                  "unitRounding": 0,
+                  "unitTax": 0,
+                  "unitTotal": 0
+                }
+              }
+            ]
+          }
+        ],
+        "price": {
+          "unitPrice": 0,
+          "unitRounding": 0,
+          "unitTax": 0,
+          "unitTotal": 0
+        },
+        "ticketType": {
+          "bgColor": "string",
+          "boxOffice": true,
+          "boxOfficePrice": 0,
+          "couponCode": "string",
+          "createAt": "2019-12-17T09:02:19.809Z",
+          "description": "string",
+          "displayOnline": true,
+          "displayPos": true,
+          "displaySpecialSeat": true,
+          "displayVipSeat": true,
+          "fontColor": "string",
+          "imageUrl": "string",
+          "name": "string",
+          "noScheduleMonth": [
+            "string"
+          ],
+          "noScheduleWeek": [
+            "string"
+          ],
+          "scannerAlert": true,
+          "scheduleType": "NONE",
+          "scheduleValue": "string",
+          "sort": 0,
+          "status": "DELETE",
+          "taxRate": 0,
+          "ticketTypeCategoryRef": "string",
+          "unitPrice": 0,
+          "unitRounding": 0,
+          "updateAt": "2019-12-17T09:02:19.809Z",
+          "uuid": "string"
+        }
+      }
+    }
+  ],
+  "transaction": {
+    "couponTotal": 0,
+    "createAt": "2019-12-17T09:02:19.809Z",
+    "deviceRel": "string",
+    "eigalandUserId": 0,
+    "invoiceIssued": true,
+    "paidAmount": 0,
+    "payerEmail": "string",
+    "payerFirstNameHant": "string",
+    "payerFirstNameSyl": "string",
+    "payerLastNameHant": "string",
+    "payerLastNameSyl": "string",
+    "payerPhoneNo": "string",
+    "paymentRef": "string",
+    "paymentRel": "string",
+    "receiptIssued": true,
+    "refundDeviceRel": "string",
+    "refundUserRel": "string",
+    "searchId": "string",
+    "shiftRel": "string",
+    "showRel": "string",
+    "status": "PROCESSING",
+    "timeExpired": true,
+    "total": 0,
+    "totalPrice": 0,
+    "totalRounding": 0,
+    "totalTax": 0,
+    "updateAt": "2019-12-17T09:02:19.809Z",
+    "userRel": "string",
+    "uuid": "string",
+    "vipSeatTotal": 0
+  }
+}

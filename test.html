@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+
+    </title>
+    <script>
+        let testData={
+            list:[
+            {
+                num:1,
+                pay:12
+            },{
+                num:2,
+                pay:13
+            },{
+                num:4,
+                pay:15
+            },{
+                num:6,
+                pay:17
+            }
+        ]}
+        testData.list.map(item=>item.total=item.num*item.pay)
+        let totalNum=testData.list.reduce((prev,cur)=>prev+cur.num,0);
+        let totalPay=testData.list.reduce((prev,cur)=>prev+cur.pay,0);
+        console.log(totalNum);
+        console.log(totalPay);
+
+        //console.log(testData)
+        testData={
+            ...testData,
+            totalNum,
+            totalPay,
+            total:totalNum * totalPay
+        }
+        console.log(testData)
+
+
+
+    </script>
+</head>
+</html>

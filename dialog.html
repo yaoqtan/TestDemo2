@@ -1,0 +1,76 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    dialog::backdrop {
+        background: linear-gradient(45deg, black, transparent);
+    }
+    dialog {
+        animation: slideDown 0.2s ease;
+    }
+
+    @keyframes slideDown {
+        from {
+            transform: translateY(-100px);
+        }
+
+        to {
+            transform: translateY(0);
+        }
+    }
+    dialog {
+        transition: opacity 0.4s ease;
+        opacity: 1;
+    }
+
+    dialog:not([open]) {
+        display: block;
+        opacity: 0;
+    }
+</style>
+<body>
+
+<dialog>
+    <p>我是一个对话框</p>
+    <button onclick="hideDialog()">隐藏对话框</button>
+</dialog>
+
+<button onclick="showDialog()">显示对话框</button>
+
+<script>
+    let dialog = document.querySelector("dialog");
+
+    // 显示对话框
+    function showDialog() {
+        //dialog.show();
+        dialog.showModal()
+    }
+
+    // 隐藏对话框
+    function hideDialog() {
+        dialog.close();
+    }
+</script>
+
+
+<!--<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50"  cy="50" rx="0"  ry="25" />
+    <ellipse cx="150" cy="50" rx="25" ry="25" />
+    <ellipse cx="250" cy="50" rx="50" ry="25" />
+
+    <rect x="20"  y="120" width="60" height="60" rx="0"   ry="15"/>
+    <rect x="120" y="120" width="60" height="60" rx="15"  ry="15"/>
+    <rect x="220" y="120" width="60" height="60" rx="150" ry="15"/>
+</svg>-->
+
+</body>
+</html>

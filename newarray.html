@@ -1,0 +1,58 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        let normalGroupTicketTypes =[
+            {
+                "name": "期間限定会員割引",
+
+                "taxRate": 0.08,
+                "uuid": "1",
+            },
+            {
+                "name": "期間限定会員割引2",
+
+                "taxRate": 0.08,
+                "uuid": "2",
+            },{
+                "name": "期間限定会員割引3",
+
+                "taxRate": 0.08,
+                "uuid": "3",
+            },{
+                "name": "期間限定会員割引2",
+
+                "taxRate": 0.1,
+                "uuid": "4",
+            },{
+                "name": "期間限定会員割4",
+
+                "taxRate": 0.1,
+                "uuid": "5",
+            }]//this.normalGroup.ticketTypes;
+        console.log(normalGroupTicketTypes)
+        let newNormalGroupTicketTypesTen =normalGroupTicketTypes.filter(item=>item.taxRate===0.1);
+        let newNormalGroupTicketTypesEight=normalGroupTicketTypes.filter(item=>item.taxRate===0.08);
+        console.log(newNormalGroupTicketTypesTen)
+        console.log(newNormalGroupTicketTypesEight)
+        newNormalGroupTicketTypesEight.map((value)=>{
+           if( !newNormalGroupTicketTypesTen.some(item=>item.name===value.name)){
+               newNormalGroupTicketTypesTen.push(value)
+           }
+
+        });
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

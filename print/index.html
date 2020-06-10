@@ -1,0 +1,82 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="epos-2.14.0.js"></script>
+    <script>
+        let ePosDev = new epson.ePOSDevice();
+
+        function print(){
+            console.log(ePosDev)
+            var ipAddress = '192.168.7.87';
+            var port = '8008';
+            ePosDev.connect(ipAddress, port, callback_connect);
+        }
+
+        function callback_connect(resultConnect){
+            console.log(2)
+            console.log(resultConnect)
+            var deviceId = 'local_printer';//M355A
+            var options = {'crypto' : true, 'buffer' : false};
+            if ((resultConnect == 'OK') || (resultConnect == 'SSL_CONNECT_OK')) {
+//Retrieves the Printer object
+                console.log(3)
+                ePosDev.createDevice(deviceId, ePosDev.DEVICE_TYPE_PRINTER, options, callback_createDevice);
+            }else {
+                console.log(4)
+//Displays error messages
+            }
+        }
+
+        var printer = null;
+        function callback_createDevice(deviceObj, errorCode){
+            console.log(errorCode)
+            console.log(deviceObj)
+            if (deviceObj === null) {
+//Displays an error message if the system fails to retrieve the Printer object
+                return;
+            }
+            const test = encodeURI(encodeURI('プリント'))
+            const test2 = encodeURIComponent('プリント')
+            printer = deviceObj;
+            printer.addTextLang('Japanese');
+            printer.addText(`${test} ,${test2} \n`);
+
+
+            console.log(ePosDev.isConnected())
+            printer.send()
+//Registers the print complete event
+            printer.onreceive = function(response){
+                console.log(response)
+                if (response.success) {
+                    console.log('success')
+                    //Displays the successful print message
+
+                } else {
+                    console.log('error')
+                    //Displays error messages
+                }
+            };
+        }
+
+//        ePosDev.deleteDevice(printer, callback_deleteDevice);
+//        function callback_deleteDevice(errorCode){
+////Terminates connection with device
+//            ePosDev.disconnect();
+//        }
+
+
+    </script>
+</head>
+<body>
+    <h1>PRINT</h1>
+    <a href="javascript:print()">Print</a>
+</body>
+</html>

@@ -1,6 +1,6 @@
 
 // 权重：系统 + 系统版本 > 平台 > 内核 + 载体 + 内核版本 + 载体版本 > 外壳 + 外壳版本
-export default function BrowserType() {
+export  function BrowserType() {
     // 权重：系统 + 系统版本 > 平台 > 内核 + 载体 + 内核版本 + 载体版本 > 外壳 + 外壳版本
     const ua = navigator.userAgent.toLowerCase();
     const testUa = regexp => regexp.test(ua);
@@ -143,3 +143,66 @@ export default function BrowserType() {
         shellVs
     });
 }
+export function  BrowserInfo (){
+    return{
+        isAndroid: Boolean(navigator.userAgent.match(/android/ig)),
+        isIphone: Boolean(navigator.userAgent.match(/iphone|ipod/ig)),
+        isIpad: Boolean(navigator.userAgent.match(/ipad/ig)),
+        isWeixin: Boolean(navigator.userAgent.match(/MicroMessenger/ig)),
+        isAli: Boolean(navigator.userAgent.match(/AlipayClient/ig)),
+        isPhone: Boolean(/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent))
+    }
+}
+export const isDeviceMobile = () => {
+    const ua = navigator.userAgent
+    return /android|webos|iphone|ipod|balckberry/i.test(ua)
+}
+export const isPC = () => {
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+        "SymbianOS", "Windows Phone",
+        "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+}
+export const isQQBrowser = () => {
+    const ua = navigator.userAgent
+    return !!ua.match(/mqqbrowser|qzone|qqbrowser|qbwebviewtype/i)
+}
+export const isWeiXin = () => {
+    var ua = navigator.userAgent;
+    return ua.match(/microMessenger/i) == 'micromessenger'
+}
+export const isIos = () => {
+    var u = navigator.userAgent;
+    if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {  //安卓手机
+        return false
+    } else if (u.indexOf('iPhone') > -1) {//苹果手机
+        return true
+    } else if (u.indexOf('iPad') > -1) {//iPad
+        return false
+    } else if (u.indexOf('Windows Phone') > -1) {//winphone手机
+        return false
+    } else {
+        return false
+    }
+}
+
+export const getQueryString = (name) => {
+    const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    const search = window.location.search.split('?')[1] || '';
+    const r = search.match(reg) || [];
+    return r[2];
+}
+
+
+
+
+
+

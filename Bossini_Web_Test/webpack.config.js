@@ -42,7 +42,14 @@ const getEntry = {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
         port: 9000,
-        host:'0.0.0.0'
+        host:'0.0.0.0',
+        proxy: {
+            '/api': {
+                target: 'https://ticket-api-dev.eigaland.com',
+                changeOrigin:true
+               // secure: false
+            }
+        }
     },
     module: {
         rules: [{

@@ -16,7 +16,7 @@
     function onloadScript (url){
         let script = document.createElement('script');
         script.src=url;
-        document.body.appendChild(script);
+        document.head.appendChild(script);
 
     }
     onloadScript('./index.js');

@@ -12,7 +12,6 @@ const data = jsonData().settingContactUs;
 
 const contentHtml = contentArt({Img:Img,data:data});
 
-
 //document.querySelector('#App').innerHTML=contentHtml;
 
 Page(contentHtml).then((val)=>{

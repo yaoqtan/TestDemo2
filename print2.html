@@ -1,0 +1,59 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+p>我是打印上面的内容</p>
+<div id="printBox">
+    <table width="400" border="1">
+        <thead>
+        <tr>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1.1</td>
+            <td>2.1</td>
+            <td>3.1</td>
+        </tr>
+        <tr>
+            <td>1.2</td>
+            <td>2.2</td>
+            <td>3.2</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<p>我是打印下面的内容</p>
+<button onclick="printDeal()">打印按钮</button>
+<script>
+    function printDeal() {
+        var printBox = document.getElementById('printBox');
+        //拿到打印的区域的html内容
+        var newContent = printBox.innerHTML;
+        //将旧的页面储存起来，当打印完成后返给给页面。
+        var oldContent = document.body.innerHTML;
+        //赋值给body
+        document.body.innerHTML = newContent;
+        //执行window.print打印功能
+        window.print();
+        // 重新加载页面，以刷新数据。以防打印完之后，页面不能操作的问题
+        //window.location.reload();
+        document.body.innerHTML = oldContent;
+        return false;
+    }
+</script>
+</body>
+</html>

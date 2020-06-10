@@ -11,8 +11,8 @@
     <title>Title</title>
 
     <script>
-        console.log(window.fetch)
-        console.log(window)
+       // console.log(window.fetch)
+        //console.log(window)
 
         /*fetch('https://api.ipify.org?format=jsonp',{
             credentials: 'same-origin',
@@ -24,13 +24,34 @@
                 console.log(myJson);
             });*/
 
-        fetch('https://api.github.com/repos/facebook/react').then(function(res){
+        fetch('./ticketType.json').then(function(res){//https://api.github.com/repos/facebook/react
             // 请求成功，得到 response 对象，调用 response 对象的 json 方法并返回
-            console.log(res)
-            return res;
+           // console.log(res)
+            return res.json();
         }).then(function(data){
             // response 对象的 json 方法执行成功，得到结果
             console.log(data)
+            const ticketItemRs = data.ticketItemRs
+
+            const ticketItem =[
+                ...ticketItemRs.filter(item=>item.ticketTypeCategoryR && item.ticketTypeCategoryR.ticketTypeRs).map(item=>item.ticketTypeCategoryR.ticketTypeRs).reduce((prev,curr)=>prev.concat(curr),[]),
+                ...ticketItemRs.filter(item=>item.ticketTypeR).map(item=>item.ticketTypeR)
+            ].map(({
+                ticketType: { name, uuid, couponCode,displaySpecialSeat,displayVipSeat },
+                price: { unitTotal }}) => ({
+                    name,
+                    uuid,
+                    unitPrice:unitTotal,
+                    couponCode,
+                    displaySpecialSeat,
+                    displayVipSeat
+                }));
+
+            console.log(ticketItem)
+
+
+
+
         });
 
     </script>

@@ -1,0 +1,21 @@
+{
+  "name": "my-pwa",
+  "short_name": "my-pwa",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color":"#000000",
+  "background_color": "#f0f0f0",
+  "description": "A simply readable Hacker News app.",
+  "icons": [
+    {
+      "src": "./img/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

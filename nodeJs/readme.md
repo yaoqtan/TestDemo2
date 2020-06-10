@@ -83,7 +83,7 @@ url=require('url');
       res.write();
       res.end();
       
-10、xpress
+10、express
 
     1.数据 GET、POST
     2.中间件：使用，写，链式操作

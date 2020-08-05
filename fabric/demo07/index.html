@@ -1,0 +1,72 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fabric 颜色模式</title>
+    <script src="./../fabric2.js"></script>
+
+
+    <style>
+        body{
+            background: #ccc;
+        }
+        #canvas{
+            background: #fff;
+            border:1px solid #000
+        }
+        #img{
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+<canvas id="canvas" width="800" height="800">
+
+</canvas>
+<img id="img" src="./back2.jpg">
+<script>
+    var canvas = new fabric.Canvas('canvas')
+
+
+    var color = new fabric.Color('#555');
+    var color2 = new fabric.Color('blue');
+    var color3 = new fabric.Color('#ffff');
+    var color4 = new fabric.Color('rgb(100,0,100)');
+    var color5 = new fabric.Color('rgba(10,20,30,.5)');
+
+    var color6 = color.toRgb();
+    var color7 = color5.toHex()
+
+    console.log(color)
+    console.log(color2)
+    console.log(color3)
+    console.log(color4)
+
+    console.log(color6)
+    console.log(color7)
+
+    var color8 = color.overlayWith(color2).toRgb()
+
+    var rect = new fabric.Rect({
+        left:100,
+        top:100,
+        width:100,
+        height:100,
+        fill:color8
+    })
+
+    canvas.add(rect)
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,5 +1,4 @@
 import {test1,test2,test3} from './demo'
-
 test('test',()=>{
     const key = 19
     expect(test1(key)).toBe(10)

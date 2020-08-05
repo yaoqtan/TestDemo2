@@ -1,0 +1,28 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生对象的原型模式</title>
+    <script>
+       console.log(typeof Array.prototype.sort)
+       console.log(typeof String.prototype.substring)
+
+        String.prototype.startWith = function (text) {
+            return this.indexOf(text) == 0
+        }
+        var msg = "Hello world"
+        console.log(msg.startsWith("Hello"))
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

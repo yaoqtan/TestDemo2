@@ -79,10 +79,36 @@
         //按属性对object分类
         console.log('按属性对object分类')
         var people = [
-            { name: 'Alice', age: 21 },
-            { name: 'Max', age: 20 },
-            { name: 'Jane', age: 20 }
+            { name: 'Alice', age: 21,work:'sdf' },
+            { name: 'Max', age: 20 ,work:'sdf'},
+            { name: 'Jane', age: 20,work:'sdf' },
+            { name: 'Jane1', age: 20,work:'sdf' }
         ];
+
+        let test=[]
+        people.map(item=>{
+            if(test.some(t=>t.age===item.age)){
+                test = test.map(t=>{
+                    let num = t.age===item.age?t.num+1:t.num
+                   return(
+                       {
+                           ...t,
+                           num
+                       })
+                })
+            }else{
+                test.push({
+                    ...item,
+                    num:1
+                })
+            }
+
+        })
+        console.log(test)
+
+
+
+
         function groupBy(objectArray,property) {
             return objectArray.reduce((acc,obj)=>{
                 let key = obj[property];

@@ -1,0 +1,86 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型模式</title>
+    <script>
+        function Person() {
+        }
+        Person.prototype.name="Ni";
+        Person.prototype.age=29;
+        Person.prototype.job="web";
+        Person.prototype.sayName=function () {
+            console.log(this)
+            console.log(this.name)
+        }
+        console.log(Person.prototype.constructor)
+
+        var person1 = new Person();
+        person1.sayName()
+        console.log(person1.constructor)
+        var person2 = new Person();
+        person2.sayName();
+        console.log(Person.prototype)
+        console.log(Person.prototype.isPrototypeOf(person1))
+        console.log(Object.getPrototypeOf(person1) == Person.prototype)
+        console.log(Object.getPrototypeOf(person1).name)
+        console.log(person1.sayName == person2.sayName)
+
+        person1.name="Greg"
+
+        console.log(person1.name)
+        console.log(person2.name)
+
+        delete person1.name;
+        console.log(person1.name)
+
+        console.log(person1.hasOwnProperty("name"))
+
+        person1.name="Greg2"
+        console.log(person1.hasOwnProperty("name"))
+
+        console.log("name in person1")
+        console.log("name" in person1)
+
+        console.log("name in person2")
+        console.log("name" in person2)
+
+        function hasPrototypeProperty(object,name){
+          return !object.hasOwnProperty(name) && (name in object)
+        }
+
+        console.log(hasPrototypeProperty(person1,'name'))
+        console.log(hasPrototypeProperty(person2,'name'))
+
+        console.log(Object.keys(Person.prototype))
+
+        var p1 = new Person()
+        p1.name = "Rob";
+        p1.age = 31
+
+        console.log(Object.keys(p1))
+
+        console.log(Object.getOwnPropertyNames(Person.prototype))
+
+
+        var o={
+            toString:function () {
+                return "my Object"
+            }
+        }
+        for (var prop in o){
+            console.log("found toString")
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

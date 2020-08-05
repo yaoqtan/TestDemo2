@@ -1,0 +1,99 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+       // console.log(window.fetch)
+        //console.log(window)
+
+        /*fetch('https://api.ipify.org?format=jsonp',{
+            credentials: 'same-origin',
+            mode: 'no-cors',
+            method:'GET'
+        }).then(function(response) {
+                console.log(response)
+            }).catch(function(myJson) {
+                console.log(myJson);
+            });*/
+
+        fetch('./app1.json').then(function(res){//https://api.github.com/repos/facebook/react
+            // 请求成功，得到 response 对象，调用 response 对象的 json 方法并返回
+            return res.json();
+        }).then(function(data){
+            // response 对象的 json 方法执行成功，得到结果
+            console.log('web')
+            console.log(data)
+            
+
+
+            // var version = data.data.movies.reduce((cur,prev)=>[...cur,...prev.schedules],[]).map(item=>{
+                
+            //     return ({
+            //         ...item
+            //     })
+            // }).filter(item=>item.showtime.indexOf('Mon 06 Jul 2020')>=0).map(item=>item.movieId)
+            // console.log(Array.from(new Set(version)))
+
+
+        
+
+        });
+
+        fetch('./app.json').then(function(res){//https://api.github.com/repos/facebook/react
+            // 请求成功，得到 response 对象，调用 response 对象的 json 方法并返回
+            return res.json();
+        }).then(function(data){
+            // response 对象的 json 方法执行成功，得到结果
+            console.log('app')
+           console.log(data.data)
+            
+            var newMovies=data.data
+            newMovies = {
+                ...newMovies,
+                value:newMovies.refValue
+            }
+
+
+            newVersions=data.data.map(item=>{
+                return({
+                    code:item.version.length<=0?"":item.version.join(' '),
+                    movieId:item.id,
+                    id:item.schedules[0].versionIdm,
+                    codes:item.version
+
+                })
+            })
+            var newData ={
+                movies:newMovies,
+                versions:newVersions
+            };
+            console.log(newData)
+            
+          
+            // var verson=data.data.reduce((cur,prev)=>[...cur,...prev.schedules],[]).map(item=>{
+            //     return ({
+            //         ...item
+            //     })
+            // })
+
+            // console.log(Array.from(new Set(verson)))
+
+        
+
+        });
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

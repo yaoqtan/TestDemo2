@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>MSR Sample Program</title>
+<!-- CSS -->
+<style type="text/css">
+body {
+	background-color: #ffffff;
+	color: #333333;
+}
+table, tr, td {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #eeeeee;
+}
+th {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #cccccc;
+}
+.center {
+	text-align: center;
+}
+</style>
+<!-- Script -->
+<script type="text/javascript" src="epos-2.14.0.js"></script>
+<script type="text/javascript">
+<!--
+	var ipAddress = null;
+	var port = null;
+
+	var msr = null;
+
+	var ePosDev = new epson.ePOSDevice();
+
+	function connect() {
+		ipAddress = document.getElementById("ipaddress").value;
+		port = document.getElementById("port").value;
+
+		ePosDev.connect(ipAddress, port, Callback_connect);
+		ePosDev.onreconnecting = OnReconnecting;
+		ePosDev.onreconnect = OnReconnect;
+		ePosDev.ondisconnect = OnDisconnect;
+	}
+
+	function Callback_connect(data) {
+		var deviceID = document.getElementById("deviceid").value;
+		var crypto = document.getElementById("crypto").checked;
+		var buffer = document.getElementById("buffer").checked;
+		var options = {'crypto' : crypto, 'buffer' : buffer};
+
+		if (data == 'OK') {
+			consolelog("connected to ePOS Device Service Interface.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_MSR, options, callbackCreateDevice_msr);
+		}
+		else if (data == 'SSL_CONNECT_OK') {
+			consolelog("connected to ePOS Device Service Interface with SSL.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_MSR, options, callbackCreateDevice_msr);
+		}
+		else {
+			consolelog("connected to ePOS Device Service Interface is failed. [" + data + "]", true);
+		}
+	}
+
+	function callbackCreateDevice_msr(data, code) {
+		if (data != null) {
+			msr = data;
+			consolelog("you can use msr.");
+			msr.ondata = onData;
+		}
+		else {
+			consolelog(code);
+		}
+	}
+
+	// カード情報読み取りイベントの受け取り
+	function onData(data) {
+		document.getElementById("track1").value = data.track1;
+		document.getElementById("track2").value = data.track2;
+		document.getElementById("track4").value = data.track4;
+		document.getElementById("account_number").value = data.account_number;
+		document.getElementById("expiration_date").value = data.expiration_date;
+		document.getElementById("surname").value = data.surname;
+		document.getElementById("first_name").value = data.first_name;
+		document.getElementById("middle_initial").value = data.middle_initial;
+		document.getElementById("title").value = data.title;
+		document.getElementById("service_code").value = data.service_code;
+		document.getElementById("track1_dd").value = data.track1_dd;
+		document.getElementById("track2_dd").value = data.track2_dd;
+	}
+
+	function OnReconnecting() {
+		consolelog('onreconnecting');
+	}
+
+	function OnReconnect() {
+		consolelog('onreconnect');
+	}
+
+	function OnDisconnect() {
+		consolelog('ondisconnect');
+	}
+
+	function consolelog(string, option) {
+		var length = arguments.length;
+		var overwrite = length > 1 ? option : false;
+		
+		if (overwrite) {
+			document.getElementById("console").value = string + "\r\n";
+		} else {
+			document.getElementById("console").value += string + "\r\n";
+		}
+		//document.getElementById('console').scrollTop = document.getElementById('console').scrollHeight;
+	}
+
+	//-->
+</script>
+</head>
+
+<body onload="consolelog('', true)">
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="3">Device Setting</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<tr>
+			<td style="width:10%;">接続設定</td>
+			<td style="width:80%;">
+				IPアドレス<input id="ipaddress" size="20" type="text" value="192.168.192.168" />
+				ポート<input id="port" size="5" type="text" value="8008" />
+				デバイスID<input id="deviceid" size="15" type="text" value="local_msr" />
+				<input id="crypto" type="checkbox" value="" />暗号化
+				<input id="buffer" type="checkbox" value="" />バッファー
+			</td>
+			<td style="width:10%;" class="center"><input type="button" value="接続" onclick="connect()" /></td>
+		</tr>
+	</tbody>
+</table>
+</form>
+<br />
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th>Console</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><textarea id="console" style="width:98%;" rows="3" cols="80"></textarea></td>
+		</tr>
+	</tbody>
+</table>
+</form>
+<br />
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="4">ePOS SDK MSR Object</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<!-- track1 -->
+		<tr>
+			<td rowspan="12" style="width:11%;">読み取り結果</td>
+			<td style="width:17%;">トラック1のデータ全体</td>
+			<td>
+				<input id="track1" style="width:98%;" type="text" value="" /><br />
+			</td>
+		</tr>
+
+		<!-- track2 -->
+		<tr>
+			<td class="odd">トラック2のデータ全体</td>
+			<td>
+				<input id="track2" style="width:98%;" type="text" value="" /><br />
+			</td>
+		</tr>
+
+		<!-- track4 -->
+		<tr>
+			<td>トラック4のデータ全体</td>
+			<td>
+				<input id="track4" style="width:98%;" type="text" value="" /><br />
+			</td>
+		</tr>
+
+		<!-- account_number -->
+		<tr>
+			<td class="odd">アカウント番号</td>
+			<td>
+				<input id="account_number" style="width:98%;" type="text" value="" /><br />
+			</td>
+		</tr>
+
+		<!-- expiration_date -->
+		<tr>
+			<td>有効期限"YYMM"形式</td>
+			<td>
+				<input id="expiration_date" style="width:98%;" type="text" value="" /><br />
+			</td>
+		</tr>
+
+		<!-- surname -->
+		<tr>
+			<td class="odd">姓</td>
+			<td>
+				<input id="surname" style="width:98%;" type="text" value="" /><br />
+			</td>
+		</tr>
+
+		<!-- first_name -->
+		<tr>
+			<td>名</td>
+			<td>
+				<input id="first_name" style="width:98%;" type="text" value="" /><br />
+			</td>
+		</tr>
+
+		<!-- middle_initial -->
+		<tr>
+			<td class="odd">ミドルネームまたはイニシャル</td>
+			<td>
+				<input id="middle_initial" style="width:98%;" type="text" value="" /><br />
+			</td>
+		</tr>
+
+		<!-- title -->
+		<tr>
+			<td>タイトル</td>
+			<td>
+				<input id="title" style="width:98%;" type="text" value="" /><br />
+			</td>
+		</tr>
+
+		<!-- service_code -->
+		<tr>
+			<td class="odd">サービスコード</td>
+			<td>
+				<input id="service_code" style="width:98%;" type="text" value="" /><br />
+			</td>
+		</tr>
+
+		<!-- track1_dd -->
+		<tr>
+			<td>トラック1の任意データ</td>
+			<td>
+				<input id="track1_dd" style="width:98%;" type="text" value="" /><br />
+			</td>
+		</tr>
+
+		<!-- track2_dd -->
+		<tr>
+			<td class="odd">トラック2の任意データ</td>
+			<td>
+				<input id="track2_dd" style="width:98%;" type="text" value="" /><br />
+			</td>
+		</tr>
+	</tbody>
+</table>
+</form>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fabric 渐变填充</title>
+    <script src="./../fabric2.js"></script>
+
+
+    <style>
+        body{
+            background: #ccc;
+        }
+        #canvas{
+            background: #fff;
+            border:1px solid #000
+        }
+        #img{
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+<canvas id="canvas" width="800" height="800">
+
+</canvas>
+<img id="img" src="./back2.jpg">
+<script>
+    var canvas = new fabric.Canvas('canvas')
+
+
+    var circle = new fabric.Circle({
+        left:100,
+        top:100,
+        radius:50,
+        strokeWidth:1,
+        stroke:'red'
+    })
+
+//    circle.setGradient('fill',{ //上下
+//        x1:0,
+//        y1:0,
+//        x2:0,
+//        y2:circle.height,
+//        colorStops:{
+//            0:'#000',
+//            1:'#fff'
+//        }
+//    })
+
+
+    circle.setGradient('fill',{ //左右
+        x1:0,
+        y1:0,
+        x2:circle.width,
+        y2:0,
+        colorStops:{
+            0:'#f00',
+            0.2:'yellow',
+            0.6:'green',
+            0.8:'blue',
+            1:'#purple'
+        }
+    });
+
+    canvas.add(circle)
+
+
+</script>
+</body>
+</html>

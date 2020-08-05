@@ -1,0 +1,41 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        let arr = [1,2]
+        function test(arr) {
+
+            let i=0
+            let len = arr.length;
+            const recursion=(d)=>{
+
+                if(d>=len){
+                    return false
+                }else{
+                    console.log(arr[d])
+                    recursion(d+1)
+                }
+
+            };
+            recursion (i)
+        }
+        test(arr)
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

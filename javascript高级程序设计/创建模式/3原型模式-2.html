@@ -1,0 +1,54 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型模式</title>
+    <script>
+        function Person(){
+
+        }
+        //var friend = new Person()
+        Person.prototype={
+            //constructor:Person,
+            name:"Nicholas",
+            age:29,
+            job:"software",
+            sayName:function () {
+                console.log(this)
+                console.log(this.name)
+            }
+        }
+
+
+        var friend = new Person()
+        console.log(friend.sayName())
+        console.log(friend instanceof Object)
+        console.log(friend instanceof Person)
+        console.log(friend.constructor == Person)
+        console.log(friend.constructor == Object)
+        console.log(Person.prototype)
+
+        Object.defineProperty(Person.prototype,"constructor",{
+            value:Person
+        })
+        for (let i in Person.prototype){
+            console.log(i)
+        }
+        Person.prototype.sayHi=function () {
+            console.log('Hi')
+        }
+        friend.sayHi()
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

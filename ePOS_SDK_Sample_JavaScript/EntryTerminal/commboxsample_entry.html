@@ -1,0 +1,399 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=10">
+<title>Communication Box Sample - Entry</title>
+<script type="text/javascript" src="./epos-2.14.0.js"></script>
+<script type="text/javascript" src="./devicesetting.js"></script>
+<script type="text/javascript" src="./commboxsample_common.js"></script>
+<script type="text/javascript" src="./jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="./jquery-ui-1.8.23.custom.min.js"></script>
+<link rel="stylesheet" href="./jquery-ui-1.8.23.custom.css" />
+<style>
+	label{ display:block; }
+	input.text { margin-bottom:12px; width:95%; padding: .4em; }
+	fieldset { padding:0; border:0; margin-top:25px; }
+	div#users-contain { width: 350px; margin: 20px 0; }
+	div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+	div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+	.ui-dialog .ui-state-error { padding: .3em;}
+	.ui-widget-content{	background: white; color:black;}
+	.validateTips { border: 1px solid transparent; padding: 0.3em; }
+</style>
+<script>
+var ePosDev  = new epson.ePOSDevice();
+var devObj   = null;
+var commObj  = null;
+var boxObj   = null;
+var boxid    = 'entry_box';
+var memberid = 'commboxsample_entry';
+var targetid = 'commboxsample_call';
+var WAIT_RATIO = 5;
+
+$(function() {
+	var o_ipAddress = $( "#ipaddr" );
+	var o_port = $( "#port" );
+	var o_deviceID_printer = $( "#devid" );
+	var allFields = $( [] ).add( o_ipAddress ).add( o_port ).add( o_deviceID_printer ),
+		tips = $( ".validateTips" );
+	function updateTips( t ) {
+		tips
+		.text( t )
+		.addClass( "ui-state-highlight" );
+		setTimeout(function() {
+			tips.removeClass( "ui-state-highlight", 1500 );
+		}, 500 );
+	}
+	function checkLength( o, n, min, max ) {
+		if ( o.val().length > max || o.val().length < min ) {
+			o.addClass( "ui-state-error" );
+			updateTips( "Input " + n + " correctly.");
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	$( "#dialog-form" ).dialog({
+		autoOpen: false,
+		height: 350,
+		width: 350,
+		modal: true,
+		buttons: {
+			"Connect": function() {
+				var bValid = true;
+				allFields.removeClass( "ui-state-error" );
+				bValid = bValid && checkLength( o_ipAddress, "IP address for TM-DT", 1, 50 );
+				bValid = bValid && checkLength( o_port, "Port number for TM-DT", 1, 5 );
+				bValid = bValid && checkLength( o_deviceID_printer, "Device ID for printer", 1, 50 );
+				if ( bValid ) {
+					ipAddress = o_ipAddress.val();
+					port = o_port.val();
+					deviceID_printer = o_deviceID_printer.val();
+					$( this ).dialog( "close" );
+					connect();
+				}
+			}
+		},
+		close: function() {
+			allFields.val( "" ).removeClass( "ui-state-error" );
+		},
+		open:function(event, ui){
+			$(".ui-dialog-titlebar-close").hide();
+			o_ipAddress.val(ipAddress);
+			o_port.val(port);
+			o_deviceID_printer.val(deviceID_printer);
+		}
+	});
+
+	opendialog();
+});
+
+// Get the latest entry number.
+function getLastRequestId(historyList){
+	var id = 0;
+
+	sortHistoryList(historyList, true);
+
+	for(var i=0;i<historyList.length;i++){
+		var data = historyList[i].message;
+		if(!data.id)					continue;
+		if(!data.command)				continue;
+		if(data.command != 'accept')	continue;
+		id = data.id;
+		break;
+	}
+	return id;
+}
+
+function countWaitGroup(historyList){
+	var count = 0;
+
+	sortHistoryList(historyList, false);
+
+	for(var i=0;i<historyList.length;i++){
+		var data = historyList[i].message;
+		if(!data.command)					continue;
+		if(data.command != 'accept')		continue;
+		if(isCalled(data.id, historyList))	continue;
+		count++;
+	}
+	return count;
+}
+
+function isCalled(id, historyList){
+	var ret = false;
+
+	sortHistoryList(historyList, false);
+
+	for(var i=0;i<historyList.length;i++){
+		var data = historyList[i].message;
+		if(!data.id)					continue;
+		if(!data.command)				continue;
+		if(data.id != id)				continue;
+		if(data.command != 'call')	continue;
+		ret = true;
+		break;
+	}
+	return ret;
+}
+
+function print(no){
+	var adultnum = document.getElementById('adultnum').value;
+	var childnum = document.getElementById('childnum').value;
+
+	devObj.addTextAlign(devObj.ALIGN_CENTER);
+	devObj.addText('Entry number\n');
+	devObj.addTextSize(5, 5);
+	devObj.addText(no + '\n');
+	devObj.addTextSize(1, 1);
+	devObj.addText('\n');
+	devObj.addText('Adults:' + adultnum);
+	devObj.addText('  ');
+	devObj.addText('Children:' + childnum);
+	devObj.addText('\n');
+	devObj.addText('\n');
+	devObj.addText(strdate(nowdate()) + '\n');
+	devObj.addCut(devObj.CUT_FEED);
+	devObj.send();
+}
+
+function refresh(historyList){
+	var count = countWaitGroup(historyList);
+	var elementTime  = document.getElementById('waittime_num');
+	elementTime.innerHTML  = count * WAIT_RATIO;
+}
+
+function opendialog(){
+	$( "#dialog-form" ).dialog( "open" );
+}
+
+function connect(){
+	ePosDev.ondisconnect = null;
+	ePosDev.disconnect();
+	ePosDev.connect(ipAddress, port, callback_connect);
+	ePosDev.onreconnecting = onreconnecting;
+	ePosDev.onreconnect    = onreconnect;
+	ePosDev.ondisconnect   = ondisconnect;
+}
+
+function callback_connect(data){
+	switch(data){
+		case 'OK':
+		case 'SSL_CONNECT_OK':
+			ePosDev.createDevice(deviceID_printer, ePosDev.DEVICE_TYPE_PRINTER, false, callback_createDevice);
+			break;
+		default:
+			alert('Connection failed:' + ipAddress + ':' + port + ', data = ' + data);
+			opendialog();
+			break;
+	}
+}
+
+function onreconnecting(){
+	document.getElementById('entry_button').disabled = true;
+}
+
+function onreconnect(){
+	document.getElementById('entry_button').disabled = false;
+	boxObj.getCommHistory(function(code, historyList, sq){
+		refreshlist(historyList);
+	});
+}
+
+function ondisconnect(){
+	document.getElementById('entry_button').disabled = true;
+}
+
+function callback_createDevice(data, code){
+	if(data == null){
+		alert('Create device failed:' + 'deviceid = ' + deviceID_printer + ', code = ' + code);
+		opendialog();
+	}else{
+		devObj  = data;
+
+		commObj = ePosDev.getCommBoxManager();
+		commObj.openCommBox(boxid,{'memberID' : memberid}, callback_open)
+	}
+}
+
+function callback_open(obj, code, sq){
+	if(code == 'OK'){
+		boxObj = obj;
+		boxObj.onreceive = onreceive;
+
+		document.getElementById('entry_button').disabled = false;
+
+		boxObj.getCommHistory(function(code, historyList, sq){
+			refresh(historyList);
+		});
+	}else{
+		alert('Open box failed:' + 'boxid = ' + boxid + ', memberid = ' + memberid + ', code = ' + code);
+		opendialog();
+	}
+}
+
+function onreceive(data){
+	switch(data.message.command){
+		case 'accept':
+			print(data.message.id);
+			break;
+		case 'call':
+			var send_data ={};
+			send_data.command = 'callok';
+			send_data.id      = data.message.id;
+			send_data.date    = nowdate();
+			boxObj.send(send_data, targetid, callback_send);
+			break;
+	}
+	boxObj.getCommHistory(function(code, historyList, sq){
+		refresh(historyList);
+	});
+}
+
+function entry(){
+	boxObj.getCommHistory(function(code, historyList, sq){
+		var no = getLastRequestId(historyList);
+		var newid = no + 1;
+
+		var adultnum = document.getElementById('adultnum').value;
+		var childnum = document.getElementById('childnum').value;
+
+		var send_data ={};
+		send_data.command  = 'request';
+		send_data.id       = newid;
+		send_data.adultnum = adultnum;
+		send_data.childnum = childnum;
+		send_data.date     = nowdate();
+		boxObj.send(send_data, targetid, callback_send);
+	});
+}
+
+function callback_send(code, count, sq){
+	if(code != 'OK'){
+		alert('Send failed:' + 'code = ' + code);
+	}
+}
+</script>
+
+<style type="text/css">
+
+.main{
+	font-size: 2.0em;
+	text-align: center;
+}
+
+.title{
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.wait{
+	border-top: 1px solid #0000FF;
+	border-left: 1px solid #0000FF;
+	border-right: 3px solid #0000FF;
+	border-bottom: 3px solid #0000FF;
+}
+
+.wait #waittime_num{
+	color: #FF0000;
+	font-size: 2.0em;
+}
+
+.entry{
+	margin-top: 45px;
+}
+
+.entry .lead{
+	font-size: 0.8em;
+	margin-bottom: 0;
+}
+
+.entry .lead .dashed{
+	padding-bottom: 5px;
+	border-bottom: 1px dashed #000000;
+}
+
+.entry .param{
+	margin-top: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.entry .param td{
+	padding: 20px;
+}
+
+.entry #adultnum, #childnum{
+	font-size: 1.0em;
+}
+
+.entry #entry_button{
+	font-size: 2.0em;
+}
+</style>
+</head>
+
+<body>
+<div class="main">
+	<p class="title">Welcome!!</p>
+	<div class="wait">
+		Waiting time:&nbsp;<span id="waittime_num">0</span>&nbsp;minutes.<br />
+	</div>
+	<div class="entry">
+		<p class="lead"><span class="dashed">Input the number of guests then press the "Enter" button.</span></p>
+		<table class="param">
+			<tr>
+				<td>
+					Adults: 
+					<select id="adultnum">
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2" selected>2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+				</td>
+				<td>
+					Children: 
+					<select id="childnum">
+						<option value="0" selected>0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+		<input id="entry_button" type="button" value="Enter" onClick="entry()" disabled />
+	</div>
+</div>
+<div id="dialog-form" title="Connection Information">
+  <p class="validateTips"></p>
+  <form>
+  <fieldset>
+	<label for="ipaddr">IP address for TM-DT</label>
+	<input type="text" name="ipaddr" id="ipaddr" value="" class="text ui-widget-content ui-corner-all" />
+	<label for="port">Port number for TM-DT</label>
+	<input type="text" name="port" id="port" value="" class="text ui-widget-content ui-corner-all" />
+	<label for="devid">Device ID for printer</label>
+	<input type="text" name="devid" id="devid" value="" class="text ui-widget-content ui-corner-all" />
+  </fieldset>
+  </form>
+</div>
+</body>
+</html>

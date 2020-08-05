@@ -1,0 +1,35 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>借用构造函数</title>
+    <script>
+        function SuperType(name) {
+            this.name=name;
+            this.job='Web'
+        }
+        function SubType() {
+            //继承SuperType ,并传递参数
+            SuperType.call(this,"Ni")
+            this.age=29
+        }
+        var instance = new SubType()
+        console.log(instance.name)
+        console.log(instance.age)
+        console.log(instance.job)
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

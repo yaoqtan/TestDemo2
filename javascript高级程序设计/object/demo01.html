@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>面向对象</title>
+        <script>
+
+            //new Object 方法 创建对象
+            var name = 'webb'
+            var person = new Object();
+            person.name="Nicholas";
+            person.age=29;
+            person.obj='web'
+            person.sayName=function(){
+                console.log(this.name)
+            }
+            person.sayName()
+           // person.sayName.call(window)
+
+            //字面量方法创建Object
+
+            var person1 = {
+                name:'N1',
+                age:90,
+                job:"fontEnd",
+                sayName:function () {
+                    console.log(this)
+                    console.log(this.name)
+                },
+                sayName1:()=>{
+                    console.log(this)
+                    console.log(this.name)
+                }
+            }
+            person1.sayName()
+            person1.sayName1()
+
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>

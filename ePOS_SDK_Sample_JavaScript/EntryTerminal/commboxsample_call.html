@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Communication Box Sample - Call</title>
+<script type="text/javascript" src="./epos-2.14.0.js"></script>
+<script type="text/javascript" src="./devicesetting.js"></script>
+<script type="text/javascript" src="./commboxsample_common.js"></script>
+<script type="text/javascript" src="./jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="./jquery-ui-1.8.23.custom.min.js"></script>
+<link rel="stylesheet" href="./jquery-ui-1.8.23.custom.css" />
+<style>
+	label{ display:block; }
+	input.text { margin-bottom:12px; width:95%; padding: .4em; }
+	fieldset { padding:0; border:0; margin-top:25px; }
+	div#users-contain { width: 350px; margin: 20px 0; }
+	div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+	div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+	.ui-dialog .ui-state-error { padding: .3em;}
+	.ui-widget-content{	background: white; color:black;}
+	.validateTips { border: 1px solid transparent; padding: 0.3em; }
+</style>
+<script>
+var ePosDev = new epson.ePOSDevice();
+var commObj = null;
+var boxObj  = null;
+var boxId   = 'entry_box'
+var memberid = 'commboxsample_call';
+var targetid = 'commboxsample_entry';
+
+$(function() {
+	var o_ipAddress = $( "#ipaddr" );
+	var o_port = $( "#port" );
+	var allFields = $( [] ).add( o_ipAddress ).add( o_port ),
+		tips = $( ".validateTips" );
+	function updateTips( t ) {
+		tips
+		.text( t )
+		.addClass( "ui-state-highlight" );
+		setTimeout(function() {
+			tips.removeClass( "ui-state-highlight", 1500 );
+		}, 500 );
+	}
+	function checkLength( o, n, min, max ) {
+		if ( o.val().length > max || o.val().length < min ) {
+		o.addClass( "ui-state-error" );
+		updateTips( "Input " + n + " correctly.");
+		return false;
+		} else {
+			return true;
+		}
+	}
+
+	$( "#dialog-form" ).dialog({
+		autoOpen: false,
+		height: 300,
+		width: 350,
+		modal: true,
+		buttons: {
+			"Connect": function() {
+				var bValid = true;
+				allFields.removeClass( "ui-state-error" );
+				bValid = bValid && checkLength( o_ipAddress, "IP address for TM-DT", 1, 50 );
+				bValid = bValid && checkLength( o_port, "Port number for TM-DT", 1, 5 );
+				if ( bValid ) {
+					ipAddress = o_ipAddress.val();
+					port = o_port.val();
+					$( this ).dialog( "close" );
+					connect();
+				}
+			}
+		},
+		close: function() {
+			allFields.val( "" ).removeClass( "ui-state-error" );
+		},
+		open:function(event, ui){
+			$(".ui-dialog-titlebar-close").hide();
+			o_ipAddress.val(ipAddress);
+			o_port.val(port);
+		}
+	});
+
+	opendialog();
+});
+// Get the oldest entry number from the waiting list.
+function getNextCallId(historyList){
+	var id = 0;
+
+	sortHistoryList(historyList, false);
+
+	for(var i=0;i<historyList.length;i++){
+		var data = historyList[i].message;
+		if(!data.command)					continue;
+		if(data.command != 'request')		continue;
+		if(isCalled(data.id, historyList))	continue;
+		id = data.id;
+		break;
+	}
+	return id;
+}
+
+function isCalled(id, historyList){
+	var ret = false;
+
+	sortHistoryList(historyList, false);
+
+	for(var i=0;i<historyList.length;i++){
+		var data = historyList[i].message;
+		if(!data.id)					continue;
+		if(!data.command)				continue;
+		if(data.id != id)				continue;
+		if(data.command != 'callok')	continue;
+		ret = true;
+		break;
+	}
+	return ret;
+}
+
+function refreshList(historyList){
+	clearlist();
+
+	sortHistoryList(historyList, false);
+
+	for(var i=0;i<historyList.length;i++){
+		var data = historyList[i].message;
+		if(!data.id)						continue;
+		if(!data.command)					continue;
+		if(data.command != 'request')		continue;
+		if(isCalled(data.id, historyList))	continue;
+		addlist(data);
+	}
+}
+
+function clearlist(){
+	var element = document.getElementById('queue');
+	while(element.rows.length > 1){
+		element.deleteRow(element.rows.length-1);
+	}
+}
+
+function addlist(data){
+	var element = document.getElementById('queue');
+
+	var date = strdate(data.date);
+
+	var row = getRow(data);
+	if(row == null){
+		row = element.insertRow(-1);
+		var cell1 = row.insertCell(-1);
+		var cell2 = row.insertCell(-1);
+		var cell3 = row.insertCell(-1);
+		var cell4 = row.insertCell(-1);
+		cell1.appendChild(document.createTextNode(data.id));
+		cell2.appendChild(document.createTextNode(data.adultnum));
+		cell3.appendChild(document.createTextNode(data.childnum));
+		cell4.appendChild(document.createTextNode(date));
+	}else{
+		row.cells[0].innerHTML = data.id;
+		row.cells[1].innerHTML = data.adultnum;
+		row.cells[2].innerHTML = data.childnum;
+		row.cells[3].innerHTML = date;
+	}
+}
+
+function getRow(data){
+	var element = document.getElementById('queue');
+	var ret = null;
+
+	for(var i=0;i<element.rows.length;i++){
+		var row = element.rows[i];
+		var id = row.cells[0].innerHTML;
+		if(id != data.id)	continue;
+		ret = row;
+		break;
+	}
+	return ret;
+}
+
+function callback_send(code, count, sq){
+	if(code == 'NG'){
+		alert('Send failed');
+	}
+}
+
+function opendialog(){
+	$( "#dialog-form" ).dialog( "open" );
+}
+
+function connect(){
+	ePosDev.connect(ipAddress, port, callback_connect);
+	ePosDev.onreconnecting = onreconnecting;
+	ePosDev.onreconnect    = onreconnect;
+	ePosDev.ondisconnect   = ondisconnect;
+}
+
+function callback_connect(data){
+	switch(data){
+		case 'OK':
+		case 'SSL_CONNECT_OK':
+			commObj = ePosDev.getCommBoxManager();
+			commObj.openCommBox(boxId,{'memberID' : memberid}, callback_open)
+			break;
+		default:
+			alert('Connection failed:' + ipAddress + ':' + port + ', data = ' + data);
+			opendialog();
+			break;
+	}
+}
+
+function onreconnecting(){
+	document.getElementById('call_button').disabled = true;
+}
+
+function onreconnect(){
+	document.getElementById('call_button').disabled = false;
+	boxObj.getCommHistory(function(code, historyList, sq){
+		refreshList(historyList);
+	});
+}
+
+function ondisconnect(){
+	document.getElementById('call_button').disabled = true;
+}
+
+function callback_open(obj, code, sq){
+	if(code == 'OK'){
+		boxObj = obj;
+		boxObj.onreceive = onreceive;
+
+		document.getElementById('call_button').disabled = false;
+
+		boxObj.getCommHistory(function(code, historyList, sq){
+			refreshList(historyList);
+		});
+	}else{
+		alert('Open box failed:' + 'boxId = ' + boxId + ', memberid = ' + memberid + ', code = ' + code);
+		opendialog();
+	}
+}
+
+function onreceive(data){
+	switch(data.message.command){
+		case 'request':
+			var send_data ={};
+			send_data.command = 'accept';
+			send_data.id      = data.message.id;
+			send_data.date    = nowdate();
+			boxObj.send(send_data, data.senderId, callback_send);
+			break;
+		case 'callok':
+			refreshCurrentNumber(data.message.id);
+			break;
+	}
+	boxObj.getCommHistory(function(code, historyList, sq){
+		refreshList(historyList);
+	});
+}
+
+function call(){
+	boxObj.getCommHistory(function(code, historyList, sq){
+		var no = getNextCallId(historyList);
+		if(no > 0){
+			var send_data ={};
+			send_data.command = 'call';
+			send_data.id      = no;
+			send_data.date    = nowdate();
+			boxObj.send(send_data, targetid, callback_send);
+		}else{
+			refreshCurrentNumber('');
+		}
+	});
+}
+
+function refreshCurrentNumber(no){
+	var element = document.getElementById('currentnumber');
+	element.innerHTML = no + '<br />';
+}
+</script>
+<style type="text/css">
+.main{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h3{
+	color: white;
+	padding: 5px;
+	background-color: blue;
+}
+
+#call_button{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-size: 3.0em;
+}
+
+#queue{
+	margin-left: auto;
+	margin-right: auto;
+	border: solid 3px #CCCCCC;
+	border-collapse: collapse;
+}
+
+#queue tr:nth-child(even){
+	background-color: #EEEEEE;
+}
+
+
+#queue th{
+	border: solid 1px #CCCCCC;
+	padding: 3px;
+}
+
+#queue td{
+	border: solid 1px #CCCCCC;
+	padding: 3px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="main">
+	<div>
+		<h3>Current entry number</h3>
+		<h1 id='currentnumber'></h1>
+		<p><input id='call_button' type='button' value='Entry' onClick="call()" disabled /></p>
+	</div>
+	<div>
+		<h3>Waiting group list</h3>
+		<table id="queue">
+			<tr>
+				<th>Entry number</th>
+				<th>Adults</th>
+				<th>Children</th>
+				<th>Entry time</th>
+			</tr>
+		</table>
+	</div>
+</div>
+<div id="dialog-form" title="Connection Information">
+	<p class="validateTips"></p>
+	<form>
+		<fieldset>
+			<label for="ipaddr">IP address for TM-DT</label>
+			<input type="text" name="ipaddr" id="ipaddr" value="" class="text ui-widget-content ui-corner-all" />
+			<label for="port">Port number for TM-DT</label>
+			<input type="text" name="port" id="port" value="" class="text ui-widget-content ui-corner-all" />
+		</fieldset>
+	</form>
+</div>
+</body>
+
+</html>

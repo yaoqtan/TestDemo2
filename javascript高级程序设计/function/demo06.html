@@ -1,0 +1,30 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>function 内部属性 this</title>
+    <script>
+        window.color="red";
+        var o = {color:'blue'}
+
+        function sayColor() {
+            console.log(this.color)
+        }
+
+        sayColor()
+
+        o.sayColor=sayColor;
+        o.sayColor()
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

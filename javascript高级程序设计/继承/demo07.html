@@ -1,0 +1,42 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型链继承</title>
+    <script>
+        function object(o) {
+            function F() {}
+            F.prototype=o
+            return new F()
+        }
+
+        var person = {
+            name:"Ni",
+            friends:["Si","Co","Van"]
+        };
+        var yetAnotherPerson = object(person);
+        yetAnotherPerson.name="Gi"
+        yetAnotherPerson.friends.push('Rob')
+
+        var anotherPerson = object(person);
+        anotherPerson.name="Li"
+        anotherPerson.friends.push('BBar')
+
+        console.log(person.friends)
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

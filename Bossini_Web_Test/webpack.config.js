@@ -7,6 +7,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const fs = require('fs');
 
+var https = require('https');
+
 
 const getEntry = {
     entry:function(dirPath,option){
@@ -42,6 +44,7 @@ const getEntry = {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
         port: 9000,
+        https:true,
         host:'0.0.0.0',
         proxy: {
             '/api': {
@@ -106,6 +109,7 @@ const getEntry = {
     ]
 
 };
+ console.log(process.env.NODE_ENV)
 if(process.env.NODE_ENV === 'production'){
     webpackConfig.plugins.push(new CleanWebpackPlugin())
 }

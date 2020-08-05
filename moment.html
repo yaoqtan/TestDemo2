@@ -11,7 +11,8 @@
     <title>Title</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script>
-        console.log(moment().format())
+        console.log(moment().format('YYYY/MM/DD'))
+        console.log(moment().format('HH:mm'))
         console.log(moment(new Date()).isValid())
         console.log(moment("1995-12-25",'MM-DD-YYYY'))
         console.log(moment.unix(1318781876.721))
@@ -22,9 +23,17 @@
         console.log(moment().date())
         console.log(moment().toISOString())
         console.log(moment().toObject() )
+        console.log('month'+moment().months())
+        console.log(moment.monthsShort())
+        console.log(moment().subtract(-1,'days').format('YYYY/MM/DD'))
 
-        console.log(moment().subtract(-1,'days'))
+        console.log(moment().subtract(7, 'days').format('YYYY/MM/DD'))
 
+
+        var date = [0,-1,-2,-3,-4].map((item)=>{
+            return moment().subtract(item,'days').format('YYYY/MM/DD')
+        })
+        console.log(date)
 
     </script>
 </head>

@@ -1,0 +1,583 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Cashchanger Sample Program</title>
+<!-- CSS -->
+<style type="text/css">
+body {
+	background-color: #ffffff;
+	color: #333333;
+}
+table, tr, td {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #eeeeee;
+}
+th {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #cccccc;
+}
+.center {
+	text-align: center;
+}
+</style>
+<!-- Script -->
+<script type="text/javascript" src="epos-2.14.0.js"></script>
+<script type="text/javascript">
+<!--
+	var ipAddress = null;
+	var port = null;
+
+	var cashchanger = null;
+
+	var ePosDev = new epson.ePOSDevice();
+
+	function connect() {
+		ipAddress = document.getElementById("ipaddress").value;
+		port = document.getElementById("port").value;
+
+		ePosDev.connect(ipAddress, port, Callback_connect);
+		ePosDev.onerror = OnError;
+		ePosDev.onreconnecting = OnReconnecting;
+		ePosDev.onreconnect = OnReconnect;
+		ePosDev.ondisconnect = OnDisconnect;
+	}
+
+	function Callback_connect(data) {
+		var deviceID = document.getElementById("deviceid").value;
+		var crypto = document.getElementById("crypto").checked;
+		var buffer = document.getElementById("buffer").checked;
+		var options = {'crypto' : crypto, 'buffer' : buffer};
+
+		if (data == 'OK') {
+			consolelog("connected to ePOS Device Service Interface.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_CASH_CHANGER, options, callbackCreateDevice_cashchanger);
+		}
+		else if (data == 'SSL_CONNECT_OK') {
+			consolelog("connected to ePOS Device Service Interface with SSL.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_CASH_CHANGER, options, callbackCreateDevice_cashchanger);
+		}
+		else {
+			consolelog("connected to ePOS Device Service Interface is failed. [" + data + "]", true);
+		}
+	}
+
+	function callbackCreateDevice_cashchanger(data, code) {
+		if (data != null) {
+			cashchanger = data;
+			consolelog("you can use cashchanger.");
+			cashchanger.onstatuschange = onStatusChange;
+		}
+		else {
+			consolelog(code);
+		}
+	}
+
+	function OnError(sq, deviceID, code) {
+		consolelog('sq: ' + sq, true);
+		consolelog('deviceID: ' + deviceID);
+		consolelog('code: ' + code);
+	}
+
+	function OnReconnecting() {
+		consolelog('onreconnecting');
+	}
+
+	function OnReconnect() {
+		consolelog('onreconnect');
+	}
+
+	function OnDisconnect() {
+		consolelog('ondisconnect');
+	}
+
+	function BeginDeposit() {
+
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.ondeposit = onDeposit;
+			cashchanger.beginDeposit();
+		}
+	}
+
+	function PauseDeposit() {
+
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.ondeposit = onDeposit;
+			cashchanger.pauseDeposit();
+		}
+	}
+
+	function RestartDeposit() {
+
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.ondeposit = onDeposit;
+			cashchanger.restartDeposit();
+		}
+	}
+
+	function EndDeposit() {
+
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.ondeposit = onDeposit;
+			cashchanger.endDeposit(cashchanger.DEPOSIT_NOCHANGE);
+		}
+	}
+
+	function EndDepositRepay() {
+
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.ondeposit = onDeposit;
+			cashchanger.endDeposit(cashchanger.DEPOSIT_REPAY);
+		}
+	}
+
+	function DispenseChange() {
+
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.ondispense = onDispense;
+
+			var cash = document.getElementById("cashAmountDispense").value;
+			cashchanger.dispenseChange(cash);
+		}
+	}
+
+	function DispenseCash() {
+
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.ondispense = onDispense;
+
+			var dispense1 = document.getElementById("cashCountDispense_1").value;
+			var dispense5 = document.getElementById("cashCountDispense_5").value;
+			var dispense10 = document.getElementById("cashCountDispense_10").value;
+			var dispense50 = document.getElementById("cashCountDispense_50").value;
+			var dispense100 = document.getElementById("cashCountDispense_100").value;
+			var dispense500 = document.getElementById("cashCountDispense_500").value;
+			var dispense1000 = document.getElementById("cashCountDispense_1000").value;
+			var dispense2000 = document.getElementById("cashCountDispense_2000").value;
+			var dispense5000 = document.getElementById("cashCountDispense_5000").value;
+			var dispense10000 = document.getElementById("cashCountDispense_10000").value;
+
+			var data = { 'jpy1': dispense1, 'jpy5': dispense5, 'jpy10': dispense10, 'jpy50': dispense50, 'jpy100': dispense100, 'jpy500': dispense500,
+				'jpy1000': dispense1000, 'jpy2000': dispense2000, 'jpy5000': dispense5000, 'jpy10000': dispense10000
+			};
+
+			cashchanger.dispenseCash(data);
+		}
+
+	}
+
+	function ReadCashCounts() {
+
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.oncashcounts = onCashCounts;
+			cashchanger.readCashCounts();
+		}
+
+	}
+
+	function CollectAllCash() {
+
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.oncollect = onCollectCash;
+			cashchanger.collectCash(cashchanger.COLLECT_ALL_CASH);
+		}
+
+	}
+
+
+	function CollectPartOfCash() {
+
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.oncollect = onCollectCash;
+			cashchanger.collectCash(cashchanger.COLLECT_PART_OF_CASH);
+		}
+
+	}
+
+	function SetConfig_CashInDrawer() {
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.onconfigchange = onSetConfig;
+			var bills = document.getElementById("billsCashInDrawer").value;
+			var coins = document.getElementById("coinsCashInDrawer").value;
+
+			var data = { "bills": bills, "coins": coins };
+			cashchanger.setConfig(cashchanger.CONFIG_LEFT_CASH, data);
+		}
+	}
+
+	function SetConfig_ManualInput() {
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.onconfigchange = onSetConfig;
+			cashchanger.setConfig(cashchanger.CONFIG_COUNT_MODE, { "mode": cashchanger.MODE_MANUAL_INPUT });
+		}
+	}
+
+	function SetConfig_AutoCount() {
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.onconfigchange = onSetConfig;
+			cashchanger.setConfig(cashchanger.CONFIG_COUNT_MODE, { "mode": cashchanger.MODE_AUTOCOUNT });
+		}
+
+	}
+
+	function OpenDrawer() {
+
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.openDrawer();
+		}
+
+	}
+
+	function SendCommand() {
+
+		if (cashchanger == null) {
+			consolelog('driver object is not loaded.');
+		}
+		else {
+			cashchanger.oncommandreply = onCommandReply;
+			var command = document.getElementById("command").value;
+			cashchanger.sendCommand(escapeCode(command));
+		}
+	}
+
+	// process escape sequence (binary)
+	function escapeCode(s) {
+		var escape = /\\x[0-9A-Fa-f]{2}/g;
+		if (escape.test(s)) {
+			s = s.replace(escape, function (c) {
+				return String.fromCharCode(parseInt(c.slice(2), 16));
+			});
+		}
+		return escapeText(s);
+	}
+
+	// process escape sequence (text)
+	function escapeText(s) {
+		var escape = /\\[tnr\\]|\\/g;
+		if (escape.test(s)) {
+			s = s.replace(escape, function (c) {
+				var r = '';
+				switch (c) {
+					case '\\t':
+						r = '\x09';
+						break;
+					case '\\n':
+						r = '\x0a';
+						break;
+					case '\\r':
+						r = '\x0d';
+						break;
+					case '\\\\':
+						r = '\\';
+						break;
+					default:
+						break;
+				}
+				return r;
+			});
+		}
+		return s;
+	}
+
+	function onDeposit(data) {
+		consolelog("status: " + data.status + "\t", true);
+		consolelog("amount: " + data.amount + "YEN" + "\r\n");
+		consolelog("10000YEN: " + data.jpy10000 + "\t");
+		consolelog("5000YEN: " + data.jpy5000 + "\t");
+		consolelog("2000YEN: " + data.jpy2000 + "\t");
+		consolelog("1000YEN: " + data.jpy1000 + "\t");
+		consolelog("500YEN: " + data.jpy500 + "\r\n");
+		consolelog("100YEN: " + data.jpy100 + "\t");
+		consolelog("50YEN: " + data.jpy50 + "\t");
+		consolelog("10YEN: " + data.jpy10 + "\t");
+		consolelog("5YEN: " + data.jpy5 + "\t");
+		consolelog("1YEN: " + data.jpy1 + "\r\n");
+	}
+
+	function onDispense(data) {
+		consolelog("status: " + data.status);
+	}
+
+	function onCashCounts(data) {
+		consolelog("status: " + data.status + "\r\n", true);
+		consolelog("10000YEN: " + data.jpy10000 + "\t");
+		consolelog("5000YEN: " + data.jpy5000 + "\t");
+		consolelog("2000YEN: " + data.jpy2000 + "\t");
+		consolelog("1000YEN: " + data.jpy1000 + "\t");
+		consolelog("500YEN: " + data.jpy500 + "\r\n");
+		consolelog("100YEN: " + data.jpy100 + "\t");
+		consolelog("50YEN: " + data.jpy50 + "\t");
+		consolelog("10YEN: " + data.jpy10 + "\t");
+		consolelog("5YEN: " + data.jpy5 + "\t");
+		consolelog("1YEN: " + data.jpy1 + "\t");
+		consolelog("10000YEN CASSETTE: " + data.jpy10000cassette + "\t");
+		consolelog("5000YEN CASSETTE: " + data.jpy5000cassette + "\t");
+		consolelog("2000YEN CASSETTE: " + data.jpy2000cassette + "\t");
+		consolelog("1000YEN CASSETTE: " + data.jpy1000cassette + "\r\n");
+	}
+
+	function onCollectCash(data) {
+		consolelog("status: " + data.status, true);
+	}
+
+	function onSetConfig(data) {
+		consolelog("status: " + data.status, true);
+	}
+
+	function onCommandReply(data) {
+		consolelog("status: " + data.status + "\r\n", true);
+		consolelog("data: " + data.data);
+	}
+
+	function onStatusChange(data) {
+		var string = '';
+		string = "status: " + data.status + "\r\n";
+		string += "st10000: " + data.st10000 + "\t";
+		string += "st5000: " + data.st5000 + "\t";
+		string += "st2000: " + data.st2000 + "\t";
+		string += "st1000: " + data.st1000 + "\t";
+		string += "st500: " + data.st500 + "\r\n";
+		string += "st100: " + data.st100 + "\t";
+		string += "st50: " + data.st50 + "\t";
+		string += "st10: " + data.st10 + "\t";
+		string += "st5: " + data.st5 + "\t";
+		string += "st1: " + data.st1 + "\r\n";
+		statuslog(string);
+	}
+
+	function statuslog(string, option) {
+		var length = arguments.length;
+		var overwrite = length > 1 ? option : false;
+		
+		if (overwrite) {
+			document.getElementById("status").value = string + "\r\n";
+		} else {
+			document.getElementById("status").value += string + "\r\n";
+		}
+	}
+
+	function consolelog(string, option) {
+		var length = arguments.length;
+		var overwrite = length > 1 ? option : false;
+		
+		if (overwrite) {
+			document.getElementById("console").value = string + "\r\n";
+		} else {
+			document.getElementById("console").value += string + "\r\n";
+		}
+		//document.getElementById('console').scrollTop = document.getElementById('console').scrollHeight;
+	}
+
+//-->
+</script>
+</head>
+
+<body onload="consolelog('', true)">
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="3">Device Setting</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<tr>
+			<td style="width:10%;">接続設定</td>
+			<td style="width:80%;">
+				IPアドレス<input id="ipaddress" size="20" type="text" value="192.168.192.168" />
+				ポート<input id="port" size="5" type="text" value="8008" />
+				デバイスID<input id="deviceid" size="15" type="text" value="local_cashchanger" />
+				<input id="crypto" type="checkbox" value="" />暗号化
+				<input id="buffer" type="checkbox" value="" />バッファー
+			</td>
+			<td style="width:10%;" class="center"><input type="button" value="接続" onclick="connect()" /></td>
+		</tr>
+	</tbody>
+</table>
+</form>
+<br />
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th>Console</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<textarea id="console" style="width:98%;" rows="5" cols="80"></textarea>
+				<input type="button" value="Reset" onclick="consolelog('', true)" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+</form>
+<br />
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="4">ePOS SDK Cashchanger Object</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td rowspan="2" style="width:8%;">機器設定</td>
+			<td style="width:16%;">計数モード</td>
+			<td style="width:68%;">
+				<button onclick='SetConfig_ManualInput()'>手入力モード</button>
+				<button onclick='SetConfig_AutoCount()'>自動計数モード</button>
+			</td>
+		</tr>
+
+		<tr>
+			<td>残置指定</td>
+			<td>
+				<input type="text" id="billsCashInDrawer" style="width:100px;height:18px" />紙幣部（単位：1000円<br>
+				<input type="text" id="coinsCashInDrawer" style="width:100px;height:18px" />硬貨部（単位：10円）<br>
+				<button onclick='SetConfig_CashInDrawer()'>残置金額設定</button>
+			</td>
+		</tr>
+
+		<tr>
+			<td>計数</td>
+			<td></td>
+			<td><button onclick='ReadCashCounts()'>計数</button></td>
+
+		</tr>
+
+		<tr>
+			<td>入金</td>
+			<td></td>
+			<td>
+				<button onclick='BeginDeposit()'>開始</button>
+				<button onclick='PauseDeposit()'>一時停止</button>
+				<button onclick='RestartDeposit()'>再開</button>
+				<button onclick='EndDeposit()'>終了</button>
+				<button onclick='EndDepositRepay()'>預り金返却して終了</button>
+			</td>
+		</tr>
+
+		<tr>
+			<td rowspan="2">出金</td>
+			<td>金額指定</td>
+			<td>
+			   <input type="text" id="cashAmountDispense" style="width:100px;height:18px" />
+			   <button onclick='DispenseChange()'>出金</button>
+			</td>
+		</tr>
+
+		<tr>
+			<td>金種指定</td>
+			<td>
+				&yen;10000<input type="text" id="cashCountDispense_10000" style="width:50px;height:18px" value="0" />
+				&yen&nbsp;&nbsp;5000<input type="text" id="cashCountDispense_5000" style="width:50px;height:18px" value="0" />
+				&yen&nbsp;&nbsp;2000<input type="text" id="cashCountDispense_2000" style="width:50px;height:18px" value="0" />
+				&yen&nbsp;&nbsp;1000<input type="text" id="cashCountDispense_1000" style="width:50px;height:18px" value="0" />
+				&yen&nbsp;&nbsp;&nbsp;&nbsp;500<input type="text" id="cashCountDispense_500" style="width:50px;height:18px" value="0" />
+				<br>
+				&yen&nbsp;&nbsp;&nbsp;&nbsp;100<input type="text" id="cashCountDispense_100" style="width:50px;height:18px" value="0" />
+				&yen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<input type="text" id="cashCountDispense_50" style="width:50px;height:18px" value="0" />
+				&yen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10<input type="text" id="cashCountDispense_10" style="width:50px;height:18px" value="0" />
+				&yen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5<input type="text" id="cashCountDispense_5" style="width:50px;height:18px" value="0" />&yen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<input type="text" id="cashCountDispense_1" style="width:50px;height:18px" value="0" />
+				<br>
+				<button onclick='DispenseCash()'>出金</button>
+			</td>
+		</tr>
+
+		<tr>
+			<td>回収</td>
+			<td></td>
+			<td>
+				<button onclick='CollectAllCash()'>全額回収</button>
+				<button onclick='CollectPartOfCash()'>残置回収</button>
+			</td>
+		</tr>
+
+		<tr>
+			<td>ドロワー</td>
+			<td></td>
+			<td>
+				<button onclick='OpenDrawer()'>開く</button>
+			</td>	
+		</tr>
+
+		<tr>
+			<td>コマンド送信</td>
+			<td></td>
+			<td>
+				<input type="text" id="command" style="width:98%;" />
+				<button onclick='SendCommand()'>コマンド送信</button>
+			</td>	
+		</tr>
+
+</tbody>
+</table>
+</form>
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th>Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<textarea id="status" style="width:98%;" rows="5" cols="80"></textarea>
+				<input type="button" value="Reset" onclick="statuslog('', true)" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+</form>
+</body>
+</html>

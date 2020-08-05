@@ -1,0 +1,27 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>稳妥构造函数模式</title>
+    <script>
+        function Person(name,age,job) {
+            var o = new Object()
+            o.sayName=function () {
+                console.log(name)
+            }
+        }
+        var friend = Person("Ni",20,"Web");
+        friend.sayName()
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

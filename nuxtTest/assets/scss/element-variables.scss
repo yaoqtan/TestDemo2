@@ -1,0 +1,121 @@
+/* 改变主题色变量 */
+$--color-primary: $theme;
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+/* 组件样式按需引入 */
+@import "~element-ui/packages/theme-chalk/src/select";
+@import "~element-ui/packages/theme-chalk/src/option";
+@import "~element-ui/packages/theme-chalk/src/input";
+@import "~element-ui/packages/theme-chalk/src/button";
+@import "~element-ui/packages/theme-chalk/src/notification";
+@import "~element-ui/packages/theme-chalk/src/message";
+
+//icon
+.el-loading-spinner i,.el-loading-spinner .el-loading-text{
+    color:$theme
+}
+
+//drawer
+.el-drawer.ltr{
+    top:60px;
+    background: #000;
+}
+.el-drawer__body{
+    text-align: left;
+    padding:32px 28px
+}
+
+.el-drawer__body{
+    .el-menu-item{
+        padding:0 !important;
+    }
+}
+
+#el-drawer__title{
+    display: none;;
+}
+//el-menu
+.el-menu{
+    font-weight: 700;
+    border-right: transparent;
+    a{
+        display: block;
+    }
+}
+.el-menu--horizontal .el-menu-item:not(.is-disabled):focus,
+.el-menu--horizontal .el-menu-item:not(.is-disabled):hover{
+    background-color: #222 !important;
+    color: #FFF !important;
+}
+.el-menu--horizontal>.el-submenu.is-active .el-submenu__title,
+.el-menu--horizontal .el-menu .el-menu-item.is-active,
+.el-menu--horizontal .el-menu .el-submenu.is-active>.el-submenu__title{
+    background: #000;
+    color:#ccc;
+    border-bottom: none;
+}
+.el-submenu__icon-arrow{
+    font-size: 14px;
+    right: -2px;
+    font-weight: 700;
+}
+.el-menu--popup{
+    border: 1px solid #333;
+    margin-top: 3px;
+    border-top-color: transparent;
+}
+
+//dialog
+.el-message-box{
+    max-width: 90%;
+}
+.el-message-box__headerbtn:focus .el-message-box__close,
+ .el-message-box__headerbtn:hover .el-message-box__close{
+    color:#FFD800;
+}
+
+//el-tabs
+
+.el-tabs__nav-wrap{
+    &::after {
+        height: 3px;
+        border-bottom: 3px solid #262626;
+    }
+    .el-tabs__item{
+        color: #777;
+        &:hover{
+            color: #666;
+            text-decoration: none;
+            border-bottom: 3px solid #666;
+        }
+        &.is-active{
+            color: #FFD800;
+            text-decoration: none;
+            border-bottom: 3px solid #FFD800;
+        }
+    }
+    .el-tabs__active-bar{
+        background: #FFD800;
+    }
+    
+}
+
+.el-tabs--bottom .el-tabs__item.is-bottom:nth-child(2),
+ .el-tabs--bottom .el-tabs__item.is-top:nth-child(2),
+  .el-tabs--top .el-tabs__item.is-bottom:nth-child(2),
+   .el-tabs--top .el-tabs__item.is-top:nth-child(2){
+       padding-left:20px ;
+   }
+
+//swiper
+.eiga-swiper{
+    .swiper-pagination-bullet{
+        background:$white;
+        &.swiper-pagination-bullet-active{
+            background:$theme;
+        }
+    }  
+}
+

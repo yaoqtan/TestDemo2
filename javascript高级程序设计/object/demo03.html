@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>访问器属性</title>
+    <script>
+        var book = {
+            _year:2004,
+            edition:1
+        }
+
+        Object.defineProperty(book,"year",{
+            get:function () {
+                return this._year
+            },
+            set:function (newValue) {
+                if(newValue > 2004){
+                    this._year=newValue
+                    this.edition +=newValue -2004;
+                }
+            }
+        })
+
+        book.year=2005;
+        console.log(book.edition)
+
+        var book1 = {
+            _year:2004,
+            edition:1
+        }
+        //定义访问器的旧有方法
+        book1.__defineGetter__("year",function(){
+            return this._year
+        });
+        book1.__defineSetter__("year",function(newValue){
+            if(newValue > 2004){
+                this._year = newValue;
+                this.edition += newValue -2004
+            }
+        })
+
+        book1.year=2006;
+        console.log(book1.edition)
+
+
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

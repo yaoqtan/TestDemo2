@@ -1,0 +1,333 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Barcode Scanner Sample Program</title>
+<!-- CSS -->
+<style type="text/css">
+body {
+	background-color: #ffffff;
+	color: #333333;
+}
+table, tr, td {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #eeeeee;
+}
+th {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #cccccc;
+}
+.center {
+	text-align: center;
+}
+</style>
+<!-- Script -->
+ <script type="text/javascript" src="epos-2.14.0.js"></script>
+
+<script type="text/javascript">
+<!--
+	var ipAddress = null;
+	var port = null;
+
+	var scanner = null;
+	
+	var id = '';
+	var barcode = '';
+
+	var ePosDev = new epson.ePOSDevice();
+
+	function connect() {
+		ipAddress = document.getElementById("ipaddress").value;
+		port = document.getElementById("port").value;
+
+		ePosDev.connect(ipAddress, port, Callback_connect);
+		ePosDev.onreconnecting = OnReconnecting;
+		ePosDev.onreconnect = OnReconnect;
+		ePosDev.ondisconnect = OnDisconnect;
+	}
+
+	function Callback_connect(data) {
+		var deviceID = document.getElementById("deviceid").value;
+		var crypto = document.getElementById("crypto").checked;
+		var buffer = document.getElementById("buffer").checked;
+		var options = {'crypto' : crypto, 'buffer' : buffer};
+
+		if (data == 'OK') {
+			consolelog("connected to ePOS Device Service Interface.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_SCANNER, options, callbackCreateDevice_scanner);
+		}
+		else if (data == 'SSL_CONNECT_OK') {
+			consolelog("connected to ePOS Device Service Interface with SSL.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_SCANNER, options, callbackCreateDevice_scanner);
+		}
+		else {
+			consolelog("connected to ePOS Device Service Interface is failed. [" + data + "]", true);
+		}
+	}
+
+	function callbackCreateDevice_scanner(data, code) {
+		if (data != null) {
+			scanner = data;
+			consolelog("you can use scanner.");
+			scanner.ondata = onData;
+		}
+		else {
+			consolelog(code);
+		}
+	}
+
+	// Receive read event of barcode information
+	function onData(data) {
+		if (document.getElementById("enable").checked) {
+			var id_len = document.getElementById("length").value;
+
+			switch (document.getElementById("position").value) {
+				case 'prefix':
+					id = data.input.slice(0, id_len);
+					barcode = data.input.slice(id_len);
+					break;
+
+				case 'suffix':
+					id = data.input.slice(-id_len);
+					barcode = data.input.slice(0, data.input.length - id_len);
+					break;
+
+				default:
+					break;
+			}
+
+			for (var i = 1; i < 7; i++) {
+				if (id == document.getElementById("id" + i.toString()).value) {
+					document.getElementById("type").value = document.getElementById("bar" + i.toString()).value;
+					break;
+				}
+
+				document.getElementById("type").value = "UNKNOWN";
+			}
+
+			document.getElementById("id_code").value = id;
+			document.getElementById("barcode_data").value = barcode;
+		}
+
+		else {
+			document.getElementById("barcode_data").value = data.input;
+		}
+	}
+
+	function OnReconnecting() {
+		consolelog('onreconnecting');
+	}
+
+	function OnReconnect() {
+		consolelog('onreconnect');
+	}
+
+	function OnDisconnect() {
+		consolelog('ondisconnect');
+	}
+
+	function consolelog(string, option) {
+		var length = arguments.length;
+		var overwrite = length > 1 ? option : false;
+		
+		if (overwrite) {
+			document.getElementById("console").value = string + "\r\n";
+		} else {
+			document.getElementById("console").value += string + "\r\n";
+		}
+		//document.getElementById('console').scrollTop = document.getElementById('console').scrollHeight;
+	}
+
+	function setcode() {
+		switch (document.getElementById("product").value) {
+			case "1":
+				document.getElementById("length").value = "1";
+				document.getElementById("id1").value = "B";
+				document.getElementById("id2").value = "A";
+				document.getElementById("id3").value = "I";
+				document.getElementById("id4").value = "M";
+				document.getElementById("id5").value = "K";
+				document.getElementById("id6").value = "N";
+				break;
+
+			case "2":
+				document.getElementById("length").value = "3";
+				document.getElementById("id1").value = "]E4";
+				document.getElementById("id2").value = "]E0";
+				document.getElementById("id3").value = "]I0";
+				document.getElementById("id4").value = "]A0";
+				document.getElementById("id5").value = "]C0";
+				document.getElementById("id6").value = "]F0";
+				break;
+
+			default:
+				break;
+		}
+	}
+
+	function switchoption() {
+		if (document.getElementById("enable").checked) {
+			document.getElementById("product").disabled = false;
+			document.getElementById("position").disabled = false;
+			document.getElementById("id_code").disabled = false;
+			document.getElementById("type").disabled = false;
+			document.getElementById("length").disabled = false;
+			for (var i = 1; i < 7; i++) {
+				document.getElementById("bar" + i.toString()).disabled = false;
+				document.getElementById("id" + i.toString()).disabled = false;
+			}
+		}
+		else {
+			document.getElementById("product").disabled = true;
+			document.getElementById("position").disabled = true;
+			document.getElementById("id_code").disabled = true;
+			document.getElementById("type").disabled = true;
+			document.getElementById("length").disabled = true;
+			for (var i = 1; i < 7; i++) {
+				document.getElementById("bar" + i.toString()).disabled = true;
+				document.getElementById("id" + i.toString()).disabled = true;
+			}
+		}
+	}
+	//-->
+</script>
+</head>
+
+<body onload="consolelog('', true);">
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="3">Device Setting</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		 <tr>
+			<td style="width:20%;">Connection settings</td>
+			<td style="width:70%;">
+				IP address<input id="ipaddress" size="20" type="text" value="192.168.192.168" />
+				Port<input id="port" size="5" type="text" value="8008" />
+				Device ID<input id="deviceid" size="15" type="text" value="local_scanner" />
+				<input id="crypto" type="checkbox" value="" />Encryption
+				<input id="buffer" type="checkbox" value="" />Enable buffer
+			</td>
+			<td style="width:10%;" class="center"><input type="button" value="Connect" onclick="connect()" /></td>
+		</tr>
+		<tr>
+			<td>Use barcode symbology identification code</td>
+			<td colspan="2">
+				<input id="enable" type="checkbox" value="" onclick="switchoption();"/>Enabled<br />
+				※Please do setting to use an identification code with a bar code scanner beforehand.
+			</td>
+		</tr>
+		<tr>
+			<td>Scanner setting</td>
+			<td colspan="2">
+				Type
+				<select id="product" class="idoption"  onchange="setcode();" disabled="true">
+					<option value="0">-</option>
+					<option value="1">Type1</option>
+					<option value="2">Type2</option>
+				</select><br />
+				Identification cord length
+				<input id="length" type="text" size="5" value="1" disabled="true">
+				Identification cord position
+				<select id="position" class="idoption" disabled="true">
+					<option value="prefix">Prefix of barcode data</option>
+					<option value="suffix">Suffix of barcode data</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="7">Identification code setting</td>
+			<td colspan="2"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Barcode type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;| &nbsp;Identification code</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<input id="bar1" type="text" size="20" value="EAN-8" disabled="true"> : 
+			<input id="id1" type="text" size="5" value="" disabled="true"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<input id="bar2" type="text" size="20" value="UPC-A/EAN-13" disabled="true"> : 
+			<input id="id2" type="text" size="5" value="" disabled="true"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<input id="bar3" type="text" size="20" value="Interleaved 2of5" disabled="true"> : 
+			<input id="id3" type="text" size="5" value="" disabled="true"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<input id="bar4" type="text" size="20" value="CODE39" disabled="true"> : 
+			<input id="id4" type="text" size="5" value="" disabled="true"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<input id="bar5" type="text" size="20" value="CODE128" disabled="true"> : 
+			<input id="id5" type="text" size="5" value="" disabled="true"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<input id="bar6" type="text" size="20" value="NW-7(CODABAR)" disabled="true"> : 
+			<input id="id6" type="text" size="5" value="" disabled="true"></td>
+		</tr>	
+	</tbody>
+</table>
+<table style="width:100%;">
+	<tbody>
+	</tbody>
+</table>
+</form>
+<br />
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th>Console</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><textarea id="console" style="width:98%;" rows="3" cols="80"></textarea></td>
+		</tr>
+	</tbody>
+</table>
+</form>
+<br />
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="4">ePOS SDK Scanner Object</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		<tr>
+			<td rowspan="2" style="width:11%;">Reading result</td>
+
+			<td>Data for Identification</td>
+			<td>
+				Identification code
+				<input id="id_code" type="text" size="5" value="" class="idoption" disabled="true"/>
+				Barcode type
+				<input id="type" type="text" size="20" value="" class="idoption" disabled="true"/><br />
+			</td>
+		</tr>
+		<tr>
+			<td>Barcode data</td>
+			<td>
+				<input id="barcode_data" style="width:98%;" type="text" value="" /><br />
+			</td>
+		</tr>
+</tbody>
+</table>
+</form>
+</body>
+</html>

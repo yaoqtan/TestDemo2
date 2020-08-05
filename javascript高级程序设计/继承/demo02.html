@@ -1,0 +1,44 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型链</title>
+    <script>
+        function SuperType() {
+            this.property=true;
+        }
+
+        SuperType.prototype.getSuperValue=function () {
+            return this.property
+        }
+
+        function SubType() {
+            this.subproperty=false
+        }
+
+        SubType.prototype = new SuperType()
+
+        SubType.prototype.getSubValue=function () {
+            return this.subproperty
+        }
+        SubType.prototype.getSuperValue=function () {
+            return false
+        }
+
+        var instance = new SubType()
+        var superInstance = new SuperType()
+        console.log(superInstance.getSuperValue())
+        console.log(instance.getSuperValue())
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

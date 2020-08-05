@@ -5,6 +5,13 @@ module.exports = {
     devServer: {
         open:true,
         port:8889,
+    },
+    configureWebpack: {
+        resolve: {
+            alias: {
+                'vue$': 'vue/dist/vue.esm.js'
+            }
+        }
     }
         //     default     //
    /* outputDir: "dist",

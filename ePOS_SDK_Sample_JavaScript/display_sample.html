@@ -1,0 +1,952 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Customer Display Sample Program</title>
+<!-- CSS -->
+<style type="text/css">
+body {
+	background-color: #ffffff;
+	color: #333333;
+}
+table, tr, td {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #eeeeee;
+}
+th {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #cccccc;
+}
+.center {
+	text-align: center;
+}
+</style>
+<!-- Script -->
+<script type="text/javascript" src="epos-2.14.0.js"></script>
+<script type="text/javascript">
+<!--
+	var ipAddress = null;
+	var port      = null;
+
+	var crypto = false;
+	var buffer = false;
+
+	var display = null;
+
+	var sample = '';
+
+	var ePosDev = new epson.ePOSDevice();
+
+	function connect() {
+		ipAddress = document.getElementById("ipaddress").value;
+		port = document.getElementById("port").value;
+
+		ePosDev.connect(ipAddress, port, Callback_connect);
+		ePosDev.onreconnecting = OnReconnecting;
+		ePosDev.onreconnect = OnReconnect;
+		ePosDev.ondisconnect = OnDisconnect;
+	}
+
+	function Callback_connect(data) {
+		var deviceID = document.getElementById("deviceid").value;
+		crypto       = document.getElementById("crypto").checked;
+		buffer       = document.getElementById("buffer").checked;
+		var options  = {'crypto' : crypto, 'buffer' : buffer};
+
+		if(data == 'OK') {
+			consolelog("connected to ePOS Device Service Interface.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_DISPLAY, options, callbackCreateDevice_display);
+		}
+		else if (data == 'SSL_CONNECT_OK') {
+			consolelog("connected to ePOS Device Service Interface with SSL.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_DISPLAY, options, callbackCreateDevice_display);
+		}
+		else {
+			consolelog("connected to ePOS Device Service Interface is failed. [" + data + "]", true);
+		}
+	}
+
+	function callbackCreateDevice_display(data, code) {
+		if( data != null ) {
+			display = data;
+			consolelog("you can use display.");
+			display.onreceive = function (res) {
+				consolelog("success: " + res.success, true);
+				consolelog("code: " + res.code);
+			};
+		}
+		else {
+
+			consolelog(code);
+		}
+	}
+
+	function OnReconnecting() {
+		consolelog('onreconnecting');
+	}
+
+	function OnReconnect() {
+		consolelog('onreconnect');
+	}
+
+	function OnDisconnect() {
+		consolelog('ondisconnect');
+	}
+
+	function consolelog(string, option) {
+		var length = arguments.length;
+		var overwrite = length > 1 ? option : false;
+		
+		if (overwrite) {
+			document.getElementById("console").value = string + "\r\n";
+		} else {
+			document.getElementById("console").value += string + "\r\n";
+		}
+		//document.getElementById('console').scrollTop = document.getElementById('console').scrollHeight;
+	}
+
+	// Add window settings to the instruction buffer
+	function createWindow() {
+		try {
+			var number = document.getElementById('windownumber').value;
+			var x = document.getElementById('windowX').value;
+			var y = document.getElementById('windowY').value;
+			var width = document.getElementById('width').value;
+			var height = document.getElementById('height').value;
+			var scrollmode = document.getElementById('scroll').value;
+			display.createWindow(number, x, y, width, height, display[scrollmode]);
+			sample += "display.createWindow(" + number + ", " + x + ", " + y + ", " + width + ", " + height + ", display." + scrollmode + ");\n";
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Add discard setting of defined window in the instruction buffer
+	function destroyWindow() {
+		try {
+			var number = document.getElementById('destroynumber').value;
+			display.destroyWindow(number);
+			sample += "display.destroyWindow(" + number + ");\n";
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Add the target window No. to move in the instruction buffer
+	function setCurrentWindow() {
+		try {
+			var number = document.getElementById('setcurrentnumber').value;
+			display.setCurrentWindow(number);
+			sample += "display.setCurrentWindow(" + number + ");\n";
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+	// Add erasing contents in the current window in the instruction buffer
+	function clearWindow() {
+		try {
+			display.clearWindow();
+			sample += "display.clearWindow();\n";
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Add cursor position setting in the instruction buffer
+	function setCursorPosition() {
+		try {
+			var x = document.getElementById('cursorX').value;
+			var y = document.getElementById('cursorY').value;
+			display.setCursorPosition(x, y);
+			sample += "display.setCursorPosition(" + x + ", " + y + ");\n";
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Add Cursor position setting in the current window in the instruction buffer
+	function moveCursorPosition() {
+		try {
+			var position = document.getElementById('movecursor').value;
+			display.moveCursorPosition(display[position]);
+			sample += "display.moveCursorPosition(display." + position + ");\n";
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Add cursor setting in the instruction buffer
+	function setCursorType() {
+		try {
+			var type = document.getElementById('cursortype').value;
+			display.setCursorType(display[type]);
+			sample += "display.setCursorType(display." + type + ");\n";
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Add text in the instruction buffer
+	function addText() {
+		try {
+			var data = document.getElementById('text').value;
+			var lang = document.getElementById('lang').value;
+			var x = document.getElementById('textX').value;
+			var y = document.getElementById('textY').value;
+			if (lang == "null" && x == "null" && y == "null") {
+				display.addText(data);
+				sample += "display.addText('" + escapeTextSample(data) + "');\n";
+				updateSampleCode();
+			}
+			else if (lang != "null" && x == "null" && y == "null") {
+				display.addText(data, lang);
+				sample += "display.addText('" + escapeTextSample(data) + "', '" + lang + "');\n";
+				updateSampleCode();
+			}
+			else if (lang == "null" && (x != "null" || y != "null")) {
+				if (x == "null") {
+					x = 1;
+				}
+				else if (y == "null") {
+					y = 1;
+				}
+				display.addText(data, x, y);
+				sample += "display.addText('" + data + "', " + x + ", " + y + ");\n";
+				updateSampleCode();
+			}
+			else {
+				if (x == "null") {
+					x = 1;
+				}
+				else if (y == "null") {
+					y = 1;
+				}
+				display.addText(data, x, y, lang);
+				sample += "display.addText('" + data + "', " + x + ", " + y + ", '" + lang + "');\n";
+				updateSampleCode();
+			}
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Add reversal-displayed text in the instruction buffer
+	function addReverseText() {
+		try {
+			var data = document.getElementById('rtext').value;
+			var lang = document.getElementById('rlang').value;
+			var x = document.getElementById('rtextX').value;
+			var y = document.getElementById('rtextY').value;
+			if (lang == "null" && x == "null" && y == "null") {
+				display.addReverseText(data);
+				sample += "display.addReverseText('" + data + "');\n";
+				updateSampleCode();
+			}
+			else if (lang != "null" && x == "null" && y == "null") {
+				display.addReverseText(data, lang);
+				sample += "display.addReverseText('" + data + "', '" + lang + "');\n";
+				updateSampleCode();
+			}
+			else if (lang == "null" && (x != "null" || y != "null")) {
+				if (x == "null") {
+					x = 1;
+				}
+				else if (y == "null") {
+					y = 1;
+				}
+				display.addReverseText(data, x, y);
+				sample += "display.addReverseText('" + data + "', " + x + ", " + y + ");\n";
+				updateSampleCode();
+			}
+			else {
+				if (x == "null") {
+					x = 1;
+				}
+				else if (y == "null") {
+					y = 1;
+				}
+				display.addReverseText(data, x, y, lang);
+				sample += "display.addReverseText('" + data + "', " + x + ", " + y + ", '" + lang + "');\n";
+				updateSampleCode();
+			}
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Add marquee display in the instruction buffer
+	function addMarquee() {
+		try {
+			var data = document.getElementById('marquee').value;
+			var format = document.getElementById('format').value;
+			var unitWait = document.getElementById('unitwait').value;
+			var repeatWait = document.getElementById('repeatwait').value;
+			var repeat = document.getElementById('repeat').value;
+			var lang = document.getElementById('mlang').value;
+			if (lang == "null") {
+				display.addMarquee(data, display[format], unitWait, repeatWait, repeat);
+				sample += "display.addMarquee('" + data + "', display." + format + ", " + unitWait + ", " + repeatWait + ", " + repeat + ");\n";
+				updateSampleCode();
+			}
+			else {
+				display.addMarquee(data, display[format], unitWait, repeatWait, repeat, lang);
+				sample += "display.addMarquee('" + data + "', display." + format + ", " + unitWait + ", " + repeatWait + ", " + repeat + ", '" + lang + "');\n";
+				updateSampleCode();
+			}
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Add the blinking display setting in the instruction buffer
+	function setBlink() {
+		try {
+			var interval = document.getElementById('interval').value;
+			display.setBlink(interval);
+			sample += "display.setBlink(" + interval + ");\n";
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Add the brightness setting of the display in the instruction buffer
+	function setBrightness() {
+		try {
+			var brightness = document.getElementById('brightness').value;
+			display.setBrightness(display[brightness]);
+			sample += "display.setBrightness(display." + brightness + ");\n";
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Add clock display in the instruction buffer
+	function showClock() {
+		try {
+			display.showClock();
+			sample += "display.showClock();\n";
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Add commands in the instruction buffer
+	function addCommand() {
+		try {
+			var data = document.getElementById('command').value;
+			display.addCommand(escapeCode(data));
+			sample += "display.addCommand('" + escapeCodeSample(data) + "');\n";
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Add initialization command for customer display to the instruction buffer
+	function resetWindow() {
+		try {
+			display.reset();
+			sample += "display.reset();\n";
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// process escape sequence (binary)
+	function escapeCode(s) {
+		var escape = /\\x[0-9A-Fa-f]{2}/g;
+		if (escape.test(s)) {
+			s = s.replace(escape, function (c) {
+				return String.fromCharCode(parseInt(c.slice(2), 16));
+			});
+		}
+		return escapeText(s);
+	}
+
+	// process escape sequence (text)
+	function escapeText(s) {
+		var escape = /\\[tnr\\]|\\/g;
+		if (escape.test(s)) {
+			s = s.replace(escape, function (c) {
+				var r = '';
+				switch (c) {
+					case '\\t':
+						r = '\x09';
+						break;
+					case '\\n':
+						r = '\x0a';
+						break;
+					case '\\r':
+						r = '\x0d';
+						break;
+					case '\\\\':
+						r = '\\';
+						break;
+					default:
+						break;
+				}
+				return r;
+			});
+		}
+		return s;
+	}
+
+	// process escape sequence for sample code (binary)
+	function escapeCodeSample(s) {
+		var escape = /\\x[0-9A-Fa-f]{2}|\\[tnr\\]|['"]|\\/g;
+		if (escape.test(s)) {
+			s = s.replace(escape, function (c) {
+				var r = c;
+				switch (c) {
+					case '"':
+						r = '\\"';
+						break;
+					case "'":
+						r = "\\'";
+						break;
+					case '\\':
+						r = '';
+						break;
+					default:
+						break;
+				}
+				return r;
+			});
+		}
+		return s;
+	}
+
+	// process escape sequence for sample code (text)
+	function escapeTextSample(s) {
+		var escape = /['"]|\\/g;
+		if (escape.test(s)) {
+			s = s.replace(escape, function (c) {
+				var r = c;
+				switch (c) {
+					case '"':
+						r = '\\"';
+						break;
+					case "'":
+						r = "\\'";
+						break;
+					case '\\':
+						r = '\\\\';
+						break;
+					default:
+						break;
+				}
+				return r;
+			});
+		}
+		return s;
+	}
+
+	// update sample code
+	function updateSampleCode() {
+		var strCrypto = 'false';
+		if( crypto ) {
+			strCrypto = 'true';
+		}
+
+		var strBuffer = 'false';
+		if( buffer ) {
+			strBuffer = 'true';
+		}
+
+		document.getElementById('sample').value = 
+			"var display = null;\n" +
+			"var ePosDev = new epson.ePOSDevice();\n" + 
+			"ePosDev.connect('" + ipAddress + "', " + port + ", cbConnect);\n" + 
+			"function cbConnect(data) {\n" +
+			"	if(data == 'OK') {\n" +
+			"		ePosDev.createDevice('local_display', ePosDev.DEVICE_TYPE_DISPLAY, {'crypto' : " + strCrypto + ", 'buffer' : " + strBuffer +"}, cbCreateDevice_display);\n" +
+			"	} else {\n" +
+			"		alert(data);\n" +
+			"	}\n" +
+			"}\n" +
+			"function cbCreateDevice_display(devobj, retcode) {\n" +
+			"	if( retcode == 'OK' ) {\n" +
+			"		display = devobj;\n" +
+			"		executeAddedCode();\n" +
+			"	} else {\n" +
+			"		alert(retcode);\n" +
+			"	}\n" +
+			"}\n" +
+			"function executeAddedCode() {\n\n" +
+			sample + "\n" +
+			"display.send();\n" +
+			"}\n";
+
+		document.getElementById('sample').scrollTop = document.getElementById('sample').scrollHeight;
+	}
+
+	// Clear message
+	function resetMessage() {
+		display.message = '';
+		sample = '';
+	}
+
+	// Execute instruction
+	function sendMessage() {
+		var temp = display.message;
+		// send
+		display.send();
+		display.message = temp;
+	}
+	
+//-->
+</script>
+</head>
+
+<body onload="consolelog('', true)">
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="3">Device Setting</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<tr>
+			<td style="width:10%;">Connection settings</td>
+			<td style="width:80%;">
+				IP address<input id="ipaddress" size="20" type="text" value="192.168.192.168" />
+				Port<input id="port" size="5" type="text" value="8008" />
+				Device ID<input id="deviceid" size="15" type="text" value="local_display" />
+				<input id="crypto" type="checkbox" value="" />Encryption
+				<input id="buffer" type="checkbox" value="" />Enable buffer
+			</td>
+			<td style="width:10%;" class="center"><input type="button" value="Connect" onclick="connect()" /></td>
+		</tr>
+	</tbody>
+</table>
+</form>
+<br />
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th>Console</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><textarea id="console" style="width:98%;" rows="3" cols="80"></textarea></td>
+		</tr>
+	</tbody>
+</table>
+</form>
+<br />
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="4">ePOS SDK Display Object</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<!-- createWindow -->
+		<tr>
+			<td rowspan="4" style="width:8%;">Window</td>
+			<td style="width:16%;">Define display area</td>
+			<td style="width:68%;">
+				Window No.
+				<select id="windownumber">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				</select>
+				X-coordinate
+				<select id="windowX">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+				</select>
+				Y-coordinate
+				<select id="windowY">
+					<option value="1">1</option>
+					<option value="2">2</option>
+				</select>
+				Width
+				<select id="width">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10" selected="selected">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+				</select>
+				Height
+				<select id="height">
+					<option value="1">1</option>
+					<option value="2">2</option>
+				</select>
+				Scroll Mode
+				<select id="scroll">
+					<option value="SCROLL_OVERWRITE">OVERWRITE</option>
+					<option value="SCROLL_VERTICAL">VERTICAL</option>
+					<option value="SCROLL_HORIZONTAL">HORIZONTAL</option>
+				</select>
+			</td>
+			<td style="width:8%;" class="center"><input type="button" value="Add" onclick="createWindow()" /></td>
+		</tr>
+
+		<!-- destroyWindow -->
+		<tr>
+			<td>Discard display area setting</td>
+			<td>
+				Window No. to discard
+				<select id="destroynumber">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="destroyWindow()" /></td>
+		</tr>
+
+		<!-- setCurrentWindow -->
+		<tr>
+			<td>Switch display area</td>
+			<td>
+				Window No. to move
+				<select id="setcurrentnumber">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="setCurrentWindow()" /></td>
+		</tr>
+
+		<!-- clearWindow -->
+		<tr>
+			<td>Clear current display area</td>
+			<td></td>
+			<td class="center"><input type="button" value="Add" onclick="clearWindow()" /></td>
+		</tr>
+
+		<!-- setCursorPosition -->
+		<tr>
+			<td rowspan="3">Cursor</td>
+			<td>Set cursor position</td>
+			<td>
+				X-coodinate
+				<select id="cursorX">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+				</select>
+				Y-coodinate
+				<select id="cursorY">
+					<option value="1">1</option>
+					<option value="2">2</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="setCursorPosition()" /></td>
+		</tr>
+
+		<!-- moveCursorPosition -->
+		<tr>
+			<td>Move cursor position in current window</td>
+			<td>
+				<select id="movecursor">
+					<option value="MOVE_TOP_LEFT">Top left</option>
+					<option value="MOVE_TOP_RIGHT">Top right</option>
+					<option value="MOVE_BOTTOM_LEFT">Bottom left</option>
+					<option value="MOVE_BOTTOM_RIGHT">Bottom right</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="moveCursorPosition()" /></td>
+		</tr>
+
+		<!-- setCursorType -->
+		<tr>
+			<td>Cursor Type</td>
+			<td>
+				<select id="cursortype">
+					<option value="CURSOR_NONE">No cursor</option>
+					<option value="CURSOR_UNDERLINE">Underline</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="setCursorType()" /></td>
+		</tr>
+
+		<!-- addText -->
+		<tr>
+			<td rowspan="3">Text</td>
+			<td>Display text</td>
+			<td>
+				String
+				<input id="text" style="width:98%;" type="text" value="Hello World!" /><br />
+				Language
+				<select id="lang">
+					<option value="null">None</option>
+					<option value="en">English</option>
+					<option value="ja">Japanese</option>
+				</select>
+				X-coordinate
+				<select id="textX">
+					<option value="null">None</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+				</select>
+				Y-coordinate
+				<select id="textY">
+					<option value="null">None</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+				</select>
+			</td>	
+			<td class="center"><input type="button" value="Add" onclick="addText()" /></td>
+		</tr>
+
+		<!-- addReverseText -->
+		<tr>
+			<td>Display inverted text</td>
+			<td>
+				String
+				<input id="rtext" style="width:98%;" type="text" value="Hello World!" /><br />
+				Language
+				<select id="rlang">
+					<option value="null">None</option>
+					<option value="en">English</option>
+					<option value="ja">Japanese</option>
+				</select>
+				X-coordinate
+				<select id="rtextX">
+					<option value="null">None</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+				</select>
+				Y-coordinate
+				<select id="rtextY">
+					<option value="null">None</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+				</select>
+			</td>	
+			<td class="center"><input type="button" value="Add" onclick="addReverseText()" /></td>
+		</tr>
+
+		<!-- addMarquee -->
+		<tr>
+			<td>Display marquee</td>
+			<td>
+				String
+				<input id="marquee" style="width:98%;" type="text" value="Hello World!" /><br />
+				Format
+				<select id="format">
+					<option value="MARQUEE_WALK">Start from right-edge</option>
+					<option value="MARQUEE_PLACE">Start from left-edge</option>
+				</select>
+				Display interval(100～2,000)(ms)
+				<input id="unitwait" type="text" size="5" value="100" />
+				Repeat interval(100～2,000)(ms)
+				<input id="repeatwait" type="text" size="5" value="100" />
+				Repeat count(0～127)
+				<input id="repeat" type="text" size="5" value="0" />				
+				Language
+				<select id="mlang">
+					<option value="null">None</option>
+					<option value="en">English</option>
+					<option value="ja">Japanese</option>
+				</select>
+				
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addMarquee()" /></td>
+		</tr>
+
+		<!-- setBlink -->
+		<tr>
+			<td rowspan="2">Properties</td>
+			<td>Blinking display</td>
+			<td>
+				Blinking interval(0～12,700)(ms)
+				<input id="interval" type="text" size="5" value="0" />
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="setBlink()" /></td>
+		</tr>
+
+		<!-- setBrightness -->
+		<tr>
+			<td>Brightness</td>
+			<td>
+				<select id="brightness">
+					<option value="BRIGHTNESS_20">20%</option>
+					<option value="BRIGHTNESS_40">40%</option>
+					<option value="BRIGHTNESS_60">60%</option>
+					<option value="BRIGHTNESS_100">100%</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="setBrightness()" /></td>
+		</tr>
+
+		<!-- showClock -->
+		<tr>
+			<td rowspan="3">Others</td>
+			<td>Display clock</td>
+			<td></td>
+			<td class="center"><input type="button" value="Add" onclick="showClock()" /></td>
+		</tr>
+
+		<!-- addCommand -->
+		<tr>
+			<td>command</td>
+			<td>
+				<input id="command" style="width:98%;" type="text" value="12345" /><br />
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addCommand()" /></td>
+		</tr>
+
+		<!-- reset -->
+		<tr>
+			<td>Reset display</td>
+			<td></td>
+			<td class="center"><input type="button" value="Add" onclick="resetWindow()" /></td>
+		</tr>
+
+</tbody>
+</table>
+</form>
+
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="2">Display Object Sample Code</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="width:92%;"><textarea id="sample" style="width:98%;" rows="10" cols="80" readonly="readonly"></textarea></td>
+			<td style="width:8%;" class="center"><input type="reset" value="Clear" onclick="resetMessage()" /></td>
+		</tr>
+		<tr>
+			<td style="width:10%;">Test display</td>
+			<td style="width:10%;" class="center"><input type="button" value="Send" onclick="sendMessage()" /></td>
+		</tr>
+	</tbody>
+</table>
+</form>
+</body>
+</html>

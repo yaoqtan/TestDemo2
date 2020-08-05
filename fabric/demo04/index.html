@@ -1,0 +1,43 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fabric 画图</title>
+    <script src="./../fabric.js"></script>
+    <style>
+        body{
+            background: #ccc;
+        }
+        #main{
+            background: #fff;
+            border:1px solid #000
+        }
+    </style>
+</head>
+<body>
+
+<canvas  id="main" width="800" height="800"></canvas>
+
+<script>
+    var canvas = new fabric.Canvas('main');
+
+    var path = new fabric.Path('M 0 0 L 200 100 L 170 200 z')
+
+    path.set({
+        left:120,
+        top:120,
+        fill:'red'
+    });
+
+    canvas.add(path)
+
+
+</script>
+</body>
+</html>

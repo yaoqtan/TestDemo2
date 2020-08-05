@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>POSKeyboard Sample Program</title>
+<!-- CSS -->
+<style type="text/css">
+body {
+	background-color: #ffffff;
+	color: #333333;
+}
+table, tr, td {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #eeeeee;
+}
+th {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #cccccc;
+}
+.center {
+	text-align: center;
+}
+</style>
+<!-- Script -->
+<script type="text/javascript" src="epos-2.14.0.js"></script>
+<script type="text/javascript">
+<!--
+	var ipAddress = null;
+	var port = null;
+
+	var keyboard = null;
+
+	var prefix = new Array();
+	var index = 0;
+
+	var ePosDev = new epson.ePOSDevice();
+
+	function connect() {
+		ipAddress = document.getElementById("ipaddress").value;
+		port = document.getElementById("port").value;
+
+		ePosDev.connect(ipAddress, port, Callback_connect);
+		ePosDev.onreconnecting = OnReconnecting;
+		ePosDev.onreconnect = OnReconnect;
+		ePosDev.ondisconnect = OnDisconnect;
+	}
+
+	function Callback_connect(data) {
+		var deviceID = document.getElementById("deviceid").value;
+		var crypto = document.getElementById("crypto").checked;
+		var buffer = document.getElementById("buffer").checked;
+		var options = {'crypto' : crypto, 'buffer' : buffer};
+
+		if(data == 'OK') {
+			consolelog("connected to ePOS Device Service Interface.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_KEYBOARD, options, callbackCreateDevice_keyboard);
+		}
+		else if (data == 'SSL_CONNECT_OK') {
+			consolelog("connected to ePOS Device Service Interface with SSL.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_KEYBOARD, options, callbackCreateDevice_keyboard);
+		}
+		else {
+			consolelog("connected to ePOS Device Service Interface is failed. [" + data + "]", true);
+		}
+	}
+
+	function callbackCreateDevice_keyboard(data, code) {
+
+		if( data != null ) {
+			consolelog('you can use poskeyboard.');
+			keyboard = data;
+			keyboard.onkeypress = onkeypress;
+			keyboard.onstring = onstring;
+		}
+		else {
+			consolelog(code);
+		}
+	}
+
+	// Receive key input event
+	function onkeypress(data) {
+		document.getElementById("onkeypress").value += data.ascii + '(' + data.keycode + ')' + "\r\n";
+		document.getElementById("onkeypress").scrollTop = document.getElementById("onkeypress").scrollHeight;
+	}
+
+	// Receive input characters as string between the character which is defined setPrefix method and the Enter key
+	function onstring(data) {
+		document.getElementById("onstring").value += data.input + '(' + data.prefix + ')' + "\r\n";
+		document.getElementById("onstring").scrollTop = document.getElementById("onstring").scrollHeight;
+	}
+
+	//Set the pre-fix key code which defines the start of the string from keyboard input
+	function setPrefix() {
+		prefix[index++] = keyboard[document.getElementById("prefix").value];
+		keyboard.setPrefix(prefix);
+	}
+
+	function OnReconnecting() {
+		consolelog('onreconnecting');
+	}
+
+	function OnReconnect() {
+		consolelog('onreconnect');
+	}
+
+	function OnDisconnect() {
+		consolelog('ondisconnect');
+	}
+
+	function consolelog(string, option) {
+		var length = arguments.length;
+		var overwrite = length > 1 ? option : false;
+		
+		if (overwrite) {
+			document.getElementById("console").value = string + "\r\n";
+		} else {
+			document.getElementById("console").value += string + "\r\n";
+		}
+		//document.getElementById('console').scrollTop = document.getElementById('console').scrollHeight;
+	}
+
+//-->
+</script>
+
+</head>
+<body onload="consolelog('', true)">
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="3">Device Setting</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		 <tr>
+			<td style="width:10%;">Connection settings</td>
+			<td style="width:80%;">
+				IP address<input id="ipaddress" size="20" type="text" value="192.168.192.168" />
+				Port<input id="port" size="5" type="text" value="8008" />
+				Device ID<input id="deviceid" size="15" type="text" value="local_keyboard" />
+				<input id="crypto" type="checkbox" value="" />Encryption
+				<input id="buffer" type="checkbox" value="" />Enable buffer
+			</td>
+			<td style="width:10%;" class="center"><input type="button" value="Connect" onclick="connect()" /></td>
+		</tr>
+		<tr>
+			<td>Set pre-fix key for onstring</td>
+			<td>
+				Key 
+				<select id="prefix">
+					<option value="VK_F1">F1</option>
+					<option value="VK_F2">F2</option>
+					<option value="VK_F3">F3</option>
+					<option value="VK_F4">F4</option>
+					<option value="VK_F5">F5</option>
+					<option value="VK_F6">F6</option>
+					<option value="VK_F7">F7</option>
+					<option value="VK_F8">F8</option>
+					<option value="VK_F9">F9</option>
+					<option value="VK_F10">F10</option>
+					<option value="VK_F11">F11</option>
+					<option value="VK_F12">F12</option>
+				</select>
+			</td>
+			<td class="center">
+				<input type="button" value="Set" onclick="setPrefix();" />
+			</td>
+
+		</tr>
+	</tbody>
+</table>
+</form>
+<br />
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th>Console</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><textarea id="console" style="width:98%;" rows="3" cols="80"></textarea></td>
+		</tr>
+	</tbody>
+</table>
+</form>
+<br />
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="4">ePOS SDK Keyboard Object</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		<!-- onkeypress -->
+		<tr>
+			<td rowspan="2" style="width:11%;">Reading result</td>
+			<td style="width:11%;">onkeypress</td>
+			<td>
+				<textarea id="onkeypress" style="width:98%;" rows="10" cols="80"></textarea>
+			</td>
+		</tr>
+
+		<!-- onstring -->
+		<tr>
+			<td>onstring</td>
+			<td>
+				<textarea id="onstring" style="width:98%;" rows="10" cols="80"></textarea>
+			</td>
+		</tr>
+</tbody>
+</table>
+</form>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./../fabric.js"></script>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="800"></canvas>
+
+    <script>
+        var canvas = new fabric.Canvas('canvas');
+
+        var text = new fabric.Text('Hello JSPang.com',{
+            left:100,
+            top:100,
+            fontFamily:'Comic Sans',
+            fontSize:20,
+            textDecoration:'overline'
+        });
+
+        canvas.add(text)
+    </script>
+
+
+</body>
+</html>

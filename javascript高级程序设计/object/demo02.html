@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性类型</title>
+    <script>
+
+        var person = {
+            name:'NI'
+        }
+
+        var person1={
+            age:10
+        }
+
+        Object.defineProperty(person1,"name",{
+            writable:false,
+            enumerable:true,
+            value:'NO'
+        })
+        Object.defineProperty(person1,"age",{
+            writable:false,
+            enumerable:false
+        })
+        console.log(person1.name);
+        person1.name="G"
+        console.log(person1.name)
+        for(var p in person1){
+            console.log(p)
+        }
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

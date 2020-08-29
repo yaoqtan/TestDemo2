@@ -11,6 +11,7 @@
     <title>Title</title>
     <script>
         // fn是我们需要包装的事件回调, interval是时间间隔的阈值
+        // 节流
         function throttle(fn, interval) {
             // last为上一次触发回调的时间
             let last = 0
@@ -34,6 +35,7 @@
         }
 
         // fn是我们需要包装的事件回调, delay是每次推迟执行的等待时间
+        // 防抖
         function debounce(fn, delay) {
             // 定时器
             let timer = null
@@ -97,12 +99,12 @@
 
 
 <script>
-    for(let i=0;i<100;i++){
-        let p=document.createElement('p');
-        p.className='index'+i;
-        p.style.height='20px'
-        document.body.appendChild(p)
-    }
+for(let i=0;i<100;i++){
+    let p=document.createElement('p');
+    p.className='index'+i;
+    p.style.height='20px'
+    document.body.appendChild(p)
+}
 
 </script>
 </body>

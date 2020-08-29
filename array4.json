@@ -1,0 +1,400 @@
+[{
+  "2020-Jan": {
+    "period": "2020-Jan",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Feb": {
+    "period": "2020-Feb",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 20
+  },
+  "2020-Mar": {
+    "period": "2020-Mar",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Apr": {
+    "period": "2020-Apr",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-May": {
+    "period": "2020-May",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 21
+  },
+  "2020-Jun": {
+    "period": "2020-Jun",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Jul": {
+    "period": "2020-Jul",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 23
+  },
+  "2020-Aug": {
+    "period": "2020-Aug 01-26",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 17
+  }
+}, {
+  "2020-Jan": {
+    "period": "2020-Jan",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Feb": {
+    "period": "2020-Feb",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 20
+  },
+  "2020-Mar": {
+    "period": "2020-Mar",
+    "totalMd": 4,
+    "confirmedProject": 4,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Apr": {
+    "period": "2020-Apr",
+    "totalMd": 2,
+    "confirmedProject": 2,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-May": {
+    "period": "2020-May",
+    "totalMd": 2.456800000000001,
+    "confirmedProject": 2.456800000000001,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 21
+  },
+  "2020-Jun": {
+    "period": "2020-Jun",
+    "totalMd": 1.0471999999999997,
+    "confirmedProject": 1.0471999999999997,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Jul": {
+    "period": "2020-Jul",
+    "totalMd": 1.0471999999999997,
+    "confirmedProject": 1.0471999999999997,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 23
+  },
+  "2020-Aug": {
+    "period": "2020-Aug 01-26",
+    "totalMd": 4,
+    "confirmedProject": 4,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 17
+  }
+}, {
+  "2020-Jan": {
+    "period": "2020-Jan",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Feb": {
+    "period": "2020-Feb",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 20
+  },
+  "2020-Mar": {
+    "period": "2020-Mar",
+    "totalMd": 4.875,
+    "confirmedProject": 4.875,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Apr": {
+    "period": "2020-Apr",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-May": {
+    "period": "2020-May",
+    "totalMd": 8.799999999999997,
+    "confirmedProject": 8.799999999999997,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 21
+  },
+  "2020-Jun": {
+    "period": "2020-Jun",
+    "totalMd": 20,
+    "confirmedProject": 20,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Jul": {
+    "period": "2020-Jul",
+    "totalMd": 44,
+    "confirmedProject": 44,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 23
+  },
+  "2020-Aug": {
+    "period": "2020-Aug 01-26",
+    "totalMd": 34,
+    "confirmedProject": 34,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 17
+  }
+}, {
+  "2020-Jan": {
+    "period": "2020-Jan",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Feb": {
+    "period": "2020-Feb",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 20
+  },
+  "2020-Mar": {
+    "period": "2020-Mar",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Apr": {
+    "period": "2020-Apr",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-May": {
+    "period": "2020-May",
+    "totalMd": 2.5,
+    "confirmedProject": 2.5,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 21
+  },
+  "2020-Jun": {
+    "period": "2020-Jun",
+    "totalMd": 5.5,
+    "confirmedProject": 5.5,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Jul": {
+    "period": "2020-Jul",
+    "totalMd": 5,
+    "confirmedProject": 5,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 23
+  },
+  "2020-Aug": {
+    "period": "2020-Aug 01-26",
+    "totalMd": 4.25,
+    "confirmedProject": 4.25,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 17
+  }
+}, {
+  "2020-Jan": {
+    "period": "2020-Jan",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Feb": {
+    "period": "2020-Feb",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 20
+  },
+  "2020-Mar": {
+    "period": "2020-Mar",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Apr": {
+    "period": "2020-Apr",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-May": {
+    "period": "2020-May",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 21
+  },
+  "2020-Jun": {
+    "period": "2020-Jun",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Jul": {
+    "period": "2020-Jul",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 23
+  },
+  "2020-Aug": {
+    "period": "2020-Aug 01-26",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 17
+  }
+}, {
+  "2020-Jan": {
+    "period": "2020-Jan",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Feb": {
+    "period": "2020-Feb",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 20
+  },
+  "2020-Mar": {
+    "period": "2020-Mar",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Apr": {
+    "period": "2020-Apr",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-May": {
+    "period": "2020-May",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 21
+  },
+  "2020-Jun": {
+    "period": "2020-Jun",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Jul": {
+    "period": "2020-Jul",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 23
+  },
+  "2020-Aug": {
+    "period": "2020-Aug 01-26",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 17
+  }
+}, {
+  "2020-Jan": {
+    "period": "2020-Jan",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Feb": {
+    "period": "2020-Feb",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 20
+  },
+  "2020-Mar": {
+    "period": "2020-Mar",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Apr": {
+    "period": "2020-Apr",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-May": {
+    "period": "2020-May",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 21
+  },
+  "2020-Jun": {
+    "period": "2020-Jun",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 22
+  },
+  "2020-Jul": {
+    "period": "2020-Jul",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 23
+  },
+  "2020-Aug": {
+    "period": "2020-Aug 01-26",
+    "totalMd": 0,
+    "confirmedProject": 0,
+    "approvedInternalProject": 0,
+    "availableWorkDays": 17
+  }
+}]

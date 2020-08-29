@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Array
+    </title>
+    <script>
+        fetch('./array.json')
+        .then((res)=>res.json())
+        .then(res=>{
+            console.log(res)
+
+            let test =[]
+            let numIndex=0
+            res.forEach((item,index,array)=>{
+                if(index<array.length-1){
+                    if( item.percent !== array[index+1]['percent'] && item.row !==array[index+1]['row']){
+                        console.log(numIndex)
+                        test.push(res.slice(numIndex,index+1))
+                        numIndex=index+1
+                    }
+                }else{
+                    test.push(res.slice(numIndex,array.length))
+                }
+            });
+            console.log(test)
+            console.log(numIndex)
+        })
+
+        fetch('./array1.json')
+        .then((res)=>res.json())
+        .then(res=>{
+            console.log(res)
+        })
+
+        fetch('./array2.json')
+        .then((res)=>res.json())
+        .then(res=>{
+            console.log('array2')
+            console.log(res)
+        })
+        fetch('./array3.json')
+        .then((res)=>res.json())
+        .then(res=>{
+            console.log('array3')
+            console.log(res)
+        })
+
+
+
+
+
+//        var data = [
+//            {name:'Liming',age:'25'},
+//            {name:'Liming',age:'25'},
+//            {name:'Liming',age:'25'},
+//            {name:'Liming',age:'25'},
+//            {name:'Liming',age:'25'},
+//            {name:'Liming',age:'25'},
+//            {name:'Liming',age:'25'},
+//            {name:'Liming',age:'25'},
+//            {name:'Liming',age:'25'},
+//            {name:'Liming',age:'25'},
+//        ]
+//        var result = [];
+//        for(var i=0;i<data.length;i+=3){
+//            result.push(data.slice(i,i+3));
+//        }
+//        console.log(result)
+
+
+
+        console.log('[new]',[...new Array(2)].map((item,index)=>index))
+        console.log('[new]',[...Array(2)].map((item,index)=>index))
+        console.log('new',Array(2).map((item,index)=>index))
+
+        console.log('[...new Array(2)].map((item,index)=>({num:index}))',[...new Array(2)].map((item,index)=>({num:index})))
+
+       console.log('new Array(2).map((item,index)=>({num:index}))',new Array(2).map((item,index)=>({num:index})))
+    </script>
+
+
+
+    <!-- <script>
+        availableOtHandle:debounce(function(){
+            console.log(this.rows)
+            console.log(this.headers)
+            console.log(this.months)
+
+
+            this.rows = this.rows.map((item)=>{
+                const monthstartDate = indexOfDate(this.months[0].date)
+                const monthEndDate = indexOfDate(this.months[1].date)
+                const schedule = item.schedules;
+                if(schedule.length===0){
+                    item.schedules=[...schedule,{
+                        ...this.availableSchedule,
+                        date:monthstartDate,
+                        id: `Available ${moment().unix()}`,
+                        startDate:this.months[0].date.format('YYYY-MMM-DD'),
+                        endDate:this.months[1].date.format('YYYY-MMM-DD')
+                    }]
+                }else{
+
+                    const dates=[...schedule.map(schedule=>schedule.date),monthstartDate,monthEndDate].sort( (a, b)=> {return a-b;})
+                    const minDate=dates[0]
+                    const maxDate=dates[dates.length-1]
+                    let availableSchedulesArr= ([...new Array(maxDate-minDate)]).map((i,index)=>{
+                        return({
+                            percent:1,
+                            date:dates[0]+index,
+                            row:0
+                        })
+                    })
+
+                    schedule.map((s)=>{
+                        const scheduleDates = [...new Array(s.size)].map((i,index)=>s.date+index)
+                        scheduleDates.forEach(scheduleDate=>{
+                            availableSchedulesArr=availableSchedulesArr.map((available)=>{
+                                let percent = available.percent
+                                let row =  available.row
+                                if(scheduleDate === available.date){
+                                    percent=percent-s.percent,
+                                        row=row+1
+                                }
+                                return({
+                                    ...available,
+                                    percent,
+                                    row
+                                })
+                            })
+                        })
+                    })
+
+                    let availableSchedulesArray= []
+                    let numIndex=0
+                    availableSchedulesArr.forEach((item,index,array)=>{
+                        if(index<array.length-1){
+                            if( item.percent !== array[index+1]['percent'] && item.row !==array[index+1]['row']){
+                                console.log(numIndex)
+                                availableSchedulesArray.push(array.slice(numIndex,index+1))
+                                numIndex=index+1
+                            }
+                        }else{
+                            availableSchedulesArray.push(array.slice(numIndex,array.length))
+                        }
+                    });
+
+                    item.schedules=[...schedule,...availableSchedulesArray.map((availableSchedule,index)=>{
+                        const scheduleFirst = availableSchedule[0]
+                        return({
+                            ...this.availableSchedule,
+                            size:availableSchedule.length,
+                            row:scheduleFirst.row,
+                            id: `Available ${moment().unix()}${index}`,
+                            percent:scheduleFirst.percent,
+                            date:scheduleFirst.date,
+                            startDate:moment(scheduleFirst.date * milliOfDay).format('YYYY-MM-DD'),
+                            endDate:moment((scheduleFirst.date+availableSchedule.length) * milliOfDay).format('YYYY-MM-DD')
+                        })
+                    })]
+                }
+
+                return item
+            })
+            console.log('12345')
+            console.log(this.rows)
+
+        })
+    </script> -->
+</head>
+<body>
+
+
+
+
+</body>
+</html>

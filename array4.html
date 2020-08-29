@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Array
+    </title>
+    <script>
+        function formatNum(num, precision = 1) {
+            if (num || num === 0) {
+                return num.toFixed(precision)
+            } else {
+                return ''
+            }
+        }
+
+        fetch('./array4.json')
+        .then((res)=>res.json())
+        .then(res=>{
+            console.log('array4')
+            console.log(res)
+            const userMaps = res.map(item=>{
+                let array = []
+                for(let i in item){
+                    array.push(item[i])
+
+                }
+                return array
+                //return [...]
+
+            })
+            //const userMaps=res
+            console.log('userMaps',userMaps)
+
+
+            let transformedObj = []
+
+            userMaps.reduce((array,i)=>{
+                //console.log(i)
+                if(transformedObj.length>0){
+                    i.map((item,index)=>{
+                        transformedObj[index].push(item)
+                    })
+                }else{
+                    i.map(item=>{
+                        transformedObj.push([item])
+                    })
+                }
+            },[]);
+
+            console.log('transformedObj',transformedObj)
+
+
+            let finalObj = []
+            console.log(finalObj)
+
+            transformedObj.map((item,index)=>{
+                let obj = null
+                if(obj){
+                    console.log(234)
+                }else{
+                    console.log(23434)
+                }
+                item.reduce((array,i)=>{
+                    if(obj){
+                        obj={
+                            ...obj,
+                            approvedInternalProject:obj.approvedInternalProject += i.approvedInternalProject,
+                            availableWorkDays:obj.availableWorkDays += i.availableWorkDays,
+                            confirmedProject:obj.confirmedProject += i.confirmedProject,
+                            totalMd:obj.totalMd += i.totalMd
+                        }
+                    }else{
+                        obj=i
+                    }
+
+
+                },[])
+
+                finalObj.push(obj)
+            });
+
+            finalObj=finalObj.map(i=>{
+                return({
+                    ...i,
+                    totalMd: formatNum(i.totalMd, 2),
+                    confirmedProject: formatNum(i.confirmedProject, 2),
+                    approvedInternalProject: formatNum(i.approvedInternalProject, 2),
+                    availableWorkDays: formatNum(i.availableWorkDays, 2),
+                    schedulePercentage: formatNum((i.totalMd / i.availableWorkDays) * 100)
+                })
+            })
+
+
+            console.log('finalObj',finalObj)
+
+
+
+
+        })
+
+
+
+
+
+
+
+
+    </script>
+<style>
+    .wrap{
+        width:100%;
+        background: red;
+    }
+    .test{
+        width: 50%;
+        min-height: 500px;
+        float: left;
+        background: black;
+    }
+    .test1{
+        background: burlywood;
+    }
+    input {
+        width:90%;
+        margin:50px auto;
+        display:inline;
+    }
+</style>
+
+</head>
+<body>
+    <div class="wrap">
+        <div class="test test1">
+            <input type='text'>
+            <input type='text'>
+            <input type='text'>
+            <input type='text'>
+            <input type='text'>
+            <input type='text'>
+            <input type='text'>
+        </div>
+        <div class="test">
+
+        </div>
+    </div>
+</body>
+</html>

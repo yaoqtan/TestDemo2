@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./moment.js"></script>
     <script>
         console.log(moment().format('YYYY/MM/DD'))
         console.log(moment().format('HH:mm'))
@@ -34,6 +34,26 @@
             return moment().subtract(item,'days').format('YYYY/MM/DD')
         })
         console.log(date)
+
+
+        var a = moment([2007, 0, 29]);
+        var b = moment([2007, 0, 28]);
+        //a.diff(b, 'days') // 1
+        console.log( a.diff(b, 'days'))
+
+        console.log(moment.utc())
+
+        console.log(moment.utc().startOf('year'))
+
+
+
+        console.log(moment('2020-07-6').endOf('month').format("YYYY-MM-DD"))
+
+
+
+
+
+
 
     </script>
 </head>

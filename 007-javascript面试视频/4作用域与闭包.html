@@ -1,0 +1,118 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+
+    //this
+     var a = {
+         name:"A",
+         fn:function () {
+             console.log(this.name)
+         }
+     }
+     a.fn()
+     a.fn.call({name:'B'})
+     var fn1 = a.fn
+     fn1()
+
+    //this执行场景
+
+    //构造函数 this
+
+    function Foo(name) {
+         this.name = name
+    }
+    var f = new Foo('zhangsan')
+
+    //this 作为对象属性执行
+    var obj = {
+         name:'A',
+         printName:function () {
+             console.log(this.name)
+         }
+    }
+    obj.printName() //this 作为对象属性执行
+
+
+    //this 普通函数执行
+
+    function fn() {
+        console.log(this)
+    }
+    fn()
+
+    // call,apply,bind
+
+    function fn1(name,age) {
+        alert(name,age)
+        console.log(this)
+    }
+    fn1.call({x:100},'zhangsan',20)
+
+
+    var fn2=function(name,age) {
+        alert(name,age)
+        console.log(this)
+    }.bind({y:200})
+    fn2('zhangsan',20)
+
+
+
+    // 作用域
+    console.log('作用域')
+    if(true){
+        var a11 = 100
+    }
+    console.log(a11)
+
+
+    </script>
+
+</head>
+<body>
+
+<p>
+    说一下对变量的提升的理解
+</p>
+
+<p>
+    说明this 几种不同的使用场景
+</p>
+
+<p>
+    创建10个< a >标签，点击的时候弹出对应的序号
+</p>
+
+<p>
+    如何理解作用域
+</p>
+
+<p>
+    实际开发中的闭包的应用
+</p>
+
+<p>
+    知识点：执行上下文，this，作用域，作用域链，闭包
+</p>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

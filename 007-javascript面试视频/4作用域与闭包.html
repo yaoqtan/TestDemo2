@@ -1,8 +1,4 @@
-<!--
-/*
-* COPYRIGHT.GT. ALL RIGHTS RESERVED.
-*/
--->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -82,14 +78,18 @@
 
 <p>
     说一下对变量的提升的理解
+
+    答：变量定义，函数声明（注意和函数表达式的区别）
 </p>
 
 <p>
     说明this 几种不同的使用场景
+    答：作为构造函数执行; 作为对象属性执行; 作为普通函数执行; call apply bind
 </p>
 
 <p>
     创建10个< a >标签，点击的时候弹出对应的序号
+
 </p>
 
 <p>
@@ -105,7 +105,50 @@
 </p>
 
 
+<script>
 
+    //没有声明函数，作用域为全局作用域
+    var i1 ,a1
+    for(i1=0;i1 < 10;i1++){
+        a1=document.createElement('a')
+        a1.innerHTML=i1+'<br>'
+        a1.addEventListener('click',function (e) {
+            e.preventDefault()
+            console.log(i1)
+        })
+        document.body.appendChild(a1)
+    }
+
+    var a3
+
+    for(let i3=0;i3 < 10;i3++){
+        a3=document.createElement('a')
+        a3.innerHTML=i3+'<br>'
+        a3.addEventListener('click',function (e) {
+            e.preventDefault()
+            console.log(i3)
+        })
+        document.body.appendChild(a3)
+    }
+
+
+    //声明了10个函数,给每个函数赋值对应的i2
+    var i2
+    for(i2=0;i2 < 10;i2++){
+        (function (i) {
+            var a2 = document.createElement('a')
+            a2.innerHTML = i2 + '<br>'
+
+            a2.addEventListener('click',function (e) {
+                e.preventDefault()
+                console.log(i)
+            })
+
+            document.body.appendChild(a2)
+
+        })(i2)
+    }
+</script>
 
 
 

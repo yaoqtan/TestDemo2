@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import KeeepAlive from '../views/KeeepAlive.vue'
+import routerOne from '../views/routerOne.vue'
 Vue.use(VueRouter)
 
   const routes = [
@@ -9,6 +10,14 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home,
+    meta:{
+      keepAlive:true
+    }
+  },
+  {
+    path: '/routerOne',
+    name: 'routerOne',
+    component: routerOne,
     meta:{
       keepAlive:true
     }

@@ -36,9 +36,11 @@
         console.log(date)
 
 
-        var a = moment([2007, 0, 29]);
-        var b = moment([2007, 0, 28]);
+        var a = moment('2007-10-29');
+        var b = moment('2007-10-28');
         //a.diff(b, 'days') // 1
+        console.log('diff')
+        console.log(b.diff(a, 'days'))
         console.log( a.diff(b, 'days'))
 
         console.log(moment.utc())
@@ -49,12 +51,30 @@
 
         console.log(moment('2020-07-6').endOf('month').format("YYYY-MM-DD"))
 
+        console.log(moment().subtract(1,'hours').format('HH:mm:ss'))
 
 
+        console.log(moment.utc().startOf('day'))
+        console.log(moment.utc().startOf('day').clone())
+        console.log(moment.utc().startOf('day').format('YYYY-MMM'))
+        console.log(moment.utc().startOf('day').add(1, 'day'))
 
-
-
-
+        console.log(moment().calendar(null, {
+            sameDay: '[今天]',
+            nextDay: '[明天]',
+            nextWeek: 'dddd',
+            lastDay: '[昨天]',
+            lastWeek: '[上个] dddd',
+            sameElse: 'DD/MM/YYYY'
+        }))
+        moment().calendar(null, {
+            sameDay: '[今天]',
+            nextDay: '[明天]',
+            nextWeek: 'dddd',
+            lastDay: '[昨天]',
+            lastWeek: '[上个] dddd',
+            sameElse: 'DD/MM/YYYY'
+        })
     </script>
 </head>
 <body>

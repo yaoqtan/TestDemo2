@@ -1,0 +1,53 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        //立即执行
+        setTimeout((function(){
+            console.log('setTimeout 立即 执行')
+        })(),500)
+
+        //延迟执行
+        setTimeout(function(){
+            console.log('setTimeout 延迟 执行')
+        },500)
+
+
+        var i = 1
+        var timer=()=>setTimeout(function(){
+            if(i<10){
+                console.log(i)
+                i=i+1
+                timer()
+
+            }else{
+
+                clearTimeout(timer)
+                console.log(timer)
+            }
+        },500)
+        timer()
+
+
+//        setInterval((function(){
+//            console.log('setInterval 立即 执行')
+//        })(),1000)
+//        setInterval(function(){
+//            console.log('setInterval 延迟 执行')
+//        },1000)
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

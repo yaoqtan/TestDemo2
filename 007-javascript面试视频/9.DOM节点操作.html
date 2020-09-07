@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body >
+    <div style="white-space: pre-wrap;">
+        获取DOM节点
+
+        prototype(属性)
+
+        Attribute
+    </div>
+
+
+    <div id="div1" class="class-div1">
+        <p id="p1" data-name="p1-data-name">
+            this is p1
+        </p>
+        <p id="p2">
+            this is p2
+        </p>
+    </div>
+    <div id="div2">
+        <p id="p3">this is p3</p>
+        <p id="p4">this is p4</p>
+    </div>
+
+
+    <script>
+        var div1 = document.getElementById('div1')
+        console.log(div1)
+        console.log(div1.className)
+        div1.className='abc'
+        console.log(div1.className)
+
+
+        var divList = document.getElementsByTagName('div')
+        console.log(divList)
+        console.log(divList.length)
+        var pList = document.querySelectorAll('p')
+        console.log(pList)
+
+        var p1 = document.getElementById('p1')
+        console.log(p1.getAttribute('data-name'))
+        p1.setAttribute('data-name','xyz')
+        console.log(p1.getAttribute('data-name'))
+
+
+
+
+    </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./jquery.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+
+
+        fetch('.submited.json').then(function(res){//https://api.github.com/repos/facebook/react
+            // 请求成功，得到 response 对象，调用 response 对象的 json 方法并返回
+            console.log('fetch')
+            console.log(res)
+            return res.json();
+        }).then(function(data){
+            // response 对象的 json 方法执行成功，得到结果
+            console.log(data)
+        });
+
+
+    </script>
+
+</head>
+<body>
+
+
+
+
+<h3>Fetch API 旨在用来简化 HTTP 请求，它包含以下类和方法：</h3>
+
+<p>fetch 方法：用于发起 HTTP 请求</p>
+
+<p>Request 类：用来描述请求</p>
+
+<p>Response 类：用来表示响应</p>
+
+<p>Headers 类：用来表示 HTTP 头部信息</p>
+
+</body>
+</html>

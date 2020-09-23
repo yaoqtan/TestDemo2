@@ -75,6 +75,11 @@
             lastWeek: '[上个] dddd',
             sameElse: 'DD/MM/YYYY'
         })
+
+        console.log(moment('2020-08-01T00:00:00.000Z').diff(moment(moment.utc().startOf('year').toDate()),'days'))
+        console.log(moment('2020-08-31T00:00:00.000Z').diff(moment(moment.utc().startOf('year').toDate()),'days'))
+        console.log(moment('2020-04-01T00:00:00.000Z'))
+        console.log(moment(moment.utc().startOf('year').toDate()))
     </script>
 </head>
 <body>

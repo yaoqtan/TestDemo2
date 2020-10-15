@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        let obj={
+          a:100,
+          b:[10,20,30],
+          c:{
+            x:10
+          },
+          d:/^\d+$/
+        };
+        let arr =[10,[100,200],{
+          x:10,
+          y:20
+        }]
+
+        let obj2={
+          ...obj,
+
+        }
+        let obj3 = JSON.parse(JSON.stringify(obj))//弊端function，日期，正则得到不是自己想要的
+
+
+        obj3.c.x=100000
+        console.log(obj,obj2,obj3)
+
+        function deepClone(obj) {
+          //过滤特殊情况
+          if(obj===null) return null;
+          if(typeof obj !=='object') return obj
+          if(obj instanceof RegExp) return new RegExp(obj);
+          if(obj instanceof Date) return new Date(obj)
+
+          //=>不直接创建空对象，目的是克隆的结果和之前保持相同的所属类
+          let newObj=new obj.constructor// new Object,{}
+
+          for (let key in obj){
+            if(obj.hasOwnProperty(key)){
+              newObj[key]=deepClone(obj[key]);
+            }
+          }
+          return newObj
+        }
+        let obj4 = deepClone(obj)
+        obj4.b=[1,2,2,2]
+        console.log('obj4',obj4)
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

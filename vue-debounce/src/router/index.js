@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import KeeepAlive from '../views/KeeepAlive.vue'
 import routerOne from '../views/routerOne.vue'
+import DemoScroll from '../views/DemoScroll.vue'
 Vue.use(VueRouter)
 
   const routes = [
@@ -39,8 +40,16 @@ Vue.use(VueRouter)
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
     meta:{
       keepAlive:true
+    },
+
+  },{
+      path: '/demoscroll',
+      name: 'demoscroll',
+      component: DemoScroll,
+      meta:{
+        keepAlive:true
+      },
     }
-  }
 ]
 
 const router = new VueRouter({

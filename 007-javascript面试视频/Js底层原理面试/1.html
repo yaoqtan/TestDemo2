@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        let a = {}
+        let b = Symbol('1')
+        let c=Symbol('1')
+        a[b]= 'qwe'
+        a[c] = '123'
+        console.log(a[c])
+
+
+        let a1={}
+        let b1={
+          n:'1'
+        }
+        let c1={
+          m:'2'
+        }
+        a1[b1]='qwee'
+        a1[c1]='sdf'
+        console.log(a1[b1])
+        console.log(a1)
+        console.log(b1.toString())
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

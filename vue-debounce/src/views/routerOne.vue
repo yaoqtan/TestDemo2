@@ -207,10 +207,10 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .demo4 {
     width: 402px !important;
-    .ul-item {
+     .ul-item {
       width: 804px;
     }
   }

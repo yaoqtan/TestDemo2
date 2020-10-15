@@ -10,6 +10,54 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script>
+        // 手写
+
+        function debounce(fn,deplay){
+          let timer =null
+          return function(){
+            let context = this;
+            let arg = arguments;
+
+            if(timer){
+              clearTimeout(timer)
+            }
+            setTimeout(function(){
+              fn.apply(context,arg)
+            },deplay)
+          }
+        }
+
+        //时间戳
+        function throttle(fn,deplay){
+          let last=0
+          return function () {
+            let context = this;
+            let arg = arguments;
+            let now = new Date()
+            if(now-last>deplay){
+              fn.apply(context,arg)
+              last=now
+            }
+          }
+        }
+        //定时器
+        function throttle(fn,wait) {
+          let timeout=null
+          return function () {
+            let context = this;
+            let arg = arguments;
+            if(!timeout){
+              setTimeout(function () {
+                fn.apply(context,arg)
+                timeout = null
+              },wait)
+
+            }
+          }
+        }
+
+    </script>
+    <script>
         // fn是我们需要包装的事件回调, interval是时间间隔的阈值
         // 节流
         function throttle(fn, interval) {

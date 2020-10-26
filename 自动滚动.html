@@ -1,0 +1,67 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #wrap{
+            width: 200px;
+            margin:0 auto;
+            overflow: hidden;
+            background: blue;
+        }
+        #test{
+            display: flex;
+            height: 50px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="test">
+            <div>
+                <span>1234234214312434213412341sdfasdflasfjlask</span>
+
+                <span>1234234214312434213412341sdfasdflasfjlask</span>
+
+                <span>1234234214312434213412341sdfasdflasfjlask</span>
+            </div>
+        </div>
+
+    </div>
+    <div onclick="stop">button</div>
+    <script>å
+        console.log({item:[{name:'were',age:12},{name:'were23',age:1232}]})
+        let test = document.getElementById('test')
+        let width=30
+        test.style.transform=`translate3d(-${width}px, 0, 0px)`;
+
+         var timer=setTimeout(function () {
+                if(width<300){
+                    width=width +30
+                    test.style.transform=`translate3d(-${width}px, 0, 0px)`;
+                    console.log(timer)
+                }else{
+                    width=0;
+                    timer
+                }
+
+            },500)
+
+
+        //timer()
+        function stop() {
+            clear(timer)
+        }
+
+
+    </script>
+</body>
+</html>

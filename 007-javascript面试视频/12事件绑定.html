@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body >
+    <div style="white-space: pre-wrap;">
+        编写一个通用的事件监听函数
+
+        描述事件冒泡流程
+
+        对于一个无限下拉加载图片的页面，如何给每个图片绑定事件
+
+        通用事件绑定
+        事件冒泡
+        代理
+
+    </div>
+    <div id="div1">
+        <p id="p1">激活</p>
+        <p id="p2">激活</p>
+        <p id="p3">激活</p>
+        <p id="p4">激活</p>
+    </div>
+
+    <div id="div2">
+        <p id="p5">激活</p>
+        <p id="p6">激活</p>
+    </div>
+
+    <div id="div3">
+        <p id="p7">p7</p>
+        <p id="p8">p8</p>
+        <p id="p9">p9</p>
+        <p id="p10">p10</p>
+    </div>
+
+    <div id="div4">
+        <p id="p11">p11</p>
+        <p id="p12">p12</p>
+    </div>
+
+
+<script>
+//    var btn = document.getElmentById('btn1')
+//    btn.addEventListener('click',function (event) {
+//      console.log(event)
+//    })
+
+    function bindEventBase(elem,type,fn) {
+      elem.addEventListener(type,fn)
+    }
+
+    var p1 = document.getElementById('p1')
+    var body = document.body
+
+    bindEventBase(p1,'click',function (event) {
+      event.stopPropagation()
+      console.log('激活')
+    })
+
+    bindEventBase(body,'click',function (event) {
+      event.stopPropagation()
+      console.log('取消')
+    })
+
+    //代理
+    var div3 = document.getElementById('div3')
+    div3.addEventListener('click',function (event) {
+      event.stopPropagation();
+      var target = event.target;
+      console.log(event)
+      if(target.nodeName==='P'){
+        console.log(target.innerHTML)
+      }
+
+    })
+
+    //加入代理函数封装
+    function bindEvent(elem,type,selector,fn) {
+      if(fn === null){
+        fn = selector
+        selector=null
+      }
+      elem.addEventListener(type,function(e){
+        var target
+        if(selector){
+          target = e.target
+          if(target.matches(selector)){
+            fn.call(target,e)
+          }
+        }else{
+          fn(e)
+        }
+      })
+    }
+
+    var div4 = document.getElementById('div4')
+
+    bindEvent(div4,'click','p',function(){
+      console.log(this.innerHTML)
+    })
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>const ThousandNum = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    const money = ThousandNum(20190214);
+    console.log(ThousandNum(20))
+    console.log(ThousandNum(201))
+    console.log(ThousandNum(2019))
+    console.log(ThousandNum(20190))
+    console.log(ThousandNum(201902))
+    console.log(ThousandNum(2019021))
+    console.log(ThousandNum('20190214%'))
+    console.log(ThousandNum('-2019021420190214'))
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

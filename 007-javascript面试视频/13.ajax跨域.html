@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="white-space: pre-wrap;">
+
+    XMLHttpRequest
+
+    状态码说明
+
+    跨域
+
+
+
+
+</div>
+
+<script>
+
+    //IE低版本 ActiveXObject
+
+    var xhr = new XMLHttpRequest()
+    console.log(xhr)
+    xhr.open("GET","/api",false)
+    xhr.onreadystatechange=function () {
+      //这里的函数异步执行，可参考之前js基础中的异步模块
+      if(xhr.readyState==4){
+        if(xhr.status== 200){
+          console.log(xhr.responseText)
+        }
+      }
+    };
+    xhr.send(null)
+    /*
+    readyState
+     0 - （未初始化）还没有调用send 方法
+     1 - (载入) 已调用send 方法，正在发生请求
+     2 - (载入完成) send()方法执行完成，已经接收到全部响应内容
+     3 - (交互) 正在解析响应内容
+     4 - (完成) 响应内容解析完成，可以在客户端调用了
+
+     status 验证码
+
+     101 - 服务器应客户端升级协议的请求 正在进行协议切换
+
+     2xx - 成功处理请求
+        200 - 请求成功
+        201 - 请求创建成功
+        202 - 服务器收到请求，但未进行处理
+        204 - 请求成功，但客户端不需要更新其现有页面
+
+
+     3xx - 需要重定向，浏览器直接跳转
+
+        301，308 ：永久重定向
+        302，307 ：临时重定向
+        303 ： 作为 PUT 或 POST 操作返回结果
+
+        304 ： 无需再次请求内容，使用缓存内容，
+
+
+     4xx - 客户端请求错误，
+
+        400 : 语法无效，服务端无法理解该请求
+
+        401 ： 缺乏资源要求的身份证凭证，没有身份证凭证
+
+        403 ： 服务器拒绝访问，客户端没有权限访问
+
+        404 ： 找不到请求资源
+
+        405 ： 服务器禁止当前HTTP 请求访问
+
+        406 ： 服务器不支持某些请求
+
+        409 ： 请求与服务端目标资源状态相冲突（上传文件版本比服务器已存在要旧）
+
+        410 ： 请求内容不存在，永久丢失
+
+        413 ： 请求主体的大小超过服务器处理限度
+
+
+
+     5xx - 服务端错误
+
+     500 - 表示所请求的服务器遇到意外的情况并阻止其执行请求。
+
+            举例：代码语法错误；php代码运行内存超了内存限制 memory_limit；nginx config 配置错误；
+
+
+     501 - request header 里面的 method 或 content-* 不被服务器支持
+
+
+     502 - Bad Gateway (服务器)
+
+     503 - 服务器停机维护或者超载，
+
+     504 - time out 服务器请求超时
+
+
+
+
+
+    */
+
+
+
+
+
+</script>~
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

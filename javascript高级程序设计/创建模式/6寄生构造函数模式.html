@@ -1,0 +1,35 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>寄生构造函数模式</title>
+    <script>
+        function SpecialArray() {
+            var values = new Array();
+
+            values.push.apply(values,arguments);
+
+            values.toPipeString=function () {
+                return this.join('|')
+            };
+
+            return values
+        }
+
+        var colors = new SpecialArray('red','blue','green')
+
+        console.log(colors.toPipeString())
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

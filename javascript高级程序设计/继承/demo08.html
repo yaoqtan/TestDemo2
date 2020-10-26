@@ -1,0 +1,35 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型链继承</title>
+    <script>
+
+    var person={
+        name:"Ni",
+        friends:["Si","Co","Van"]
+    };
+    var anotherPerson = Object.create(person);
+    anotherPerson.name="Gr";
+    anotherPerson.friends.push('Rob');
+
+    var yetAnotherPerson=Object.create(person)
+    yetAnotherPerson.name="Linda"
+    yetAnotherPerson.friends.push('Barbie')
+
+    console.log(yetAnotherPerson)
+    console.log(person)
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

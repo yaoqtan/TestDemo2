@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Title</title>
+    <style>
+        .mac .ccmLanding,.windows .ccmLanding{
+            display: none;
+        }
+        .android .law,.ios .law{
+            display: none;
+        }
+        #ccmLanding{
+            width: 100%;
+            background: #1A1A18 url("image/bg2.png") no-repeat top center fixed;
+        }
+        .ccm-content{
+            padding: 30px 10px 50px 10px;
+        }
+        .ccm-subtitle{
+            color: #999;
+            font-size: 1.1em;
+            line-height: 1.4em;
+            font-weight: 700;
+        }
+        .ccm-text{
+            color: #999;
+            font-size: 1em;
+            line-height: 1.4em;
+        }
+        .ccm-title{
+            font-size: 1.7em;
+            line-height: 2.2em;
+            color: #FFF;
+        }
+        .ccm-btn{
+            display: inline-block;
+            padding: 5px 15px;
+            background: #2a2b27;
+            color: #fff;
+            border-radius: 20px;
+        }
+        .ccm-img-main{
+            display: flex;
+            width: 100%;
+        }
+        .ccm-img{
+            flex: 1;
+            width: 50%;
+        }
+        .text-center{
+            text-align: center;
+        }
+        .ccm-margin-text{
+            margin:30px 0;
+        }
+        .ccm-link-btn{
+            display: inline-block;
+            padding: 10px 50px;
+            background: #ffe436;
+            color: #000;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 15px;
+            text-decoration: none;
+
+        }
+        .cmm-list-wrap{
+            display: flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+
+        }
+        .ccm-item-img-main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 70px;
+            margin:30px auto;
+            background: #4a4946;
+            border-radius: 100%;
+        }
+        .ccm-item-img{
+            width: 45px;
+            height: 45px;
+        }
+        .ccm-print{
+            margin: 0 auto;
+            background: #ffe436;
+            padding: 0 20px;
+            border-radius: 100px;
+            color: #000;
+            font-weight: 700;
+        }
+        .ccm-list-subtitle{
+            color: #fff;
+            font-weight: 700;
+        }
+        .ccm-list-title{
+            margin:20px 0 5px;
+            color: #fff;
+            text-decoration: underline;
+            text-align: center;
+            line-height: 1.4;
+        }
+        .ccm-list-des{
+            margin:30px 0;
+            font-size: 1.2em;
+            color: #fff;
+            text-align: center;
+            line-height: 1.4em;
+        }
+        .ccm-list-btn-main{
+            margin: 20px 0 30px;
+        }
+        .ccm-list-btn-main.btn2{margin-top:50px}
+        .ccm-list-btn{
+            display: inline-block;
+            padding: 10px 30px;
+            color: #000;
+            text-decoration: none;
+            border-radius: 10px;
+            background: #fff;
+        }
+        .ccm-join{
+            width: 100%;
+            margin-bottom: 30px;
+            padding: 30px 0;
+        }
+        .ccm-join-img{
+            width: 100%;
+        }
+        /*.ccm-join-title{
+            background: #000;
+            padding: 10px 40px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .ccm-waring{
+            font-size: 12px;
+            color: #b1b1b1;
+        }
+        .ccm-link{
+            display: flex;
+            justify-content:space-between;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #999;
+        }*/
+    </style>
+    <script type="text/javascript">
+        function linkHandle() {
+            var isAndroid=Boolean(navigator.userAgent.match(/android/ig))
+            if(isAndroid){
+                window.location.href='https://play.google.com/store/apps/details?id=gt.farm.eigaland&hl=ja'
+            }else{
+                window.location.href='https://apps.apple.com/jp/app/no-1ying-huachiketto-yu-yueapuri/id775882028'
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="ccmLanding" class="ccmLanding" v-if="isMobile">
+    <div class="ccm-content">
+        <div class="ccm-subtitle">映画ランドプレミアムサービス</div>
+        <div class="ccm-title">有料会員</div>
+        <div class="ccm-btn">年会費￥298（税込）</div>
+        <div class="ccm-img-main">
+            <img class="ccm-img" src= "image/1.png" />
+            <img class="ccm-img" src="image/2.png"/>
+        </div>
+        <div class="text-center ccm-text">※イメージ画像</div>
+        <div class="ccm-subtitle text-center ccm-margin-text">
+            映画ランドプレミアムサービスは、年額298円+税であなたのシネマライフをより豊かなものにする有料サービスです。
+            <br>鑑賞料金割引や特別クーポン、映画館のキャンペーン情報等、会員限定の様々な特典をご利用いただけます。
+        </div>
+        <div class="text-center ccm-margin-text">
+            <a class="ccm-link-btn" onclick="linkHandle()" href="javascript:void(0)">
+                加入する
+            </a>
+        </div>
+        <hr/>
+        <div class="cmm-list-wrap">
+            <div class="ccm-item-img-main text-center">
+                <img class="ccm-item-img" src='image/coupon-2.svg'>
+            </div>
+            <div class="ccm-print-main">
+                <div class="ccm-print">POINT 1</div>
+            </div>
+            <!--<div class="ccm-list-subtitle ccm-subtitle">
+                最大
+            </div>-->
+            <div class="ccm-list-title ccm-title">
+                <!--1,900円——>1,400円-->
+                鑑賞料金 最大 500円OFF！
+            </div>
+            <div class="ccm-list-subtitle ccm-subtitle">
+                (25%以上OFF！)
+            </div>
+            <div class="ccm-list-des">
+                いつでも何回でも割引価格で映画鑑賞できます。最低でも鑑賞料金10%OFF以上（※要確認）のクーポンをご用意しました。
+            </div>
+            <div class="ccm-list-btn-main">
+                <a class="ccm-list-btn" href="#">
+                    特典詳細はこちら
+                </a>
+            </div>
+        </div>
+        <hr/>
+
+        <div class="cmm-list-wrap">
+            <div class="ccm-item-img-main text-center">
+                <img class="ccm-item-img" src="image/cinema.svg">
+            </div>
+            <div class="ccm-print-main">
+                <div class="ccm-print">POINT 2</div>
+            </div>
+
+            <div class="ccm-list-title ccm-title">
+                いろいろな劇場で割引特典が使える
+            </div>
+            <div class="ccm-list-subtitle ccm-subtitle">
+                （対応劇場拡大予定）
+            </div>
+            <div class="ccm-list-des">
+                新宿・渋谷・池袋・横浜など<br>
+                特典利用可能劇場
+            </div>
+
+            <div class="ccm-join">
+                <img class="ccm-join-img" src="image/join.png">
+            </div>
+
+        </div>
+
+
+        <hr/>
+
+
+        <div class="cmm-list-wrap">
+            <div class="ccm-item-img-main text-center">
+                <img class="ccm-item-img" src="image/popcorn.svg">
+            </div>
+            <div class="ccm-print-main">
+                <div class="ccm-print">POINT 3</div>
+            </div>
+            <div class="ccm-list-title ccm-title">
+                フード＆ドリンク割引等<br/>
+                他の特典も充実！
+            </div>
+            <div class="ccm-list-subtitle ccm-subtitle">
+                (順次拡大予定)
+            </div>
+            <div class="ccm-list-btn-main btn2">
+                <a class="ccm-list-btn" href="#">
+                    特典詳細はこちら
+                </a>
+            </div>
+        </div>
+
+        <hr/>
+        <div class="text-center ccm-margin-text">
+            <a onclick="linkHandle()" class="ccm-link-btn" href="javascript:void(0)">
+                加入する
+            </a>
+        </div>
+        <!--<div class="ccm-waring">
+            ※吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いて<br/>
+            ※吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いて<br/>
+            ※吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いて<br/>
+            ※吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いて
+
+        </div>
+        <div class="ccm-link">
+            <div>
+                https://eigaland.com/law
+            </div>
+            <div>
+                designed by 映画ランドfrom Flaticon
+            </div>
+
+        </div>-->
+    </div>
+</div>
+
+<div id="law" class="law" v-if="!isMobile">
+    <div class="inner ">
+        <div class="content">
+
+            <strong>特定商取引法に基づく表記</strong>
+            <div class="section_content">
+                「特定商取引法に関する法律」第11条（通信販売についての広告）に基づき、商品の提供条件を次の通り明示します。
+            </div>
+
+            <div class="section_header f" style="font-size: 1.5em"><span class="dot">1.</span>チケット予約サービス</div>
+
+            <div class="section_header f"><span class="dot">■</span>販売事業者</div>
+            <div class="section_content">
+                映画ランド株式会社
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>販売事業者所在地</div>
+            <div class="section_content">
+                東京都中央区新川2丁目20番8号　八丁堀スクエア5階
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>お問合せ先</div>
+            <div class="section_content">
+                <a href="mailto:support@eigaland.com">support@eigaland.com</a> （映画ランド カスタマーサポート）<br>
+                ※お問い合わせは、当社営業時間：10:00～19:00(土日祝日を除く)に順次対応させていただきます。<br>
+                ※お問い合わせの内容により、対応までお時間をいただく場合がございます。
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>ご購入対象・価格・期間</div>
+            <div class="section_content">
+                ご利用の内容に応じたサービス内容となりますので、本サイトの販売画面にて詳細のご案内を差し上げております。
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>ご購入内容の有効期間</div>
+            <div class="section_content">
+                ご購入時から、ご利用内容の映画上映開始時刻までとなります。
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>ご購入枚数制限</div>
+            <div class="section_content">
+                1回のお申込み手続きにおいてご購入いただけますチケット枚数の上限は、興行主の取り扱いチケット枚数の制限に応じ申し込み順にて販売します。<br>
+                なお、お座席はお申込み単位で離れた位置でのご案内となる可能性がございます。
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>ご購入内容の変更・キャンセル・払戻し</div>
+            <div class="section_content">
+                ご購入手続き完了後は、チケットの発券の有無に限らず、またいかなる理由に拘わらず、その内容の変更、キャンセル、払戻しはお受けしておりません。ただし、弊社または興行主の事情により上映を中止または延期した場合に限り、期間および場所を定めご購入内容の払戻しをお受けします。<br>
+                払戻しは、発券済みのチケット（弊社判断による内容判別が可能なもの）を、弊社にご返却頂くことを前提といたします。<br>
+                払戻し方法は、ご利用のクレジットカード会社の処理方法に準じます。また、払戻し実施に際しましては、ご入場券の券面金額のみが払戻し対象となり、その他の費用（ご利用に付随して発生した諸費用）はお支払いいたしかねます。
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>お支払方法</div>
+            <div class="section_content">
+                クレジットカードによる決済のみとなります。<br>
+                （ご利用可能なクレジット：VISA,MASTER,JCB,AMEX,Diners）
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>お支払期限</div>
+            <div class="section_content">
+                クレジットカード決済画面におけるクレジットカード情報の送信完了時に決済させていただきます。なおご請求日は各カード会社により異なります。
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>チケットのお引渡方法</div>
+            <div class="section_content">
+                ご登録いただいたメールアドレスに、ご購入完了後QRコードをお送りいたします。そちらのQRコードがチケットとなりますので、当日は劇場入口にてご準備をお願いいたします。なお、学生料金・シニア割等をご利用のお客様は、ご鑑賞当日、興行主の規約所定の証明書（学生証、身分証明書等）をお持ちください。ご提示いただけない場合、予約購入金額と適正なチケット金額とに差異がある場合は差額分をお支払いただく、もしくはご入場をお断りさせていただきます。
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>運営責任者</div>
+            <div class="section_content">
+                王　漢銘（ジェイソン・ウォン）
+            </div>
+
+            <div class="section_header f" style="font-size: 1.5em"><span class="dot">2.</span>劇場会員サービス</div>
+
+            <div class="section_header f"><span class="dot">■</span>販売事業者</div>
+            <div class="section_content">
+                映画ランド株式会社
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>販売事業者所在地</div>
+            <div class="section_content">
+                東京都中央区新川2丁目20番8号　八丁堀スクエア5階
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>お問合せ先</div>
+            <div class="section_content">
+                <a href="mailto:support@eigaland.com">support@eigaland.com</a> （映画ランド カスタマーサポート）<br>
+                ※お問い合わせは、当社営業時間：10:00～19:00(土日祝日を除く)に順次対応させていただきます。<br>
+                ※お問い合わせの内容により、対応までお時間をいただく場合がございます。
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>ご購入対象・価格・期間</div>
+            <div class="section_content">
+                ご利用の内容に応じたサービス内容となりますので、各劇場の会員制度紹介画面にて詳細のご案内を差し上げております。
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>ご購入内容の変更・キャンセル・払戻し</div>
+            <div class="section_content">
+                ご利用の内容に応じたサービス内容となりますので、各劇場の会員制度紹介画面にて詳細のご案内を差し上げております。
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>お支払方法</div>
+            <div class="section_content">
+                クレジットカードによる決済のみとなります。<br>
+                （ご利用可能なクレジット：VISA,MASTER,JCB, AMEX）
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>お支払期限</div>
+            <div class="section_content">
+                クレジットカード決済画面におけるクレジットカード情報の送信完了時に決済させていただきます。なおご請求日は各カード会社により異なります。
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>ソフトウェア動作環境</div>
+            <div class="section_content">
+                iOS 9.0以上<br />
+                Android 5.0 以上<br />
+                ※ただし、一部の機種では正常に動作しない場合があります。
+            </div>
+
+            <div class="section_header f"><span class="dot">■</span>運営責任者</div>
+            <div class="section_content">
+                王　漢銘（ジェイソン・ウォン）
+            </div>
+
+            <br>
+        </div>
+
+
+    </div>
+    <!--.inner-->
+</div>
+
+
+
+
+</body>
+
+
+
+

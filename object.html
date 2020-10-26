@@ -1,0 +1,41 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var data={
+            a:1,
+            b:2,
+            obj:{
+                fA:1
+            },
+            arr:[1,2,3]
+        };
+        var newData={
+            ...data,
+            c:2,
+            b:3,
+            obj:{
+                fA: data.obj.fA
+            },
+            arr:[...data.arr]
+        };
+        newData.d=2
+        data.arr.push(56)
+        data.a=1234
+        data.obj.fA=2344
+        console.log(data)
+        console.log(newData)
+    </script>
+</head>
+<body>
+
+</body>
+</html>

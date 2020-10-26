@@ -1,0 +1,1732 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Hybrid Printer Sample Program</title>
+<!-- CSS -->
+<style type="text/css">
+body {
+	background-color: #ffffff;
+	color: #333333;
+}
+table, tr, td {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #eeeeee;
+}
+th {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #cccccc;
+}
+h2, h3{
+	margin-bottom: 15px;
+	border-bottom: 1px solid #000000;
+}
+.center {
+	text-align: center;
+}
+</style>
+<!-- Script -->
+<script type="text/javascript" src="epos-2.14.0.js"></script>
+<script type="text/javascript">
+	var INDEX_RECEIPT = 0;
+	var INDEX_SLIP    = 1;
+	var INDEX_ENDORSE = 2;
+
+	var ipAddress ="";
+	var port      ="";
+
+	var crypto = false;
+	var buffer = false;
+
+	var printer = null;
+	var printerList = new Array(null, null, null);
+	var sampleList = new Array('', '', '');
+	var printerNameList = new Array('ReceiptPrinter', 'SlipPrinter', 'EndorsePrinter');
+
+	var ePosDev = new epson.ePOSDevice();
+
+	function connect() {
+		ipAddress = document.getElementById("ipaddress").value;
+		port = document.getElementById("port").value;
+
+		ePosDev.connect(ipAddress, port, Callback_connect);
+		ePosDev.onreconnecting = OnReconnecting;
+		ePosDev.onreconnect = OnReconnect;
+		ePosDev.ondisconnect = OnDisconnect;
+	}
+
+	function Callback_connect(data) {
+		var deviceID = document.getElementById("deviceid").value;
+		crypto       = document.getElementById("crypto").checked;
+		buffer       = document.getElementById("buffer").checked;
+		var options = {'crypto' : crypto, 'buffer' : buffer};
+
+		if (data == 'OK') {
+			consolelog("connected to ePOS Device Service Interface.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_HYBRID_PRINTER, options, callbackCreateDevice_hybridPrinter);
+		}
+		else if (data == 'SSL_CONNECT_OK') {
+			consolelog("connected to ePOS Device Service Interface with SSL.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_HYBRID_PRINTER, options, callbackCreateDevice_hybridPrinter);
+		}
+		else {
+			consolelog("connected to ePOS Device Service Interface is failed. [" + data + "]", true);
+		}
+	}
+
+	function callbackCreateDevice_hybridPrinter(data, code) {
+		if (data == null) {
+			consolelog(code);
+			return;
+		}
+
+		consolelog("you can use Hybrid printer.");
+
+		printer = data;
+		printerList[INDEX_RECEIPT] = printer.ReceiptPrinter;
+		printerList[INDEX_SLIP]    = printer.SlipPrinter;
+		printerList[INDEX_ENDORSE] = printer.EndorsePrinter;
+
+		sampleList[INDEX_RECEIPT] = '';
+		sampleList[INDEX_SLIP]    = '';
+		sampleList[INDEX_ENDORSE] = '';
+
+		// Set a response callback function
+		printer.onreceive = function (res) {
+			// Show message
+			var msg = "";
+			msg += 'Event type:' + res.eventtype + '\n';
+			msg += 'Print '       + (res.success ? 'Success' : 'Failure') + '\n';
+			msg += 'Code:'       + res.code + '\n';
+			msg += 'Status:\n'   + getStatusText(printer, res.status);
+			consolelog(msg, true);
+		}
+		printer.ReceiptPrinter.onreceive = function (res) {
+			// Show message
+			var msg = "";
+			msg += 'Event type:' + res.eventtype + '\n';
+			msg += 'Print '       + (res.success ? 'Success' : 'Failure') + '\n';
+			msg += 'Code:'       + res.code + '\n';
+			msg += 'Status:\n'   + getStatusText(printer, res.status) + '\n';
+			consolelog(msg, true);
+		}
+		printer.SlipPrinter.onreceive = function (res) {
+			// Show message
+			var msg = "";
+			msg += 'Event type:' + res.eventtype + '\n';
+			msg += 'Print '       + (res.success ? 'Success' : 'Failure') + '\n';
+			msg += 'Code:'       + res.code + '\n';
+			msg += 'Status:\n'   + getStatusText(printer, res.status) + '\n';
+			consolelog(msg, true);
+		}
+		printer.EndorsePrinter.onreceive = function (res) {
+			// Show message
+			var msg = "";
+			msg += 'Event type:' + res.eventtype + '\n';
+			msg += 'Print '       + (res.success ? 'Success' : 'Failure') + '\n';
+			msg += 'Code:'       + res.code + '\n';
+			msg += 'Status:\n'   + getStatusText(printer, res.status) + '\n';
+			consolelog(msg, true);
+		}
+		printer.MICRReader.onreceive = function (res) {
+			// Show message
+			var msg = "";
+			msg += 'Event type:' + res.eventtype + '\n';
+			msg += 'Print '      + (res.success ? 'Success' : 'Failure') + '\n';
+			msg += 'Code:'       + res.code + '\n';
+			msg += 'Status:\n'   + getStatusText(printer, res.status);
+			if(res.data != null){
+				msg += 'Data:'   + res.data;
+			}
+			consolelog(msg, true);
+		}
+		// Set a status change callback funciton
+		printer.onstatuschange = function (status) {
+			if (document.getElementById('onstatuschange').checked) {
+				alert(getStatusText(printer, status));
+			}
+		};
+		printer.ononline = function () {
+			if (document.getElementById('ononline').checked) {
+				alert('online');
+			}
+		};
+		printer.onoffline = function () {
+			if (document.getElementById('ononline').checked) {
+				alert('offline');
+			}
+		};
+		printer.onpoweroff = function () {
+			if (document.getElementById('ononline').checked) {
+				alert('poweroff');
+			}
+		};
+		printer.oncoverok = function () {
+			if (document.getElementById('oncoverok').checked) {
+				alert('coverok');
+			}
+		};
+		printer.oncoveropen = function () {
+			if (document.getElementById('oncoverok').checked) {
+				alert('coveropen');
+			}
+		};
+		printer.onpaperok = function () {
+			if (document.getElementById('onpaperok').checked) {
+				alert('paperok');
+			}
+		};
+		printer.onpapernearend = function () {
+			if (document.getElementById('onpaperok').checked) {
+				alert('papernearend');
+			}
+		};
+		printer.onpaperend = function () {
+			if (document.getElementById('onpaperok').checked) {
+				alert('paperend');
+			}
+		};
+		printer.ondrawerclosed = function () {
+			if (document.getElementById('ondrawerclosed').checked) {
+				alert('drawerclosed');
+			}
+		};
+		printer.ondraweropen = function () {
+			if (document.getElementById('ondrawerclosed').checked) {
+				alert('draweropen');
+			}
+		};
+	}
+
+	function OnReconnecting() {
+		consolelog('onreconnecting');
+	}
+
+	function OnReconnect() {
+		consolelog('onreconnect');
+	}
+
+	function OnDisconnect() {
+		consolelog('ondisconnect');
+	}
+
+	function consolelog(string, option) {
+		var length = arguments.length;
+		var overwrite = length > 1 ? option : false;
+		
+		if (overwrite) {
+			document.getElementById("console").value = string + "\r\n";
+		} else {
+			document.getElementById("console").value += string + "\r\n";
+		}
+		//document.getElementById('console').scrollTop = document.getElementById('console').scrollHeight;
+	}
+
+	// lock the hybrid printer
+	function lock() {
+		printer.lock();
+	}
+
+	// unlock the hybrid printer
+	function unlock() {
+		printer.unlock();
+	}
+
+	// read micr
+	function MicrRead() {
+
+		// ignore
+		var selectTypelist = document.getElementsByName("ignore_err");
+		var selectType     = isCheckedRadioButtonValue(selectTypelist);
+
+		var ignore = false;
+		switch(selectType) {
+			case "enable":
+				ignore = true;
+				break;
+			case "disable":
+				ignore = false;
+				break;
+			default:
+				break;
+		}
+
+		// timeout
+		var timeout = document.getElementById('micr_timeout').value;
+		// font
+		var str_font = document.getElementById('micr_font').value;
+		var font = (str_font == "E13B") ? printer.MICRReader.FONT_E13B : printer.MICRReader.FONT_CMC7;
+
+		printer.MICRReader.timeout = timeout * 60 * 1000;
+		printer.MICRReader.read(ignore, font);
+
+	}
+
+	// eject micr
+	function MicrEject() {
+		printer.eject();
+	}
+
+	// cancel micr reading
+	function Cancel(type) {
+		var obj = null;
+		switch(type){
+			case 1:
+				obj = printer.SlipPrinter;
+				break;
+			case 2:
+				obj = printer.EndorsePrinter;
+				break;
+			case 3:
+				obj = printer.MICRReader;
+				break;
+		}
+		obj.cancel();
+	}
+
+	// micr cleaning
+	function MicrClean() {
+		// timeout
+		var timeout = document.getElementById('micr_timeout').value;
+		printer.MICRReader.timeout = timeout * 60 * 1000;
+		printer.MICRReader.cleaning();
+	}
+
+	// Adds the text alignment setting
+	function addTextAlign() {
+		try {
+			var align = document.getElementById('align').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addTextAlign(printerList[i][align]);
+				sampleList[i] += "printer." + printerNameList[i] + ".addTextAlign(printer." + printerNameList[i] + "." + align + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the line feed space setting
+	function addTextLineSpace() {
+		try {
+			var linespc = document.getElementById('linespc').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addTextLineSpace(linespc);
+				sampleList[i] += "printer." + printerNameList[i] + ".addTextLineSpace(" + linespc + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the text rotation setting
+	function addTextRotate() {
+		try {
+			var rotate = document.getElementById('rotate').checked;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addTextRotate(rotate);
+				sampleList[i] += "printer." + printerNameList[i] + ".addTextRotate(" + rotate + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the printing of text
+	function addText() {
+		try {
+			var data = document.getElementById('text').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addText(escapeText(data));
+				sampleList[i] += "printer." + printerNameList[i] + ".addText(" + escapeTextSample(data) + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the language setting
+	function addTextLang() {
+		try {
+			var lang = document.getElementById('lang').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addTextLang(lang);
+				sampleList[i] += "printer." + printerNameList[i] + ".addTextLang(" + lang + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the text font setting
+	function addTextFont() {
+		try {
+			var font = document.getElementById('font').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addTextFont(printerList[i][font]);
+				sampleList[i] += "printer." + printerNameList[i] + ".addTextFont(printer." + printerNameList[i] + "." + font + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the smoothing setting
+	function addTextSmooth() {
+		try {
+			var smooth = document.getElementById('smooth').checked;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addTextSmooth(smooth);
+				sampleList[i] += "printer." + printerNameList[i] + ".addTextSmooth(" + smooth + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the double-sized text setting
+	function addTextDouble() {
+		try {
+			var dw = document.getElementById('dw').checked;
+			var dh = document.getElementById('dh').checked;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addTextDouble(dw, dh);
+				sampleList[i] += "printer." + printerNameList[i] + ".addTextDouble(" + dw + ", " + dh + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the text scale setting
+	function addTextSize() {
+		try {
+			var width = document.getElementById('textwidth').value;
+			var height = document.getElementById('textheight').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addTextSize(width, height);
+				sampleList[i] += "printer." + printerNameList[i] + ".addTextSize(" + width + ", " + height + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the text style setting
+	function addTextStyle() {
+		try {
+			var reverse = document.getElementById('reverse').checked;
+			var ul = document.getElementById('ul').checked;
+			var em = document.getElementById('em').checked;
+			var color = document.getElementById('color').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addTextStyle(reverse, ul, em, printerList[i][color]);
+				sampleList[i] += "printer." + printerNameList[i] + ".addTextStyle(" + reverse + ", " + ul + ", " + em + ", printer." + printerNameList[i] + "." + color + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the horizontal print start position of text
+	function addTextPosition() {
+		try {
+			var x = document.getElementById('textx').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addTextPosition(x);
+				sampleList[i] += "printer." + printerNameList[i] + ".addTextPosition(" + x + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the vertical print start position of text
+	function addTextVPosition() {
+		try {
+			var y = document.getElementById('texty').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addTextVPosition(y);
+				sampleList[i] += "printer." + printerNameList[i] + ".addTextVPosition(" + y + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds paper feeding in dots
+	function addFeedUnit() {
+		try {
+			var unit = document.getElementById('feedunit').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addFeedUnit(unit);
+				sampleList[i] += "printer." + printerNameList[i] + ".addFeedUnit(" + unit + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds paper feeding in lines
+	function addFeedLine() {
+		try {
+			var line = document.getElementById('feedline').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addFeedLine(line);
+				sampleList[i] += "printer." + printerNameList[i] + ".addFeedLine(" + line + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// load image
+	function loadImage() {
+		try {
+			var image = new Image();
+			image.src = document.getElementById('image').value + '?' + new Date().getTime();
+			image.onload = function () {
+				// show message
+				alert('Image:Width' + image.width + 'px, Height' + image.height + 'px');
+				// draw image
+				var canvas = document.getElementById('canvas');
+				if (canvas.getContext) {
+					canvas.width = image.width;
+					canvas.height = image.height;
+					var context = canvas.getContext('2d');
+					context.drawImage(image, 0, 0);
+				}
+			}
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds raster image printing
+	function addImage() {
+		try {
+			var canvas = document.getElementById('canvas');
+			if (canvas.getContext) {
+				var context = canvas.getContext('2d');
+				var color = document.getElementById('imagec').value;
+				var mode = document.getElementById('mode').value;
+				var brightness = document.getElementById('brightness').value;
+				var halftone = document.getElementById('halftone').value;
+				for(var i=0;i<printerList.length;i++){
+					printerList[i].brightness = brightness;
+					printerList[i].halftone   = printerList[i][halftone];
+					printerList[i].addImage(context, 0, 0, canvas.width, canvas.height, printerList[i][color], printerList[i][mode]);
+					sampleList[i] += "printer." + printerNameList[i] + ".brightness = " + brightness + ";\n";
+					sampleList[i] += "printer." + printerNameList[i] + ".halftone = printer." + printerNameList[i] + "." + halftone + ";\n";
+					sampleList[i] += "printer." + printerNameList[i] + ".addImage(canvas.getContext('2d'), 0, 0, canvas.width, canvas.height, printer." + printerNameList[i] + "." + color + ", printer." + printerNameList[i] + "." + mode + ");\n";
+				}
+				updateSampleCode();
+			}
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds NV logo printing
+	function addLogo() {
+		try {
+			var key1 = document.getElementById('key1').value;
+			var key2 = document.getElementById('key2').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addLogo(key1, key2);
+				sampleList[i] += "printer." + printerNameList[i] + ".addLogo(" + key1 + ", " + key2 + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds barcode printing
+	function addBarcode() {
+		try {
+			var data = document.getElementById('bardata').value;
+			var type = document.getElementById('bartype').value;
+			var hri = document.getElementById('barhri').value;
+			var font = document.getElementById('barfont').value;
+			var width = document.getElementById('barwidth').value;
+			var height = document.getElementById('barheight').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addBarcode(escapeCode(data), printerList[i][type], printerList[i][hri], printerList[i][font], width, height);
+				sampleList[i] += "printer." + printerNameList[i] + ".addBarcode('" + escapeCodeSample(data) + "', printer." + printerNameList[i] + "." + type + ", printer." + printerNameList[i] + "." + hri + ", printer." + printerNameList[i] + "." + font + ", " + width + ", " + height + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	function isCheckedRadioButtonValue(list) {
+
+		var ret = '';
+		for( var i=0; i<list.length; i++ ) {
+			if( list[i].checked ) {
+				ret = list[i].value;
+				break;
+			}
+		}
+
+		return ret;
+	}
+
+	// Adds two-dimensional symbol printing
+	function addSymbol() {
+		try {
+			var data = document.getElementById('symdata').value;
+			var type = document.getElementById('symtype').value;
+
+			var level  = document.getElementById('symleveldefine').value;
+			var width  = document.getElementById('symwidth').value;
+			var height = document.getElementById('symheight').value;
+			var size   = document.getElementById('symsize').value;
+
+			var selectTypelist = document.getElementsByName("symlevelselect");
+			var selectType     = isCheckedRadioButtonValue(selectTypelist);
+
+			switch(selectType) {
+				case "define":
+					level = document.getElementById('symleveldefine').value;
+					for(var i=0;i<printerList.length;i++){
+						printerList[i].addSymbol(escapeCode(data), printerList[i][type], printerList[i][level], width, height, size);
+						sampleList[i] += "printer." + printerNameList[i] + ".addSymbol('" + escapeCodeSample(data) + "', printer." + printerNameList[i] + "." + type + ", printer." + printerNameList[i] + "." + printerList[i][level] + ", " + width + ", " + height + ", " + size + ");\n";
+					}
+					break;
+				case "value":
+					level = document.getElementById('symlevelvalue').value;
+					for(var i=0;i<printerList.length;i++){
+						printerList[i].addSymbol(escapeCode(data), printerList[i][type], level, width, height, size);
+						sampleList[i] += "printer." + printerNameList[i] + ".addSymbol('" + escapeCodeSample(data) + "', printer." + printerNameList[i] + "." + type + ", " + level + ", " + width + ", " + height + ", " + size + ");\n";
+					}
+					break;
+				default:
+					level = document.getElementById('symleveldefine').value;
+					break;
+			}
+
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the switching to page mode
+	function addPageBegin() {
+		try {
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addPageBegin();
+				sampleList[i] += "printer." + printerNameList[i] + ".addPageBegin();\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the print area in page mode
+	function addPageArea() {
+		try {
+			var x = document.getElementById('areax').value;
+			var y = document.getElementById('areay').value;
+			var width = document.getElementById('areawidth').value;
+			var height = document.getElementById('areaheight').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addPageArea(x, y, width, height);
+				sampleList[i] += "printer." + printerNameList[i] + ".addPageArea(" + x + ", " + y + ", " + width + ", " + height + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the page mode print direction setting
+	function addPageDirection() {
+		try {
+			var dir = document.getElementById('dir').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addPageDirection(printerList[i][dir]);
+				sampleList[i] += "printer." + printerNameList[i] + ".addPageDirection(printer." + printerNameList[i] + "." + dir + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the page mode print-position-set area
+	function addPagePosition() {
+		try {
+			var x = document.getElementById('posx').value;
+			var y = document.getElementById('posy').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addPagePosition(x, y);
+				sampleList[i] += "printer." + printerNameList[i] + ".addPagePosition(" + x + ", " + y + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the end of page mode
+	function addPageEnd() {
+		try {
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addPageEnd();
+				sampleList[i] += "printer." + printerNameList[i] + ".addPageEnd();\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds paper cut
+	function addCut() {
+		try {
+			var type = document.getElementById('cut').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addCut(printerList[i][type]);
+				sampleList[i] += "printer." + printerNameList[i] + ".addCut(printer." + printerNameList[i] + "." + type + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the drawer kick
+	function addPulse() {
+		try {
+			var drawer = document.getElementById('drawer').value;
+			var pulse = document.getElementById('pulse').value;
+
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addPulse(printerList[i][drawer], printerList[i][pulse]);
+				sampleList[i] += "printer." + printerNameList[i] + ".addPulse(printer." + printerNameList[i] + "." + drawer + ", printer." + printerNameList[i] + "." + pulse + ");\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the printer recovery
+	function addRecovery() {
+		try {
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addRecpvery();
+				sampleList[i] += "printer.addRecovery();\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the printer reset
+	function addReset() {
+		try {
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addReset();
+				sampleList[i] += "printer.addReset();\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds commands
+	function addCommand() {
+		try {
+			var data = document.getElementById('command').value;
+			for(var i=0;i<printerList.length;i++){
+				printerList[i].addCommand(escapeCode(data));
+				sampleList[i] += "printer." + printerNameList[i] + ".addCommand('" + escapeCodeSample(data) + "');\n";
+			}
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// Adds the 40cpl mode
+	function add40cplmode() {
+		try {
+			var selectTypelist = document.getElementsByName("40cplmode");
+			var selectType     = isCheckedRadioButtonValue(selectTypelist);
+
+			var mode = false;
+			var strMode = "false";
+			switch(selectType) {
+				case "40cplmode_enable":
+					mode = true;
+					strMode = "true";
+					break;
+				case "40cplmode_disable":
+					mode = false;
+					strMode = "false";
+					break;
+				default:
+					break;
+			}
+
+			printer.EndorsePrinter.enable40cplmode(mode);
+			sampleList[INDEX_ENDORSE] += "printer.EndorsePrinter.enable40cplmode(" + strMode + ");\n";
+			updateSampleCode();
+		}
+		catch (e) {
+			alert(e.message);
+		}
+	}
+
+	// process escape sequence (binary)
+	function escapeCode(s) {
+		var escape = /\\x[0-9A-Fa-f]{2}/g;
+			if (escape.test(s)) {
+				s = s.replace(escape, function (c) {
+				return String.fromCharCode(parseInt(c.slice(2), 16));
+			});
+		}
+		return escapeText(s);
+	}
+
+	// process escape sequence (text)
+	function escapeText(s) {
+		var escape = /\\[tnr\\]|\\/g;
+		if (escape.test(s)) {
+			s = s.replace(escape, function (c) {
+				var r = '';
+				switch (c) {
+					case '\\t':
+						r = '\x09';
+						break;
+					case '\\n':
+						r = '\x0a';
+						break;
+					case '\\r':
+						r = '\x0d';
+						break;
+					case '\\\\':
+						r = '\\';
+						break;
+					default:
+						break;
+				}
+				return r;
+			});
+		}
+		return s;
+	}
+
+	// process escape sequence for sample code (binary)
+	function escapeCodeSample(s) {
+		var escape = /\\x[0-9A-Fa-f]{2}|\\[tnr\\]|['"]|\\/g;
+		if (escape.test(s)) {
+			s = s.replace(escape, function (c) {
+				var r = c;
+				switch (c) {
+					case '"':
+						r = '\\"';
+						break;
+					case "'":
+						r = "\\'";
+						break;
+					case '\\':
+						r = '';
+						break;
+					default:
+						break;
+				}
+				return r;
+			});
+		}
+		return s;
+	}
+
+	// process escape sequence for sample code (text)
+	function escapeTextSample(s) {
+		var escape = /\\[tnr\\]|['"]|\\/g;
+		if (escape.test(s)) {
+			s = s.replace(escape, function (c) {
+				var r = c;
+				switch (c) {
+					case '"':
+						r = '\\"';
+						break;
+					case "'":
+						r = "\\'";
+						break;
+					case '\\':
+						r = '';
+						break;
+					default:
+						break;
+				}
+				return r;
+			});
+		}
+		return s;
+	}
+
+	// update sample code
+	function updateSampleCode() {
+		var target = document.getElementById('target').value;
+
+		var index  = 0;
+		switch(target){
+			case 'Receipt':
+				index = INDEX_RECEIPT;
+				break;
+			case 'Slip':
+				index = INDEX_SLIP;
+				break;
+			case 'Endorse':
+				index = INDEX_ENDORSE;
+				break;
+		}
+
+		var strCrypto = 'false';
+		if( crypto ) {
+			strCrypto = 'true';
+		}
+
+		var strBuffer = 'false';
+		if( buffer ) {
+			strBuffer = 'true';
+		}
+
+		var str = '';
+		str += "var canvas = document.getElementById('canvas');\n";
+		str += "var printer = null;\n";
+		str += "var ePosDev = new epson.ePOSDevice();\n";
+		str += "ePosDev.connect('" + ipAddress + "', " + port + ", cbConnect);\n";
+		str += "function cbConnect(data) {\n";
+		str += "	if(data == 'OK') {\n";
+		str += "		ePosDev.createDevice('local_printer', ePosDev.DEVICE_TYPE_HYBRID_PRINTER, {'crypto' : " + strCrypto + ", 'buffer' : " + strBuffer +"}, cbCreateDevice_printer);\n";
+		str += "	} else {\n";
+		str += "		alert(data);\n";
+		str += "	}\n";
+		str += "}\n";
+		str += "function cbCreateDevice_printer(devobj, retcode) {\n";
+		str += "	if( retcode == 'OK' ) {\n";
+		str += "		printer = devobj;\n";
+		str += "		executeAddedCode();\n";
+		str += "	} else {\n";
+		str += "		alert(retcode);\n";
+		str += "	}\n";
+		str += "}\n";
+		str += "function executeAddedCode() {\n\n";
+		str += sampleList[index] + "\n";
+		str += "printer." + printerNameList[index] + ".send();\n";
+		str += "}\n";
+
+		document.getElementById('Sample').value = str;
+		document.getElementById('Sample').scrollTop = document.getElementById('Sample').scrollHeight;
+	}
+
+	// clear print data
+	function resetMessage() {
+		for(var i=0;i<printerList.length;i++){
+			printerList[i].message = '';
+		}
+		for(var i=0;i<sampleList.length;i++){
+			sampleList[i] = '';
+		}
+	}
+
+	// call the printer reset function
+	function sendReset() {
+		printer.reset();
+	}
+
+	// call the printer recover function
+	function sendRecover() {
+		printer.force = document.getElementById('force_recover').checked;
+		printer.recover();
+	}
+
+	// send print data
+	function sendMessage(type) {
+		// send
+		var obj = null;
+		switch(type){
+			case 0:
+				obj = printer.ReceiptPrinter;
+				obj.force = document.getElementById('force_print').checked;
+				break;
+			case 1:
+				var timeout = document.getElementById('slip_timeout').value;
+				obj = printer.SlipPrinter;
+				obj.timeout = timeout * 60 * 1000;
+				break;
+			case 2:
+				var timeout = document.getElementById('endorse_timeout').value;
+				obj = printer.EndorsePrinter;
+				obj.timeout = timeout * 60 * 1000;
+				break;
+		}
+		var message = obj.message;
+		obj.send();
+		obj.message = message;
+	}
+
+	// start status monitor
+	function startMonitor() {
+		printer.interval = document.getElementById('interval').value;
+		printer.startMonitor();
+	}
+
+	// stop status monitor
+	function stopMonitor() {
+		printer.stopMonitor();
+	}
+
+	// get status text
+	function getStatusText(e, status) {
+		var s = '';
+		if (status & e.ASB_NO_RESPONSE) {
+			s += ' No printer response\n';
+		}
+		if (status & e.ASB_PRINT_SUCCESS) {
+			s += ' Print complete\n';
+		}
+		if (status & e.ASB_DRAWER_KICK) {
+			s += ' Status of the drawer kick number 3 connector pin = "H"\n';
+		}
+		if (status & e.ASB_OFF_LINE) {
+			s += ' Offline status\n';
+		}
+		if (status & e.ASB_COVER_OPEN) {
+			s += ' Cover is open\n';
+		}
+		if (status & e.ASB_PAPER_FEED) {
+			s += ' Paper feed switch is feeding paper\n';
+		}
+		if (status & e.ASB_WAIT_ON_LINE) {
+			s += ' Waiting for online recovery\n';
+		}
+		if (status & e.ASB_PANEL_SWITCH) {
+			s += ' Panel switch is ON\n';
+		}
+		if (status & e.ASB_MECHANICAL_ERR) {
+			s += ' Mechanical error generated\n';
+		}
+		if (status & e.ASB_AUTOCUTTER_ERR) {
+			s += ' Auto cutter error generated\n';
+		}
+		if (status & e.ASB_UNRECOVER_ERR) {
+			s += ' Unrecoverable error generated\n';
+		}
+		if (status & e.ASB_AUTORECOVER_ERR) {
+			s += ' Auto recovery error generated\n';
+		}
+		if (status & e.ASB_RECEIPT_NEAR_END) {
+			s += ' No paper in the roll paper near end detector\n';
+		}
+		if (status & e.ASB_RECEIPT_END) {
+			s += ' No paper in the roll paper end detector\n';
+		}
+		if (status & e.ASB_TOF_NOPAPER) {
+		    s += ' TOP sensor: paper not present\n';
+		}
+		if (status & e.ASB_BOF_NOPAPER) {
+		    s += ' BOF sensor: paper not present\n';
+		}
+		if (status & e.ASB_SLIP_NO_SELECT) {
+		    s += ' Slip not selected as the active sheet\n';
+		}
+		if (status & e.ASB_SLIP_DISABLE_PRINT) {
+		    s += ' An unknown error occurred\n';
+		}
+		if (status & e.ASB_BUZZER) {
+			s += ' Sounding the buzzer (certain model)\n';
+		}
+		if (status & e.ASB_SPOOLER_IS_STOPPED) {
+			s += ' Stop the spooler\n';
+		}
+		return s;
+	}
+
+</script>
+</head>
+
+<body onload="consolelog('', true);">
+	<form action="" onsubmit="return false;">
+		<table style="width:100%;">
+			<thead>
+				<tr><th colspan="3">Device Setting</th>	</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Connection settings</td>
+					<td>
+						IP address <input id="ipaddress" size="20" type="text" value="192.168.192.168" />
+						Port <input id="port" size="5" type="text" value="8008" />
+						Device ID <input id="deviceid" size="15" type="text" value="local_printer" />
+						<input id="crypto" type="checkbox" value="" />Encryption
+						<input id="buffer" type="checkbox" value="" />Enable buffer
+					</td>
+					<td class="center"><input type="button" value="Connect" onclick="connect()" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	<br />
+	<form action="" onsubmit="return false;">
+		<table style="width:100%;">
+			<thead>
+				<tr><th>Console</th></tr>
+			</thead>
+			<tbody>
+				<tr><td><textarea id="console" style="width:98%;" rows="8" cols="80"></textarea></td></tr>
+			</tbody>
+		</table>
+	</form>
+
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="4">ePOS SDK Hybrid Printer Object</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<!-- addTextAlign -->
+		<tr>
+			<td rowspan="3" style="width:8%;">Common</td>
+			<td style="width:16%;">Alignment</td>
+			<td style="width:68%;">
+				<select id="align">
+					<option value="ALIGN_LEFT">Left</option>
+					<option value="ALIGN_CENTER">Center</option>
+					<option value="ALIGN_RIGHT">Right</option>
+				</select>
+			</td>
+			<td style="width:8%;" class="center"><input type="button" value="Add" onclick="addTextAlign()" /></td>
+		</tr>
+
+		<!-- addTextLineSpace -->
+		<tr>
+			<td>Line Spacing</td>
+			<td><input id="linespc" type="text" size="5" value="30" /></td>
+			<td class="center"><input type="button" value="Add" onclick="addTextLineSpace()" /></td>
+		</tr>
+
+		<!-- addTextRotate -->
+		<tr>
+			<td>Upside-down</td>
+			<td><input id="rotate" type="checkbox" value="" />Upside-down</td>
+			<td class="center"><input type="button" value="Add" onclick="addTextRotate()" /></td>
+		</tr>
+
+		<!-- addText -->
+		<tr>
+			<td rowspan="9">Text</td>
+			<td>Print Characters</td>
+			<td>
+				<input id="text" style="width:98%;" type="text" value="Hello,\tWorld!\n" /><br />
+				Horizontal Tab(HT): '\t', Line Feed(LF): '\n', Carriage Return(CR): '\r', Back Slash: '\\'
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addText()" /></td>
+		</tr>
+
+		<!-- addTextLang -->
+		<tr>
+			<td>Language</td>
+			<td>
+				<select id="lang">
+					<option value="en" selected="selected">ANK</option>
+					<option value="ja">Japanese</option>
+					<option value="ko">Korean</option>
+					<option value="zh-cn">Simplified Chinese</option>
+					<option value="zh-tw">Traditional Chinese</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addTextLang()" /></td>
+		</tr>
+
+		<!-- addTextFont -->
+		<tr>
+			<td>Font</td>
+			<td>
+				<select id="font">
+					<option value="FONT_A">Font A</option>
+					<option value="FONT_B">Font B</option>
+					<option value="FONT_C">Font C</option>
+					<option value="FONT_SPECIAL_A">Special Font A</option>
+					<option value="FONT_SPECIAL_B">Special Font B</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addTextFont()" /></td>
+		</tr>
+
+		<!-- addTextSmooth -->
+		<tr>
+			<td>Smoothing</td>
+			<td><input id="smooth" type="checkbox" value="" />Enabled</td>
+			<td class="center"><input type="button" value="Add" onclick="addTextSmooth()" /></td>
+		</tr>
+
+		<!-- addTextDouble -->
+		<tr>
+			<td>Double</td>
+			<td>
+				<input id="dw" type="checkbox" value="" />Double-width
+				<input id="dh" type="checkbox" value="" />Double-height
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addTextDouble()" /></td>
+		</tr>
+
+		<!-- addTextSize -->
+		<tr>
+			<td>Size</td>
+			<td>
+				Width
+				<select id="textwidth">
+					<option value="1">Normal</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+				</select>
+				Height
+				<select id="textheight">
+					<option value="1">Normal</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addTextSize()" /></td>
+		</tr>
+
+		<!-- addTextStyle -->
+		<tr>
+			<td>Style</td>
+			<td>
+				<input id="reverse" type="checkbox" value="" />White/Black Reverse
+				<input id="ul" type="checkbox" value="" />Underline
+				<input id="em" type="checkbox" value="" />Emphasized
+				&nbsp;&nbsp;Color
+				<select id="color">
+					<option value="COLOR_NONE">None</option>
+					<option value="COLOR_1" selected="selected">Color 1</option>
+					<option value="COLOR_2">Color 2</option>
+					<option value="COLOR_3">Color 3</option>
+					<option value="COLOR_4">Color 4</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addTextStyle()" /></td>
+		</tr>
+
+		<!-- addTextPosition -->
+		<tr>
+			<td>X Position</td>
+			<td>
+				Position
+				<input id="textx" type="text" size="5" value="0" />
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addTextPosition()" /></td>
+		</tr>
+
+		<!-- addTextVPosition -->
+		<tr>
+			<td>Y Position</td>
+			<td>
+				Position
+				<input id="texty" type="text" size="5" value="0" />
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addTextVPosition()" /></td>
+		</tr>
+
+		<!-- addFeedUnit -->
+		<tr>
+			<td rowspan="2">Paper Feed</td>
+			<td>By Unit</td>
+			<td>
+				Units
+				<input id="feedunit" type="text" size="5" value="30" />
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addFeedUnit()" /></td>
+		</tr>
+
+		<!-- addFeedLine -->
+		<tr>
+			<td>By Line</td>
+			<td>
+				Lines
+				<input id="feedline" type="text" size="5" value="3" />
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addFeedLine()" /></td>
+		</tr>
+
+		<!-- addImage -->
+		<tr>
+			<td rowspan="2">Image</td>
+			<td>Raster Image</td>
+			<td>
+				Image File (in the same server)
+				<input id="image" type="text" size="20" value="logo1.bmp" />
+				<input type="button" value="Load" onclick="loadImage()" />
+				<br />
+				<canvas id="canvas" width="0" height="0"></canvas>
+				<br />
+				Mode
+				<select id="mode">
+					<option value="MODE_MONO" selected="selected">Monochrome</option>
+					<option value="MODE_GRAY16">Grayscale(Only for supported printer)</option>
+				</select>
+				Brightness
+				<input id="brightness" type="text" size="5" value="1.0" />
+				<br />
+				Color(Monochrome)
+				<select id="imagec">
+					<option value="COLOR_NONE">None</option>
+					<option value="COLOR_1" selected="selected">Color 1</option>
+					<option value="COLOR_2">Color 2</option>
+					<option value="COLOR_3">Color 3</option>
+					<option value="COLOR_4">Color 4</option>
+				</select>
+				Halftone(Monochrome)
+				<select id="halftone">
+					<option value="HALFTONE_DITHER" selected="selected">Dither</option>
+					<option value="HALFTONE_ERROR_DIFFUSION">Error Diffusion</option>
+					<option value="HALFTONE_THRESHOLD">Threshold</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addImage()" /></td>
+		</tr>
+
+		<!-- addLogo -->
+		<tr>
+			<td>NV Logo</td>
+			<td>
+				Keycode 1
+				<input id="key1" type="text" size="5" value="48" />
+				Keycode 2
+				<input id="key2" type="text" size="5" value="48" />
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addLogo()" /></td>
+		</tr>
+
+		<!-- addBarcode -->
+		<tr>
+			<td rowspan="2">Bar Code</td>
+			<td>Bar Code</td>
+			<td>
+				Data
+				<input id="bardata" type="text" size="20" value="12345" />
+				Type
+				<select id="bartype">
+					<option value="BARCODE_UPC_A">UPC-A</option>
+					<option value="BARCODE_UPC_E">UPC-E</option>
+					<option value="BARCODE_EAN13">EAN13</option>
+					<option value="BARCODE_JAN13">JAN13</option>
+					<option value="BARCODE_EAN8">EAN8</option>
+					<option value="BARCODE_JAN8">JAN8</option>
+					<option value="BARCODE_CODE39" selected="selected">CODE39</option>
+					<option value="BARCODE_ITF">ITF</option>
+					<option value="BARCODE_CODABAR">CODABAR</option>
+					<option value="BARCODE_CODE93">CODE93</option>
+					<option value="BARCODE_CODE128">CODE128</option>
+					<option value="BARCODE_GS1_128">GS1-128</option>
+					<option value="BARCODE_GS1_DATABAR_OMNIDIRECTIONAL">GS1 DataBar Omnidirectional</option>
+					<option value="BARCODE_GS1_DATABAR_TRUNCATED">GS1 DataBar Truncated</option>
+					<option value="BARCODE_GS1_DATABAR_LIMITED">GS1 DataBar Limited</option>
+					<option value="BARCODE_GS1_DATABAR_EXPANDED">GS1 Databar Expanded</option>
+				</select>
+				<br />
+				HRI
+				<select id="barhri">
+					<option value="HRI_NONE">None</option>
+					<option value="HRI_ABOVE">Above</option>
+					<option value="HRI_BELOW" selected="selected">Below</option>
+					<option value="HRI_BOTH">Both</option>
+				</select>
+				Font
+				<select id="barfont">
+					<option value="FONT_A">Font A</option>
+					<option value="FONT_B">Font B</option>
+					<option value="FONT_C">Font C</option>
+					<option value="FONT_SPECIAL_A">Special Font A</option>
+					<option value="FONT_SPECIAL_B">Special Font B</option>
+				</select>
+				<br />
+				Module Width
+				<input id="barwidth" type="text" size="5" value="2" />
+				Module Height
+				<input id="barheight" type="text" size="5" value="32" /><br />
+				Hexadecimal: '\x00'-'\xff', Horizontal Tab(HT): '\t', Line Feed(LF): '\n', Carriage Return(CR): '\r', Back Slash: '\\'
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addBarcode()" /></td>
+		</tr>
+
+		<!-- addSymbol -->
+		<tr>
+			<td>Symbol</td>
+			<td>
+				Data
+				<input id="symdata" type="text" size="20" value="http://www.epson.com/" />
+				Type
+				<select id="symtype">
+					<option value="SYMBOL_PDF417_STANDARD" selected="selected">Standard PDF417</option>
+					<option value="SYMBOL_PDF417_TRUNCATED">Truncated PDF417</option>
+					<option value="SYMBOL_QRCODE_MODEL_1">QR Code Model 1</option>
+					<option value="SYMBOL_QRCODE_MODEL_2">QR Code Model 2</option>
+					<option value="SYMBOL_MAXICODE_MODE_2">MaxiCode Mode 2</option>
+					<option value="SYMBOL_MAXICODE_MODE_3">MaxiCode Mode 3</option>
+					<option value="SYMBOL_MAXICODE_MODE_4">MaxiCode Mode 4</option>
+					<option value="SYMBOL_MAXICODE_MODE_5">MaxiCode Mode 5</option>
+					<option value="SYMBOL_MAXICODE_MODE_6">MaxiCode Mode 6</option>
+					<option value="SYMBOL_GS1_DATABAR_STACKED">GS1 DataBar Stacked</option>
+					<option value="SYMBOL_GS1_DATABAR_STACKED_OMNIDIRECTIONAL">GS1 DataBar Stacked Omnidirectional</option>
+					<option value="SYMBOL_GS1_DATABAR_EXPANDED_STACKED">GS1 DataBar Expanded Stacked</option>
+					<option value="SYMBOL_AZTECCODE_FULLRANGE">Aztec Code FullRange</option>
+					<option value="SYMBOL_AZTECCODE_COMPACT">Aztec Code Compact</option>
+					<option value="SYMBOL_DATAMATRIX_SQUARE">Datamatrix Square</option>
+					<option value="SYMBOL_DATAMATRIX_RECTANGLE_8">Datamatrix Rectangle 8</option>
+					<option value="SYMBOL_DATAMATRIX_RECTANGLE_12">Datamatrix Rectangle 12</option>
+					<option value="SYMBOL_DATAMATRIX_RECTANGLE_16">Datamatrix Rectangle 16</option>
+				</select>
+				<br />
+				Error Correction Level
+				<input type="radio" name="symlevelselect" value="define" checked>Specify a constant definition
+				<select id="symleveldefine">
+					<option value="LEVEL_0">PDF417 Level 0</option>
+					<option value="LEVEL_1" selected="selected">PDF417 Level 1</option>
+					<option value="LEVEL_2">PDF417 Level 2</option>
+					<option value="LEVEL_3">PDF417 Level 3</option>
+					<option value="LEVEL_4">PDF417 Level 4</option>
+					<option value="LEVEL_5">PDF417 Level 5</option>
+					<option value="LEVEL_6">PDF417 Level 6</option>
+					<option value="LEVEL_7">PDF417 Level 7</option>
+					<option value="LEVEL_8">PDF417 Level 8</option>
+					<option value="LEVEL_L">QR Code Level L</option>
+					<option value="LEVEL_M">QR Code Level M</option>
+					<option value="LEVEL_Q">QR Code Level Q</option>
+					<option value="LEVEL_H">QR Code Level H</option>
+					<option value="LEVEL_DEFAULT">Default Level</option>
+				</select>
+				<input type="radio" name="symlevelselect" value="value">Specify a numerical value
+				<input id="symlevelvalue" type="text" size="5" value="23" /><br />
+				Module Width
+				<input id="symwidth" type="text" size="5" value="3" /><br />
+				Module Height
+				<input id="symheight" type="text" size="5" value="3" />
+				Symbol Size
+				<input id="symsize" type="text" size="5" value="0" /><br />
+				Hexadecimal: '\x00'-'\xff', Horizontal Tab(HT): '\t', Line Feed(LF): '\n', Carriage Return(CR): '\r', Back Slash: '\\'
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addSymbol()" /></td>
+		</tr>
+
+		<!-- addPageBegin -->
+		<tr>
+			<td rowspan="5">Page Mode</td>
+			<td>Start</td>
+			<td></td>
+			<td class="center"><input type="button" value="Add" onclick="addPageBegin()" /></td>
+		</tr>
+
+		<!-- addPageArea -->
+		<tr>
+			<td>Print Area</td>
+			<td>
+				X Origin
+				<input id="areax" type="text" size="5" value="0" />
+				Y Origin
+				<input id="areay" type="text" size="5" value="0" />
+				Width
+				<input id="areawidth" type="text" size="5" value="100" />
+				Height
+				<input id="areaheight" type="text" size="5" value="100" />
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addPageArea()" /></td>
+		</tr>
+
+		<!-- addPageDirection -->
+		<tr>
+			<td>Print Direction</td>
+			<td>
+				Direction
+				<select id="dir">
+					<option value="DIRECTION_LEFT_TO_RIGHT">Left To Right</option>
+					<option value="DIRECTION_BOTTOM_TO_TOP">Bottom To Top</option>
+					<option value="DIRECTION_RIGHT_TO_LEFT">Right To Left</option>
+					<option value="DIRECTION_TOP_TO_BOTTOM">Top To Bottom</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addPageDirection()" /></td>
+		</tr>
+
+		<!-- addPagePosition -->
+		<tr>
+			<td>Print Position</td>
+			<td>
+				X Position
+				<input id="posx" type="text" size="5" value="0" />
+				Y Position
+				<input id="posy" type="text" size="5" value="21" />
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addPagePosition()" /></td>
+		</tr>
+
+		<!-- addPageEnd -->
+		<tr>
+			<td>End</td>
+			<td></td>
+			<td class="center"><input type="button" value="Add" onclick="addPageEnd()" /></td>
+		</tr>
+
+		<!-- addCut -->
+		<tr>
+			<td rowspan="4">Others</td>
+			<td>Paper Cutting</td>
+			<td>
+				Type
+				<select id="cut">
+					<option value="CUT_NO_FEED">No Feed</option>
+					<option value="CUT_FEED" selected="selected">Feed</option>
+					<option value="CUT_RESERVE">Reserve</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addCut()" /></td>
+		</tr>
+
+		<!-- addPulse -->
+		<tr>
+			<td>Drawer Kick-out</td>
+			<td>
+				Connector
+				<select id="drawer">
+					<option value="DRAWER_1">Pin 2</option>
+					<option value="DRAWER_2">Pin 5</option>
+				</select>
+				ON Time
+				<select id="pulse">
+					<option value="PULSE_100">100ms</option>
+					<option value="PULSE_200">200ms</option>
+					<option value="PULSE_300">300ms</option>
+					<option value="PULSE_400">400ms</option>
+					<option value="PULSE_500">500ms</option>
+				</select>
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addPulse()" /></td>
+		</tr>
+
+		<!-- add40cplmode -->
+		<tr>
+			<td>40cplmode</td>
+			<td>
+				<input type="radio" name="40cplmode" value="40cplmode_enable" checked>Enable
+				<input type="radio" name="40cplmode" value="40cplmode_disable">Disable
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="add40cplmode()" /></td>
+		</tr>
+		<!-- addCommand -->
+		<tr>
+			<td>Command</td>
+			<td>
+				<input id="command" style="width:98%;" type="text" value="12345" /><br />
+				Hexadecimal: '\x00'-'\xff', Horizontal Tab(HT): '\t', Line Feed(LF): '\n', Carriage Return(CR): '\r', Back Slash: '\\'
+			</td>
+			<td class="center"><input type="button" value="Add" onclick="addCommand()" /></td>
+		</tr>
+	</tbody>
+</table>
+</form>
+
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="2">Hybrid Printer Object Sample Code&nbsp;--&nbsp;target
+				<select id="target" onchange="updateSampleCode()">
+					<option value="Receipt">Receipt</option>
+					<option value="Slip">Slip</option>
+					<option value="Endorse">Endorse</option>
+				</select>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="width:92%;"><textarea id="Sample" style="width:98%;" rows="10" cols="80" readonly="readonly"></textarea></td>
+			<td style="width:8%;" class="center">
+				<input type="reset" value="Clear" onclick="resetMessage()" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+</form>
+
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+		<th colspan="4">Test print</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="3">lock/unlock</td>
+			<td style="padding: 5px;" class="center">
+				<button onclick='lock()'>lock</button>
+				<button onclick='unlock()'>unlock</button>
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="3">MICR</td>
+			<td>
+				ignoreerror
+			</td>
+			<td>
+				<input type="radio" name="ignore_err" value="enable" checked>true
+				<input type="radio" name="ignore_err" value="disable">false
+			</td>
+			<td rowspan="3" class="center">
+				<button onclick='MicrRead()'>Read</button>
+				<button onclick='MicrEject()'>Eject</button>
+				<button onclick='Cancel(3)'>Cancel</button>
+				<button onclick='MicrClean()'>Clean</button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				font
+			</td>
+			<td>
+				<select id="micr_font">
+					<option value="E13B">E13B</option>
+					<option value="CMC7">CMC7</option>
+				</select>&nbsp;&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				timeout
+			</td>
+			<td>
+				<input type="text" size="3" id="micr_timeout" value="1" />&nbsp;(min)
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="3" style="width:10%;">Test print</td>
+			<td style="width:10%;">Receipt print</td>
+			<td><input id='force_print' type='checkbox' value='' />Forced Transmission&nbsp;</td>
+			<td style="width:8%; padding: 5px;" class="center"><input type="button" value="Print" onclick="sendMessage(0)" /></td>
+		</tr>
+		<tr>
+			<td>Slip print&nbsp;&nbsp;</td>
+			<td>timeout&nbsp;<input type="text" size="3" id="slip_timeout" value="1" />&nbsp;(min)</td>
+			<td style="padding: 5px;" class="center">
+				<input type="button" value="Print" onclick="sendMessage(1)" />&nbsp;&nbsp;
+				<input type="button" value="Cancel" onclick="Cancel(1)" />
+			</td>
+		</tr>
+		<tr>
+			<td>Endorse print&nbsp;&nbsp;</td>
+			<td>timeout&nbsp;<input type="text" size="3" id="endorse_timeout" value="1" />&nbsp;(min)</td>
+			<td style="padding: 5px;" class="center">
+				<input type="button" value="Print" onclick="sendMessage(2)" />
+				<input type="button" value="Cancel" onclick="Cancel(2)" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">Recovery</td>
+			<td><input id='force_recover' type='checkbox' value='' />Forced Transmission&nbsp;</td>
+			<td style="padding: 5px;" class="center"><input type="button" value="Send" onclick="sendRecover()" /></td>
+		</tr>
+		<tr>
+			<td colspan="3">Reset</td>
+			<td style="padding: 5px;" class="center"><input type="button" value="Send" onclick="sendReset()" /></td>
+		</tr>
+		<tr>
+			<td rowspan="2">Status</td>
+			<td colspan="2">
+				Interval
+				<input id="interval" type="text" size="10" value="3000" />
+			</td>
+			<td rowspan="2" style="padding: 5px;" class="center">
+				<input type="button" value="Start" onclick="startMonitor()" /><br />
+				<input type="button" value="Stop" onclick="stopMonitor()" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input id="onstatuschange" type="checkbox" value="" />onstatuschange&nbsp;
+				<input id="ononline" type="checkbox" value="" checked="checked" />ononline, onoffline, onpoweroff&nbsp;
+				<input id="oncoverok" type="checkbox" value="" checked="checked" />oncoverok, oncoveropen
+				<br />
+				<input id="onpaperok" type="checkbox" value="" checked="checked" />onpaperok, onpaperend, onpapernearend&nbsp;
+				<input id="ondrawerclosed" type="checkbox" value="" checked="checked" />ondrawerclosed, ondraweropen
+			</td>
+		</tr>
+	</tbody>
+</table>
+</form>
+
+</body>
+
+</html>

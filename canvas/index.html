@@ -1,0 +1,45 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>要使用的图片:</p>
+<p>画布:</p>
+<canvas id="myCanvas" width="250" height="300" style="border:1px solid #d3d3d3;">
+    您的浏览器不支持 HTML5 canvas 标签。
+</canvas>
+
+<script>
+
+
+        var myImage=document.getElementById("myCanvas");
+
+        var cxt=myImage.getContext("2d");
+
+        var img=new Image()
+        img.src='./logo192.png'
+        console.log(img)
+
+
+        cxt.drawImage(img,10,10);
+
+
+        var canvas = document.createElement('canvas');
+        canvas.width=100;
+        canvas.height=200
+
+        canvas.getContext("2d").drawImage(img,10,10)
+        console.log(canvas)
+        document.body.appendChild(canvas)
+
+</script>
+</body>
+</html>

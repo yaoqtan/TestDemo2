@@ -1,0 +1,58 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*.hidden{*/
+            /*display: none;*/
+        /*}*/
+        /*#test{*/
+            /*width: 300px;*/
+            /*height: 500px;*/
+            /*border:1px solid #ccc;*/
+        /*}*/
+    </style>
+</head>
+<body>
+
+    <div id='test'>
+        <div id="text">不可逻辑</div>
+        <input id="input" type="text"  />
+    </div>
+
+    <script>
+        var test = document.getElementById('test')
+        var text = document.getElementById('text')
+        var input =document.getElementById('input')
+        var isClick =false;
+            input.className='hidden'
+            text.className=''
+
+            input.onmouseout=function () {
+                console.log(2)
+                input.className='hidden'
+                text.className=''
+                console.log()
+                text.innerHTML=input.value
+                input.focus
+                console.log()
+            }
+            text.onclick=function () {
+                input.className=''
+                text.className='hidden'
+             console.log(3)
+            }
+
+
+
+    </script>
+
+</body>
+</html>

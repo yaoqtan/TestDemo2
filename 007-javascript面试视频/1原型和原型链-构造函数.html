@@ -1,0 +1,111 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        // 构造函数
+        function Foo(name,age) {
+            this.name=name
+            this.age=age
+            this.class='class-1'
+            // return this // 默认有这么一行
+        }
+        var f = new Foo('zhangsan',20)
+
+        // var f1 = new Foo('lisi',22)//创建多个对象
+
+        // 构造函数-扩展
+    </script>
+</head>
+<body>
+    <p>
+        如何准确判断一个变量是数组类型:<br/>
+        var arr=[];  arr instanceof Array
+    </p>
+
+
+    <p>写一个原型链继承</p>
+    <script>
+        // 动物
+        function Animal() {
+            this.eat = function () {
+                console.log('animal eat')
+            }
+        }
+        // 狗
+        function Dog() {
+            this.dark = function () {
+                conosle.log('dog dark')
+            }
+        }
+
+        Dog.prototype = new Animal()
+
+        // 哈士奇
+        var hashiqi = new Dog()
+
+        for (var item in hashiqi){
+            console.log('heshiqi',item)
+        }
+
+        //封装一个dom查询
+
+        function Elem(id) {
+            this.elem=document.getElementById(id)
+        }
+        
+        Elem.prototype.html = function (val) {
+            var elem = this.elem
+            if(val){
+                elem.innerHTML=val
+                return this // 链式操作
+            }else{
+                elem.innerHTML
+            }
+        }
+
+        Elem.prototype.on= function (type,fn) {
+            var elem = this.elem
+            elem.addEventListener(type,fn)
+            return this // 链式操作
+        }
+        
+        
+        
+        var div1 = new Elem('div1')
+
+        console.log(div1.html())
+        div1.html('<h1>sfs</h1>')
+
+        div1.on('click',function(){})
+
+        div1.html('<h1>sfs</h1>').on('click',function(){
+
+        }).html('<h3>h3</h3>') //链式
+
+    </script>
+
+
+
+
+    <p>描述new 一个对象的过程：创建一个构造函数</p>
+
+
+
+
+
+    <p>zepto(或其他框架)源码中如何使用原型链</p>
+        阅读源码是高效提高技能的方式
+
+
+
+    <p>知识点：构造函数，构造函数-扩展，原型规则和示例，原型链，instanceof</p>
+</body>
+</html>

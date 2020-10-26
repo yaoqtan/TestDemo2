@@ -5,6 +5,8 @@ import ParentChild from '@/page/ParentChild'
 import Vuetify from '@/page/Vuetify'
 import StoreTest from '@/page/StoreTest'
 import Todo from '@/page/Todo'
+import Upload from '@/page/Upload'
+import Upload2 from '@/page/Upload2'
 
 Vue.use(Router);
 export default new Router({
@@ -38,6 +40,16 @@ export default new Router({
       path:"/todo",
       name:"Todo",
       component:Todo
+    },
+    {
+      path:"/upload",
+      name:"Upload",
+      component:Upload
+    },
+    {
+      path:"/upload2",
+      name:"Upload2",
+      component:Upload2
     }
   ]
 })

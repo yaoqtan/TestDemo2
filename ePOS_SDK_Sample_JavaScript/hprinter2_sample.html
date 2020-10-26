@@ -1,0 +1,2539 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Hybrid Printer 2 Sample Program</title>
+    <!-- CSS -->
+    <style type="text/css">
+        body {
+            background-color: #ffffff;
+            color: #333333;
+        }
+
+        table, tr, td {
+            border: 1px solid #666666;
+            border-collapse: collapse;
+            color: #333333;
+            background-color: #eeeeee;
+        }
+
+        th {
+            border: 1px solid #666666;
+            border-collapse: collapse;
+            color: #333333;
+            background-color: #cccccc;
+        }
+
+        h2, h3 {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #000000;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+
+    <!-- Script -->
+    <script type="text/javascript" src="epos-2.14.0.js"></script>
+    <script type="text/javascript">
+        var deviceID = "";
+        var ipAddress = "";
+        var port = "";
+
+        var optionCrypto = false;
+        var optionBuffer = false;
+
+        var hybridPrinter2 = null;
+
+        var sampleList = '';
+        var sampleSend = '';
+        var sampleCodeArray = [];
+
+        var DEVICE_UNIT_TYPE_RECEIPT = 0;
+        var DEVICE_UNIT_TYPE_SLIP = 1;
+        var DEVICE_UNIT_TYPE_ENDORSE = 2;
+        var DEVICE_UNIT_TYPE_VALIDATION = 3;
+        var DEVICE_UNIT_TYPE_MICR = 4;
+
+        var ePosDev = new epson.ePOSDevice();
+
+        function connect() {
+            ipAddress = document.getElementById("ipaddress").value;
+            port = document.getElementById("port").value;
+
+            ePosDev.connect(ipAddress, port, callback_connect);
+            ePosDev.onreconnecting = onReconnecting;
+            ePosDev.onreconnect = onReconnect;
+            ePosDev.ondisconnect = onDisconnect;
+        }
+
+        function callback_connect(data) {
+
+            deviceID = document.getElementById("deviceid").value;
+            optionCrypto = document.getElementById("crypto").checked;
+            optionBuffer = document.getElementById("buffer").checked;
+
+            options = { 'crypto': optionCrypto, 'buffer': optionBuffer };
+
+            switch (data) {
+                case 'OK':
+                    consolelog("connected to ePOS Device Service Interface.", true);
+                    ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_HYBRID_PRINTER2, options, callback_createDevice);
+                    break;
+
+                case 'SSL_CONNECT_OK':
+                    consolelog("connected to ePOS Device Service Interface with SSL.", true);
+                    ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_HYBRID_PRINTER2, options, callback_createDevice);
+                    break;
+
+                default:
+                    consolelog("connected to ePOS Device Service Interface is failed. [" + data + "]", true);
+                    break;
+            }
+        }
+
+        function callback_createDevice(devObj, code) {
+
+            if (code != 'OK') {
+                if (devObj == null) {
+                    consolelog(code);
+                    return;
+                }
+            }
+
+            consolelog("you can use Hybrid printer.");
+
+            hybridPrinter2 = devObj;
+
+            sampleList = '';
+            sampleSend = '';
+            sampleCodeArray.length = 0;
+
+            // Set a response callback function
+            hybridPrinter2.onreceive = function (res) {
+                // Show message
+                var msg = "";
+                msg += ('Method:' + res.method + '\n');
+
+                msg += 'Print ';
+                if (res.success) {
+                    msg += 'Success\n';
+                }
+                else {
+                    msg += 'Failure\n';
+                }
+
+                msg += ('Code:' + res.code + '\n');
+                msg += 'Status:\n';
+                msg += getStatusText(hybridPrinter2, res.status);
+                if (res.data != null) {
+                    msg += 'Data:' + res.data;
+                }
+                consolelog(msg, true);
+            };
+
+            // Set a status change callback funciton
+            hybridPrinter2.onstatuschange = function (status) {
+                if (document.getElementById('onstatuschange').checked) {
+                    alert(getStatusText(hybridPrinter2, status));
+                }
+            };
+
+            hybridPrinter2.ononline = function () {
+                if (document.getElementById('ononline').checked) {
+                    alert('online');
+                }
+            };
+
+            hybridPrinter2.onoffline = function () {
+                if (document.getElementById('ononline').checked) {
+                    alert('offline');
+                }
+            };
+
+            hybridPrinter2.onpoweroff = function () {
+                if (document.getElementById('ononline').checked) {
+                    alert('poweroff');
+                }
+            };
+
+            hybridPrinter2.oncoverok = function () {
+                if (document.getElementById('oncoverok').checked) {
+                    alert('coverok');
+                }
+            };
+
+            hybridPrinter2.oncoveropen = function () {
+                if (document.getElementById('oncoverok').checked) {
+                    alert('coveropen');
+                }
+            };
+
+            hybridPrinter2.onpaperok = function () {
+                if (document.getElementById('onpaperok').checked) {
+                    alert('paperok');
+                }
+            };
+
+            hybridPrinter2.onpapernearend = function () {
+                if (document.getElementById('onpaperok').checked) {
+                    alert('papernearend');
+                }
+            };
+
+            hybridPrinter2.onpaperend = function () {
+                if (document.getElementById('onpaperok').checked) {
+                    alert('paperend');
+                }
+            };
+
+            hybridPrinter2.ondrawerclosed = function () {
+                if (document.getElementById('ondrawerclosed').checked) {
+                    alert('drawerclosed');
+                }
+            };
+
+            hybridPrinter2.ondraweropen = function () {
+                if (document.getElementById('ondrawerclosed').checked) {
+                    alert('draweropen');
+                }
+            };
+        }
+
+        function onReconnecting() {
+            consolelog('onreconnecting');
+        }
+
+        function onReconnect() {
+            consolelog('onreconnect');
+        }
+
+        function onDisconnect() {
+            consolelog('ondisconnect');
+        }
+
+        function consolelog(string, option) {
+            var overwrite = false;
+
+            if (arguments.length > 1) {
+                overwrite = option;
+            }
+
+            if (overwrite) {
+                document.getElementById("console").value = string + "\r\n";
+            } else {
+                document.getElementById("console").value += string + "\r\n";
+            }
+        }
+
+        // Adds the text alignment setting
+        function addTextAlign() {
+            try {
+                selectPaperType();
+
+                var align = document.getElementById('align').value;
+
+                hybridPrinter2.addTextAlign(hybridPrinter2[align]);
+                sampleList += ("\thybridPrinter2.addTextAlign(hybridPrinter2." + align + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the line feed space setting
+        function addTextLineSpace() {
+            try {
+                selectPaperType();
+
+                var linespc = document.getElementById('linespc').value;
+
+                hybridPrinter2.addTextLineSpace(linespc);
+                sampleList += ("\thybridPrinter2.addTextLineSpace(" + linespc + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the text rotation setting
+        function addTextRotate() {
+            try {
+                selectPaperType();
+
+                var rotate = document.getElementById('rotate').checked;
+
+                hybridPrinter2.addTextRotate(rotate);
+                sampleList += ("\thybridPrinter2.addTextRotate(" + rotate + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the printing of text
+        function addText() {
+            try {
+                selectPaperType();
+
+                var data = document.getElementById('text').value;
+
+                hybridPrinter2.addText(escapeText(data));
+                sampleList += ("\thybridPrinter2.addText(\"" + escapeTextSample(data) + "\");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the language setting
+        function addTextLang() {
+            try {
+                selectPaperType();
+
+                var lang = document.getElementById('lang').value;
+
+                hybridPrinter2.addTextLang(lang);
+                sampleList += ("\thybridPrinter2.addTextLang(" + lang + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the text font setting
+        function addTextFont() {
+            try {
+                selectPaperType();
+
+                var font = document.getElementById('font').value;
+
+                hybridPrinter2.addTextFont(hybridPrinter2[font]);
+                sampleList += ("\thybridPrinter2.addTextFont(hybridPrinter2." + font + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the smoothing setting
+        function addTextSmooth() {
+            try {
+                selectPaperType();
+
+                var smooth = document.getElementById('smooth').checked;
+
+                hybridPrinter2.addTextSmooth(smooth);
+                sampleList += ("\thybridPrinter2.addTextSmooth(" + smooth + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the double-sized text setting
+        function addTextDouble() {
+            try {
+                selectPaperType();
+
+                var dw = document.getElementById('dw').checked;
+                var dh = document.getElementById('dh').checked;
+
+                hybridPrinter2.addTextDouble(dw, dh);
+                sampleList += ("\thybridPrinter2.addTextDouble(" + dw + ", " + dh + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the text scale setting
+        function addTextSize() {
+            try {
+                selectPaperType();
+
+                var width = document.getElementById('textwidth').value;
+                var height = document.getElementById('textheight').value;
+
+                hybridPrinter2.addTextSize(width, height);
+                sampleList += ("\thybridPrinter2.addTextSize(" + width + ", " + height + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the text style setting
+        function addTextStyle() {
+            try {
+                selectPaperType();
+
+                var reverse = document.getElementById('reverse').checked;
+                var ul = document.getElementById('ul').checked;
+                var em = document.getElementById('em').checked;
+                var color = document.getElementById('color').value;
+
+                hybridPrinter2.addTextStyle(reverse, ul, em, hybridPrinter2[color]);
+                sampleList += ("\thybridPrinter2.addTextStyle(" + reverse + ", " + ul + ", " + em + ", hybridPrinter2." + color + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the horizontal print start position of text
+        function addTextPosition() {
+            try {
+                selectPaperType();
+
+                var x = document.getElementById('textx').value;
+
+                hybridPrinter2.addTextPosition(x);
+                sampleList += ("\thybridPrinter2.addTextPosition(" + x + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the vertical print start position of text
+        function addTextVPosition() {
+            try {
+                selectPaperType();
+
+                var y = document.getElementById('texty').value;
+
+                hybridPrinter2.addTextVPosition(y);
+                sampleList += ("\thybridPrinter2.addTextVPosition(" + y + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds paper feeding in dots
+        function addFeedUnit() {
+            try {
+                selectPaperType();
+
+                var unit = document.getElementById('feedunit').value;
+
+                hybridPrinter2.addFeedUnit(unit);
+                sampleList += ("\thybridPrinter2.addFeedUnit(" + unit + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds paper feeding in lines
+        function addFeedLine() {
+            try {
+                selectPaperType();
+
+                var line = document.getElementById('feedline').value;
+
+                hybridPrinter2.addFeedLine(line);
+                sampleList += ("\thybridPrinter2.addFeedLine(" + line + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // load image
+        function loadImage() {
+            try {
+                var image = new Image();
+                image.src = document.getElementById('image').value + '?' + new Date().getTime();
+                image.onload = function () {
+                    // show message
+                    alert('Image:Width' + image.width + 'px, Height' + image.height + 'px');
+                    // draw image
+                    var canvas = document.getElementById('canvas');
+                    if (canvas.getContext) {
+                        canvas.width = image.width;
+                        canvas.height = image.height;
+                        var context = canvas.getContext('2d');
+                        context.drawImage(image, 0, 0);
+                    }
+                }
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds raster image printing
+        function addImage() {
+            try {
+                selectPaperType();
+
+                var canvas = document.getElementById('canvas');
+                if (canvas.getContext) {
+                    var context = canvas.getContext('2d');
+                    var color = document.getElementById('imagec').value;
+                    var mode = document.getElementById('mode').value;
+                    var brightness = document.getElementById('brightness').value;
+                    var halftone = document.getElementById('halftone').value;
+
+                    hybridPrinter2.brightness = brightness;
+                    sampleList += ("\thybridPrinter2.brightness = " + brightness + ";\n");
+
+                    hybridPrinter2.halftone = hybridPrinter2[halftone];
+                    sampleList += ("\thybridPrinter2.halftone = hybridPrinter2." + halftone + ";\n");
+
+                    hybridPrinter2.addImage(context, 0, 0, canvas.width, canvas.height, hybridPrinter2[color], hybridPrinter2[mode]);
+                    sampleList += ("\thybridPrinter2.addImage(canvas.getContext('2d'), 0, 0, canvas.width, canvas.height, hybridPrinter2." + color + ", hybridPrinter2." + mode + ");\n");
+
+                    updateSampleCode();
+                }
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds NV logo printing
+        function addLogo() {
+            try {
+                selectPaperType();
+
+                var key1 = document.getElementById('key1').value;
+                var key2 = document.getElementById('key2').value;
+
+                hybridPrinter2.addLogo(key1, key2);
+                sampleList += ("\thybridPrinter2.addLogo(" + key1 + ", " + key2 + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds barcode printing
+        function addBarcode() {
+            try {
+                selectPaperType();
+
+                var data = document.getElementById('bardata').value;
+                var type = document.getElementById('bartype').value;
+                var hri = document.getElementById('barhri').value;
+                var font = document.getElementById('barfont').value;
+                var width = document.getElementById('barwidth').value;
+                var height = document.getElementById('barheight').value;
+
+                hybridPrinter2.addBarcode(escapeCode(data), hybridPrinter2[type], hybridPrinter2[hri], hybridPrinter2[font], width, height);
+                sampleList += ("\thybridPrinter2.addBarcode('" + escapeCodeSample(data) + "', hybridPrinter2." + type + ", hybridPrinter2." + hri + ", hybridPrinter2." + font + ", " + width + ", " + height + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds two-dimensional symbol printing
+        function addSymbol() {
+            try {
+                selectPaperType();
+
+                var data = document.getElementById('symdata').value;
+                var type = document.getElementById('symtype').value;
+
+                var level = document.getElementById('symleveldefine').value;
+                var width = document.getElementById('symwidth').value;
+                var height = document.getElementById('symheight').value;
+                var size = document.getElementById('symsize').value;
+
+                var selectTypelist = document.getElementsByName("symlevelselect");
+                var selectType = isCheckedRadioButtonValue(selectTypelist);
+
+                switch (selectType) {
+                    case "define":
+                        level = document.getElementById('symleveldefine').value;
+
+                        hybridPrinter2.addSymbol(escapeCode(data), hybridPrinter2[type], hybridPrinter2[level], width, height, size);
+                        sampleList += ("\thybridPrinter2.addSymbol('" + escapeCodeSample(data) + "', hybridPrinter2." + type + ", hybridPrinter2." + hybridPrinter2[level] + ", " + width + ", " + height + ", " + size + ");\n");
+                        break;
+
+                    case "value":
+                        level = document.getElementById('symlevelvalue').value;
+
+                        hybridPrinter2.addSymbol(escapeCode(data), hybridPrinter2[type], level, width, height, size);
+                        sampleList += ("\thybridPrinter2.addSymbol('" + escapeCodeSample(data) + "', hybridPrinter2." + type + ", " + level + ", " + width + ", " + height + ", " + size + ");\n");
+                        break;
+
+                    default:
+                        level = document.getElementById('symleveldefine').value;
+                        break;
+                }
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the switching to page mode
+        function addPageBegin() {
+            try {
+                selectPaperType();
+
+                hybridPrinter2.addPageBegin();
+                sampleList += "\thybridPrinter2.addPageBegin();\n";
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the print area in page mode
+        function addPageArea() {
+            try {
+                selectPaperType();
+
+                var x = document.getElementById('areax').value;
+                var y = document.getElementById('areay').value;
+                var width = document.getElementById('areawidth').value;
+                var height = document.getElementById('areaheight').value;
+
+                hybridPrinter2.addPageArea(x, y, width, height);
+                sampleList += ("\thybridPrinter2.addPageArea(" + x + ", " + y + ", " + width + ", " + height + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the page mode print direction setting
+        function addPageDirection() {
+            try {
+                selectPaperType();
+
+                var dir = document.getElementById('dir').value;
+
+                hybridPrinter2.addPageDirection(hybridPrinter2[dir]);
+                sampleList += ("\thybridPrinter2.addPageDirection(hybridPrinter2." + dir + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the page mode print-position-set area
+        function addPagePosition() {
+            try {
+                selectPaperType();
+
+                var x = document.getElementById('posx').value;
+                var y = document.getElementById('posy').value;
+
+                hybridPrinter2.addPagePosition(x, y);
+                sampleList += ("\thybridPrinter2.addPagePosition(" + x + ", " + y + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the end of page mode
+        function addPageEnd() {
+            try {
+                selectPaperType();
+
+                hybridPrinter2.addPageEnd();
+                sampleList += "\thybridPrinter2.addPageEnd();\n";
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds paper cut
+        function addCut() {
+            try {
+                selectPaperType();
+
+                var type = document.getElementById('cut').value;
+
+                hybridPrinter2.addCut(hybridPrinter2[type]);
+                sampleList += ("\thybridPrinter2.addCut(hybridPrinter2." + type + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the drawer kick
+        function addPulse() {
+            try {
+                selectPaperType();
+
+                var drawer = document.getElementById('drawer').value;
+                var pulse = document.getElementById('pulse').value;
+
+                hybridPrinter2.addPulse(hybridPrinter2[drawer], hybridPrinter2[pulse]);
+                sampleList += ("\thybridPrinter2.addPulse(hybridPrinter2." + drawer + ", hybridPrinter2." + pulse + ");\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the printer recovery
+        function addRecovery() {
+            try {
+                hybridPrinter2.addRecpvery();
+                sampleList += "\thybridPrinter2.addRecovery();\n";
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds the printer reset
+        function addReset() {
+            try {
+                hybridPrinter2.addReset();
+                sampleList += "\thybridPrinter2.addReset();\n";
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // Adds commands
+        function addCommand() {
+            try {
+                var data = document.getElementById('command').value;
+
+                hybridPrinter2.addCommand(escapeCode(data));
+                sampleList += ("\thybridPrinter2.addCommand('" + escapeCodeSample(data) + "');\n");
+
+                updateSampleCode();
+            }
+            catch (e) {
+                alert(e.message);
+            }
+        }
+
+        // clear print data
+        function clearMessage() {
+            var currentPaperType = hybridPrinter2.paperType;
+
+            hybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_RECEIPT);
+            hybridPrinter2.setMessage('');
+
+            hybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_SLIP);
+            hybridPrinter2.setMessage('');
+
+            hybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_ENDORSE);
+            hybridPrinter2.setMessage('');
+
+            hybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_VALIDATION);
+            hybridPrinter2.setMessage('');
+
+            hybridPrinter2.selectPaperType(currentPaperType);
+
+            sampleList = '';
+            sampleSend = '';
+            sampleCodeArray.length = 0;
+        }
+
+
+        // lock the hybrid printer
+        function lock() {
+            hybridPrinter2.lock();
+
+            var sample = "\thybridPrinter2.lock();\n";
+            sampleCodeArray.push(sample); 
+
+            updateSampleCode();
+        }
+
+        // unlock the hybrid printer
+        function unlock() {
+            hybridPrinter2.unlock();
+
+            var sample = "\thybridPrinter2.unlock();\n";
+            sampleCodeArray.push(sample); 
+
+            updateSampleCode();
+        }
+
+        // read micr
+        function micrRead() {
+
+            var ignore = document.getElementById('ignore_err').checked;
+            var timeout = document.getElementById('micr_timeout').value * 60 * 1000;
+            var str_font = document.getElementById('micr_font').value;
+            var waitTime = document.getElementById('micr_waitTime').value;
+
+            var font = hybridPrinter2.FONT_CMC7;
+
+            if (str_font == "E13B") {
+                font = hybridPrinter2.FONT_E13B;
+            }
+
+            hybridPrinter2.waitTime = Number(waitTime);
+
+            hybridPrinter2.readMicrData(ignore, font, Number(timeout));
+
+            var sample = ("\thybridPrinter2.readMicrData(" + ignore + ', \"' + str_font + '\", ' + timeout + ");\n");
+            sampleCodeArray.push(sample); 
+
+            updateSampleCode();
+        }
+
+        // micr cleaning
+        function micrClean() {
+
+            var timeout = document.getElementById('micr_timeout').value * 60 * 1000;
+            var waitTime = document.getElementById('micr_waitTime').value;
+
+            hybridPrinter2.waitTime = Number(waitTime);
+
+            hybridPrinter2.cleanMicrReader(Number(timeout));
+            var sample = ("\thybridPrinter2.cleanMicrReader(" + timeout + ");\n");
+            sampleCodeArray.push(sample);
+
+            updateSampleCode();
+        }
+
+        // wait insertion
+        function waitInsertion(deviceUnitType) {
+
+            var timeout = document.getElementById('slip_timeout').value * 60 * 1000;
+            var waitTime = document.getElementById('slip_waitTime').value;
+            var typeString = "hybridPrinter2.PAPERTYPE_SLIP";
+
+            switch (deviceUnitType) {
+                case DEVICE_UNIT_TYPE_SLIP:
+                    hybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_SLIP);
+                    timeout = document.getElementById('slip_timeout').value * 60 * 1000;
+                    waitTime = document.getElementById('slip_waitTime').value;
+                    typeString = "hybridPrinter2.PAPERTYPE_SLIP";
+                    break;
+
+                case DEVICE_UNIT_TYPE_ENDORSE:
+                    hybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_ENDORSE);
+                    timeout = document.getElementById('endorse_timeout').value * 60 * 1000;
+                    waitTime = document.getElementById('endorse_waitTime').value;
+                    typeString = "hybridPrinter2.PAPERTYPE_ENDORSE";
+                    break;
+
+                case DEVICE_UNIT_TYPE_VALIDATION:
+                    hybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_VALIDATION);
+                    timeout = document.getElementById('validation_timeout').value * 60 * 1000;
+                    waitTime = document.getElementById('validation_waitTime').value;
+                    typeString = "hybridPrinter2.PAPERTYPE_VALIDATION";
+                    break;
+
+                default:
+                    hybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_SLIP);
+                    timeout = document.getElementById('slip_timeout').value * 60 * 1000;
+                    waitTime = document.getElementById('slip_waitTime').value;
+                    typeString = "hybridPrinter2.PAPERTYPE_SLIP";
+                    break;
+            }
+
+            var sample = ("\thybridPrinter2.selectPaperType(" + typeString + ");\n");
+
+            hybridPrinter2.waitTime = Number(waitTime);
+            sample += ("\thybridPrinter2.waitTime = " + waitTime + ";\n");
+
+            hybridPrinter2.waitInsertion(Number(timeout));
+            sample += ("\thybridPrinter2.waitInsertion(" + timeout + ");\n");
+
+            sampleCodeArray.push(sample);
+
+            updateSampleCode();
+        }
+
+        // send print data
+        function sendData(deviceUnitType) {
+            var currentPaperType = hybridPrinter2.paperType;
+            var timeout = (document.getElementById('receipt_timeout').value * 60 * 1000);
+            var collectPaperType = hybridPrinter2.PAPERTYPE_RECEIPT;
+            var force = document.getElementById('force_receipt').checked;
+            var typeString = "hybridPrinter2.PAPERTYPE_RECEIPT";
+            var sample = "";
+
+            // send
+            switch (deviceUnitType) {
+                case DEVICE_UNIT_TYPE_RECEIPT:
+                    collectPaperType = hybridPrinter2.PAPERTYPE_RECEIPT;
+                    timeout = document.getElementById('receipt_timeout').value * 60 * 1000;
+                    force = document.getElementById('force_receipt').checked;
+                    typeString = "hybridPrinter2.PAPERTYPE_RECEIPT";
+                    break;
+
+                case DEVICE_UNIT_TYPE_SLIP:
+                    collectPaperType = hybridPrinter2.PAPERTYPE_SLIP;
+                    timeout = document.getElementById('slip_timeout').value * 60 * 1000;
+                    force = document.getElementById('force_slip').checked;
+                    typeString = "hybridPrinter2.PAPERTYPE_SLIP";
+                    break;
+
+                case DEVICE_UNIT_TYPE_ENDORSE:
+                    collectPaperType = hybridPrinter2.PAPERTYPE_ENDORSE;
+                    timeout = document.getElementById('endorse_timeout').value * 60 * 1000;
+                    force = document.getElementById('force_endorse').checked;
+                    typeString = "hybridPrinter2.PAPERTYPE_ENDORSE";
+
+                    var enable40cplMode = document.getElementById('enable40cpl').checked;
+                    if (hybridPrinter2.enable40cplMode != enable40cplMode) {
+                        hybridPrinter2.enable40cplMode = enable40cplMode;
+                        sample += ("\thybridPrinter2.enable40cplMode = " + enable40cplMode + ";\n");
+                    }
+                    break;
+
+                case DEVICE_UNIT_TYPE_VALIDATION:
+                    collectPaperType = hybridPrinter2.PAPERTYPE_VALIDATION;
+                    typeString = "hybridPrinter2.PAPERTYPE_VALIDATION";
+                    timeout = document.getElementById('validation_timeout').value * 60 * 1000;
+                    force = document.getElementById('force_validation').checked;
+                    break;
+
+                default:
+                    collectPaperType = hybridPrinter2.PAPERTYPE_RECEIPT;
+                    typeString = "hybridPrinter2.PAPERTYPE_RECEIPT";
+
+                    timeout = document.getElementById('receipt_timeout').value * 60 * 1000;
+                    break;
+            }
+
+            hybridPrinter2.selectPaperType(collectPaperType);
+            sample += ("\thybridPrinter2.selectPaperType(" + typeString + ");\n");
+
+            var message = hybridPrinter2.getMessage();
+
+            hybridPrinter2.force = force;
+
+            sample += sampleList;
+            sampleList = "";
+
+            hybridPrinter2.sendData(Number(timeout));
+            sample += ("\thybridPrinter2.sendData(" + timeout + ");\n");
+            sampleCodeArray.push(sample);
+
+            updateSampleCode();
+
+            hybridPrinter2.setMessage(message);
+
+            hybridPrinter2.selectPaperType(currentPaperType);
+            
+        }
+
+        // cancel insertion
+        function cancelInsertion() {
+            hybridPrinter2.cancelInsertion();
+
+            if(sampleCodeArray.length > 0) {
+                sampleSend += "hybridPrinter2.cancelInsertion();\n";  
+                var end = sampleCodeArray[sampleCodeArray.length - 1];
+                if (end.indexOf('waitInsertion') != -1) {
+                    ampleCodeArray[sampleCodeArray.length - 1] += "\thybridPrinter2.cancelInsertion();\n";
+                }
+            } 
+
+            updateSampleCode();
+        }
+
+        // eject paper
+        function ejectPaper() {
+            hybridPrinter2.ejectPaper();
+
+            var sample = "\thybridPrinter2.ejectPaper();\n";
+            sampleCodeArray.push(sample);
+
+            updateSampleCode();
+        }
+
+        // call the micr and slip,endorse combination function
+        function continuous_start() {
+            // control
+            var micr = document.getElementById('continuous_micr').checked;
+            var endorse = document.getElementById('continuous_endorse').checked;
+            var slip = document.getElementById('continuous_slip').checked;
+            var receipt = document.getElementById('continuous_receipt').checked;
+            
+            // step
+            var continuousStep = -1;
+            var continuousEndStep = -1;
+
+            // current onreceive
+            var currentOnreceive = null;
+            var currentOnstatuschange = null;
+
+            var currentOnonline = null;
+            var currentOnoffline = null;
+            var currentOnpoweroff = null;
+            var currentOncoverok = null;
+            var currentOncoveropen = null;
+            var currentOnpaperok = null;
+            var currentOnpapernearend = null;
+            var currentOnpaperend = null;
+            var currentOndrawerclosed = null;
+            var currentOndraweropen = null;
+
+            var updateConsle = true;
+
+            var nowTime = new Date();
+
+            function createEndorseData(){
+                if(!endorse){
+                    return this;
+                }
+               
+                // add function
+                hybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_ENDORSE);
+                sampleList += ("\thybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_ENDORSE);\n");
+
+                hybridPrinter2.addText(escapeText("FOR DEPOSIT ONLY FLESH*MART #5521\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("FOR DEPOSIT ONLY FLESH*MART #5521\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("TE#01 TR#8009 OP00000001  TIM" + nowTime.getHours() + ":" + nowTime.getMinutes() + "\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("TE#01 TR#8009 OP00000001  TIM" + nowTime.getHours() + ":" + nowTime.getMinutes() + "\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText(" H ID#                    " + nowTime.getDate() + "/" + (nowTime.getMonth() + 1) + "/"+ String(nowTime.getFullYear()).substr(2) + "\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText(" H ID#                    " + nowTime.getDate() + "/" + (nowTime.getMonth() + 1) + "/"+ String(nowTime.getFullYear()).substr(2) + "\n") + ");\n");
+            }
+
+            function createSlipDdata(){
+                if(!slip){
+                    return this;
+                }
+                var formatMMM = new Array("Jan","Feb","Mar","Apr","Jun","Jul","Aug","Sep","Aug","Oct","Nov","Dec");
+
+                // add function
+                hybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_SLIP);
+                sampleList += ("\thybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_SLIP);\n");
+
+                hybridPrinter2.addPageBegin();
+                sampleList += "\thybridPrinter2.addPageBegin();\n";
+
+                hybridPrinter2.addTextFont(hybridPrinter2.FONT_B);
+                sampleList += ("\thybridPrinter2.addTextFont(hybridPrinter2." + "hybridPrinter2.FONT_B" + ");\n");
+
+                hybridPrinter2.addPageDirection(hybridPrinter2.DIRECTION_BOTTOM_TO_TOP);
+                sampleList += ("\thybridPrinter2.addPageDirection(hybridPrinter2." + "hybridPrinter2.DIRECTION_BOTTOM_TO_TOP" + ");\n");
+
+                hybridPrinter2.addPageArea(188, 0, 340, 687);
+                sampleList += ("\thybridPrinter2.addPageArea(" + "188" + ", " + "0" + ", " + "340" + ", " + "687" + ");\n");
+
+                hybridPrinter2.addPagePosition(300, 55);
+                sampleList += ("\thybridPrinter2.addPagePosition(" + "300" + ", " + "55" + ");\n");
+
+                hybridPrinter2.addText(escapeText(formatMMM[nowTime.getMonth()] + " " + nowTime.getDate() + "," + nowTime.getFullYear() + "\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText(formatMMM[nowTime.getMonth()] + " " + nowTime.getDate() + "," + nowTime.getFullYear() + "\n") + ");\n");
+
+                hybridPrinter2.addPagePosition(10, 125);
+                sampleList += ("\thybridPrinter2.addPagePosition(" + "10" + ", " + "125" + ");\n");
+
+                hybridPrinter2.addText(escapeText("CASH                                         150.00\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("CASH                                         150.00\n") + ");\n");
+
+                hybridPrinter2.addPagePosition(10, 170);
+                sampleList += ("\thybridPrinter2.addPagePosition(" + "10" + ", " + "170" + ");\n");
+
+                hybridPrinter2.addText(escapeText("One hundred fifty and zero cents\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("One hundred fifty and zero cents\n") + ");\n");
+
+                hybridPrinter2.addPageEnd();
+                sampleList += "\thybridPrinter2.addPageEnd();\n";
+            }
+
+            function createReceiptData(){
+                if(!receipt){
+                    return this;
+                }
+                // add function
+                hybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_RECEIPT);
+                sampleList += ("\thybridPrinter2.selectPaperType(hybridPrinter2.PAPERTYPE_RECEIPT);\n");
+
+                hybridPrinter2.addTextFont(hybridPrinter2.FONT_B);
+                sampleList += ("\thybridPrinter2.addTextFont(hybridPrinter2.FONT_B" + ");\n");
+
+                hybridPrinter2.addTextAlign(hybridPrinter2.ALIGN_CENTER);
+                sampleList += ("\thybridPrinter2.addTextAlign(hybridPrinter2.ALIGN_CENTER" + ");\n");
+
+                hybridPrinter2.addLogo(48,48);
+                sampleList += ("\thybridPrinter2.addLogo(48, 48);\n");
+
+                hybridPrinter2.addTextStyle(false, false, true, hybridPrinter2.COLOR_1);
+                sampleList += ("\thybridPrinter2.addTextStyle(" + false + ", " + false + ", " + true + ", hybridPrinter2.COLOR_1);\n");
+
+                hybridPrinter2.addText(escapeText("( 555 ) 555 - 5555\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("( 555 ) 555 - 5555\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("SHIOJIRI BEACH, 12\n\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("SHIOJIRI BEACH, 12\n\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("TAX INCLUDE\n\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("TAX INCLUDE\n\n") + ");\n");
+
+                hybridPrinter2.addTextAlign(hybridPrinter2.ALIGN_LEFT);
+                sampleList += ("\thybridPrinter2.addTextAlign(hybridPrinter2.ALIGN_LEFT);\n");
+
+                hybridPrinter2.addTextStyle(false, false, false, hybridPrinter2.COLOR_1);
+                sampleList += ("\thybridPrinter2.addTextStyle(" + false + ", " + false + ", " + false + ", hybridPrinter2.COLOR_1);\n");
+
+                hybridPrinter2.addText(escapeText("#ORD 24 -REG 02- " + nowTime.getDate() + "/" + (nowTime.getMonth() + 1) + "/" + nowTime.getFullYear() + " " + nowTime.getHours() + ":" + nowTime.getUTCMinutes() + ":" +  nowTime.getSeconds() + "\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("#ORD 24 -REG 02- "+ nowTime.getDate() + "/" + (nowTime.getMonth() + 1) + "/" + nowTime.getFullYear() + " " + nowTime.getHours() + ":" + nowTime.getUTCMinutes() + ":" +  nowTime.getSeconds() + "\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("QTY ITEM                         TOTAL\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("QTY ITEM                         TOTAL\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("  1 LRG ORANGE                    2.25\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("  1 LRG ORANGE                    2.25\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("  4 YASHI NUGGETS                 2.40\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("  4 YASHI NUGGETS                 2.40\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("  1 PREMIUM YASHI SALAD           3.50\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("  1 PREMIUM YASHI SALAD           3.50\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("  3 YASHI BURGER                 10.50\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("  3 YASHI BURGER                 10.50\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("  1 LRG YASHI FRENCH FRIES        1.75\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("  1 LRG YASHI FRENCH FRIES        1.75\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("  1 SMILE                         0.00\n\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("  1 SMILE                         0.00\n\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("SUB TOTAL                        20.40\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("SUB TOTAL                        20.40\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("TAKE OUT TAX                      3.06\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("TAKE OUT TAX                      3.06\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("                                  ----\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("                                  ----\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("                                 23.46\n\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("                                 23.46\n\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("CASH TENDERED                    24.00\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("CASH TENDERED                    24.00\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("CHANGE                             .54\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("CHANGE                             .54\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("        THANK YOU PLEASE CALL AGAIN   \n\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("        THANK YOU PLEASE CALL AGAIN   \n\n") + ");\n");
+
+                hybridPrinter2.addText(escapeText("------------------------------------------\n"));
+                sampleList += ("\thybridPrinter2.addText(" + escapeText("------------------------------------------\n") + ");\n");
+
+                hybridPrinter2.addFeedLine(2);
+                sampleList += ("\thybridPrinter2.addFeedLine(2);\n");
+
+                hybridPrinter2.addCut(hybridPrinter2.CUT_NO_FEED);
+                sampleList += ("\thybridPrinter2.addCut(hybridPrinter2.CUT_NO_FEED);\n");
+                
+            }
+
+            function consolelogForReceive(res){
+                // Show message
+                var msg = "";
+                msg += ('Method:' + res.method + '\n');
+
+                msg += 'Print ';
+                if (res.success) {
+                    msg += 'Success\n';
+                }
+                else {
+                    msg += 'Failure\n';
+                }
+
+                msg += ('Code:' + res.code + '\n');
+                msg += 'Status:\n';
+                msg += getStatusText(hybridPrinter2, res.status);
+                if (res.data != null) {
+                    msg += 'Data:' + res.data;
+                }
+
+                consolelog(msg, updateConsle);
+                updateConsle = false;
+            }
+
+            function backupSample(){
+                currentOnreceive = hybridPrinter2.onreceive;
+                currentOnstatuschange = hybridPrinter2.onstatuschange;
+
+                currentOnonline = hybridPrinter2.ononline;
+                currentOnoffline = hybridPrinter2.onoffline;
+                currentOnpoweroff = hybridPrinter2.onpoweroff;
+                currentOncoverok = hybridPrinter2.oncoverok;
+                currentOncoveropen = hybridPrinter2.oncoveropen;
+                currentOnpaperok = hybridPrinter2.onpaperok;
+                currentOnpapernearend = hybridPrinter2.onpapernearend;
+                currentOnpaperend = hybridPrinter2.onpaperend;
+                currentOndrawerclosed = hybridPrinter2.ondrawerclosed;
+                currentOndraweropen = hybridPrinter2.ondraweropen;
+            }
+
+            function rollupSample(){
+                hybridPrinter2.onreceive = currentOnreceive;
+                hybridPrinter2.onstatuschange = currentOnreceive;
+
+                hybridPrinter2.ononline = currentOnonline;
+                hybridPrinter2.onoffline = currentOnoffline;
+                hybridPrinter2.onpoweroff = currentOnpoweroff;
+                hybridPrinter2.oncoverok = currentOncoverok;
+                hybridPrinter2.oncoveropen = currentOncoveropen;
+                hybridPrinter2.onpaperok = currentOnpaperok;
+                hybridPrinter2.onpapernearend = currentOnpapernearend;
+                hybridPrinter2.onpaperend = currentOnpaperend;
+                hybridPrinter2.ondrawerclosed = currentOndrawerclosed;
+                hybridPrinter2.ondraweropen = currentOndraweropen;
+            }
+
+            function checkStepContinuous(unitFunc, stepUnitType){
+                if (unitFunc) {
+                    if (continuousStep < 0) {
+                        continuousStep = stepUnitType;
+                    }
+                    continuousEndStep = stepUnitType;
+                }
+            }
+
+            checkStepContinuous(micr, DEVICE_UNIT_TYPE_MICR);
+            checkStepContinuous(endorse, DEVICE_UNIT_TYPE_ENDORSE);
+            checkStepContinuous(slip, DEVICE_UNIT_TYPE_SLIP);
+            checkStepContinuous(receipt, DEVICE_UNIT_TYPE_RECEIPT);
+
+            if (continuousStep < 0) {
+                alert('Print control is not checked.');
+                return this;
+            }
+
+            backupSample();
+
+            clearMessage();
+
+            createEndorseData();
+            createSlipDdata();
+            createReceiptData();
+
+            hybridPrinter2.ononline = function () {
+            };
+
+            hybridPrinter2.onoffline = function () {
+            };
+
+            hybridPrinter2.onpoweroff = function () {
+            };
+
+            hybridPrinter2.oncoverok = function () {
+            };
+
+            hybridPrinter2.oncoveropen = function () {
+            };
+
+            hybridPrinter2.onpaperok = function () {
+            };
+
+            hybridPrinter2.onpapernearend = function () {
+            };
+
+            hybridPrinter2.onpaperend = function () {
+            };
+
+            hybridPrinter2.ondrawerclosed = function () {
+            };
+
+            hybridPrinter2.ondraweropen = function () {
+            };
+
+            hybridPrinter2.onreceive = function (res) {
+                consolelogForReceive(res);
+
+                switch (res.method) {
+                    case 'readMicrData':
+                        if (res.success) {
+                            if (endorse) {
+                                continuousStep = DEVICE_UNIT_TYPE_ENDORSE;
+                                waitInsertion(DEVICE_UNIT_TYPE_ENDORSE);
+                            }
+                            else if (slip) {
+                                continuousStep = DEVICE_UNIT_TYPE_SLIP;
+                                waitInsertion(DEVICE_UNIT_TYPE_SLIP);
+                            }
+                            else if (receipt) {
+                                continuousStep = DEVICE_UNIT_TYPE_RECEIPT;
+                                ejectPaper();
+                            }
+                            else {
+                                ejectPaper();
+                            }
+                        }
+                        else {
+                            if (res.code == hybridPrinter2.ERROR_TIMEOUT) {
+                                cancelInsertion();
+                            }
+                            else{
+                                //end
+                                rollupSample();
+                            }
+                        }
+                        break;
+
+                    case 'waitInsertion':
+                        if (res.success) {
+                            startMonitor();
+                        }
+                        else {
+                            if (res.code == hybridPrinter2.ERROR_TIMEOUT) {
+                                cancelInsertion();
+                            }
+                            else{
+                                //end
+                                rollupSample();
+                            }
+                        }
+                        break;
+
+                    case 'sendData':
+                        stopMonitor();
+
+                        if (res.success) {
+                            if (continuousStep == DEVICE_UNIT_TYPE_ENDORSE) {
+                                if (slip) {
+                                    continuousStep = DEVICE_UNIT_TYPE_SLIP;
+                                    waitInsertion(DEVICE_UNIT_TYPE_SLIP);
+                                }
+                                else {
+                                    if (receipt) {
+                                        continuousStep = DEVICE_UNIT_TYPE_RECEIPT;
+                                    }
+                                    ejectPaper();
+                                }
+                            }
+                            else if (continuousStep == DEVICE_UNIT_TYPE_SLIP) {
+                                if (receipt) {
+                                    continuousStep = DEVICE_UNIT_TYPE_RECEIPT;
+                                }
+                                ejectPaper();
+                            }
+                            else if (continuousStep == continuousEndStep) {
+                                //end
+                                rollupSample();
+                            }
+                            else {
+                                //receipt
+                            }
+
+                        }
+                        else {
+                             //end
+                             if(res.code != hybridPrinter2.ERROR_DEVICE_BUSY) {
+                                rollupSample();
+                             }
+                        }
+                        break;
+
+                    case 'ejectPaper':
+                        if (res.success) {
+                            alert('Please remove the paper.');
+                            if (receipt) {
+                                continuousStep = DEVICE_UNIT_TYPE_RECEIPT;
+                                startMonitor();
+                            }
+                            else if (continuousStep == continuousEndStep) {
+                                //end
+                                rollupSample();
+                            }
+                            else{
+
+                            }
+                        }
+                        else {
+                            //end
+                            rollupSample();
+                        }
+                        break;
+
+                    case 'cancelInsertion':
+                        if (res.success) {
+                            if (res.code == hybridPrinter2.CANCEL) {
+                                if (continuousStep == DEVICE_UNIT_TYPE_ENDORSE) {
+                                    waitInsertion(DEVICE_UNIT_TYPE_ENDORSE);
+                                    alert('Please insert the paper.');
+                                }
+                                else if (continuousStep == DEVICE_UNIT_TYPE_SLIP) {
+                                    waitInsertion(DEVICE_UNIT_TYPE_SLIP);
+                                    alert('Please insert the paper.');
+                                }
+                                else {
+                                    ejectPaper();
+                                }
+                            }
+                        }
+                        else {
+                            //end
+                            rollupSample();
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            };
+
+            hybridPrinter2.onstatuschange = function (status) {
+
+                switch(continuousStep){
+                    case DEVICE_UNIT_TYPE_ENDORSE:
+                    case DEVICE_UNIT_TYPE_SLIP:
+                        if (!(hybridPrinter2.ASB_SLIP_IMPOSSIBLE_PRINT & status)) {
+                            sendData(continuousStep);
+                        }
+                        break;
+
+                    case DEVICE_UNIT_TYPE_RECEIPT:
+                        if (hybridPrinter2.ASB_SLIP_IMPOSSIBLE_PRINT & status) {
+                            sendData(DEVICE_UNIT_TYPE_RECEIPT);
+                        }
+                        break;
+
+                    default:
+                        ejectPaper();
+                        break;
+                }
+            };
+
+            // start action
+            switch (continuousStep) {
+                case DEVICE_UNIT_TYPE_MICR:
+                    micrRead();
+                    alert('Please insert the check.');
+                    break;
+
+                case DEVICE_UNIT_TYPE_ENDORSE:
+                    waitInsertion(DEVICE_UNIT_TYPE_ENDORSE);
+                    alert('Please insert the paper.');
+                    break;
+
+                case DEVICE_UNIT_TYPE_SLIP:
+                    waitInsertion(DEVICE_UNIT_TYPE_SLIP);
+                    alert('Please insert the paper.');
+                    break;
+
+                case DEVICE_UNIT_TYPE_RECEIPT:
+                    sendData(DEVICE_UNIT_TYPE_RECEIPT);
+                    break;
+
+                default:
+                    rollupSample();
+                    return;
+            }
+            
+        }
+
+        // call the printer recover function
+        function sendRecover() {
+
+            var sample = "";
+
+            hybridPrinter2.force = document.getElementById('force_recover').checked;
+            sample += ("\thybridPrinter2.force = " + hybridPrinter2.force + ";\n");
+
+            hybridPrinter2.recover();
+            sample += ("\thybridPrinter2.recover();\n");
+
+            sampleCodeArray.push(sample);
+
+            updateSampleCode();
+        }
+
+        // call the printer reset function
+        function sendReset() {
+
+            var sample = "";
+
+            hybridPrinter2.reset();
+            sample += ("\thybridPrinter2.reset();\n");
+
+            sampleCodeArray.push(sample);
+
+            updateSampleCode();
+        }
+
+        // start status monitor
+        function startMonitor() {
+
+            var interval = document.getElementById('interval').value;
+
+            if (interval != hybridPrinter2.interval) {
+                hybridPrinter2.interval = Number(interval);
+
+                sampleSend += ("\t\thybridPrinter2.interval = " + interval + ";\n");
+            }
+
+            hybridPrinter2.startMonitor();
+
+            sampleSend += "\t\thybridPrinter2.startMonitor();\n";
+
+            updateSampleCode();
+        }
+
+        // stop status monitor
+        function stopMonitor() {
+
+            hybridPrinter2.stopMonitor();
+
+            sampleSend += "\t\thybridPrinter2.stopMonitor();\n";
+
+            updateSampleCode();
+        }
+
+        // ------------------- helper of sample program ------------------- //
+        // get status text
+        function getStatusText(e, status) {
+
+            var textStatus = '';
+
+            if (status & e.ASB_NO_RESPONSE) {
+                textStatus += ' No printer response\n';
+            }
+
+            if (status & e.ASB_PRINT_SUCCESS) {
+                textStatus += ' Print complete\n';
+            }
+
+            if (status & e.ASB_DRAWER_KICK) {
+                textStatus += ' Status of the drawer kick number 3 connector pin = "H"\n';
+            }
+
+            if (status & e.ASB_OFF_LINE) {
+                textStatus += ' Offline status\n';
+            }
+
+            if (status & e.ASB_COVER_OPEN) {
+                textStatus += ' Cover is open\n';
+            }
+
+            if (status & e.ASB_PAPER_FEED) {
+                textStatus += ' Paper feed switch is feeding paper\n';
+            }
+
+            if (status & e.ASB_WAIT_ON_LINE) {
+                textStatus += ' Waiting for online recovery\n';
+            }
+
+            if (status & e.ASB_PANEL_SWITCH) {
+                textStatus += ' Panel switch is ON\n';
+            }
+
+            if (status & e.ASB_MECHANICAL_ERR) {
+                textStatus += ' Mechanical error generated\n';
+            }
+
+            if (status & e.ASB_AUTOCUTTER_ERR) {
+                textStatus += ' Auto cutter error generated\n';
+            }
+
+            if (status & e.ASB_UNRECOVER_ERR) {
+                textStatus += ' Unrecoverable error generated\n';
+            }
+
+            if (status & e.ASB_AUTORECOVER_ERR) {
+                textStatus += ' Auto recovery error generated\n';
+            }
+
+            if (status & e.ASB_INSERTION_WAIT_PAPER) {
+                textStatus += ' Waiting insertion paper\n';
+            }
+
+            if (status & e.ASB_RECEIPT_NEAR_END) {
+                textStatus += ' No paper in the roll paper near end detector\n';
+            }
+
+            if (status & e.ASB_REMOVAL_WAIT_PAPER) {
+                textStatus += ' Waiting removal paper\n';
+            }
+
+            if (status & e.ASB_RECEIPT_END) {
+                textStatus += ' No paper in the roll paper end detector\n';
+            }            
+
+            if (status & e.ASB_TOF_NOPAPER) {
+                textStatus += ' TOF sensor: paper not present\n';
+            }
+
+            if (status & e.ASB_BOF_NOPAPER) {
+                textStatus += ' BOF sensor: paper not present\n';
+            }
+
+            if (status & e.ASB_SLIP_NO_SELECT) {
+                textStatus += ' Slip not selected as the active sheet\n';
+            }
+
+            if (status & e.ASB_SLIP_IMPOSSIBLE_PRINT) {
+                textStatus += ' Slip printing is impossible\n';
+            }
+
+            if (status & e.ASB_EJD_NOPAPER) {
+                textStatus += ' Ejection sensor: paper not present\n';
+            }
+
+            if (status & e.ASB_VALIDATION_NO_SELECT) {
+                textStatus += ' Validation not selected as the active sheet\n';
+            }
+
+            if (status & e.ASB_VALIDATION_IMPOSSIBLE_PRINT) {
+                textStatus += ' Validation printing is impossible\n';
+            }
+
+            if (status & e.ASB_SPOOLER_IS_STOPPED) {
+                textStatus += ' Stop the spooler\n';
+            }
+
+            return textStatus;
+        }
+
+        function isCheckedRadioButtonValue(list) {
+
+            var ret = '';
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].checked) {
+                    ret = list[i].value;
+                    break;
+                }
+            }
+
+            return ret;
+        }
+
+        // process escape sequence (binary)
+        function escapeCode(s) {
+            var escape = /\\x[0-9A-Fa-f]{2}/g;
+            if (escape.test(s)) {
+                s = s.replace(escape, function (c) {
+                    return String.fromCharCode(parseInt(c.slice(2), 16));
+                });
+            }
+            return escapeText(s);
+        }
+
+        // process escape sequence (text)
+        function escapeText(s) {
+            var escape = /\\[tnr\\]|\\/g;
+            if (escape.test(s)) {
+                s = s.replace(escape, function (c) {
+                    var r = '';
+                    switch (c) {
+                        case '\\t':
+                            r = '\x09';
+                            break;
+
+                        case '\\n':
+                            r = '\x0a';
+                            break;
+
+                        case '\\r':
+                            r = '\x0d';
+                            break;
+
+                        case '\\\\':
+                            r = '\\';
+                            break;
+
+                        default:
+                            break;
+                    }
+                    return r;
+                });
+            }
+            return s;
+        }
+
+        // process escape sequence for sample code (binary)
+        function escapeCodeSample(s) {
+            var escape = /\\x[0-9A-Fa-f]{2}|\\[tnr\\]|['"]|\\/g;
+            if (escape.test(s)) {
+                s = s.replace(escape, function (c) {
+                    var r = c;
+                    switch (c) {
+                        case '"':
+                            r = '\\"';
+                            break;
+
+                        case "'":
+                            r = "\\'";
+                            break;
+
+                        case '\\':
+                            r = '';
+                            break;
+
+                        default:
+                            break;
+                    }
+                    return r;
+                });
+            }
+            return s;
+        }
+
+        // process escape sequence for sample code (text)
+        function escapeTextSample(s) {
+            var escape = /\\[tnr\\]|['"]|\\/g;
+            if (escape.test(s)) {
+                s = s.replace(escape, function (c) {
+                    var r = c;
+                    switch (c) {
+                        case '"':
+                            r = '\\"';
+                            break;
+
+                        case "'":
+                            r = "\\'";
+                            break;
+
+                        case '\\':
+                            r = '';
+                            break;
+
+                        default:
+                            break;
+                    }
+                    return r;
+                });
+            }
+            return s;
+        }
+
+        function selectPaperType() {
+
+            var target = document.getElementById('target').value;
+            var paperType = hybridPrinter2.PAPERTYPE_RECEIPT;
+            var typeString = "hybridPrinter2.PAPERTYPE_RECEIPT";
+
+            switch (target) {
+                case "Receipt":
+                    paperType = hybridPrinter2.PAPERTYPE_RECEIPT;
+                    typeString = "hybridPrinter2.PAPERTYPE_RECEIPT";
+                    break;
+
+                case "Slip":
+                    paperType = hybridPrinter2.PAPERTYPE_SLIP;
+                    typeString = "hybridPrinter2.PAPERTYPE_SLIP";
+                    break;
+
+                case "Endorse":
+                    paperType = hybridPrinter2.PAPERTYPE_ENDORSE;
+                    typeString = "hybridPrinter2.PAPERTYPE_ENDORSE";
+                    break;
+
+                case "Validation":
+                    paperType = hybridPrinter2.PAPERTYPE_VALIDATION;
+                    typeString = "hybridPrinter2.PAPERTYPE_VALIDATION";
+                    break;
+
+                default:
+                    paperType = hybridPrinter2.PAPERTYPE_RECEIPT;
+                    typeString = "hybridPrinter2.PAPERTYPE_RECEIPT";
+                    break;
+            }
+
+            if (hybridPrinter2.paperType != paperType) {
+                hybridPrinter2.selectPaperType(paperType);
+                sampleList += ("\thybridPrinter2.selectPaperType(" + typeString + ");\n");
+            }
+        }
+
+        // update sample code
+        function updateSampleCode() {
+
+            var strCrypto = 'false';
+            if (optionCrypto) {
+                strCrypto = 'true';
+            }
+
+            var strBuffer = 'false';
+            if (optionBuffer) {
+                strBuffer = 'true';
+            }
+
+            var str = '';
+            str += "var hybridPrinter2 = null;\n";
+            str += "var ePosDev = new epson.ePOSDevice();\n";
+            str += "var next_function = null;\n";
+            str += "\n";
+            str += "ePosDev.connect('" + ipAddress + "', " + port + ", callback_connect);\n";
+            str += "function callback_connect(data) {\n";
+            str += "    if(data == 'OK') {\n";
+            str += "        ePosDev.createDevice('" + deviceID + "', ePosDev.DEVICE_TYPE_HYBRID_PRINTER2, {'crypto' : " + strCrypto + ", 'buffer' : " + strBuffer + "}, callback_createDevice);\n";
+            str += "    } else {\n";
+            str += "        alert(data);\n";
+            str += "    }\n";
+            str += "}\n";
+            str += "\n";
+            str += "function callback_createDevice(devObj, code) {\n";
+            str += "    if( code == 'OK' ) {\n";
+            str += "        hybridPrinter2 = devObj;\n";
+            str += "        hybridPrinter2.onreceive = function (res) {\n";
+            str += "            var msg = '';\n";
+            str += "            msg += 'Method:' + res.method + '\\n';\n";
+            str += "            msg += 'Print ';\n";
+            str += "            if (res.success) {\n";
+            str += "                msg += 'Success\\n';\n";
+            str += "            }\n";
+            str += "            else {\n";
+            str += "                msg += 'Failure\\n';\n";
+            str += "            }\n";
+            str += "            msg += 'Code:' + res.code + '\\n';\n";
+            str += "            msg += 'Status:\\n' + res.status;\n";
+            str += "            alert(msg);\n";
+            str += "            if(next_function != null){\n";
+            str += "                next_function();\n";
+            str += "            }\n";
+            str += "            else {\n";
+            str += "                ePosDev.deleteDevice(hybridPrinter2, callback_deleteDevice);\n";
+            str += "            }\n";
+            str += "        }\n";
+            if (sampleSend != '') { 
+                str += sampleSend;
+            }
+            str += "        executeAddedCode1();\n";
+            str += "    } else {\n";
+            str += "        alert(code);\n";
+            str += "    }\n";
+            str += "}\n\n";
+            if(sampleCodeArray.length > 0){ 
+                for(i = 0; i < sampleCodeArray.length; i++) {
+                    str += "function executeAddedCode" + (i+1) + "() {\n";
+                    str += sampleCodeArray[i]; 
+                    if(sampleCodeArray[i+1] != null) {
+                        str += "\tnext_function = executeAddedCode" + (i+2) + ";\n";
+                        str += "}\n\n"; 
+                    } else {
+                        str += "\tnext_function = null;\n"; 
+                        str += "}\n\n"; 
+                    }
+                }
+            } else {
+                str += "function executeAddedCode1() {\n"; 
+                str += "\tnext_function = null;\n";
+                str += "}\n\n"; 
+            }
+            
+            document.getElementById('Sample').value = str;
+            document.getElementById('Sample').scrollTop = document.getElementById('Sample').scrollHeight;
+        }
+
+    </script>
+</head>
+
+<body onload="consolelog('', true);">
+    <form action="" onsubmit="return false;">
+        <table style="width:100%;">
+            <thead>
+                <tr><th colspan="3">Device Setting</th>	</tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Connection settings</td>
+                    <td>
+                        IP address <input id="ipaddress" size="20" type="text" value="192.168.192.168" />
+                        Port <input id="port" size="5" type="text" value="8008" />
+                        Device ID <input id="deviceid" size="15" type="text" value="local_printer" />
+                        <input id="crypto" type="checkbox" value="" />Encryption
+                        <input id="buffer" type="checkbox" value="" />Enable buffer
+                    </td>
+                    <td class="center"><input type="button" value="Connect" onclick="connect()" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <br />
+    <form action="" onsubmit="return false;">
+        <table style="width:100%;">
+            <thead>
+                <tr><th>Console</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><textarea id="console" style="width:98%;" rows="8" cols="80"></textarea></td></tr>
+            </tbody>
+        </table>
+    </form>
+
+    <form action="" onsubmit="return false;">
+        <table style="width:100%;">
+            <thead>
+                <tr>
+                    <th colspan="4">
+                        ePOS SDK Hybrid Printer 2 Object
+                        <select id="target" onchange="updateSampleCode()">
+                            <option value="Receipt">Receipt</option>
+                            <option value="Slip">Slip</option>
+                            <option value="Endorse">Endorse</option>
+                            <option value="Validation">Validation</option>
+                        </select>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- addTextAlign -->
+                <tr>
+                    <td rowspan="3" style="width:8%;">Common</td>
+                    <td style="width:16%;">Alignment</td>
+                    <td style="width:68%;">
+                        <select id="align">
+                            <option value="ALIGN_LEFT">Left</option>
+                            <option value="ALIGN_CENTER">Center</option>
+                            <option value="ALIGN_RIGHT">Right</option>
+                        </select>
+                    </td>
+                    <td style="width:8%;" class="center"><input type="button" value="Add" onclick="addTextAlign()" /></td>
+                </tr>
+
+                <!-- addTextLineSpace -->
+                <tr>
+                    <td>Line Spacing</td>
+                    <td><input id="linespc" type="text" size="5" value="30" /></td>
+                    <td class="center"><input type="button" value="Add" onclick="addTextLineSpace()" /></td>
+                </tr>
+
+                <!-- addTextRotate -->
+                <tr>
+                    <td>Upside-down</td>
+                    <td><input id="rotate" type="checkbox" value="" />Upside-down</td>
+                    <td class="center"><input type="button" value="Add" onclick="addTextRotate()" /></td>
+                </tr>
+
+                <!-- addText -->
+                <tr>
+                    <td rowspan="9">Text</td>
+                    <td>Print Characters</td>
+                    <td>
+                        <input id="text" style="width:98%;" type="text" value="Hello,\tWorld!\n" /><br />
+                        Horizontal Tab(HT): '\t', Line Feed(LF): '\n', Carriage Return(CR): '\r', Back Slash: '\\'
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addText()" /></td>
+                </tr>
+
+                <!-- addTextLang -->
+                <tr>
+                    <td>Language</td>
+                    <td>
+                        <select id="lang">
+                            <option value="en" selected="selected">ANK</option>
+                            <option value="ja">Japanese</option>
+                            <option value="ko">Korean</option>
+                            <option value="zh-cn">Simplified Chinese</option>
+                            <option value="zh-tw">Traditional Chinese</option>
+                        </select>
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addTextLang()" /></td>
+                </tr>
+
+                <!-- addTextFont -->
+                <tr>
+                    <td>Font</td>
+                    <td>
+                        <select id="font">
+                            <option value="FONT_A">Font A</option>
+                            <option value="FONT_B">Font B</option>
+                            <option value="FONT_C">Font C</option>
+                            <option value="FONT_SPECIAL_A">Special Font A</option>
+                            <option value="FONT_SPECIAL_B">Special Font B</option>
+                        </select>
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addTextFont()" /></td>
+                </tr>
+
+                <!-- addTextSmooth -->
+                <tr>
+                    <td>Smoothing</td>
+                    <td><input id="smooth" type="checkbox" value="" />Enabled</td>
+                    <td class="center"><input type="button" value="Add" onclick="addTextSmooth()" /></td>
+                </tr>
+
+                <!-- addTextDouble -->
+                <tr>
+                    <td>Double</td>
+                    <td>
+                        <input id="dw" type="checkbox" value="" />Double-width
+                        <input id="dh" type="checkbox" value="" />Double-height
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addTextDouble()" /></td>
+                </tr>
+
+                <!-- addTextSize -->
+                <tr>
+                    <td>Size</td>
+                    <td>
+                        Width
+                        <select id="textwidth">
+                            <option value="1">Normal</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                        Height
+                        <select id="textheight">
+                            <option value="1">Normal</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addTextSize()" /></td>
+                </tr>
+
+                <!-- addTextStyle -->
+                <tr>
+                    <td>Style</td>
+                    <td>
+                        <input id="reverse" type="checkbox" value="" />White/Black Reverse
+                        <input id="ul" type="checkbox" value="" />Underline
+                        <input id="em" type="checkbox" value="" />Emphasized
+                        &nbsp;&nbsp;Color
+                        <select id="color">
+                            <option value="COLOR_NONE">None</option>
+                            <option value="COLOR_1" selected="selected">Color 1</option>
+                            <option value="COLOR_2">Color 2</option>
+                            <option value="COLOR_3">Color 3</option>
+                            <option value="COLOR_4">Color 4</option>
+                        </select>
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addTextStyle()" /></td>
+                </tr>
+
+                <!-- addTextPosition -->
+                <tr>
+                    <td>X Position</td>
+                    <td>
+                        Position
+                        <input id="textx" type="text" size="5" value="0" />
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addTextPosition()" /></td>
+                </tr>
+
+                <!-- addTextVPosition -->
+                <tr>
+                    <td>Y Position</td>
+                    <td>
+                        Position
+                        <input id="texty" type="text" size="5" value="0" />
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addTextVPosition()" /></td>
+                </tr>
+
+                <!-- addFeedUnit -->
+                <tr>
+                    <td rowspan="2">Paper Feed</td>
+                    <td>By Unit</td>
+                    <td>
+                        Units
+                        <input id="feedunit" type="text" size="5" value="30" />
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addFeedUnit()" /></td>
+                </tr>
+
+                <!-- addFeedLine -->
+                <tr>
+                    <td>By Line</td>
+                    <td>
+                        Lines
+                        <input id="feedline" type="text" size="5" value="3" />
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addFeedLine()" /></td>
+                </tr>
+
+                <!-- addImage -->
+                <tr>
+                    <td rowspan="2">Image</td>
+                    <td>Raster Image</td>
+                    <td>
+                        Image File (in the same server)
+                        <input id="image" type="text" size="20" value="logo1.bmp" />
+                        <input type="button" value="Load" onclick="loadImage()" />
+                        <br />
+                        <canvas id="canvas" width="0" height="0"></canvas>
+                        <br />
+                        Mode
+                        <select id="mode">
+                            <option value="MODE_MONO" selected="selected">Monochrome</option>
+                            <option value="MODE_GRAY16">Grayscale(Only for supported printer)</option>
+                        </select>
+                        Brightness
+                        <input id="brightness" type="text" size="5" value="1.0" />
+                        <br />
+                        Color(Monochrome)
+                        <select id="imagec">
+                            <option value="COLOR_NONE">None</option>
+                            <option value="COLOR_1" selected="selected">Color 1</option>
+                            <option value="COLOR_2">Color 2</option>
+                            <option value="COLOR_3">Color 3</option>
+                            <option value="COLOR_4">Color 4</option>
+                        </select>
+                        Halftone(Monochrome)
+                        <select id="halftone">
+                            <option value="HALFTONE_DITHER" selected="selected">Dither</option>
+                            <option value="HALFTONE_ERROR_DIFFUSION">Error Diffusion</option>
+                            <option value="HALFTONE_THRESHOLD">Threshold</option>
+                        </select>
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addImage()" /></td>
+                </tr>
+
+                <!-- addLogo -->
+                <tr>
+                    <td>NV Logo</td>
+                    <td>
+                        Keycode 1
+                        <input id="key1" type="text" size="5" value="48" />
+                        Keycode 2
+                        <input id="key2" type="text" size="5" value="48" />
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addLogo()" /></td>
+                </tr>
+
+                <!-- addBarcode -->
+                <tr>
+                    <td rowspan="2">Bar Code</td>
+                    <td>Bar Code</td>
+                    <td>
+                        Data
+                        <input id="bardata" type="text" size="20" value="12345" />
+                        Type
+                        <select id="bartype">
+                            <option value="BARCODE_UPC_A">UPC-A</option>
+                            <option value="BARCODE_UPC_E">UPC-E</option>
+                            <option value="BARCODE_EAN13">EAN13</option>
+                            <option value="BARCODE_JAN13">JAN13</option>
+                            <option value="BARCODE_EAN8">EAN8</option>
+                            <option value="BARCODE_JAN8">JAN8</option>
+                            <option value="BARCODE_CODE39" selected="selected">CODE39</option>
+                            <option value="BARCODE_ITF">ITF</option>
+                            <option value="BARCODE_CODABAR">CODABAR</option>
+                            <option value="BARCODE_CODE93">CODE93</option>
+                            <option value="BARCODE_CODE128">CODE128</option>
+                            <option value="BARCODE_GS1_128">GS1-128</option>
+                            <option value="BARCODE_GS1_DATABAR_OMNIDIRECTIONAL">GS1 DataBar Omnidirectional</option>
+                            <option value="BARCODE_GS1_DATABAR_TRUNCATED">GS1 DataBar Truncated</option>
+                            <option value="BARCODE_GS1_DATABAR_LIMITED">GS1 DataBar Limited</option>
+                            <option value="BARCODE_GS1_DATABAR_EXPANDED">GS1 Databar Expanded</option>
+                        </select>
+                        <br />
+                        HRI
+                        <select id="barhri">
+                            <option value="HRI_NONE">None</option>
+                            <option value="HRI_ABOVE">Above</option>
+                            <option value="HRI_BELOW" selected="selected">Below</option>
+                            <option value="HRI_BOTH">Both</option>
+                        </select>
+                        Font
+                        <select id="barfont">
+                            <option value="FONT_A">Font A</option>
+                            <option value="FONT_B">Font B</option>
+                            <option value="FONT_C">Font C</option>
+                            <option value="FONT_SPECIAL_A">Special Font A</option>
+                            <option value="FONT_SPECIAL_B">Special Font B</option>
+                        </select>
+                        <br />
+                        Module Width
+                        <input id="barwidth" type="text" size="5" value="2" />
+                        Module Height
+                        <input id="barheight" type="text" size="5" value="32" /><br />
+                        Hexadecimal: '\x00'-'\xff', Horizontal Tab(HT): '\t', Line Feed(LF): '\n', Carriage Return(CR): '\r', Back Slash: '\\'
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addBarcode()" /></td>
+                </tr>
+
+                <!-- addSymbol -->
+                <tr>
+                    <td>Symbol</td>
+                    <td>
+                        Data
+                        <input id="symdata" type="text" size="20" value="http://www.epson.com/" />
+                        Type
+                        <select id="symtype">
+                            <option value="SYMBOL_PDF417_STANDARD" selected="selected">Standard PDF417</option>
+                            <option value="SYMBOL_PDF417_TRUNCATED">Truncated PDF417</option>
+                            <option value="SYMBOL_QRCODE_MODEL_1">QR Code Model 1</option>
+                            <option value="SYMBOL_QRCODE_MODEL_2">QR Code Model 2</option>
+                            <option value="SYMBOL_MAXICODE_MODE_2">MaxiCode Mode 2</option>
+                            <option value="SYMBOL_MAXICODE_MODE_3">MaxiCode Mode 3</option>
+                            <option value="SYMBOL_MAXICODE_MODE_4">MaxiCode Mode 4</option>
+                            <option value="SYMBOL_MAXICODE_MODE_5">MaxiCode Mode 5</option>
+                            <option value="SYMBOL_MAXICODE_MODE_6">MaxiCode Mode 6</option>
+                            <option value="SYMBOL_GS1_DATABAR_STACKED">GS1 DataBar Stacked</option>
+                            <option value="SYMBOL_GS1_DATABAR_STACKED_OMNIDIRECTIONAL">GS1 DataBar Stacked Omnidirectional</option>
+                            <option value="SYMBOL_GS1_DATABAR_EXPANDED_STACKED">GS1 DataBar Expanded Stacked</option>
+                            <option value="SYMBOL_AZTECCODE_FULLRANGE">Aztec Code FullRange</option>
+                            <option value="SYMBOL_AZTECCODE_COMPACT">Aztec Code Compact</option>
+                            <option value="SYMBOL_DATAMATRIX_SQUARE">Datamatrix Square</option>
+                            <option value="SYMBOL_DATAMATRIX_RECTANGLE_8">Datamatrix Rectangle 8</option>
+                            <option value="SYMBOL_DATAMATRIX_RECTANGLE_12">Datamatrix Rectangle 12</option>
+                            <option value="SYMBOL_DATAMATRIX_RECTANGLE_16">Datamatrix Rectangle 16</option>
+                        </select>
+                        <br />
+                        Error Correction Level
+                        <input type="radio" name="symlevelselect" value="define" checked>Specify a constant definition
+                        <select id="symleveldefine">
+                            <option value="LEVEL_0">PDF417 Level 0</option>
+                            <option value="LEVEL_1" selected="selected">PDF417 Level 1</option>
+                            <option value="LEVEL_2">PDF417 Level 2</option>
+                            <option value="LEVEL_3">PDF417 Level 3</option>
+                            <option value="LEVEL_4">PDF417 Level 4</option>
+                            <option value="LEVEL_5">PDF417 Level 5</option>
+                            <option value="LEVEL_6">PDF417 Level 6</option>
+                            <option value="LEVEL_7">PDF417 Level 7</option>
+                            <option value="LEVEL_8">PDF417 Level 8</option>
+                            <option value="LEVEL_L">QR Code Level L</option>
+                            <option value="LEVEL_M">QR Code Level M</option>
+                            <option value="LEVEL_Q">QR Code Level Q</option>
+                            <option value="LEVEL_H">QR Code Level H</option>
+                            <option value="LEVEL_DEFAULT">Default Level</option>
+                        </select>
+                        <input type="radio" name="symlevelselect" value="value">Specify a numerical value
+                        <input id="symlevelvalue" type="text" size="5" value="23" /><br />
+                        Module Width
+                        <input id="symwidth" type="text" size="5" value="3" /><br />
+                        Module Height
+                        <input id="symheight" type="text" size="5" value="3" />
+                        Symbol Size
+                        <input id="symsize" type="text" size="5" value="0" /><br />
+                        Hexadecimal: '\x00'-'\xff', Horizontal Tab(HT): '\t', Line Feed(LF): '\n', Carriage Return(CR): '\r', Back Slash: '\\'
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addSymbol()" /></td>
+                </tr>
+
+                <!-- addPageBegin -->
+                <tr>
+                    <td rowspan="5">Page Mode</td>
+                    <td>Start</td>
+                    <td></td>
+                    <td class="center"><input type="button" value="Add" onclick="addPageBegin()" /></td>
+                </tr>
+
+                <!-- addPageArea -->
+                <tr>
+                    <td>Print Area</td>
+                    <td>
+                        X Origin
+                        <input id="areax" type="text" size="5" value="0" />
+                        Y Origin
+                        <input id="areay" type="text" size="5" value="0" />
+                        Width
+                        <input id="areawidth" type="text" size="5" value="100" />
+                        Height
+                        <input id="areaheight" type="text" size="5" value="100" />
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addPageArea()" /></td>
+                </tr>
+
+                <!-- addPageDirection -->
+                <tr>
+                    <td>Print Direction</td>
+                    <td>
+                        Direction
+                        <select id="dir">
+                            <option value="DIRECTION_LEFT_TO_RIGHT">Left To Right</option>
+                            <option value="DIRECTION_BOTTOM_TO_TOP">Bottom To Top</option>
+                            <option value="DIRECTION_RIGHT_TO_LEFT">Right To Left</option>
+                            <option value="DIRECTION_TOP_TO_BOTTOM">Top To Bottom</option>
+                        </select>
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addPageDirection()" /></td>
+                </tr>
+
+                <!-- addPagePosition -->
+                <tr>
+                    <td>Print Position</td>
+                    <td>
+                        X Position
+                        <input id="posx" type="text" size="5" value="0" />
+                        Y Position
+                        <input id="posy" type="text" size="5" value="21" />
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addPagePosition()" /></td>
+                </tr>
+
+                <!-- addPageEnd -->
+                <tr>
+                    <td>End</td>
+                    <td></td>
+                    <td class="center"><input type="button" value="Add" onclick="addPageEnd()" /></td>
+                </tr>
+
+                <!-- addCut -->
+                <tr>
+                    <td rowspan="4">Others</td>
+                    <td>Paper Cutting</td>
+                    <td>
+                        Type
+                        <select id="cut">
+                            <option value="CUT_NO_FEED">No Feed</option>
+                            <option value="CUT_FEED" selected="selected">Feed</option>
+                            <option value="CUT_RESERVE">Reserve</option>
+                        </select>
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addCut()" /></td>
+                </tr>
+
+                <!-- addPulse -->
+                <tr>
+                    <td>Drawer Kick-out</td>
+                    <td>
+                        Connector
+                        <select id="drawer">
+                            <option value="DRAWER_1">Pin 2</option>
+                            <option value="DRAWER_2">Pin 5</option>
+                        </select>
+                        ON Time
+                        <select id="pulse">
+                            <option value="PULSE_100">100ms</option>
+                            <option value="PULSE_200">200ms</option>
+                            <option value="PULSE_300">300ms</option>
+                            <option value="PULSE_400">400ms</option>
+                            <option value="PULSE_500">500ms</option>
+                        </select>
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addPulse()" /></td>
+                </tr>
+
+                <!-- addCommand -->
+                <tr>
+                    <td>Command</td>
+                    <td>
+                        <input id="command" style="width:98%;" type="text" value="12345" /><br />
+                        Hexadecimal: '\x00'-'\xff', Horizontal Tab(HT): '\t', Line Feed(LF): '\n', Carriage Return(CR): '\r', Back Slash: '\\'
+                    </td>
+                    <td class="center"><input type="button" value="Add" onclick="addCommand()" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <form action="" onsubmit="return false;">
+        <table style="width:100%;">
+
+            <tbody>
+                <tr>
+                    <td style="width:92%;"><textarea id="Sample" style="width:98%;" rows="10" cols="80" readonly="readonly"></textarea></td>
+                    <td style="width:8%;" class="center">
+                        <input type="reset" value="Clear" onclick="clearMessage()" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <form action="" onsubmit="return false;">
+        <table style="width:100%;">
+            <thead>
+                <tr>
+                    <th colspan="4">SendData</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3">lock/unlock</td>
+                    <td style="padding: 5px;" class="center">
+                        <button onclick='lock()'>lock</button>
+                        <button onclick='unlock()'>unlock</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="4">MICR</td>
+
+                    <td>ignoreerror</td>
+                    <td><input id='ignore_err' type='checkbox' value=true />Ignore&nbsp;</td>
+                    <td rowspan="4" class="center">
+                        <button onclick='micrRead()'>Read MICR</button>
+                        <button onclick='micrClean()'>Clean MICR</button>
+                        <button onclick='cancelInsertion()'>Cancel Insertion</button>
+                        <button onclick='ejectPaper()'>Eject</button>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>font</td>
+                    <td>
+                        <select id="micr_font">
+                            <option value="E13B">E13B</option>
+                            <option value="CMC7">CMC7</option>
+                        </select>&nbsp;&nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td>timeout</td>
+                    <td><input type="text" size="3" id="micr_timeout" value="1" />&nbsp;(min)</td>
+                </tr>
+                <tr>
+                    <td>wait time</td>
+                    <td><input type="text" size="3" id="micr_waitTime" value="500" />(msec)</td>
+                </tr>
+                <tr>
+                    <td rowspan="5" style="width:10%;">Print</td>
+
+                    <td style="width:10%;">Receipt print</td>
+                    <td>
+                        timeout&nbsp;<input type="text" size="3" id="receipt_timeout" value="1" />&nbsp;(min)
+                        <input id='force_receipt' type='checkbox' value='' />Forced Transmission&nbsp;
+                    </td>
+                    <td style="width:8%; padding: 5px;" class="center">
+                        <input type="button" value="Print" onclick="sendData(DEVICE_UNIT_TYPE_RECEIPT)" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Slip print&nbsp;&nbsp;</td>
+                    <td>
+                        timeout&nbsp;<input type="text" size="3" id="slip_timeout" value="1" />&nbsp;(min)
+                        <input id='force_slip' type='checkbox' value=true />Forced Transmission&nbsp;
+                        Wait time&nbsp;<input type="text" size="3" id="slip_waitTime" value="500" />&nbsp;(msec)
+                    </td>
+                    <td style="padding: 5px;" class="center">
+                        <input type="button" value="Wait Insertion" onclick="waitInsertion(DEVICE_UNIT_TYPE_SLIP)" />
+                        <input type="button" value="Print" onclick="sendData(DEVICE_UNIT_TYPE_SLIP)" />&nbsp;&nbsp;
+                        <input type="button" value="Cancel Insertion" onclick="cancelInsertion()" />
+                        <input type="button" value="Eject" onclick="ejectPaper()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Endorse print&nbsp;&nbsp;</td>
+                    <td>
+                        timeout&nbsp;<input type="text" size="3" id="endorse_timeout" value="1" />&nbsp;(min)
+                        <input id='force_endorse' type='checkbox' value=true />Forced Transmission&nbsp;
+                        Wait time&nbsp;<input type="text" size="3" id="endorse_waitTime" value="500" />&nbsp;(msec)
+                        <input id="enable40cpl" type="checkbox" value=true checked="checked" />Enable 40CPL mode
+                    </td>
+
+                    <td style="padding: 5px;" class="center">
+                        <input type="button" value="Wait Insertion" onclick="waitInsertion(DEVICE_UNIT_TYPE_ENDORSE)" />
+                        <input type="button" value="Print" onclick="sendData(DEVICE_UNIT_TYPE_ENDORSE)" />&nbsp;&nbsp;
+                        <input type="button" value="Cancel Insertion" onclick="cancelInsertion()" />
+                        <input type="button" value="Eject" onclick="ejectPaper()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Validation print&nbsp;&nbsp;</td>
+                    <td>
+                        timeout&nbsp;<input type="text" size="3" id="validation_timeout" value="1" />&nbsp;(min)
+                        <input id='force_validation' type='checkbox' value=true />Forced Transmission&nbsp;
+                        Wait time&nbsp;<input type="text" size="3" id="validation_waitTime" value="500" />&nbsp;(msec)
+                    </td>
+                    <td style="padding: 5px;" class="center">
+                        <input type="button" value="Wait Insertion" onclick="waitInsertion(DEVICE_UNIT_TYPE_VALIDATION)" />
+                        <input type="button" value="Print" onclick="sendData(DEVICE_UNIT_TYPE_VALIDATION)" />&nbsp;&nbsp;
+                        <input type="button" value="Cancel Insertion" onclick="cancelInsertion()" />
+                        <input type="button" value="Eject" onclick="ejectPaper()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>1 pass control&nbsp;&nbsp;</td>
+                    <td>
+                        <input id='continuous_micr' type='checkbox' value=true checked="checked"/>Read MICR&nbsp;
+                        <input id='continuous_endorse' type='checkbox' value=true checked="checked"/>Endorse&nbsp;
+                        <input id='continuous_slip' type='checkbox' value=true checked="checked" />SLIP&nbsp;
+                        <input id='continuous_receipt' type='checkbox' value=true checked="checked" />Receipt&nbsp;
+                    </td>
+                    <td style="padding: 5px;" class="center">
+                        <input type="button" value="Start" onclick="continuous_start()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">Recovery</td>
+                    <td><input id='force_recover' type='checkbox' value='' />Forced Transmission&nbsp;</td>
+                    <td style="padding: 5px;" class="center"><input type="button" value="Send" onclick="sendRecover()" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3">Reset</td>
+                    <td style="padding: 5px;" class="center"><input type="button" value="Send" onclick="sendReset()" /></td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Status</td>
+                    <td colspan="2">
+                        Interval
+                        <input id="interval" type="text" size="10" value="3000" />
+                    </td>
+                    <td rowspan="2" style="padding: 5px;" class="center">
+                        <input type="button" value="Start" onclick="startMonitor()" /><br />
+                        <input type="button" value="Stop" onclick="stopMonitor()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="onstatuschange" type="checkbox" value="" />onstatuschange&nbsp;
+                        <input id="ononline" type="checkbox" value="" checked="checked" />ononline, onoffline, onpoweroff&nbsp;
+                        <input id="oncoverok" type="checkbox" value="" checked="checked" />oncoverok, oncoveropen
+                        <br />
+                        <input id="onpaperok" type="checkbox" value="" checked="checked" />onpaperok, onpaperend, onpapernearend&nbsp;
+                        <input id="ondrawerclosed" type="checkbox" value="" checked="checked" />ondrawerclosed, ondraweropen
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+</body>
+
+</html>

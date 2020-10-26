@@ -1,0 +1,31 @@
+# Compiled Sources #
+####################
+dist
+
+
+# Node Modules #
+################
+node_modules
+webDev_backup.zip
+.*/**/node_modules
+
+# Log Files #
+#############
+npm-debug.log
+result.txt
+
+
+# OS Generated Files #
+######################
+._*
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+
+# Editor Generated Files #
+##########################
+.idea

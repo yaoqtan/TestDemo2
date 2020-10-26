@@ -1,0 +1,67 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>加入图片</title>
+    <script src="./../fabric2.js"></script>
+
+
+    <style>
+        body{
+            background: #ccc;
+        }
+        #canvas{
+            background: #fff;
+            border:1px solid #000
+        }
+        #img{
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+<canvas id="canvas" width="800" height="800">
+
+</canvas>
+<img id="img" src="./back2.jpg">
+<script>
+    var canvas = new fabric.Canvas('canvas')
+
+    fabric.Image.fromURL('./back2.jpg',(oImg)=>{
+
+        //oImg.filters.push(new fabric.Image.filters.Grayscale());//灰
+
+        //oImg.filters.push(new fabric.Image.filters.Sepia());//复古
+
+
+        oImg.filters.push(
+            new fabric.Image.filters.Sepia(),
+            new fabric.Image.filters.Brightness({
+                brightness:100
+            })
+        );
+
+
+        oImg.applyFilters(canvas.renderAll.bind(canvas));
+
+
+
+        canvas.add(oImg)
+    })
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

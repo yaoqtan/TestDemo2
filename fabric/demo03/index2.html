@@ -1,0 +1,50 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>加入图片</title>
+    <script src="./../fabric.js"></script>
+
+
+    <style>
+        body{
+            background: #ccc;
+        }
+        #canvas{
+            background: #fff;
+            border:1px solid #000
+        }
+        #img{
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+<canvas id="canvas" width="800" height="800">
+
+</canvas>
+<img id="img" src="./back2.jpg">
+<script>
+    var canvas = new fabric.Canvas('canvas')
+
+    fabric.Image.fromURL('./back2.jpg',(oImg)=>{
+        //oImg.scale(0.1);
+        canvas.add(oImg)
+    })
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

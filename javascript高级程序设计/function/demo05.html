@@ -1,0 +1,38 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>function 内部属性 arguments.callee(num-1)</title>
+    <script>
+        function factorial(num) {
+            if(num<=1){
+                return 1
+            }else{
+                return num * factorial(num-1)
+            }
+        }
+        console.log(factorial(6))
+        console.log(this)
+        function factorial1(num) {
+            console.log(this)
+            if(num<=1){
+                return 1
+            }else{
+                return num * arguments.callee(num-1)
+            }
+        }
+        console.log(factorial1(6))
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

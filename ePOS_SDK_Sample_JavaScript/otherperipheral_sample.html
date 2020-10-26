@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Other Peripheral Sample Program</title>
+<!-- CSS -->
+<style type="text/css">
+body {
+	background-color: #ffffff;
+	color: #333333;
+}
+table, tr, td {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #eeeeee;
+}
+th {
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	color: #333333;
+	background-color: #cccccc;
+}
+.center {
+	text-align: center;
+}
+</style>
+<!-- Script -->
+<script type="text/javascript" src="epos-2.14.0.js"></script>
+<script type="text/javascript">
+<!--
+	var ePosDev = new epson.ePOSDevice();
+	
+	var otherPeripheral = null;
+
+	function connect() {
+		var ipAddress = document.getElementById("ipaddress").value;
+		var port = document.getElementById("port").value;
+		
+		ePosDev.connect(ipAddress, port, Callback_connect);
+		
+		ePosDev.onreconnecting = OnReconnecting;
+		ePosDev.onreconnect = OnReconnect;
+		ePosDev.ondisconnect = OnDisconnect;
+		ePosDev.onerror = OnEposError;
+	}
+	
+	function OnEposError(sq, device_id, code, data) {
+		consolelog("sq:" + sq);
+		consolelog("device_id:" + device_id);
+		consolelog("code:" + code);
+		consolelog("data:" + data);
+	}
+
+	function senddata(data) {
+		var method  = document.getElementById("method").value;
+		var sendbuffer = document.getElementById("sendbuffer").value;
+		try{
+			var json = JSON.parse(sendbuffer);
+			var sq = otherPeripheral.send(method, json);
+		}catch(e){
+		}
+	}
+
+	function Callback_connect(data) {
+		var deviceID = document.getElementById("deviceid").value;
+		var crypto = document.getElementById("crypto").checked;
+		var buffer = document.getElementById("buffer").checked;
+		var options = {'crypto' : crypto, 'buffer' : buffer};
+
+		if (data == 'OK') {
+			consolelog("connected to ePOS Device Service Interface.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_OTHER_PERIPHERAL, options, callbackCreateDevice_otherPeripheral);
+		}
+		else if (data == 'SSL_CONNECT_OK') {
+			consolelog("connected to ePOS Device Service Interface with SSL.", true);
+			ePosDev.createDevice(deviceID, ePosDev.DEVICE_TYPE_OTHER_PERIPHERAL, options, callbackCreateDevice_otherPeripheral);
+		}
+		else {
+			consolelog("connected to ePOS Device Service Interface is failed. [" + data + "]", true);
+		}
+	}
+
+	function callbackCreateDevice_otherPeripheral(data, code) {
+		if (data != null) {
+			otherPeripheral = data;
+			consolelog("you can use other peripheral.");
+			otherPeripheral.onreceive = onReceive;
+			otherPeripheral.onerror = onError;
+		}
+		else {
+			consolelog(code);
+		}
+	}
+
+	function onReceive(eventName, data) {
+		for(var key in data){
+			receivelog(key + " : " + data[key]);
+		}
+	}
+	
+	function onError(data) {
+		for(var key in data){
+			consolelog(key + " : " + data[key]);
+		}
+	}
+
+	function OnReconnecting() {
+		consolelog('onreconnecting');
+	}
+
+	function OnReconnect() {
+		consolelog('onreconnect');
+	}
+
+	function OnDisconnect() {
+		consolelog('ondisconnect');
+	}
+
+	function consolelog(string, option) {
+		var length = arguments.length;
+		var overwrite = length > 1 ? option : false;
+
+		if (overwrite) {
+			document.getElementById("console").value = string + "\r\n";
+		} else {
+			document.getElementById("console").value += string + "\r\n";
+		}
+	}
+
+	function receivelog(string, option) {
+		var length = arguments.length;
+		var overwrite = length > 1 ? option : false;
+
+		if (overwrite) {
+			document.getElementById("receive").value = string + "\r\n";
+		} else {
+			document.getElementById("receive").value += string + "\r\n";
+		}
+	}
+//-->
+</script>
+</head>
+
+<body onload="consolelog('', true);">
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="3">Device Setting</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<tr>
+			<td style="width:10%;">Connection settings</td>
+			<td style="width:80%;">
+				IP address<input id="ipaddress" size="20" type="text" value="192.168.192.168" />
+				Port<input id="port" size="5" type="text" value="8008" />
+				Device ID<input id="deviceid" size="15" type="text" value="local_other" />
+				<input id="crypto" type="checkbox" value="" />Encryption
+				<input id="buffer" type="checkbox" value="" />Enable buffer
+			</td>
+			<td style="width:10%;" class="center"><input type="button" value="Connect" onclick="connect()" /></td>
+		</tr>
+	</tbody>
+</table>
+<table style="width:100%;">
+	<tbody>
+	</tbody>
+</table>
+</form>
+<br />
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th>Console</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<textarea id="console" style="width:98%;" rows="5" cols="80"></textarea>
+				<input type="button" value="Reset" onclick="consolelog('', true)" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+</form>
+<br />
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th colspan="3">ePOS SDK Other Peripheral Object</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="1" style="width:10%;">Method Name</td>
+			<td style="width:80%;">
+				<input id="method" type="text" size="20" value='authorizesales'>
+			</td>
+			<td rowspan="2" style="width:10%;" class="center"><input type="button" value="send" onclick="senddata()" /></td>
+		</tr>
+		<tr>
+			<td colspan="1" style="width:10%;">Send data</td>
+			<td style="width:80%;">
+				<input id="sendbuffer" type="text" size="100" value='{"sequence":1,"service":"credit","total_amount":2000,"training":true,"timeout":60000}'>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</form>
+<form action="" onsubmit="return false;">
+<table style="width:100%;">
+	<thead>
+		<tr>
+			<th>Receive data</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<textarea id="receive" style="width:98%;" rows="10" cols="80"></textarea>
+				<input type="button" value="Reset" onclick="receivelog('', true)" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+</form>
+
+</body>
+</html>

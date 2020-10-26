@@ -9,10 +9,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="./jquery.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>
-        console.log(window.fetch)
-        console.log(window)
+       // console.log(window.fetch)
+        //console.log(window)
 
         /*fetch('https://api.ipify.org?format=jsonp',{
             credentials: 'same-origin',
@@ -24,14 +26,80 @@
                 console.log(myJson);
             });*/
 
-        fetch('https://api.github.com/repos/facebook/react').then(function(res){
+
+       axios.post('./region_prefecture_city_list.csv', { responseType: 'arraybuffer' }).then((res) => {
+            console.log('axios')
+            console.log(res.data)
+       })
+
+        fetch('./region_prefecture_city_list.csv').then(function(res){//https://api.github.com/repos/facebook/react
             // 请求成功，得到 response 对象，调用 response 对象的 json 方法并返回
+            console.log('fetch')
             console.log(res)
-            return res;
+            return res.text();
         }).then(function(data){
             // response 对象的 json 方法执行成功，得到结果
             console.log(data)
+            var csvLines = data.split(/\r\n|\n/);
+            console.log(csvLines)
+            var csvLines = data.split(/\r\n|\n/);
+            var lines = [];
+            var regionList = [];
+            var prefectureList = [];
+            var cityList = [];
+            for (var i = 1; i < csvLines.length; i++) {
+                var line = csvLines[i].split(",");
+                var region = line[0];
+                var prefecture = line[1];
+                var city = line[2];
+                if (region == "" || prefecture == "" || city == "") {
+                    continue;
+                }
+                if ($.inArray(region, regionList) === -1) {
+                    regionList.push(region);
+                }
+                if ($.grep(prefectureList, function (obj) {
+                        return obj.prefecture === prefecture;
+                    }).length === 0) {
+                    prefectureList.push({
+                        "region": region,
+                        "prefecture": prefecture
+                    });
+                }
+                if ($.grep(cityList, function (obj) {
+                        return obj.city === city;
+                    }).length === 0) {
+                    cityList.push({
+                        "prefecture": prefecture,
+                        "city": city
+                    });
+                }
+
+
+
+            }
+            console.log(regionList)
+//
+//            prefectureList = prefectureList.map(item=>{
+//                return({
+//                    ...item,
+//                    value:item.prefecture,
+//                    label:item.prefecture
+//                })
+//            })
+//            cityList = cityList.map(item=>{
+//                return({
+//                    ...item,
+//                    value:item.city,
+//                    label:item.city
+//                })
+//            })
+
+
+            console.log(JSON.stringify(prefectureList) )
+            console.log(JSON.stringify(cityList))
         });
+
 
     </script>
 

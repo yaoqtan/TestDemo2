@@ -1,0 +1,38 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>function apply call</title>
+    <script>
+        function sum(num1,num2) {
+            return num1 + num2
+        }
+
+        function applySum1(num1,num2){
+            return sum.apply(this,arguments);
+        }
+
+        function applySum2(num1,num2) {
+            return sum.apply(this,[num1,num2]);
+
+        }
+        function callSum2(num1,num2) {
+            return sum.call(this,num1,num2);
+
+        }
+        console.log(applySum1(10,10));
+        console.log(applySum2(10,10));
+        console.log(callSum2(10,10));
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

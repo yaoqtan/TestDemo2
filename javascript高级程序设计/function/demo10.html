@@ -1,0 +1,28 @@
+<!DOCTYPE html >
+<html lang="cn">
+    <head>
+        <meta charset="UTF-8">
+        <title>function apply call bind</title>
+        <script>
+            window.color="red";
+            var o = {color:"blue"};
+            function sayColor() {
+                console.log(this.color)
+            }
+            sayColor();
+            sayColor.apply(o)
+            sayColor.call(window);
+            sayColor.call(o)
+            sayColor.call(this)
+
+            var objectSayColor = sayColor.bind(o)
+
+            objectSayColor()
+
+
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>

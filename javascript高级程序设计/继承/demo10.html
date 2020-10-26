@@ -1,0 +1,38 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>寄生式继承</title>
+    <script>
+
+        function createAnother(original) {
+            var clone = Object(original)
+            clone.sayHi=function () {
+                console.log("hi")
+                console.log(this)
+            };
+            return clone
+
+        }
+
+        var person = {
+            name:"Ni",
+            friends:['Sh','Cou','Van']
+        }
+        var anotherPerson = createAnother(person);
+        anotherPerson.sayHi()
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

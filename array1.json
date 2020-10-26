@@ -1,0 +1,2512 @@
+{
+    "data": {
+      "tenkftUsers": [
+        {
+          "id": 761701,
+          "display_name": "Tin Mak",
+          "discipline": "SDU",
+          "thumbnail": "",
+          "role": "Technical - Solution Architect",
+          "archived": false,
+          "projectGraph": {
+            "workingHrs": [
+              0,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8,
+              8,
+              8,
+              0,
+              0,
+              8,
+              8,
+              8
+            ],
+            "assignments": [
+              {
+                "assignment": {
+                  "id": 17298360,
+                  "starts_at": "2020-03-02T00:00:00.000Z",
+                  "ends_at": "2020-04-09T00:00:00.000Z",
+                  "percent": 0.0625
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3148179,
+                  "parent_id": 3148157,
+                  "name": "[SDU] Internal / Other Task",
+                  "phase_name": "Others",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17745496,
+                  "starts_at": "2020-04-16T00:00:00.000Z",
+                  "ends_at": "2020-05-15T00:00:00.000Z",
+                  "percent": 0.0625
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3148179,
+                  "parent_id": 3148157,
+                  "name": "[SDU] Internal / Other Task",
+                  "phase_name": "Others",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17745492,
+                  "starts_at": "2020-05-18T00:00:00.000Z",
+                  "ends_at": "2020-05-28T00:00:00.000Z",
+                  "percent": 0.2
+                },
+                "project": {
+                  "project_state": "Confirmed",
+                  "client": "Manner"
+                },
+                "assignable": {
+                  "id": 3239885,
+                  "parent_id": 3239883,
+                  "name": "Manner 18+ [MANNER-ETP-2004]",
+                  "phase_name": "Development",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17485920,
+                  "starts_at": "2020-03-26T00:00:00.000Z",
+                  "ends_at": "2020-04-03T00:00:00.000Z",
+                  "percent": 1
+                },
+                "project": {
+                  "project_state": "Confirmed",
+                  "client": "Timable"
+                },
+                "assignable": {
+                  "id": 3208488,
+                  "parent_id": 3208486,
+                  "name": "Timable Cloud Migration [TIMAB-CM-2003]",
+                  "phase_name": "Development",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17495165,
+                  "starts_at": "2020-03-23T00:00:00.000Z",
+                  "ends_at": "2020-03-31T00:00:00.000Z",
+                  "percent": 0.125
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3138833,
+                  "parent_id": 3138823,
+                  "name": "Taraxar [SDU-TAR-2002]",
+                  "phase_name": "Development",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17334205,
+                  "starts_at": "2020-03-23T00:00:00.000Z",
+                  "ends_at": "2020-04-03T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3159204,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "Sprint 4",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17048008,
+                  "starts_at": "2020-02-10T00:00:00.000Z",
+                  "ends_at": "2020-03-20T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3138833,
+                  "parent_id": 3138823,
+                  "name": "Taraxar [SDU-TAR-2002]",
+                  "phase_name": "Development",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17334204,
+                  "starts_at": "2020-03-09T00:00:00.000Z",
+                  "ends_at": "2020-03-20T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3159203,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "Sprint 3",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17096862,
+                  "starts_at": "2020-03-03T00:00:00.000Z",
+                  "ends_at": "2020-03-03T00:00:00.000Z",
+                  "percent": 0.1875
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3148172,
+                  "parent_id": 3148157,
+                  "name": "[SDU] Internal / Other Task",
+                  "phase_name": "Team Meeting",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17247174,
+                  "starts_at": "2020-02-24T00:00:00.000Z",
+                  "ends_at": "2020-03-06T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3175017,
+                  "parent_id": 3153152,
+                  "name": "[SDU] Pitching",
+                  "phase_name": "Tech - Timable Revamp",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17247175,
+                  "starts_at": "2020-02-27T00:00:00.000Z",
+                  "ends_at": "2020-02-28T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3175018,
+                  "parent_id": 3148157,
+                  "name": "[SDU] Internal / Other Task",
+                  "phase_name": "Gear Industry - BlankInBlank",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17096864,
+                  "starts_at": "2020-03-18T00:00:00.000Z",
+                  "ends_at": "2020-03-18T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3148172,
+                  "parent_id": 3148157,
+                  "name": "[SDU] Internal / Other Task",
+                  "phase_name": "Team Meeting",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17096863,
+                  "starts_at": "2020-03-11T00:00:00.000Z",
+                  "ends_at": "2020-03-11T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3148172,
+                  "parent_id": 3148157,
+                  "name": "[SDU] Internal / Other Task",
+                  "phase_name": "Team Meeting",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17096860,
+                  "starts_at": "2020-02-19T00:00:00.000Z",
+                  "ends_at": "2020-02-19T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3148172,
+                  "parent_id": 3148157,
+                  "name": "[SDU] Internal / Other Task",
+                  "phase_name": "Team Meeting",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 16998096,
+                  "starts_at": "2020-02-24T00:00:00.000Z",
+                  "ends_at": "2020-03-06T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3129690,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "Sprint 2",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 16998091,
+                  "starts_at": "2020-02-10T00:00:00.000Z",
+                  "ends_at": "2020-02-21T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3129689,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "Sprint 1",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17884786,
+                  "starts_at": "2020-05-04T00:00:00.000Z",
+                  "ends_at": "2020-05-15T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3260213,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "Sprint 7",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17884782,
+                  "starts_at": "2020-04-20T00:00:00.000Z",
+                  "ends_at": "2020-04-29T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3259963,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "Sprint 6",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 17884703,
+                  "starts_at": "2020-04-24T00:00:00.000Z",
+                  "ends_at": "2020-05-28T00:00:00.000Z",
+                  "percent": 0.0313
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3148172,
+                  "parent_id": 3148157,
+                  "name": "[SDU] Internal / Other Task",
+                  "phase_name": "Team Meeting",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 18072688,
+                  "starts_at": "2020-05-04T00:00:00.000Z",
+                  "ends_at": "2020-05-28T00:00:00.000Z",
+                  "percent": 0.0476
+                },
+                "project": {
+                  "project_state": "Confirmed",
+                  "client": "Timable"
+                },
+                "assignable": {
+                  "id": 3298526,
+                  "parent_id": 3298524,
+                  "name": "Timable [Maintenance] May - Jul 2020 [TIMAB-MAIN-20200731]",
+                  "phase_name": "Maintenance",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 18308893,
+                  "starts_at": "2020-06-01T00:00:00.000Z",
+                  "ends_at": "2020-07-31T00:00:00.000Z",
+                  "percent": 0.0313
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3148172,
+                  "parent_id": 3148157,
+                  "name": "[SDU] Internal / Other Task",
+                  "phase_name": "Team Meeting",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 18308894,
+                  "starts_at": "2020-06-01T00:00:00.000Z",
+                  "ends_at": "2020-07-31T00:00:00.000Z",
+                  "percent": 0.0938
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3148179,
+                  "parent_id": 3148157,
+                  "name": "[SDU] Internal / Other Task",
+                  "phase_name": "Others",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 18308892,
+                  "starts_at": "2020-06-01T00:00:00.000Z",
+                  "ends_at": "2020-07-31T00:00:00.000Z",
+                  "percent": 0.0476
+                },
+                "project": {
+                  "project_state": "Confirmed",
+                  "client": "Timable"
+                },
+                "assignable": {
+                  "id": 3298526,
+                  "parent_id": 3298524,
+                  "name": "Timable [Maintenance] May - Jul 2020 [TIMAB-MAIN-20200731]",
+                  "phase_name": "Maintenance",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 18308896,
+                  "starts_at": "2020-06-01T00:00:00.000Z",
+                  "ends_at": "2020-07-31T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3320369,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "10,000ft - Analytics",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 18308888,
+                  "starts_at": "2020-05-29T00:00:00.000Z",
+                  "ends_at": "2020-05-29T00:00:00.000Z",
+                  "percent": 1
+                },
+                "project": null,
+                "assignable": {
+                  "id": 520495,
+                  "parent_id": null,
+                  "name": "Leave",
+                  "phase_name": null,
+                  "type": "LeaveType"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 18259703,
+                  "starts_at": "2020-05-18T00:00:00.000Z",
+                  "ends_at": "2020-05-28T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3320369,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "10,000ft - Analytics",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 18259705,
+                  "starts_at": "2020-05-18T00:00:00.000Z",
+                  "ends_at": "2020-05-28T00:00:00.000Z",
+                  "percent": 0.375
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3320399,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "Onsite Attendance Report",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 18259667,
+                  "starts_at": "2020-05-18T00:00:00.000Z",
+                  "ends_at": "2020-05-28T00:00:00.000Z",
+                  "percent": 0.0938
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3148179,
+                  "parent_id": 3148157,
+                  "name": "[SDU] Internal / Other Task",
+                  "phase_name": "Others",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 18259513,
+                  "starts_at": "2020-04-24T00:00:00.000Z",
+                  "ends_at": "2020-05-15T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3320372,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "HR One",
+                  "type": "Project"
+                }
+              },
+              {
+                "assignment": {
+                  "id": 18259508,
+                  "starts_at": "2020-04-24T00:00:00.000Z",
+                  "ends_at": "2020-05-15T00:00:00.000Z",
+                  "percent": 0.25
+                },
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3320383,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "10,000ft - SA",
+                  "type": "Project"
+                }
+              }
+            ],
+            "timesheets": [
+              {
+                "submitted": [
+                  {
+                    "index": 106,
+                    "hours": 7.5
+                  },
+                  {
+                    "index": 107,
+                    "hours": 7.5
+                  },
+                  {
+                    "index": 105,
+                    "hours": 6
+                  },
+                  {
+                    "index": 104,
+                    "hours": 6
+                  },
+                  {
+                    "index": 99,
+                    "hours": 4
+                  },
+                  {
+                    "index": 98,
+                    "hours": 3.5
+                  },
+                  {
+                    "index": 98,
+                    "hours": 1
+                  },
+                  {
+                    "index": 97,
+                    "hours": 3.5
+                  },
+                  {
+                    "index": 96,
+                    "hours": 2
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3227577,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "Sprint 5",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 107,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 106,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 105,
+                    "hours": 2
+                  },
+                  {
+                    "index": 104,
+                    "hours": 2
+                  },
+                  {
+                    "index": 99,
+                    "hours": 4
+                  },
+                  {
+                    "index": 98,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 111,
+                    "hours": 4
+                  },
+                  {
+                    "index": 110,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 113,
+                    "hours": 1.5
+                  },
+                  {
+                    "index": 112,
+                    "hours": 3
+                  },
+                  {
+                    "index": 118,
+                    "hours": 1.5
+                  },
+                  {
+                    "index": 117,
+                    "hours": 1.5
+                  },
+                  {
+                    "index": 127,
+                    "hours": 2.5
+                  },
+                  {
+                    "index": 124,
+                    "hours": 1.5
+                  },
+                  {
+                    "index": 126,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 119,
+                    "hours": 1.5
+                  },
+                  {
+                    "index": 114,
+                    "hours": 1.5
+                  },
+                  {
+                    "index": 125,
+                    "hours": 1.5
+                  },
+                  {
+                    "index": 132,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 134,
+                    "hours": 1.5
+                  },
+                  {
+                    "index": 133,
+                    "hours": 1.5
+                  },
+                  {
+                    "index": 131,
+                    "hours": 1.5
+                  },
+                  {
+                    "index": 128,
+                    "hours": 1.5
+                  },
+                  {
+                    "index": 142,
+                    "hours": 2
+                  },
+                  {
+                    "index": 141,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 140,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 139,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 138,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 135,
+                    "hours": 1.5
+                  },
+                  {
+                    "index": 156,
+                    "hours": 1.75
+                  },
+                  {
+                    "index": 155,
+                    "hours": 1.75
+                  },
+                  {
+                    "index": 154,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 153,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 152,
+                    "hours": 1.75
+                  },
+                  {
+                    "index": 148,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 147,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 146,
+                    "hours": 1.15
+                  },
+                  {
+                    "index": 145,
+                    "hours": 1.15
+                  },
+                  {
+                    "index": 97,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 96,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 93,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 92,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 91,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 90,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 89,
+                    "hours": 0
+                  },
+                  {
+                    "index": 86,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 85,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 84,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 83,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 82,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 79,
+                    "hours": 1
+                  },
+                  {
+                    "index": 78,
+                    "hours": 1
+                  },
+                  {
+                    "index": 77,
+                    "hours": 1
+                  },
+                  {
+                    "index": 76,
+                    "hours": 1
+                  },
+                  {
+                    "index": 75,
+                    "hours": 1
+                  },
+                  {
+                    "index": 170,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 169,
+                    "hours": 1.75
+                  },
+                  {
+                    "index": 168,
+                    "hours": 1.75
+                  },
+                  {
+                    "index": 167,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 166,
+                    "hours": 1.75
+                  },
+                  {
+                    "index": 163,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 162,
+                    "hours": 1.75
+                  },
+                  {
+                    "index": 161,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 160,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 159,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 177,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 175,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 174,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 173,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 183,
+                    "hours": 0.75
+                  },
+                  {
+                    "index": 181,
+                    "hours": 0.7504
+                  },
+                  {
+                    "index": 180,
+                    "hours": 0.7504
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3148179,
+                  "parent_id": 3148157,
+                  "name": "[SDU] Internal / Other Task",
+                  "phase_name": "Others",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 105,
+                    "hours": 0
+                  },
+                  {
+                    "index": 104,
+                    "hours": 0
+                  },
+                  {
+                    "index": 105,
+                    "hours": 8
+                  },
+                  {
+                    "index": 104,
+                    "hours": 8
+                  },
+                  {
+                    "index": 140,
+                    "hours": 0
+                  },
+                  {
+                    "index": 141,
+                    "hours": 0
+                  },
+                  {
+                    "index": 138,
+                    "hours": 0
+                  },
+                  {
+                    "index": 142,
+                    "hours": 0
+                  },
+                  {
+                    "index": 139,
+                    "hours": 0
+                  },
+                  {
+                    "index": 148,
+                    "hours": 0
+                  },
+                  {
+                    "index": 147,
+                    "hours": 0
+                  },
+                  {
+                    "index": 146,
+                    "hours": 0
+                  },
+                  {
+                    "index": 145,
+                    "hours": 0
+                  }
+                ],
+                "project": {
+                  "project_state": "Confirmed",
+                  "client": "Manner"
+                },
+                "assignable": {
+                  "id": 3239885,
+                  "parent_id": 3239883,
+                  "name": "Manner 18+ [MANNER-ETP-2004]",
+                  "phase_name": "Development",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 98,
+                    "hours": 3
+                  },
+                  {
+                    "index": 97,
+                    "hours": 4
+                  },
+                  {
+                    "index": 96,
+                    "hours": 5.5
+                  },
+                  {
+                    "index": 93,
+                    "hours": 3.5
+                  },
+                  {
+                    "index": 92,
+                    "hours": 6.5
+                  },
+                  {
+                    "index": 91,
+                    "hours": 6.5
+                  },
+                  {
+                    "index": 90,
+                    "hours": 4
+                  },
+                  {
+                    "index": 89,
+                    "hours": 6
+                  },
+                  {
+                    "index": 86,
+                    "hours": 7.5
+                  },
+                  {
+                    "index": 85,
+                    "hours": 7.5
+                  }
+                ],
+                "project": {
+                  "project_state": "Confirmed",
+                  "client": "Timable"
+                },
+                "assignable": {
+                  "id": 3208488,
+                  "parent_id": 3208486,
+                  "name": "Timable Cloud Migration [TIMAB-CM-2003]",
+                  "phase_name": "Development",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 110,
+                    "hours": 0
+                  },
+                  {
+                    "index": 111,
+                    "hours": 0
+                  },
+                  {
+                    "index": 112,
+                    "hours": 0
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3212101,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "10,000ft POC - Development",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 111,
+                    "hours": 4
+                  },
+                  {
+                    "index": 113,
+                    "hours": 6.5
+                  },
+                  {
+                    "index": 112,
+                    "hours": 5
+                  },
+                  {
+                    "index": 110,
+                    "hours": 7.5
+                  },
+                  {
+                    "index": 117,
+                    "hours": 2
+                  },
+                  {
+                    "index": 118,
+                    "hours": 2
+                  },
+                  {
+                    "index": 119,
+                    "hours": 2
+                  },
+                  {
+                    "index": 114,
+                    "hours": 2
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3259963,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "Sprint 6",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 117,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 118,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 127,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 124,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 114,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 125,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 126,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 119,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 134,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 132,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 133,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 131,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 128,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 142,
+                    "hours": 1
+                  },
+                  {
+                    "index": 141,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 140,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 138,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 139,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 135,
+                    "hours": 0.5
+                  },
+                  {
+                    "index": 156,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 155,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 154,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 153,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 152,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 148,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 147,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 146,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 145,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 77,
+                    "hours": 2
+                  },
+                  {
+                    "index": 170,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 169,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 168,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 167,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 166,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 163,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 162,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 161,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 160,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 159,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 177,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 175,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 174,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 173,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 183,
+                    "hours": 1.25
+                  },
+                  {
+                    "index": 181,
+                    "hours": 0.2504
+                  },
+                  {
+                    "index": 180,
+                    "hours": 0.2504
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3148172,
+                  "parent_id": 3148157,
+                  "name": "[SDU] Internal / Other Task",
+                  "phase_name": "Team Meeting",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 127,
+                    "hours": 0
+                  },
+                  {
+                    "index": 126,
+                    "hours": 2
+                  },
+                  {
+                    "index": 125,
+                    "hours": 2
+                  },
+                  {
+                    "index": 124,
+                    "hours": 2
+                  },
+                  {
+                    "index": 131,
+                    "hours": 4
+                  },
+                  {
+                    "index": 133,
+                    "hours": 4
+                  },
+                  {
+                    "index": 134,
+                    "hours": 4
+                  },
+                  {
+                    "index": 132,
+                    "hours": 4
+                  },
+                  {
+                    "index": 128,
+                    "hours": 2
+                  },
+                  {
+                    "index": 135,
+                    "hours": 4
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3260213,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "Sprint 7",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 128,
+                    "hours": 0
+                  },
+                  {
+                    "index": 124,
+                    "hours": 0
+                  },
+                  {
+                    "index": 125,
+                    "hours": 0
+                  },
+                  {
+                    "index": 126,
+                    "hours": 0
+                  },
+                  {
+                    "index": 127,
+                    "hours": 5
+                  },
+                  {
+                    "index": 134,
+                    "hours": 0
+                  },
+                  {
+                    "index": 131,
+                    "hours": 0
+                  },
+                  {
+                    "index": 133,
+                    "hours": 0
+                  },
+                  {
+                    "index": 132,
+                    "hours": 1
+                  },
+                  {
+                    "index": 142,
+                    "hours": 0
+                  },
+                  {
+                    "index": 141,
+                    "hours": 1
+                  },
+                  {
+                    "index": 138,
+                    "hours": 0
+                  },
+                  {
+                    "index": 140,
+                    "hours": 0
+                  },
+                  {
+                    "index": 139,
+                    "hours": 1
+                  },
+                  {
+                    "index": 135,
+                    "hours": 0
+                  },
+                  {
+                    "index": 163,
+                    "hours": 0
+                  },
+                  {
+                    "index": 162,
+                    "hours": 0
+                  },
+                  {
+                    "index": 161,
+                    "hours": 0
+                  },
+                  {
+                    "index": 160,
+                    "hours": 0
+                  },
+                  {
+                    "index": 159,
+                    "hours": 0
+                  },
+                  {
+                    "index": 156,
+                    "hours": 0
+                  },
+                  {
+                    "index": 155,
+                    "hours": 0
+                  },
+                  {
+                    "index": 154,
+                    "hours": 0
+                  },
+                  {
+                    "index": 153,
+                    "hours": 0
+                  },
+                  {
+                    "index": 152,
+                    "hours": 0
+                  },
+                  {
+                    "index": 148,
+                    "hours": 0
+                  },
+                  {
+                    "index": 147,
+                    "hours": 2
+                  },
+                  {
+                    "index": 147,
+                    "hours": 0
+                  },
+                  {
+                    "index": 146,
+                    "hours": 0
+                  },
+                  {
+                    "index": 145,
+                    "hours": 0
+                  },
+                  {
+                    "index": 170,
+                    "hours": 0
+                  },
+                  {
+                    "index": 169,
+                    "hours": 0
+                  },
+                  {
+                    "index": 168,
+                    "hours": 0
+                  },
+                  {
+                    "index": 167,
+                    "hours": 1
+                  },
+                  {
+                    "index": 166,
+                    "hours": 0
+                  },
+                  {
+                    "index": 166,
+                    "hours": 1
+                  },
+                  {
+                    "index": 177,
+                    "hours": 0
+                  },
+                  {
+                    "index": 175,
+                    "hours": 0
+                  },
+                  {
+                    "index": 174,
+                    "hours": 0
+                  },
+                  {
+                    "index": 173,
+                    "hours": 0
+                  },
+                  {
+                    "index": 184,
+                    "hours": 0
+                  },
+                  {
+                    "index": 183,
+                    "hours": 0
+                  },
+                  {
+                    "index": 181,
+                    "hours": 1.5
+                  },
+                  {
+                    "index": 180,
+                    "hours": 0
+                  }
+                ],
+                "project": {
+                  "project_state": "Confirmed",
+                  "client": "Timable"
+                },
+                "assignable": {
+                  "id": 3298526,
+                  "parent_id": 3298524,
+                  "name": "Timable [Maintenance] May - Jul 2020 [TIMAB-MAIN-20200731]",
+                  "phase_name": "Maintenance",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 140,
+                    "hours": 3
+                  },
+                  {
+                    "index": 139,
+                    "hours": 3
+                  },
+                  {
+                    "index": 138,
+                    "hours": 3
+                  },
+                  {
+                    "index": 142,
+                    "hours": 3
+                  },
+                  {
+                    "index": 141,
+                    "hours": 3
+                  },
+                  {
+                    "index": 148,
+                    "hours": 3
+                  },
+                  {
+                    "index": 147,
+                    "hours": 3
+                  },
+                  {
+                    "index": 146,
+                    "hours": 3
+                  },
+                  {
+                    "index": 145,
+                    "hours": 3
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3320399,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "Onsite Attendance Report",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 138,
+                    "hours": 4
+                  },
+                  {
+                    "index": 139,
+                    "hours": 3
+                  },
+                  {
+                    "index": 141,
+                    "hours": 3
+                  },
+                  {
+                    "index": 140,
+                    "hours": 4
+                  },
+                  {
+                    "index": 142,
+                    "hours": 2
+                  },
+                  {
+                    "index": 156,
+                    "hours": 6
+                  },
+                  {
+                    "index": 155,
+                    "hours": 6
+                  },
+                  {
+                    "index": 154,
+                    "hours": 7
+                  },
+                  {
+                    "index": 153,
+                    "hours": 7
+                  },
+                  {
+                    "index": 152,
+                    "hours": 6
+                  },
+                  {
+                    "index": 148,
+                    "hours": 4
+                  },
+                  {
+                    "index": 147,
+                    "hours": 2
+                  },
+                  {
+                    "index": 146,
+                    "hours": 3.6
+                  },
+                  {
+                    "index": 145,
+                    "hours": 3.6
+                  },
+                  {
+                    "index": 170,
+                    "hours": 7
+                  },
+                  {
+                    "index": 169,
+                    "hours": 6
+                  },
+                  {
+                    "index": 168,
+                    "hours": 6
+                  },
+                  {
+                    "index": 167,
+                    "hours": 6
+                  },
+                  {
+                    "index": 166,
+                    "hours": 5
+                  },
+                  {
+                    "index": 163,
+                    "hours": 7
+                  },
+                  {
+                    "index": 162,
+                    "hours": 6
+                  },
+                  {
+                    "index": 161,
+                    "hours": 7
+                  },
+                  {
+                    "index": 160,
+                    "hours": 7
+                  },
+                  {
+                    "index": 159,
+                    "hours": 7
+                  },
+                  {
+                    "index": 177,
+                    "hours": 7
+                  },
+                  {
+                    "index": 175,
+                    "hours": 7
+                  },
+                  {
+                    "index": 174,
+                    "hours": 7
+                  },
+                  {
+                    "index": 173,
+                    "hours": 7
+                  },
+                  {
+                    "index": 183,
+                    "hours": 6
+                  },
+                  {
+                    "index": 181,
+                    "hours": 5.5
+                  },
+                  {
+                    "index": 180,
+                    "hours": 7
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3320369,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "10,000ft - Analytics",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 133,
+                    "hours": 0
+                  },
+                  {
+                    "index": 132,
+                    "hours": 0
+                  },
+                  {
+                    "index": 126,
+                    "hours": 3
+                  },
+                  {
+                    "index": 124,
+                    "hours": 2
+                  },
+                  {
+                    "index": 118,
+                    "hours": 2
+                  },
+                  {
+                    "index": 131,
+                    "hours": 0
+                  },
+                  {
+                    "index": 135,
+                    "hours": 0
+                  },
+                  {
+                    "index": 127,
+                    "hours": 0
+                  },
+                  {
+                    "index": 114,
+                    "hours": 2
+                  },
+                  {
+                    "index": 134,
+                    "hours": 0
+                  },
+                  {
+                    "index": 128,
+                    "hours": 2
+                  },
+                  {
+                    "index": 125,
+                    "hours": 2
+                  },
+                  {
+                    "index": 119,
+                    "hours": 2
+                  },
+                  {
+                    "index": 117,
+                    "hours": 2
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3320372,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "HR One",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 135,
+                    "hours": 2
+                  },
+                  {
+                    "index": 128,
+                    "hours": 2
+                  },
+                  {
+                    "index": 125,
+                    "hours": 2
+                  },
+                  {
+                    "index": 117,
+                    "hours": 2
+                  },
+                  {
+                    "index": 114,
+                    "hours": 2
+                  },
+                  {
+                    "index": 134,
+                    "hours": 2
+                  },
+                  {
+                    "index": 131,
+                    "hours": 2
+                  },
+                  {
+                    "index": 126,
+                    "hours": 2
+                  },
+                  {
+                    "index": 118,
+                    "hours": 2
+                  },
+                  {
+                    "index": 119,
+                    "hours": 2
+                  },
+                  {
+                    "index": 132,
+                    "hours": 2
+                  },
+                  {
+                    "index": 133,
+                    "hours": 2
+                  },
+                  {
+                    "index": 127,
+                    "hours": 0
+                  },
+                  {
+                    "index": 124,
+                    "hours": 2
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3320383,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "10,000ft - SA",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 149,
+                    "hours": 8
+                  }
+                ],
+                "project": null,
+                "assignable": {
+                  "id": 520495,
+                  "parent_id": null,
+                  "name": "Leave",
+                  "phase_name": null,
+                  "type": "LeaveType"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 93,
+                    "hours": 4
+                  },
+                  {
+                    "index": 92,
+                    "hours": 1
+                  },
+                  {
+                    "index": 91,
+                    "hours": 1
+                  },
+                  {
+                    "index": 90,
+                    "hours": 2.5
+                  },
+                  {
+                    "index": 89,
+                    "hours": 0
+                  },
+                  {
+                    "index": 86,
+                    "hours": 0
+                  },
+                  {
+                    "index": 85,
+                    "hours": 0
+                  },
+                  {
+                    "index": 84,
+                    "hours": 6.5
+                  },
+                  {
+                    "index": 83,
+                    "hours": 7.5
+                  },
+                  {
+                    "index": 82,
+                    "hours": 7.5
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3159204,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "Sprint 4",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 92,
+                    "hours": 0
+                  },
+                  {
+                    "index": 91,
+                    "hours": 0
+                  },
+                  {
+                    "index": 90,
+                    "hours": 0
+                  },
+                  {
+                    "index": 89,
+                    "hours": 0
+                  },
+                  {
+                    "index": 86,
+                    "hours": 0
+                  },
+                  {
+                    "index": 85,
+                    "hours": 0
+                  },
+                  {
+                    "index": 84,
+                    "hours": 1
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "HSBC"
+                },
+                "assignable": {
+                  "id": 3209777,
+                  "parent_id": 3209775,
+                  "name": "HSBC Vision Go Content Creation",
+                  "phase_name": "Blogging",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 91,
+                    "hours": 0
+                  }
+                ],
+                "project": {
+                  "project_state": "Tentative",
+                  "client": "Green Tomato"
+                },
+                "assignable": {
+                  "id": 3208473,
+                  "parent_id": 3208472,
+                  "name": "Look Case",
+                  "phase_name": "Development",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 90,
+                    "hours": 1
+                  },
+                  {
+                    "index": 89,
+                    "hours": 2
+                  },
+                  {
+                    "index": 86,
+                    "hours": 0
+                  },
+                  {
+                    "index": 85,
+                    "hours": 0
+                  },
+                  {
+                    "index": 84,
+                    "hours": 0
+                  },
+                  {
+                    "index": 83,
+                    "hours": 0
+                  },
+                  {
+                    "index": 82,
+                    "hours": 0
+                  },
+                  {
+                    "index": 79,
+                    "hours": 2
+                  },
+                  {
+                    "index": 78,
+                    "hours": 2
+                  },
+                  {
+                    "index": 77,
+                    "hours": 2
+                  },
+                  {
+                    "index": 76,
+                    "hours": 2
+                  },
+                  {
+                    "index": 75,
+                    "hours": 2
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3138833,
+                  "parent_id": 3138823,
+                  "name": "Taraxar [SDU-TAR-2002]",
+                  "phase_name": "Development",
+                  "type": "Project"
+                }
+              },
+              {
+                "submitted": [
+                  {
+                    "index": 79,
+                    "hours": 5
+                  },
+                  {
+                    "index": 78,
+                    "hours": 5
+                  },
+                  {
+                    "index": 77,
+                    "hours": 3
+                  },
+                  {
+                    "index": 76,
+                    "hours": 5
+                  },
+                  {
+                    "index": 75,
+                    "hours": 5
+                  }
+                ],
+                "project": {
+                  "project_state": "Internal",
+                  "client": "SDU"
+                },
+                "assignable": {
+                  "id": 3159203,
+                  "parent_id": 3129688,
+                  "name": "Dashboard [SDU-DASHBOARD-2002]",
+                  "phase_name": "Sprint 3",
+                  "type": "Project"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }

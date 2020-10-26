@@ -79,10 +79,13 @@
         //按属性对object分类
         console.log('按属性对object分类')
         var people = [
-            { name: 'Alice', age: 21 },
-            { name: 'Max', age: 20 },
-            { name: 'Jane', age: 20 }
+            { name: 'Alice', age: 21,work:'sdf' },
+            { name: 'Max', age: 20 ,work:'sdf'},
+            { name: 'Jane', age: 20,work:'sdf' },
+            { name: 'Jane1', age: 20,work:'sdf' }
         ];
+
+
         function groupBy(objectArray,property) {
             return objectArray.reduce((acc,obj)=>{
                 let key = obj[property];
@@ -95,6 +98,29 @@
             },{})
         }
         console.log(groupBy(people,'age'))
+
+
+        let test=[]
+        people.map(item=>{
+            if(test.some(t=>t.age===item.age)){
+                test = test.map(t=>{
+                    let num = t.age===item.age?t.num+1:t.num
+                    return(
+                        {
+                            ...t,
+                            num
+                        })
+                })
+            }else{
+                test.push({
+                    ...item,
+                    num:1
+                })
+            }
+
+        })
+        console.log(test)
+
 
 
         //使用扩展运算符和initialValue绑定包含在对象数组中的数组
@@ -150,7 +176,10 @@
          */
         function runPromiseInSequence(arr, input) {
             return arr.reduce(
-                (promiseChain, currentFunction) => promiseChain.then(currentFunction),
+                (promiseChain, currentFunction) => {
+                    console.log(currentFunction)
+                    return promiseChain.then(currentFunction)
+                },
                 Promise.resolve(input)
             );
         }
@@ -158,6 +187,7 @@
         // promise function 1
         function p1(a) {
             return new Promise((resolve, reject) => {
+                console.log('5')
                 resolve(a * 5);
             });
         }
@@ -165,25 +195,28 @@
         // promise function 2
         function p2(a) {
             return new Promise((resolve, reject) => {
+                console.log('2')
                 resolve(a * 2);
             });
         }
 
         // function 3  - will be wrapped in a resolved promise by .then()
         function f3(a) {
+            console.log('3')
             return a * 3;
         }
 
         // promise function 4
         function p4(a) {
             return new Promise((resolve, reject) => {
+                console.log('4')
                 resolve(a * 4);
             });
         }
 
         const promiseArr = [p1, p2, f3, p4];
         runPromiseInSequence(promiseArr, 10)
-            .then(console.log);   // 1200
+            .then((data)=>console.log(data));   // 1200
 
         //功能型函数管道
 

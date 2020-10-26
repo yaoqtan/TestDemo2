@@ -1,0 +1,43 @@
+<!--
+/*
+* COPYRIGHT.GT. ALL RIGHTS RESERVED.
+*/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生对象的问题</title>
+    <script>
+
+        function Person(){
+
+        }
+        //var friend = new Person()
+        Person.prototype={
+            //constructor:Person,
+            name:"Nicholas",
+            age:29,
+            job:"software",
+            friends:["tman","yao",'tan'],
+            sayName:function () {
+                console.log(this.name)
+            }
+        }
+        var person1 = new Person()
+        var person2 = new Person()
+
+        person1.friends.push('Van');
+        console.log(person1.friends)
+        console.log(person2.friends)
+        console.log(person1.friends === person2.friends)
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

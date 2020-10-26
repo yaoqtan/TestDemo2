@@ -1,0 +1,161 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+
+    //this
+     var a = {
+         name:"A",
+         fn:function () {
+             console.log(this.name)
+         }
+     }
+     a.fn()
+     a.fn.call({name:'B'})
+     var fn1 = a.fn
+     fn1()
+
+    //this执行场景
+
+    //构造函数 this
+
+    function Foo(name) {
+         this.name = name
+    }
+    var f = new Foo('zhangsan')
+
+    //this 作为对象属性执行
+    var obj = {
+         name:'A',
+         printName:function () {
+             console.log(this.name)
+         }
+    }
+    obj.printName() //this 作为对象属性执行
+
+
+    //this 普通函数执行
+
+    function fn() {
+        console.log(this)
+    }
+    fn()
+
+    // call,apply,bind
+
+    function fn1(name,age) {
+        alert(name,age)
+        console.log(this)
+    }
+    fn1.call({x:100},'zhangsan',20)
+
+
+    var fn2=function(name,age) {
+        alert(name,age)
+        console.log(this)
+    }.bind({y:200})
+    fn2('zhangsan',20)
+
+
+
+    // 作用域
+    console.log('作用域')
+    if(true){
+        var a11 = 100
+    }
+    console.log(a11)
+
+
+    </script>
+
+</head>
+<body>
+
+<p>
+    说一下对变量的提升的理解
+
+    答：变量定义，函数声明（注意和函数表达式的区别）
+</p>
+
+<p>
+    说明this 几种不同的使用场景
+    答：作为构造函数执行; 作为对象属性执行; 作为普通函数执行; call apply bind
+</p>
+
+<p>
+    创建10个< a >标签，点击的时候弹出对应的序号
+
+</p>
+
+<p>
+    如何理解作用域
+</p>
+
+<p>
+    实际开发中的闭包的应用
+</p>
+
+<p>
+    知识点：执行上下文，this，作用域，作用域链，闭包
+</p>
+
+
+<script>
+
+    //没有声明函数，作用域为全局作用域
+    var i1 ,a1
+    for(i1=0;i1 < 10;i1++){
+        a1=document.createElement('a')
+        a1.innerHTML=i1+'<br>'
+        a1.addEventListener('click',function (e) {
+            e.preventDefault()
+            console.log(i1)
+        })
+        document.body.appendChild(a1)
+    }
+
+    var a3
+
+    for(let i3=0;i3 < 10;i3++){
+        a3=document.createElement('a')
+        a3.innerHTML=i3+'<br>'
+        a3.addEventListener('click',function (e) {
+            e.preventDefault()
+            console.log(i3)
+        })
+        document.body.appendChild(a3)
+    }
+
+
+    //声明了10个函数,给每个函数赋值对应的i2
+    var i2
+    for(i2=0;i2 < 10;i2++){
+        (function (i) {
+            var a2 = document.createElement('a')
+            a2.innerHTML = i2 + '<br>'
+
+            a2.addEventListener('click',function (e) {
+                e.preventDefault()
+                console.log(i)
+            })
+
+            document.body.appendChild(a2)
+
+        })(i2)
+    }
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

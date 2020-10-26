@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+      const priceSubstr = (num = '0', n = 0, symbol = ',') => {
+          if(parseInt(num) != num && n !== 0) {
+              if (symbol === '.') throw new Error('symbol can not same as .')
+          }
+          num = (+num).toFixed(n === 0 ? 1 : n)
+          num = num.toString().replace(/(\d)(?=(\d{3})+\.)/g, `$1${symbol}`)
+          if (!!n) {
+              return num
+          } else {
+              return num.substring(0, num.lastIndexOf('.'))
+          }
+      }
+      function ThousandNum(num){
+          return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+      console.log(ThousandNum('100000.5423'))
+  </script>
+</head>
+<body>
+
+</body>
+</html>

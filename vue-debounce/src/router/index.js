@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import KeeepAlive from '../views/KeeepAlive.vue'
 import routerOne from '../views/routerOne.vue'
 import DemoScroll from '../views/DemoScroll.vue'
+import AttrListeners from '../views/AttrListeners.vue'
 Vue.use(VueRouter)
 
   const routes = [
@@ -11,6 +12,14 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home,
+    meta:{
+      keepAlive:true
+    }
+  },
+  {
+    path: '/attrListeners',
+    name: 'attrListeners',
+    component: AttrListeners,
     meta:{
       keepAlive:true
     }

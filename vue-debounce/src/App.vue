@@ -7,6 +7,9 @@
 
       <router-link to="/keepalive">KeepaLive</router-link>
       <router-link to="/routerOne">routerOne</router-link>
+
+      <router-link to="/attrListeners">AttrListeners</router-link>
+
     </div>
     <!-- <div >
       <router-link to="/">Home</router-link> |
@@ -44,6 +47,7 @@
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  padding:0 5px;
 }
 
 #nav a.router-link-exact-active {

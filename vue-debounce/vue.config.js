@@ -5,6 +5,14 @@ module.exports = {
     devServer: {
         open:true,
         port:8889,
+        proxy: {
+            '': {
+                target:'http://localhost:4000', //GraphQL/graphqlx 小demo
+                ws:true,
+                changeOrigin: true,
+
+            },
+        }
     },
     configureWebpack: {
         resolve: {

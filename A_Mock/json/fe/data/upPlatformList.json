@@ -1,0 +1,86 @@
+{
+  "code": "0",
+  "engDesc": null,
+  "chnDesc": null,
+  "detail": "成功执行操作",
+  "content": {
+    "pageNum": 1,
+    "pageSize": 15,
+    "size": 1,
+    "startRow": 1,
+    "endRow": 1,
+    "total": 1,
+    "pages": 1,
+    "list": [
+      {
+        "renter_id": 0,
+        "secret_key": "324480d7-35ad-47e4-a216-f7fd301c38fb",
+        "times": 0,
+        "update_time": "2020-11-06 10:17:13",
+        "platform_type": "启信宝",
+        "create_time": "2020-11-05 14:24:50",
+        "platform_name": "启信宝001",
+        "platform_id": "qx001",
+        "id": 1,
+        "app_id": "2711d79cc04940509a20231a219fe6a5",
+        "status": "启用"
+      }
+    ],
+    "prePage": 0,
+    "nextPage": 0,
+    "isFirstPage": true,
+    "isLastPage": true,
+    "hasPreviousPage": false,
+    "hasNextPage": false,
+    "navigatePages": 8,
+    "navigatepageNums": [
+      1
+    ],
+    "navigateFirstPage": 1,
+    "navigateLastPage": 1,
+    "columns": [
+      {
+        "name": "Id",
+        "displayName": ""
+      },
+      {
+        "name": "renter_id",
+        "displayName": "租户id,产品化预留"
+      },
+      {
+        "name": "platform_name",
+        "displayName": "上游平台名称"
+      },
+      {
+        "name": "platform_id",
+        "displayName": "上游平台id(编码)"
+      },
+      {
+        "name": "platform_type",
+        "displayName": "平台类型，枚举UpPlatFormType.java"
+      },
+      {
+        "name": "app_id",
+        "displayName": "appid"
+      },
+      {
+        "name": "secret_key",
+        "displayName": "密key"
+      },
+      {
+        "name": "times",
+        "displayName": "剩余次数，预留"
+      },
+      {
+        "name": "status",
+        "displayName": "默认: 启用, 冻结, 删除 (枚举PlatFormStatus.java)"
+      },
+      {
+        "name": "update_time",
+        "displayName": ""
+      }
+    ],
+    "lastPage": 1,
+    "firstPage": 1
+  }
+}

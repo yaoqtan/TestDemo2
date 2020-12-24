@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://gw.alipayobjects.com/os/lib/antv/g6/3.7.1/dist/g6.min.js"></script>
+
+  <style>
+      #g6-chart{
+          height: 150px;
+      }
+  </style>
+</head>
+<body>
+<div id = "g6-chart">
+</div>
+<script>
+    window.onload=function (){
+        const data={
+            nodes:[
+                {
+                    id:'node1',
+                    x:100,
+                    y:200,
+                    label:'起始点',
+                    size:60,
+                    labelCfg:{
+                        position:'center',
+                        style:{
+                            fontSize:12,
+                            fill:'#fff'
+                        }
+                    },
+                    style:{
+                        fill:'#ff0000',
+                        stroke:'#888',
+                        lineWidth:2
+                    }
+                },
+                {
+                    id:'node2',
+                    x:300,
+                    y:200,
+                    label:'起始点1',
+                    size:80
+                },
+                {
+                    id:'node3',
+                    x:500,
+                    y:200,
+                    label:'起始点2',
+                    size:100
+                },
+                {
+                    id:'node4',
+                    x:300,
+                    y:400,
+                    label:'起始点4',
+                    size:80
+                }
+            ],//点集
+            edges:[{
+                source:'node1',
+                target:'node2',
+                label:'链接点1'
+            },{
+                source:'node2',
+                target:'node3',
+                label:'链接点2'
+            },{
+                source:'node1',
+                target:'node4',
+                label:'链接点3'
+            }],//边集
+        };
+        const graph = new G6.Graph({
+            container:'g6-chart',
+            width:800,
+            height:500
+
+        })//完成g6图的初始化
+        graph.data(data)//绑定数据源
+        graph.render();//绘制矢量图
+    }
+
+</script>
+</body>
+</html>

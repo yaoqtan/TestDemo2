@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src ='https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.js'></script>
+  <style>
+    #chart{
+        width: 800px;
+        height: 400px;
+        margin:0 auto
+    }
+</style>
+</head>
+<body>
+  <div id="chart"></div>
+  <script>
+    const chartDom = document.getElementById('chart');
+    const chart = echarts.init(chartDom)
+    chart.setOption({
+      title:{
+          text:'ECharts 多坐标系'
+      },
+      xAxis:{
+          data:['一季度','二季度','三季度','四季度']
+      },
+      yAxis:{
+
+      },
+      series:[
+          {
+            type:'pie',
+              center:['50%',65],
+              radius:35,
+              data:[{
+                name:'分类一',
+                value:50
+              },{
+                  name:'分类二',
+                  value:60
+              },{
+                  name:'分类三',
+                  value:70
+              },{
+                  name:'分类四',
+                  value:90
+              }]
+          },{
+            type: 'line',
+            data:[100,112,96,123]
+          },
+          {
+              type:'bar',
+              data:[79,81,88,60]
+          }
+      ]
+
+    })
+  </script>
+</body>
+</html>

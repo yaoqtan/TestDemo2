@@ -1,13 +1,16 @@
+import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App.vue'
+import Antd from 'ant-design-vue';
 import router from './router'
 import store from './store'
 import './assets/style.css'
+import 'ant-design-vue/dist/antd.css';
 import vuescroll from 'vuescroll';
 //Vue.use(scroll)
 //Vue.use(scroll,{componentName: 'scroll-seamless'})
 
-
+Vue.use(Antd);
 Vue.use(vuescroll); // install the vuescroll first
 Vue.prototype.$vuescrollConfig = {
   bar: {

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    const array = new Array(20)
+    console.log(array)
+    for(let i=0;i<array.length;i++){
+        if(i===0 || i===1){
+            array[i]= i
+
+        }else{
+            array[i]=array[i-1]+array[i-2]
+        }
+
+    }
+    console.log(array)
+
+    function Fibonacci(number=0){
+        if(number>=0){
+            const array= new Array(number)
+            for(let i=0;i<number;i++){
+                if(i===0 || i===1){
+                    array[i]= i
+                }else{
+                    array[i]=array[i-1]+array[i-2]
+                }
+            }
+            return array
+        }else {
+            return number
+        }
+
+    }
+
+    console.log(Fibonacci(0))
+    console.log(Fibonacci(1))
+    console.log(Fibonacci(2))
+    console.log(Fibonacci(20))
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

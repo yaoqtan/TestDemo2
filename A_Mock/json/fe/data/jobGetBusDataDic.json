@@ -1,0 +1,127 @@
+{
+  "code": "0",
+  "engDesc": null,
+  "chnDesc": null,
+  "detail": "成功执行操作",
+  "content": {
+    "job_type": [
+      {
+        "type_name": "重复执行",
+        "type": 0
+      }
+    ],
+    "bus_attr_type": [
+      {
+        "type_name": "无业务属性",
+        "type": 0
+      },
+      {
+        "type_name": "专业类型",
+        "type": 1
+      }
+    ],
+    "platform_type": [
+      {
+        "type_name": "内部系统",
+        "type": 0
+      },
+      {
+        "type_name": "外部系统",
+        "type": 1
+      }
+    ],
+    "up_platform_info": [
+      {
+        "renter_id": 0,
+        "times": 0,
+        "platform_type": "启信宝",
+        "platform_name": "启信宝001",
+        "platform_id": "qx001"
+      }
+    ],
+    "collect_type": [
+      {
+        "type_name": "工商信息",
+        "type": 1
+      },
+      {
+        "type_name": "资质信息",
+        "type": 2
+      },
+      {
+        "type_name": "股东信息",
+        "type": 3
+      },
+      {
+        "type_name": "对外投资",
+        "type": 4
+      },
+      {
+        "type_name": "企业被执行人",
+        "type": 5
+      },
+      {
+        "type_name": "企业失信被执行人",
+        "type": 6
+      },
+      {
+        "type_name": "严重违法",
+        "type": 7
+      },
+      {
+        "type_name": "新闻舆论",
+        "type": 8
+      },
+      {
+        "type_name": "主要人员信息",
+        "type": 9
+      },
+      {
+        "type_name": "主要人员被执行人",
+        "type": 10
+      },
+      {
+        "type_name": "主要人员失信被执行人",
+        "type": 11
+      },
+      {
+        "type_name": "企业经营风险",
+        "type": 12
+      }
+    ],
+    "down_platform_info": [
+      {
+        "renter_id": 0,
+        "times": 0,
+        "platform_type": "mtp",
+        "platform_name": "招采系统",
+        "platform_id": "mtp",
+        "syn_url": "http://10.18.69.182/tp-dev-back/rest/supplierOutApi/supplierInfoUpdate.do"
+      },
+      {
+        "renter_id": 0,
+        "times": 0,
+        "platform_type": "ims",
+        "platform_name": "投资系统",
+        "platform_id": "ims",
+        "syn_url": "http://ims.midexyzy.com/update"
+      },
+      {
+        "renter_id": 0,
+        "times": 0,
+        "platform_type": "fms",
+        "platform_name": "核算系统",
+        "platform_id": "fms",
+        "syn_url": "http://fms.midexyzy.com/update"
+      },
+      {
+        "renter_id": 0,
+        "times": 0,
+        "platform_type": "srm",
+        "platform_name": "srm系统",
+        "platform_id": "srm",
+        "syn_url": "http://srm.midexyzy.com/update"
+      }
+    ]
+  }
+}

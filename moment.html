@@ -18,7 +18,9 @@
         console.log(moment.unix(1318781876.721))
         console.log(moment('1995-12-25').millisecond())
         console.log(moment().second())
+        console.log('moment().minute()')
         console.log(moment().minute())
+        console.log('moment().hour()')
         console.log(moment().hour())
         console.log(moment().date())
         console.log(moment().toISOString())
@@ -36,11 +38,11 @@
         console.log(date)
 
 
-        var a = moment('2007-10-29');
+        var a = moment('2018-11-28');
         var b = moment('2007-10-28');
         //a.diff(b, 'days') // 1
         console.log('diff')
-        console.log(b.diff(a, 'days'))
+        console.log(a.diff(b, 'months'))
         console.log( a.diff(b, 'days'))
 
         console.log(moment.utc())
@@ -80,6 +82,16 @@
         console.log(moment('2020-08-31T00:00:00.000Z').diff(moment(moment.utc().startOf('year').toDate()),'days'))
         console.log(moment('2020-04-01T00:00:00.000Z'))
         console.log(moment(moment.utc().startOf('year').toDate()))
+        console.log(moment().format())
+
+        console.log(moment().isoWeekYear())
+        console.log(moment().weeksInYear())
+        console.log(moment().months())
+        console.log('moment().weeks()')
+        console.log(moment().weeks())
+        console.log('moment().isoWeekday(1)')
+        console.log(moment().isoWeekday())
+        console.log(moment(0).format('YYYY-MM-DD HH:mm:ss'))
     </script>
 </head>
 <body>

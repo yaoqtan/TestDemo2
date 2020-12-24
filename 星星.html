@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <script>
+      function onRate(rate){
+          return "★★★★★☆☆☆☆☆".slice(5 - rate, 10 - rate);
+      }
+      console.log(onRate(0))
+      console.log(onRate(11))
+      console.log(onRate(2))
+      console.log(onRate(3))
+      console.log(onRate(4))
+      console.log(onRate(5))
+
+  </script>
+</head>
+<body>
+  <div>★★★★★☆☆☆☆☆</div>
+</body>
+</html>

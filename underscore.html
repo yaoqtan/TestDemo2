@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="./underscore.js"></script>
+
+</head>
+<body>
+<div id="app"></div>
+<script>
+    let list =[
+        {id:1,name:'部门A',parentId:0},
+        {id:2,name:'部门B',parentId:0},
+        {id:3,name:'部门C',parentId:1},
+        {id:4,name:'部门D',parentId:1},
+        {id:5,name:'部门E',parentId:2},
+        {id:6,name:'部门F',parentId:3},
+        {id:7,name:'部门G',parentId:2},
+        {id:8,name:'部门H',parentId:4}
+    ];
+    _.each(list,(item,index,items)=>{ //遍历
+        console.log(item,index,items)
+    })
+
+    let compiled = _.template("<h1>hello: <%= name %> </h1>");//template
+    document.getElementById('app').innerHTML=compiled({name: 'moe'})
+
+    console.log(_.compact([0, 1, false, 2, '', 3]))//除去javascript 为false的值
+
+    console.log(_.flatten([1, [2], [3, [[4]]]]))//转换为只有一层的数组
+
+    console.log(_.flatten([1, [2], [3, [[4]]]], true))//转换为只减少一层的数组
+
+    console.log(_.object(['moe', 'larry', 'curly'], [30, 40, 50]))
+    console.log(_.object([['moe', 30], ['larry', 40], ['curly', 50]]))
+
+
+    //_方法
+    var greet    = function(name){ return "hi: " + name; };
+    var exclaim  = function(statement){ return statement.toUpperCase() + "!"; };
+    var welcome = _.compose(greet, exclaim);
+    welcome('moe') //'hi: MOE!'
+
+
+
+</script>
+</body>
+</html>

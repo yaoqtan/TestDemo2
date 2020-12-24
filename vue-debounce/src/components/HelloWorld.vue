@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    {{testData}}
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -37,6 +38,24 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  beforeCreate(){
+    console.log('beforeCreate2')
+  },
+  created(){
+    console.log('created2')
+  },
+  computed:{
+    testData(){
+      console.log('computed2')
+      return 'testData'
+    }
+  },
+  beforeMount(){
+    console.log('beforeMount2')
+  },
+  mounted(){
+    console.log('mounted2')
   }
 }
 </script>

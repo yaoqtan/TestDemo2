@@ -14,9 +14,56 @@
         console.log(document.documentElement.clientHeight || document.body.clientHeight)
         console.log(window.innerHeight)
         console.log(window.outerHeight)
+        var qwe='2134'
+        console.log('qwe')
+
+        var arr = [{label:'我经办的',value:'1',id:'radio82'},{label:'我经办的2',value:'2',id:'radio83'}]
+
+        console.log(arr.map(function (item,index){
+           return item
+        }))
+        console.log(arr.some(function (item){
+            return item.value ==='1'
+        }))
+        console.log(arr.forEach(function (item){
+            console.log(item)
+        }))
+        //console.log(arr.map(item=>item))
+        // console.log(arr.some(item=>item.value=='1'))
+
+        // function test(value,array){
+        //     var arr = array || []
+        //     console.log(arr.length)
+        //     if(arr.length>0){
+        //         for(var i=0;i<arr.length;i++){
+        //             if(value==arr[i].value){
+        //                 return arr[i].label
+        //             }
+        //         }
+        //     }else{
+        //         console.log(112)
+        //         return value
+        //     }
+        // }
+
+        //console.log(test('3'))
+        console.log('document.fullscreenElement :',document.fullscreenElement)
+        console.log('document.msFullscreenElement :',document.msFullscreenElement)
+
+        console.log([1,2].reduce(function (pre,cur){
+            return pre+cur
+        },0))
     </script>
 </head>
 <body>
+<input
 
+  class="input_text"
+  type="text"
+
+  datatype="*1-100"
+
+  nullmsg="必填！"
+  style="width:100%" />
 </body>
 </html>

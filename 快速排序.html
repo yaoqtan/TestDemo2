@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>快速排序</title>
+  <script>
+      let number=0
+      const quickSort=function (){
+          const  array = [3, 5, 1, 6, 4, 7, 2]
+          quick(array,0,array.length-1);
+          return array
+      }
+      function quick(array,left,right){
+          number++
+          console.log('开始')
+          let index
+          if(array.length>1){
+              index = partition(array,left,right); //4
+              console.log('index:'+index)
+
+              if(left<index-1){
+                  console.log('left')
+                  quick(array,left,index-1);
+              }
+              if(index<right){
+                  console.log('right')
+                  quick(array,index,right);
+              }
+          }
+          console.log('结束')
+      }
+
+      function partition(array,left,right){
+          console.log(`number:${number},array:[${array}],left:[${left}],right:[${right}]`)
+          let pivot = array[Math.floor((right+left)/2)],
+              i=left,
+              j=right;
+
+          while (i<=j){
+              while (array[i]<pivot){
+                  i++
+              }
+              while (array[j]>pivot){
+                  j--
+              }
+              if(i <=j){
+                  swapQuickSort(array,i,j);
+                  i++;
+                  j--;
+              }
+          }
+          return i
+      }
+      function swapQuickSort(array,index1,index2){
+          let aux = array[index1];
+          array[index1]=array[index2];
+          array[index2]=aux;
+
+      }
+      console.log(`最终值：${quickSort()}`)
+  </script>
+</head>
+<body>
+
+</body>
+</html>

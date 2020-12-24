@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div></div>
+  <div></div>
+  <div></div>
+<script>
+  const DIVS = document.querySelectorAll('div')
+  console.log(DIVS)
+  console.log(Array.from(DIVS))
+  console.log([...DIVS])
+  console.log(Array.prototype.slice.call(document.querySelectorAll('div')))
+  console.log(Array.prototype.concat.apply([], document.querySelectorAll('div')))
+</script>
+</body>
+</html>

@@ -15,7 +15,18 @@
       <a-range-picker/>
 
     </scroll>
-
+    <el-dialog
+        title="提示"
+        :visible="dialogVisible"
+        width="30%"
+        v-dialogDrag
+        >
+      <span>这是一段信息</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
 
   </div>
 </template>
@@ -25,6 +36,7 @@
 import HelloWorld from '@/components/HelloWorld.vue'
 import scroll from 'vue-seamless-scroll'
 import axios from 'axios'
+import pinyin from 'pinyin'
 
 export default {
   name: 'Home',
@@ -34,7 +46,8 @@ export default {
   },
   data(){
     return{
-      term_end:null
+      term_end:null,
+      dialogVisible:true
     }
   },
   beforeCreate(){
@@ -48,6 +61,9 @@ export default {
       console.log("json", res);
     }).catch(err=>console.log(err));
     console.log('created1')
+    console.log(pinyin('we',{
+      style:pinyin.STYLE_NORMAL,
+    }))
   },
   computed:{
     testData(){

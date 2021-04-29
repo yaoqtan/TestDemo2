@@ -45,6 +45,26 @@ const routes = [
     path: '/demo6',
     name: 'Demo6',
     component: () => import( '../views/Demo6.vue')
+  },
+  {
+    path: '/demo7',
+    name: 'Demo7',
+    component: () => import( '../views/Demo7.vue')
+  },
+  {
+    path: '/demo8',
+    name: 'Demo8',
+    component: () => import( '../views/Demo8.vue')
+  },
+  {
+    path: '/demo9',
+    name: 'Demo9',
+    component: () => import( '../views/Demo9.vue')
+  },
+  {
+    path: '/demo10',
+    name: 'Demo10',
+    component: () => import( '../views/Demo10.vue')
   }
 ]
 

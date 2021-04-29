@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <div id="nav">
+  <div id="app" @click="test" >
+    <div id="nav" >
       <router-link to="/">Home</router-link> |
 
       <router-link to="/about">About</router-link>
@@ -8,8 +8,13 @@
       <router-link to="/keepalive">KeepaLive</router-link>
       <router-link to="/routerOne">routerOne</router-link>
 
-      <router-link to="/attrListeners">AttrListeners</router-link>
+      <router-link to="/attrListeners">AttrListeners</router-link> |
+      <router-link to="/textComputed">TextComputed</router-link> |
+      <router-link to="/inputCustom">inputCustom</router-link>
 
+    </div>
+    <div class="test"  :style="{top:pageY,left:pageX}">
+      test
     </div>
     <!-- <div >
       <router-link to="/">Home</router-link> |
@@ -22,6 +27,9 @@
       <router-view v-if="$route.meta.keepAlive"/>
     </keep-alive>
 
+
+
+
     <!-- <keep-alive include="a,b">
       <component :is="view">
 
@@ -31,7 +39,37 @@
   </div>
 </template>
 
+<script>
+export default {
+  data(){
+    return{
+      pageY:0,
+      pageX:0
+    }
+  },
+  methods:{
+    test(e){
+      console.log(e)
+      this.pageY=e.y+'px'
+      this.pageX=e.x+'px'
+    }
+  }
+}
+</script>
+
+
+
+
 <style>
+.test{
+  position: fixed;
+  background: red;
+  width: 100px;
+  height: 100px;
+  top:0;
+  bottom:0
+
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

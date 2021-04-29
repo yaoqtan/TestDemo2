@@ -7,11 +7,17 @@ import store from './store'
 import './assets/style.css'
 import 'ant-design-vue/dist/antd.css';
 import vuescroll from 'vuescroll';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import './utils/dialog'
+import Directive from './utils/directive'
+Directive.initDirective(Vue);
 //Vue.use(scroll)
 //Vue.use(scroll,{componentName: 'scroll-seamless'})
 
 Vue.use(Antd);
 Vue.use(vuescroll); // install the vuescroll first
+Vue.use(ElementUI);
 Vue.prototype.$vuescrollConfig = {
   bar: {
     background: '#000'

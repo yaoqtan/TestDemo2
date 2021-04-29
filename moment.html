@@ -85,13 +85,14 @@
         console.log(moment().format())
 
         console.log(moment().isoWeekYear())
-        console.log(moment().weeksInYear())
-        console.log(moment().months())
+        console.log('当前年共有几周',moment().weeksInYear())
+        console.log('当前第几月',moment().months())
         console.log('moment().weeks()')
-        console.log(moment().weeks())
+        console.log('当前年第几周',moment().weeks())
         console.log('moment().isoWeekday(1)')
-        console.log(moment().isoWeekday())
-        console.log(moment(0).format('YYYY-MM-DD HH:mm:ss'))
+        console.log('当前星期',moment().isoWeekday())
+        console.log('起始日期',moment(0).format('YYYY-MM-DD HH:mm:ss'))
+        console.log('当月天数',moment('2020-10-9').daysInMonth())
     </script>
 </head>
 <body>

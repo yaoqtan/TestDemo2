@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>setup toRefs</h1>
+    <h1>setup toRefs isRef computed</h1>
     <Cdemo1 :msg="msg"/>
     <div>
       <button v-for="(i,index) in array" :key="index" @click="selectArray(index)">
@@ -17,11 +17,15 @@
         overTitle
       </button>
       {{overText}}
+      <div style="color:red">
+        {{itemComputed}}
+      </div>
+
     </div>
   </div>
 </template>
 <script>
-import {ref,reactive,toRefs,watch } from "vue";
+import {ref,reactive,toRefs,watch ,computed,isRef} from "vue";
 import Cdemo1 from '@/components/Cdemo1.vue'
 
 // interface DataProps {
@@ -49,6 +53,11 @@ export  default {
       }
     })
     const refData= toRefs(data)
+
+    const itemComputed=computed(()=>{
+      return data.item+'qwe'
+    })
+    console.log(isRef(itemComputed));
 
     const overText=ref('title')
     const overAction = ()=>{
@@ -86,7 +95,8 @@ export  default {
     return{
       ...refData,
       overText,
-      overAction
+      overAction,
+      itemComputed
     }
   }
 }

@@ -11,6 +11,7 @@
     <title>Title</title>
     <script src="./moment.js"></script>
     <script>
+        console.log(moment().valueOf())
         console.log(moment().format('YYYY/MM/DD'))
         console.log(moment().format('HH:mm'))
         console.log(moment(new Date()).isValid())
@@ -93,6 +94,8 @@
         console.log('当前星期',moment().isoWeekday())
         console.log('起始日期',moment(0).format('YYYY-MM-DD HH:mm:ss'))
         console.log('当月天数',moment('2020-10-9').daysInMonth())
+        console.log(moment().valueOf())
+        console.log((moment().add(1, 'day')).valueOf())
     </script>
 </head>
 <body>

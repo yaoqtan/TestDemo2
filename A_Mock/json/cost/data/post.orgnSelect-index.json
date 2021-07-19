@@ -1,0 +1,11 @@
+{
+  "code": "00000",
+  "engDesc": "success",
+  "chnDesc": "操作成功",
+  "detail": null,
+  "content": {
+    "showTree": false,
+    "typeTree": "null"
+  },
+  "success": true
+}

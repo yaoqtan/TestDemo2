@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+      const arr = [1, 1, '1', 17, true, true, false, false, 'true', 'a', {}, {}];
+      // => [1, '1', 17, true, false, 'true', 'a', {}, {}]
+
+      const res1 = [...(new Set(arr))]
+      console.log(res1)
+      const res2 =Array.from(new Set(arr))
+      console.log(res2)
+
+      const unique1 = arr=>{
+          const arr1 = [...arr]
+          let len = arr1.length
+          for(let i=0;i<len;i++){
+              for(let j=i+1;j<len;j++){
+                  //每删除一个树，j--保证j的值经过自加后不变。同时，len--，减少循环次数提升性能
+                  if(arr1[i]===arr1[j]){
+                      arr1.splice(j,1);
+                      len--;
+                      j--
+                  }
+              }
+          }
+          return arr1
+      }
+      console.log(unique1(arr))
+      console.log(arr)
+      console.log('false'===false)
+
+
+      const unique2 = arr=>{
+          let res4 = []
+          for(let i=0;i<arr.length;i++){
+              if(res4.indexOf(arr[i])<0){
+                  res4.push(arr[i])
+              }
+          }
+          return res4
+      }
+      console.log(unique2(arr))
+
+      const res5 = arr.reduce((pre,cur,array)=>{
+
+          if(!pre.includes(cur)){
+              return [...pre,cur]
+          }else {
+              return pre
+          }
+
+
+      },[])
+      console.log(res5)
+      console.log(arr.map((item)=>{
+          return arr.indexOf(item)
+      }))
+
+      const res6 = arr.filter((item,index)=>{
+          return arr.indexOf(item) === index
+      })
+      console.log(res6)
+
+      //方法六：利用Map
+      const res7 = []
+      const map = new Map()
+      for(let i=0;i<arr.length;i++){
+          if(!map.has(arr[i])){
+              map.set(arr[i],true)
+              res7.push(arr[i])
+          }
+      }
+      console.log(res7)
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

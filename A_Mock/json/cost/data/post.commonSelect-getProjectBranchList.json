@@ -1,0 +1,37 @@
+{
+  "code": "00000",
+  "engDesc": "success",
+  "chnDesc": "操作成功",
+  "detail": null,
+  "content": {
+    "1": {
+      "branchName": "一期",
+      "fullName": "衡阳三环路美的白鹭湾一期",
+      "outId": "a168c390-30cc-11e9-acc5-9bcf2f8b0bc1",
+      "id": 15657272,
+      "projectName": "衡阳三环路美的白鹭湾"
+    },
+    "2": {
+      "branchName": "二期",
+      "fullName": "衡阳三环路美的白鹭湾二期",
+      "outId": "a759cca0-8c60-11e9-9da1-891a87c1e054",
+      "id": 15657358,
+      "projectName": "衡阳三环路美的白鹭湾"
+    },
+    "3": {
+      "branchName": "三期",
+      "fullName": "衡阳三环路美的白鹭湾三期",
+      "outId": "ad20cfe0-a492-11e9-9b75-5b4e782fa399",
+      "id": 15657400,
+      "projectName": "衡阳三环路美的白鹭湾"
+    },
+    "4": {
+      "branchName": "0期",
+      "fullName": "衡阳三环路美的白鹭湾0期",
+      "outId": "b670985d-b37c-4a03-993c-0fabd63690aa",
+      "id": 15657458,
+      "projectName": "衡阳三环路美的白鹭湾"
+    }
+  },
+  "success": true
+}

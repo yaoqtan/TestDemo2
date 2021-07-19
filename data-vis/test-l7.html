@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://unpkg.com/@antv/l7"></script>
+
+  <style>
+    body{
+        padding:0;
+        margin:0
+    }
+  </style>
+</head>
+<body>
+<div id = "l7-map">
+</div>
+<script>
+    window.onload=function (){
+      const scene = new L7.Scene({
+          id:'l7-map',
+          map:new L7.GaodeMap({
+              style:'dark',
+              conter:[127.5671666579043, 7.445038892195569],
+              pitch:0,
+              zoom:18,
+              token:'1ed4367a145205812b5e01507238861e',
+          })
+      });
+      scene.on('loaded',function (){})
+        fetch('https://gw.alipayobjects.com/os/basement_prod/d3564b06-670f-46ea-8edb-842f7010a7c6.json')
+          .then(res=>res.json())
+          .then(res=>{
+              console.log(res)
+              const pointLayer = new L7.PointLayer({})
+              .source(res)
+              .shape('circle')
+              .size('mag',[0,16])
+              .color('mag',[
+                  'red',
+                  'blue',
+                  'green'
+              ])
+              .style({
+                  strokeWidth:0,
+                  opcaity:0.5
+              })
+              .active(true)
+              scene.addLayer(pointLayer)
+          })
+    }
+
+</script>
+</body>
+</html>

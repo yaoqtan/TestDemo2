@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>图片压缩</title>
+</head>
+<body>
+  1、上传图片-判断类型-判断大小-转成base64-拿到实际宽高-压缩图片宽高-创建画布-画布压缩()
+  <input type="file" id="upload" />
+  <script>
+    const ACCEPT = ['image/jpg','image/png','image/jpeg']
+    const MAXSIZE = 1024 * 1024
+    const MAXSIZE_STR = '1MB'
+    const upload = document.getElementById('upload')
+    function converImageToBase64(file,callback){
+        let reader = new FileReader()
+        reader.addEventListener('load',function (e){
+            //console.log(e.target.result)
+            //console.log(reader.result)
+            const base64Image = e.target.result
+            callback && callback(base64Image)
+            reader = null
+        });
+        reader.readAsDataURL(file)
+
+    }
+    function compress(base64Image,callback){
+        let maxW = 1024
+        let maxH = 1024
+        const image = new Image()
+        image.addEventListener('load',function (e){
+            let ratio;//图片的压缩比
+            let needCompress = false//是否需要压缩
+            console.log(image.naturalWidth,image.naturalHeight)
+            if(maxW<image.naturalWidth ){
+                needCompress = true
+                ratio = image.naturalWidth / maxW
+                maxH = image.naturalHeight / ratio
+            }//经过处理后，实际图片的尺寸为1024
+            if(maxH<image.naturalHeight){
+                needCompress=true;
+                ratio=image.naturalHeight / maxH;
+                maxW = image.naturalWidth /ratio
+            }
+            console.log(maxW,maxH)
+            if(!needCompress){ //如果不需要压缩，需要获取图片真实尺寸
+                maxW = image.naturalWidth
+                maxH = image.naturalHeight
+            }
+            const canvas = document.createElement('canvas')
+            canvas.setAttribute('id','__compress__');
+            canvas.width = maxW;
+            canvas.height = maxH;
+            canvas.style.visibility = 'visible'
+            document.body.appendChild(canvas)
+
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0,0,maxW,maxH);//情况画布
+            ctx.drawImage(image,0,0,maxW,maxH);//画布填充图片
+            const compressImage = canvas.toDataURL('image/jpeg',0.1);//获取压缩，类型，压缩比例
+            callback && callback(compressImage);
+            console.log(compressImage)
+            const _image = new Image()
+            _image.src=compressImage;
+            document.body.append(_image)
+            canvas.remove()
+            console.log(`压缩比：${image.src.length/_image.src.length}`)
+        })
+        image.src=base64Image
+        document.body.appendChild(image)
+        console.log(base64Image);
+    }
+    function uploadToServer(compressImage){
+        console.log('upload to server...',compressImage)
+    }
+    upload.addEventListener('change',function (e){
+        const [file] = e.target.files
+        if(!file){
+            return false
+        }
+        const {type:fileType,size:fileSize} = file;
+        console.log(fileType,fileSize)
+        // if(ACCEPT.indexOf(fileType)<0){
+        //     console.log(`不支持[${fileType}]文件类型`)
+        // }
+
+        if(!ACCEPT.includes(fileType)){//图片类型检查
+            console.log(`不支持[${fileType}]文件类型`)
+            upload.value='';
+            return false
+        }
+
+        if(fileSize > MAXSIZE){//图片容量检查
+            console.log(`文件超出${MAXSIZE_STR}`)
+            upload.value='';
+            return false
+        }
+        //压缩图片
+        converImageToBase64(file,(base64Image)=>compress(base64Image,uploadToServer))
+
+
+
+
+    })
+  </script>
+</body>
+</html>

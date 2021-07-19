@@ -1,0 +1,12 @@
+{
+  "path": "/get_user",
+  "method": "post",
+  "returnCode": "0",
+  "returnMsg": "成功执行操作",
+  "data": {
+    "uid": "caotao2",
+    "username": "Mock",
+    "mail": "caotao2@midea.com"
+  },
+  "operates": []
+}

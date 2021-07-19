@@ -4,6 +4,10 @@ import Home from '../views/Home.vue'
 import KeeepAlive from '../views/KeeepAlive.vue'
 import routerOne from '../views/routerOne.vue'
 import DemoScroll from '../views/DemoScroll.vue'
+import AttrListeners from '../views/AttrListeners.vue'
+import TextComputed from '../views/TextComputed.vue'
+import InputCustom from '../views/InputCustom.vue'
+
 Vue.use(VueRouter)
 
   const routes = [
@@ -11,6 +15,14 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home,
+    meta:{
+      keepAlive:true
+    }
+  },
+  {
+    path: '/attrListeners',
+    name: 'attrListeners',
+    component: AttrListeners,
     meta:{
       keepAlive:true
     }
@@ -49,7 +61,24 @@ Vue.use(VueRouter)
       meta:{
         keepAlive:true
       },
+    },
+    {
+      path: '/textComputed',
+      name: 'textComputed',
+      component: TextComputed,
+      meta:{
+        keepAlive:true
+      },
+    },
+    {
+      path: '/inputCustom',
+      name: 'inputCustom',
+      component: InputCustom,
+      meta:{
+        keepAlive:true
+      },
     }
+
 ]
 
 const router = new VueRouter({

@@ -1,0 +1,20 @@
+{
+  "code": "00000",
+  "engDesc": "success",
+  "chnDesc": "操作成功",
+  "detail": null,
+  "content": [
+    {
+      "id": 330249704,
+      "name": "派驻财务",
+      "fullName": "美的控股/置业集团/地产开发事业集群/西南区域公司/云南公司/派驻财务",
+      "shortName": null,
+      "code": null,
+      "prefix": null,
+      "type": null,
+      "refId": null,
+      "isSelect": null
+    }
+  ],
+  "success": true
+}

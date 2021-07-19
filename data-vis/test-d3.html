@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/d3/6.2.0/d3.min.js">
+
+  </script>
+</head>
+<body>
+<p>Vue</p>
+<p>React</p>
+<p>Agular</p>
+<button id="datum">datum</button>
+<button id="data">data</button>
+
+<script>
+
+  const body =d3.select('body');
+  const p = body.selectAll('p');
+  function doDatum(){
+      console.log('doDatum')
+      const str = 'Framework'
+      p.datum(str)
+      p.text(function (d,i){
+          return `${d}-${i}`
+      })
+
+  }
+  function doData(){
+      console.log('doData')
+      const dataset=['Vue','React','Agular'];
+      p.data(dataset)
+      .text(function (d,i){
+          return `${d}-${i}`
+      })
+  }
+  document.getElementById('datum')
+      .addEventListener('click',doDatum)
+  document.getElementById('data')
+      .addEventListener('click',doData)
+</script>
+
+</body>
+</html>

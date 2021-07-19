@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="800"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d') //获取canvas 对象
+
+     //矩形
+    ctx.fillStyle = 'red'//填冲颜色
+    ctx.fillRect(0,0,50,100)//坐标，长，宽 ，绘制矩形
+
+    //线
+    ctx.beginPath();//
+    ctx.lineWidth=2;//线条宽度
+    ctx.strokeStyle='blue'//线条填充色
+    ctx.moveTo(100,100)//起点坐标
+    ctx.lineTo(250,75)//中间坐标
+    ctx.lineTo(300,100)//终点坐标
+    ctx.stroke()//绘制线段
+
+    //圆
+    ctx.beginPath();
+    ctx.lineWidth=2;
+    ctx.strokeStyle='green'
+    ctx.fillStyle="red"
+    ctx.arc(200,200,50,0,2* Math.PI)//绘制圆形，坐标，半径，开始角度，结束角度
+    ctx.stroke()
+    ctx.fill()
+
+
+    //点
+    ctx.beginPath();//
+    ctx.lineWidth=1;//
+    ctx.strokeStyle='red'//
+    ctx.moveTo(300,300)//
+    ctx.lineTo(301,301)//终点坐标
+    ctx.stroke()//绘制线段
+
+
+  </script>
+</body>
+</html>

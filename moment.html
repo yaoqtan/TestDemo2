@@ -11,6 +11,7 @@
     <title>Title</title>
     <script src="./moment.js"></script>
     <script>
+        console.log(moment().valueOf())
         console.log(moment().format('YYYY/MM/DD'))
         console.log(moment().format('HH:mm'))
         console.log(moment(new Date()).isValid())
@@ -18,7 +19,9 @@
         console.log(moment.unix(1318781876.721))
         console.log(moment('1995-12-25').millisecond())
         console.log(moment().second())
+        console.log('moment().minute()')
         console.log(moment().minute())
+        console.log('moment().hour()')
         console.log(moment().hour())
         console.log(moment().date())
         console.log(moment().toISOString())
@@ -36,11 +39,11 @@
         console.log(date)
 
 
-        var a = moment('2007-10-29');
+        var a = moment('2018-11-28');
         var b = moment('2007-10-28');
         //a.diff(b, 'days') // 1
         console.log('diff')
-        console.log(b.diff(a, 'days'))
+        console.log(a.diff(b, 'months'))
         console.log( a.diff(b, 'days'))
 
         console.log(moment.utc())
@@ -80,6 +83,19 @@
         console.log(moment('2020-08-31T00:00:00.000Z').diff(moment(moment.utc().startOf('year').toDate()),'days'))
         console.log(moment('2020-04-01T00:00:00.000Z'))
         console.log(moment(moment.utc().startOf('year').toDate()))
+        console.log(moment().format())
+
+        console.log(moment().isoWeekYear())
+        console.log('当前年共有几周',moment().weeksInYear())
+        console.log('当前第几月',moment().months())
+        console.log('moment().weeks()')
+        console.log('当前年第几周',moment().weeks())
+        console.log('moment().isoWeekday(1)')
+        console.log('当前星期',moment().isoWeekday())
+        console.log('起始日期',moment(0).format('YYYY-MM-DD HH:mm:ss'))
+        console.log('当月天数',moment('2020-10-9').daysInMonth())
+        console.log(moment().valueOf())
+        console.log((moment().add(1, 'day')).valueOf())
     </script>
 </head>
 <body>

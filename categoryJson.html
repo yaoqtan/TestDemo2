@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    fetch('./category.json')
+        .then(res=>res.json())
+        .then(res=>{
+            console.log(res)
+            const {list} = res.content
+            console.log(list)
+            let newList=[]
+            for(let i=0;i<list.length;i++){
+                const obj=list.find(item=>item.PARENT_ID===list[i].ID)
+                if(!obj){
+                    newList.push(list[i])
+                }
+            }
+            console.log(newList)
+
+
+            const listParentIdArray=[...(new Set(list.map(item=>item.PARENT_ID).filter(item=>!!item)))]
+
+            console.log(listParentIdArray)
+            const newList2 = list.filter(item=>!listParentIdArray.includes(item.ID))
+            console.log(newList2)
+
+            const newList3 = list.filter(item=>listParentIdArray.indexOf(item.ID)<0)
+            console.log(newList3)
+            const newList4 = list.reduce((cur,pre)=>{
+                if(!listParentIdArray.includes(pre.ID)){
+                    return [...cur,pre]
+                }else{
+                    return cur
+                }
+            },[])
+            console.log(newList4)
+
+
+
+        })
+
+
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

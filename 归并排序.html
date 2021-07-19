@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    // const arr1 = [1,2]
+    // const arr2 = []
+    // let i = 0
+    // arr2.push(arr1[i++])
+    // console.log(arr2,i)
+
+    let mergeSortNumber = 0
+    console.log(`开始值：[1,2,3,87,12,45,0]`)
+    const mergeSort = function (array=[1,2,3,87,12,45,0]){
+         return mergeSortRec(array)
+    }
+    const mergeSortRec = function (array){
+
+        let length = array.length;
+        if(length === 1){
+            return array
+        }
+        let mid = Math.floor(length/2),
+            left = array.slice(0,mid),
+            right = array.slice(mid,length);
+
+
+        //console.log(mergeSortRec(left),mergeSortRec(right))
+        return merge(mergeSortRec(left),mergeSortRec(right));
+    }
+
+    const merge = function (left,right){
+        //console.log(left,right)
+        console.log(`merge([${left}],[${right}]),${++mergeSortNumber}`)
+        let result = [],il=0,ir=0
+        while (il<left.length && ir<right.length){
+            if(left[il] < right[ir]){
+                result.push(left[il++])
+            }else{
+                result.push(right[ir++])
+            }
+        }
+        while (il<left.length){
+            result.push(left[il++])
+        }
+        while (ir < right.length){
+            result.push(right[ir++])
+        }
+        console.log(result)
+        return result
+    }
+    console.log(`最终值 ：[${mergeSort()}]`)
+
+
+      //归并排序2
+
+      let arr2 = [2,3,56,34,36,78,5]
+      function mergeSort2(arr2){
+        if(arr2.length<=1) return arr2 //数组元素被划分到剩1个时，递归终止
+        const midIndex=arr2.length / 2 | 0
+        //console.log(midIndex)
+        const leftArr = arr2.slice(0,midIndex)
+        const rightArr = arr2.slice(midIndex,arr2.length)
+        //console.log(leftArr)
+          console.log(arr2,leftArr,rightArr)
+
+        return merge2(mergeSort2(leftArr),mergeSort2(rightArr)) //先划分，后合并
+      }
+      function merge2(leftArr,rightArr){
+
+          const result = []
+          while (leftArr.length && rightArr.length){
+              if(leftArr[0]<=rightArr[0]){
+                  result.push(leftArr.shift())
+              }else{
+                  result.push(rightArr.shift())
+              }
+          }
+          while (leftArr.length){
+              result.push(leftArr.shift())
+          }
+          while (rightArr.length){
+              result.push(rightArr.shift())
+          }
+          return result
+      }
+      console.log(mergeSort2(arr2))
+  </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+{
+  "code": "0",
+  "engDesc": null,
+  "chnDesc": null,
+  "detail": "成功执行操作",
+  "content": {
+    "pageNum": 1,
+    "pageSize": 15,
+    "size": 2,
+    "startRow": 1,
+    "endRow": 2,
+    "total": 2,
+    "pages": 1,
+    "list": [
+      {
+        "job_type": 0,
+        "end_date": "2120-11-20",
+        "collect_content": 1,
+        "per_week_day": 0,
+        "per_day_interval": 1,
+        "per_month_week_month": 0,
+        "business_attribute": 0,
+        "per_day_interval_times": 15,
+        "catalog_level": "",
+        "update_time": "2020-11-26 17:12:57",
+        "platform_type": 0,
+        "rate": 0,
+        "per_month_week": 0,
+        "per_month_nweek": 0,
+        "per_month_month": 0,
+        "per_day_time": "1970-02-01 00:00:00",
+        "start_date": "2020-11-18",
+        "renter_id": 0,
+        "interval_starttime": "2020-11-18 00:00:00",
+        "creator": "kongfei",
+        "catalog_name": "0",
+        "create_time": "2020-11-18 15:40:15",
+        "run_time": "2020-11-26 17:11:10",
+        "interval1": 1,
+        "catalog_id": 0,
+        "job_id": 3,
+        "per_month_day": 0,
+        "name": "清洗专用1",
+        "platform_id": "mtp",
+        "interval_endtime": "2020-11-18 23:59:59",
+        "status": 1
+      },
+      {
+        "job_type": 0,
+        "end_date": "2020-11-29",
+        "collect_content": 1,
+        "per_week_day": 0,
+        "per_day_interval": 0,
+        "per_month_week_month": 0,
+        "business_attribute": 1,
+        "per_day_interval_times": 1,
+        "catalog_level": "",
+        "update_time": "2020-11-25 17:00:35",
+        "platform_type": 0,
+        "rate": 0,
+        "per_month_week": 0,
+        "per_month_nweek": 0,
+        "per_month_month": 0,
+        "per_day_time": "1970-02-01 00:00:00",
+        "start_date": "2020-11-26",
+        "renter_id": 0,
+        "interval_starttime": "2020-11-25 00:00:00",
+        "creator": "caotao2",
+        "catalog_name": "景观提升及整改苗木采购",
+        "create_time": "2020-11-25 17:00:13",
+        "interval1": 1,
+        "catalog_id": 6813561,
+        "job_id": 12,
+        "per_month_day": 0,
+        "name": "测试专业名称",
+        "platform_id": "",
+        "interval_endtime": "2020-11-25 23:59:59",
+        "status": 0
+      }
+    ],
+    "prePage": 0,
+    "nextPage": 0,
+    "isFirstPage": true,
+    "isLastPage": true,
+    "hasPreviousPage": false,
+    "hasNextPage": false,
+    "navigatePages": 8,
+    "navigatepageNums": [
+      1
+    ],
+    "navigateFirstPage": 1,
+    "navigateLastPage": 1,
+    "columns": [
+      {
+        "name": "job_id",
+        "displayName": ""
+      },
+      {
+        "name": "renter_id",
+        "displayName": "租户id产品化预留"
+      },
+      {
+        "name": "name",
+        "displayName": "任务名称/订阅名称"
+      },
+      {
+        "name": "creator",
+        "displayName": "创建人"
+      },
+      {
+        "name": "platform_type",
+        "displayName": "系统来源，内部系统，"
+      },
+      {
+        "name": "platform_id",
+        "displayName": "来源系统编码"
+      },
+      {
+        "name": "job_type",
+        "displayName": "订阅类型，0重复执"
+      },
+      {
+        "name": "start_date",
+        "displayName": "开始日期"
+      },
+      {
+        "name": "end_date",
+        "displayName": "结束日期"
+      },
+      {
+        "name": "rate",
+        "displayName": "执行频率 0每天"
+      },
+      {
+        "name": "interval1",
+        "displayName": "执行间隔 0天，"
+      },
+      {
+        "name": "interval_starttime",
+        "displayName": "执行间隔开始时间"
+      },
+      {
+        "name": "interval_endtime",
+        "displayName": "执行间隔结束时间"
+      },
+      {
+        "name": "per_week_day",
+        "displayName": "每周执行：执行的天，"
+      },
+      {
+        "name": "per_day_time",
+        "displayName": "每天执行：执行一次时"
+      },
+      {
+        "name": "per_day_interval",
+        "displayName": "每天执行频率，0每"
+      },
+      {
+        "name": "per_month_day",
+        "displayName": "每月执行：每几天"
+      },
+      {
+        "name": "per_month_month",
+        "displayName": "每月执行：每几个月"
+      },
+      {
+        "name": "per_month_week",
+        "displayName": "每月执行：第几个星期"
+      },
+      {
+        "name": "per_month_nweek",
+        "displayName": "每月执行：第n个星期"
+      },
+      {
+        "name": "per_month_week_month",
+        "displayName": "每月执行：第n个星期"
+      },
+      {
+        "name": "status",
+        "displayName": "默认 1启用，0关"
+      },
+      {
+        "name": "create_time",
+        "displayName": "创建时间"
+      },
+      {
+        "name": "update_time",
+        "displayName": "更新时间"
+      },
+      {
+        "name": "catalog_id",
+        "displayName": "专业id"
+      },
+      {
+        "name": "catalog_name",
+        "displayName": "专业名称"
+      },
+      {
+        "name": "catalog_level",
+        "displayName": "专业等级"
+      },
+      {
+        "name": "business_attribute",
+        "displayName": "业务属性"
+      },
+      {
+        "name": "collect_content",
+        "displayName": "订阅内容"
+      }
+    ],
+    "lastPage": 1,
+    "firstPage": 1
+  }
+}

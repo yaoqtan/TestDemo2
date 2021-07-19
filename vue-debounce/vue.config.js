@@ -1,10 +1,19 @@
 
 console.log(process.env.NODE_ENV)
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
     publicPath: process.env.NODE_ENV === "production" ? "/" : "/",
     devServer: {
         open:true,
         port:8889,
+        proxy: {
+            '': {
+                target:'http://localhost:4000', //GraphQL/graphqlx 小demo
+                ws:true,
+                changeOrigin: true,
+
+            },
+        }
     },
     configureWebpack: {
         resolve: {
@@ -12,8 +21,17 @@ module.exports = {
                 'vue$': 'vue/dist/vue.esm.js'
             }
         }
+    },
+    chainWebpack: config => {
+        config
+          .plugin('webpack-bundle-analyzer')
+          .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
     }
-        //     default     //
+
+    // plugins: [
+    //     new BundleAnalyzerPlugin(),
+    // ],
+    //     default     //
    /* outputDir: "dist",
     assetsDir: "",
     indexPath: "index.html",

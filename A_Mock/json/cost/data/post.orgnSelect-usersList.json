@@ -1,0 +1,71 @@
+{
+  "code": "00000",
+  "engDesc": null,
+  "chnDesc": null,
+  "detail": null,
+  "content": [
+    {
+      "id": 15180000,
+      "userName": "李劲松",
+      "account": "lijs18",
+      "dept": "美的檀府"
+    },
+    {
+      "id": 15153900,
+      "userName": "杨宇卿",
+      "account": "yangyq8",
+      "dept": "派驻财务"
+    },
+    {
+      "id": 15154200,
+      "userName": "张晓瑞",
+      "account": "zhangxr",
+      "dept": "工程部"
+    },
+    {
+      "id": 15154500,
+      "userName": "邹立坤",
+      "account": "zoulk",
+      "dept": "江肇公司"
+    },
+    {
+      "id": 15154800,
+      "userName": "刘薇",
+      "account": "liuwei16",
+      "dept": "财务资金部"
+    },
+    {
+      "id": 15155100,
+      "userName": "马莹",
+      "account": "maying3",
+      "dept": "人力资源部"
+    },
+    {
+      "id": 15155400,
+      "userName": "孙宇",
+      "account": "sunyu",
+      "dept": "徐州美的东湖天城项目"
+    },
+    {
+      "id": 15155700,
+      "userName": "程明勇",
+      "account": "chengmy",
+      "dept": "审计风控中心"
+    },
+    {
+      "id": 15156000,
+      "userName": "冯俊",
+      "account": "fengjun2",
+      "dept": "成本控制部"
+    },
+    {
+      "id": 15156300,
+      "userName": "黄健平",
+      "account": "huangjp2",
+      "dept": "产品管理部"
+    }
+  ],
+  "total": 41458,
+  "hasNext": true,
+  "success": true
+}

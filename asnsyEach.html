@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+
+
+    async function process(array) {
+      for await (let i of array) {
+        fetch('https://api.ipify.org?format=jsonp',{
+          credentials: 'same-origin',
+          mode: 'no-cors',
+          method:'GET'
+        }).then(function(response) {
+          console.log(response)
+        }).catch(function(myJson) {
+          console.log(myJson);
+        });
+      }
+    }
+
+    process([1,2])
+
+
+  </script>
+</head>
+<body>
+
+
+</body>
+</html>

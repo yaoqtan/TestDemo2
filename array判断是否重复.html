@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var array = [1,2,3,4,5]
+        var hasReapt=false;
+        var hasReat1 = false
+        var num =0
+        var num1 = 0
+        array.reduce((acc,curr)=>{
+          for(var i=0;i<acc.length;i++){
+            num++
+            if(curr==acc[i]){
+              hasReapt=true
+            }
+          }
+          console.log(acc)
+          console.log(curr)
+
+          return acc.concat(curr)
+        },[])
+
+        //console.log(array1)
+        console.log(num)
+        console.log(hasReapt)
+
+        for(let i = 0; i<array.length;i++){
+          for(let j=0;j<array.length;j++){
+            num1++
+            if(i!=j && array[i]==array[j]){
+              hasReat1 = true
+              break
+            }
+          }
+          if(hasReat1) break
+        }
+        console.log(num1)
+
+    </script>
+</head>
+<body>
+
+</body>
+
+</html>

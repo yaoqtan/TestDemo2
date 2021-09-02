@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {number}
+   */
+  var removeDuplicates = function(nums) {
+    nums= nums.reduce((acc,cur)=>{
+      if(!acc.includes(cur)){
+        return [...acc,cur]
+      }
+      return acc
+    },[])
+    return nums
+  };
+  console.log(removeDuplicates([0,0,0,1,1,1,2,2,3,3,4]))
+</script>
+</body>
+</html>

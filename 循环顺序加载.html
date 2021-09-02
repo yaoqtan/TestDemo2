@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+
+    const callApi = async (url)=>{
+      return await fetch(url).then(res=>res.text())
+    }
+
+    let arr = ['https://api.ipify.org?format=jsonp','https://api.ipify.org?format=jsonp','https://api.ipify.org?format=jsonp']
+
+    const reduceToFetch=(arr,promiseFn)=>{
+
+      return arr.reduce((prev,cur)=>{
+        return prev.then(prevRes=>{//promise
+          return promiseFn(cur).then(resp=>{//promise
+            return [...prevRes,resp]
+          })
+        })
+      },Promise.resolve([]))
+
+     }
+     reduceToFetch(arr,callApi)
+
+
+
+
+
+
+
+    // function reduceToFetch1(array, promise) {
+    //   return array.reduce((prev, curr) =>
+    //     prev.then(prevResp =>
+    //       promise(curr).then(resp => [...prevResp, resp])
+    //     ), Promise.resolve([]))
+    // }
+    // reduceToFetch1(arr,callApi).then(res=>{
+    //   console.log(res)
+    // })
+
+
+
+    // function callApi(){
+    //   return fetch('https://api.ipify.org?format=jsonp').then((res)=>res.text())
+    // }
+    // Promise.all([callApi(),callApi()]).then(res=>{
+    //   console.log(res)
+    // })
+
+    // console.log(callApi().then((res)=>{
+    //   console.log(res)
+    // }))
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

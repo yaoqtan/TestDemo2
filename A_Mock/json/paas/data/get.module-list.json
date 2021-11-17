@@ -1,0 +1,30 @@
+{
+  "code": 0,
+  "msg": null,
+  "errorMsg": null,
+  "timestamp": null,
+  "data":[
+    {
+      "id": 1,
+      "name": "name",
+      "type": "type",
+      "alias": "alias",
+      "code": "code",
+      "updateTime": "updateTime",
+      "updateUser": "updateUser",
+      "status": "status"
+    },
+    {
+      "id": 2,
+      "name": "名称",
+      "type": "类型",
+      "alias": "别名",
+      "code": "编码",
+      "updateTime": "更新时间",
+      "updateUser": "更新人",
+      "status": "状态"
+    }
+  ],
+  "success": true
+}
+

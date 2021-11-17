@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    function clickA() {
+      // 新建个下载的a标签，完成后移除。
+      let a = document.createElement('a');
+      a.href = 'http://supd-admin-dev.mideazy.com/dc/importAndExport/exportTemplate?data=%7B%22source_id%22:%22segi%22,%22sup_type%22:0%7D'
+      document.body.appendChild(a);
+      a.click();
+      //document.body.removeChild(a);
+    }
+    function clickOpen(){
+      var baidu = 'http://supd-admin-dev.mideazy.com/dc/importAndExport/exportTemplate?data=%7B%22source_id%22:%22segi%22,%22sup_type%22:0%7D'
+      var myWindow= window.open(baidu)
+      setTimeout(()=>{
+        myWindow.close()
+      },1000)
+    }
+    for(var i=0;i<10;i++){
+      test(i)
+      setTimeout(function(){
+        console.log(i * 100)
+      },1000)
+    }
+    function test(i){
+      setTimeout(function(){
+        console.log(i)
+      },1000)
+    }
+
+  </script>
+</head>
+
+<body>
+  <div onclick="clickA()">点击创建a标签跳转</div>
+  <div onclick="clickOpen()">点击window.open</div>
+  <a href = "http://supd-admin-dev.mideazy.com/dc/importAndExport/exportTemplate?data=%7B%22source_id%22:%22segi%22,%22sup_type%22:0%7D">
+    a标签
+  </a>
+</body>
+
+</html>

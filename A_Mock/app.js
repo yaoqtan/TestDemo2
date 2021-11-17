@@ -11,6 +11,7 @@ const users = require('./routes/users')
 const fe = require('./routes/fe')
 const test = require('./routes/test')
 const cost = require('./routes/cost')
+const paas = require('./routes/paas')
 
 // error handler
 onerror(app)
@@ -41,6 +42,7 @@ app.use(users.routes(), users.allowedMethods())
 app.use(fe.routes(), fe.allowedMethods())
 app.use(test.routes(), test.allowedMethods())
 app.use(cost.routes(), cost.allowedMethods())
+app.use(paas.routes(), paas.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

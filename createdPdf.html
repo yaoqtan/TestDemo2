@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #capture{
+      position: absolute;
+        left: -100000px;
+
+    }
+  </style>
+</head>
+<body>
+<header>
+  <nav>
+    <ul>
+      <li>one</li>
+      ...
+    </ul>
+  </nav>
+</header>
+<section>
+  <aside>
+    <h3>it is a title</h3>
+    <a href="">Stone Giant</a>
+    ...
+  </aside>
+  <article>
+    <h2>Stone Giant</h2>
+    <p>Coming ... </p>
+    <p>以一团石头...</p>
+  </article>
+</section>
+<span id="renderPdf">renderPdf</span>
+<footer>write by linwalker @2017</footer>
+<div  id="capture" style="padding: 10px; background: #f5da55">
+  <h4 style="color: #000; ">Hello world!</h4>
+</div>
+
+<script type="text/javascript" src="./A_js/html2canvas.min.js"></script>
+<script type="text/javascript" src="./A_js/jsPdf.js"></script>
+<script src="./A_js/axios.min.js"></script>
+<script type="text/javascript">
+   function dataURLtoFile(dataurl, filename) {
+    var arr = dataurl.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  }
+
+
+
+  var downPdf = document.getElementById("renderPdf");
+   var capture = document.getElementById("capture");
+  downPdf.onclick = function() {
+    // 默认a4大小，竖直方向，mm单位的PDF
+    html2canvas(capture).then(canvas => {
+      console.log(canvas)
+      var contentWidth = canvas.width;
+      var contentHeight = canvas.height;
+      //一页pdf显示html页面生成的canvas高度;
+      var pageHeight = contentWidth / 592.28 * 841.89;
+      //未生成pdf的html页面高度
+      var leftHeight = contentHeight;
+      //页面偏移
+      var position = 0;
+      //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+      var imgWidth = 595.28;
+      var imgHeight = 592.28/contentWidth * contentHeight;
+      var pageData = canvas.toDataURL('image/jpeg', 1.0);
+       var  jsPDF  = window.jspdf.jsPDF;
+       //var doc = new jsPDF();
+      var pdf = new jsPDF('', 'pt', 'a4');
+      //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+      //当内容未超过pdf一页显示的范围，无需分页
+      if (leftHeight < pageHeight) {
+        pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight );
+      } else {
+        while(leftHeight > 0) {
+          pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+          leftHeight -= pageHeight;
+          position -= 841.89;
+          //避免添加空白页
+          if(leftHeight > 0) {
+            pdf.addPage();
+          }
+        }
+      }
+      console.log(pdf)
+
+      pdf.save('content.pdf');
+
+      var pdfData = pdf.output('datauristring')//获取base64Pdf
+      console.log(pdfData)
+
+      var myfile = dataURLtoFile(pdfData,'test.pdf')
+
+      var formdata = new FormData();
+      formdata.append("file", myfile); // 文件对象
+
+
+
+      var configs = {
+        headers:{'Content-Type':'multipart/form-data'}
+      };
+
+      axios.post('/teset/',formdata ,configs).then(res=>{
+        console.log(res)
+      })
+
+
+      //document.body.appendChild(canvas)
+
+      // var  jsPDF  = window.jspdf.jsPDF;
+      // var doc = new jsPDF();
+      // doc.text(canvas, 10, 10);
+      // doc.save('a4.pdf');
+
+    });
+  }
+
+</script>
+</body>
+</html>

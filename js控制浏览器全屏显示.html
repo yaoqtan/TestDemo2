@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script>
+    function enterFullscreen() {
+      var docElm = document.documentElement;
+      //W3C
+      if(docElm.requestFullscreen) {
+        docElm.requestFullscreen();
+      }
+      //FireFox
+      else if(docElm.mozRequestFullScreen) {
+        docElm.mozRequestFullScreen();
+      }
+      //Chrome等
+      else if(docElm.webkitRequestFullScreen) {
+        docElm.webkitRequestFullScreen();
+      }
+      //IE11
+      else if(docElm.msRequestFullscreen) {
+        docElm.msRequestFullscreen();
+      }
+    }
+    function exitFullscreen() {
+      //W3C
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+      //FireFox
+      else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      }
+      //Chrome等
+      else if (document.webkitCancelFullScreen) {
+        document.webkitCancelFullScreen();
+      }
+      //IE11
+      else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+  </script>
+</head>
+<body>
+<h1>测试全屏功能</h1>
+<button onclick="enterFullscreen()">进入全屏</button>
+<button onclick="exitFullscreen()">退出全屏</button>
+</body>
+</html>

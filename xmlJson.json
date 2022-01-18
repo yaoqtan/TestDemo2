@@ -1,0 +1,472 @@
+{
+  "code": 200,
+  "message": "操作成功！",
+  "result": {
+    "btDomainXML": "<?xml version=\"1.0\"?>\r\n<BusinessType businessAssembly=\"Mysoft.Cbgl.Business\" businessClassName=\"CbContractFDDZXHTSP\" BusinessGUID=\"0126c66f-4c51-408a-8f2c-b6bbe9fa46d1\"><Item><Domain name=\"合同编号\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"200\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">sdgs.sdhc2-2015-0319</Domain><Domain name=\"合同名称\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"80\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">翰诚四期项目大堂及电梯前室瓷砖购销</Domain><Domain name=\"合同类别\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"400\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">采购类</Domain><Domain name=\"合同细类\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"10\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">其它类</Domain><Domain name=\"币种\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"20\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">人民币</Domain><Domain name=\"汇率\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\">1.00000000</Domain><Domain name=\"合同属性\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"16\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">预计合同</Domain><Domain name=\"合同金额\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\">270300.0000</Domain><Domain name=\"合同金额（大写）\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"200\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">贰拾柒万零叁佰元整</Domain><Domain name=\"有效签约金额\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\">0.00</Domain><Domain name=\"有效签约金额（大写）\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"100\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">零</Domain><Domain name=\"有效签约金额（￥）\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"12\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\">0.0000</Domain><Domain name=\"有效签约金额（￥）（大写）\" isupdate=\"0\" isnull=\"1\" type=\"varchar\" len=\"100\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">零</Domain><Domain name=\"合同签约日期\" isupdate=\"0\" isnull=\"0\" type=\"datetime\" len=\"20\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">2015-08-06</Domain><Domain name=\"经办人\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"20\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">陈伟忠</Domain><Domain name=\"经办部门\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"50\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">招标中心</Domain><Domain name=\"合同性质\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"16\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">补充合同</Domain><Domain name=\"甲方单位\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"100\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">广东美的置业有限公司</Domain><Domain name=\"甲方单位签字人\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"20\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">赫恒乐</Domain><Domain name=\"乙方单位\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"100\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">佛山市金满堂装饰工程有限公司</Domain><Domain name=\"乙方单位签字人\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"20\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">陈明</Domain><Domain name=\"丙方单位\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"100\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\"></Domain><Domain name=\"丙方单位签字人\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"20\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\"></Domain><Domain name=\"所属项目\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"400\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">翰诚二区地块-四期</Domain><Domain name=\"形成方式\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"10\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">招标</Domain><Domain name=\"造价性质\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"10\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">基本确定</Domain><Domain name=\"最小规划余量\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\">0.00</Domain><Domain name=\"主合同名称\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"80\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">翰诚四期项目大堂及电梯前室装修工程</Domain><Domain name=\"合同开工日期\" isnull=\"0\" type=\"datetime\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\"></Domain><Domain name=\"合同竣工日期\" isnull=\"0\" type=\"datetime\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\"></Domain><Domain name=\"工期\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\">0</Domain><Domain name=\"保修金额\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\">0.0000</Domain><Domain name=\"保修金额（大写）\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"100\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">零</Domain><Domain name=\"保修期限\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\"></Domain><Domain name=\"履约保证金\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\">0.0000</Domain><Domain name=\"履约保证金（大写）\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"100\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">零</Domain><Domain name=\"承包范围\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"500\" displaytype=\"textarea\" dropdownoptions=\"\" default=\"\" isuser=\"0\"></Domain><Domain name=\"付款方式\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"500\" displaytype=\"textarea\" dropdownoptions=\"\" default=\"\" isuser=\"0\"></Domain><Domain name=\"质量要求\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"500\" displaytype=\"textarea\" dropdownoptions=\"\" default=\"\" isuser=\"0\"></Domain><Domain name=\"保修约定\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"500\" displaytype=\"textarea\" dropdownoptions=\"\" default=\"\" isuser=\"0\"></Domain><Domain name=\"违约责任\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"500\" displaytype=\"textarea\" dropdownoptions=\"\" default=\"\" isuser=\"0\"></Domain><Domain name=\"所属项目类型\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"200\" displaytype=\"textarea\" dropdownoptions=\"\" default=\"\" isuser=\"0\">单项目</Domain><Domain name=\"合同GUID\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"40\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\">0126c66f-4c51-408a-8f2c-b6bbe9fa46d1</Domain><Domain name=\"合约规划使用明细记录数\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\">0</Domain><Domain name=\"部门费用使用明细记录数\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\">0</Domain><Domain name=\"合约规划列表比较域\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"500\" displaytype=\"textarea\" dropdownoptions=\"\" default=\"\" isuser=\"0\"/><Domain name=\"部门费用列表比较域\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"500\" displaytype=\"textarea\" dropdownoptions=\"\" default=\"\" isuser=\"0\">757602046</Domain><Group name=\"部门费用列表\" RowCount=\"0\"><Item><Domain name=\"责任人\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"20\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\" businessdynamic=\"1\"></Domain><Domain name=\"责任部门\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"50\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\" businessdynamic=\"1\"></Domain><Domain name=\"部门费用科目名称\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"40\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\" businessdynamic=\"1\"></Domain><Domain name=\"部门费用对应金额\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\" businessdynamic=\"1\"></Domain></Item></Group><Domain name=\"Input合同类别\" isupdate=\"0\" len=\"\" displaytype=\"select\" dropdownoptions=\"集团负责设计类,集团负责设计类|集团负责工程类,集团负责工程类|项目负责设计类,项目负责设计类|项目负责工程类,项目负责工程类|项目工程部招标,项目工程部招标|项目开发招标,项目开发招标|造价咨询类,造价咨询类|其他类合同,其他类合同|单株苗木大于等于3万,单株苗木大于等于3万|物料采购,物料采购|项目负责营销类,项目负责营销类|项目负责客服类,项目负责客服类\" isuser=\"1\" type=\"text\">项目负责工程类</Domain><Domain name=\"Input承包范围\" isupdate=\"0\" len=\"2000\" displaytype=\"textarea\" dropdownoptions=\"\" isuser=\"1\" type=\"text\">翰诚四期项目大堂及电梯前室装修工程电梯厅墙身地面所需 瓷砖 的供货及售后服务事项</Domain><Domain name=\"Input付款方式\" isupdate=\"0\" len=\"2000\" displaytype=\"textarea\" dropdownoptions=\"\" isuser=\"1\" type=\"text\">1、本合同签订后，买方向广东美的置业有限公司（以下简称美的置业）提交《甲控材料设备委托付款证明书》（合同附件1-2），确认本合同材料款全程由“美的置业”代付，并同意材料款由“美的置业”在《翰诚四期项目大堂及电梯前室装修工程合同》（合同编号：sdgs.sdhc2-2015-0101）工程款中扣除。买方必须提供等额合法的有效发票（建安发票）给“美的置业”。\r\n2、本合同无预付款。\r\n3、卖方按买方确认的供货进度计划分批供货，买方于次月向卖方支付上月供货金额80%的到货款。\r\n4、合同内全部产品供货完毕，买方向卖方支付至到货总金额的80%。\r\n5、合同内全部产品供货完毕并经买方验收合格后20天内，卖方向买方提交结算资料，买方须在30天内完成结算审核，结算审定后60天内买方向卖方支付至结算总额100%的结算款。</Domain><Group name=\"中间科目列表\"><Item rowIndex=\"1\"><Domain name=\"中间科目名称\" len=\"40\" displaytype=\"text\" dropdownoptions=\"\" isuser=\"0\" type=\"varchar\" businessdynamic=\"1\" isupdate=\"0\" dynamic=\"1\"></Domain><Domain name=\"中间科目对应金额\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" isuser=\"0\" type=\"money\" businessdynamic=\"1\" isupdate=\"0\" dynamic=\"1\"></Domain></Item></Group><Group name=\"合约规划列表\"><Item rowIndex=\"1\"><Domain name=\"合约规划所属项目\" isupdate=\"0\" isnull=\"0\" type=\"varchar\" len=\"400\" displaytype=\"text\" dropdownoptions=\"\" default=\"\" isuser=\"0\" businessdynamic=\"1\"/><Domain name=\"主合同对应金额\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\" businessdynamic=\"1\"/><Domain name=\"预估变更金额\" isupdate=\"0\" isnull=\"0\" type=\"money\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" default=\"\" isuser=\"0\" businessdynamic=\"1\"/><Domain name=\"生效后（科目）规划余额\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" isuser=\"0\" type=\"money\" businessdynamic=\"1\" isupdate=\"0\" dynamic=\"1\"/><Domain name=\"生效后（合同）规划余量\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" isuser=\"0\" type=\"money\" businessdynamic=\"1\" isupdate=\"0\" dynamic=\"1\"/><Domain name=\"生效后（合同）预估变更金额\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" isuser=\"0\" type=\"money\" businessdynamic=\"1\" isupdate=\"0\" dynamic=\"1\"/><Domain name=\"成本科目\" len=\"40\" displaytype=\"text\" dropdownoptions=\"\" isuser=\"0\" type=\"varchar\" businessdynamic=\"1\" isupdate=\"0\" dynamic=\"1\"></Domain><Domain name=\"合约规划名称\" len=\"100\" displaytype=\"text\" dropdownoptions=\"\" isuser=\"0\" type=\"varchar\" businessdynamic=\"1\" isupdate=\"0\" dynamic=\"1\"></Domain><Domain name=\"合约规划金额\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" isuser=\"0\" type=\"money\" businessdynamic=\"1\" isupdate=\"0\" dynamic=\"1\"></Domain><Domain name=\"本合同对应金额\" len=\"16\" displaytype=\"number\" dropdownoptions=\"\" isuser=\"0\" type=\"money\" businessdynamic=\"1\" isupdate=\"0\" dynamic=\"1\"></Domain></Item></Group></Item></BusinessType>\r\n",
+    "businessGUID": "0126C66F-4C51-408A-8F2C-B6BBE9FA46D1",
+    "businessType": "非单独执行合同审批",
+    "documentsDtoList": [
+      {
+        "docName": "美的地产集团2013-2015年标准层电梯厅瓷砖战略采购合作协议（新明珠1）.pdf",
+        "docType": "工作流",
+        "fileName": "工作流2015_08_06(10_46_38_98).pdf",
+        "fkGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "location": "J:\\UpFiles\\201508\\"
+      },
+      {
+        "docName": "材料设备需用量计划表.pdf",
+        "docType": "工作流",
+        "fileName": "工作流2015_08_06(10_46_44_30).pdf",
+        "fkGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "location": "J:\\UpFiles\\201508\\"
+      },
+      {
+        "docName": "翰诚四期项目大堂及电梯前室瓷砖购销合同（材料公司-金满堂，草稿版）.docx",
+        "docType": "工作流",
+        "fileName": "工作流2015_08_06(10_46_56_84).docx",
+        "fkGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "location": "J:\\UpFiles\\201508\\"
+      },
+      {
+        "docName": "翰诚四期项目大堂及电梯前室瓷砖购销合同（材料公司-新明珠，草稿版）.docx",
+        "docType": "工作流",
+        "fileName": "工作流2015_08_06(10_47_53_88).docx",
+        "fkGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "location": "J:\\UpFiles\\201508\\"
+      },
+      {
+        "docName": "翰诚四期项目大堂及电梯前室瓷砖购销合同（材料公司-新明珠，审完版）.docx",
+        "docType": "工作流",
+        "fileName": "工作流2015_08_10(10_23_11_89).docx",
+        "fkGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "location": "J:\\UpFiles\\201508\\"
+      },
+      {
+        "docName": "翰诚四期项目大堂及电梯前室瓷砖购销合同（材料公司-金满堂，审完版）.docx",
+        "docType": "工作流",
+        "fileName": "工作流2015_08_29(10_10_13_44).docx",
+        "fkGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "location": "J:\\UpFiles\\201508\\"
+      },
+      {
+        "docName": "翰诚四期项目大堂及电梯前室瓷砖购销合同（材料公司-金满堂，盖章版）.pdf",
+        "docType": "工作流",
+        "fileName": "工作流2015_08_29(10_10_21_89).pdf",
+        "fkGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "location": "J:\\UpFiles\\201508\\"
+      }
+    ],
+    "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+    "stepDtoList": [
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "00BBD0FB-7AD2-46DE-B048-A174305909C2",
+        "stepId": "6",
+        "stepName": "总经理"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "0290E9AC-4B65-4148-87E2-6D886903E47A",
+        "stepId": "42",
+        "stepName": "成本部长"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "104E5CF4-0F0E-467F-8AEB-65F057EAF6AA",
+        "stepId": "23",
+        "stepName": "总经理"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "11F0DA1E-61C1-487B-A2E9-EE8EB9CCBAE8",
+        "stepId": "7",
+        "stepName": "法务"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "177D5CB0-5D45-4D59-AD94-D19B19051701",
+        "stepId": "33",
+        "stepName": "招标采购副总监"
+      },
+      {
+        "nodeDtoList": [
+          {
+            "auditorName": "谭奔",
+            "handleDatetime": "2015-08-07 23:11:27",
+            "handleText": "无异议",
+            "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+            "stepGUID": "259EA6E7-8DA3-4545-8500-55A4D9470549",
+            "stepPathID": "4"
+          }
+        ],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "259EA6E7-8DA3-4545-8500-55A4D9470549",
+        "stepId": "9",
+        "stepName": "法务"
+      },
+      {
+        "nodeDtoList": [
+          {
+            "auditorName": "陈伟忠",
+            "handleDatetime": "2015-08-10 10:23:24",
+            "handleText": "按审批结果执行！",
+            "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+            "stepGUID": "296375A5-5B10-47BC-894A-31E5E0598F33",
+            "stepPathID": "6"
+          }
+        ],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "296375A5-5B10-47BC-894A-31E5E0598F33",
+        "stepId": "31",
+        "stepName": "流程反馈"
+      },
+      {
+        "nodeDtoList": [
+          {
+            "auditorName": "陈伟忠",
+            "handleDatetime": "2015-08-06 10:57:42",
+            "handleText": "1、本次所用材料为翰诚四期项目大堂及电梯前室装修工程的甲控材，按设计定板品牌为“冠珠”，由年度供应商“广东新明珠陶瓷集团有限公司”供应。\r\n2、按管理需要，签订合同的关系由宁波材料公司——施工单位，订波材料公司——供货厂家，本合同为订波材料公司——施工单位的购销合同，请领导审批！",
+            "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+            "stepGUID": "2B95CB08-D011-46FF-B5BE-1F4D629646C1",
+            "stepPathID": "1"
+          }
+        ],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "2B95CB08-D011-46FF-B5BE-1F4D629646C1",
+        "stepId": "1",
+        "stepName": "发起人"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "2CEBEA8B-094E-41C7-B7B9-52A177CC8AB4",
+        "stepId": "44",
+        "stepName": "会签"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "3091FAF1-6FB9-497F-9A7B-7305925B7942",
+        "stepId": "35",
+        "stepName": "成本部长"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "33B912ED-B96B-4E57-BA99-A6D522C3278F",
+        "stepId": "19",
+        "stepName": "总经理"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "34D3A555-8D15-410E-B65C-97085AFFCF74",
+        "stepId": "11",
+        "stepName": "会签"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "39734B1F-6F71-4F3B-BF02-3A310509090F",
+        "stepId": "18",
+        "stepName": "法务"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "3AD26756-8F8D-48C0-AD52-5AD50FC198B6",
+        "stepId": "34",
+        "stepName": "成本部长"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "422FEFB9-0332-4AEA-A1C5-0913276AF419",
+        "stepId": "20",
+        "stepName": "会签"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "42EF396F-39E5-4EA6-A796-397856AB19D0",
+        "stepId": "30",
+        "stepName": "招标采购副总监"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "4475F6C5-F988-4C8A-8677-95D2A6F78E70",
+        "stepId": "47",
+        "stepName": "总经理"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "46E5560A-460D-4B17-BD7E-67EE806E5785",
+        "stepId": "5",
+        "stepName": "法务"
+      },
+      {
+        "nodeDtoList": [
+          {
+            "auditorName": "黎惠惠",
+            "handleDatetime": "2015-08-07 17:56:04",
+            "handleText": "同意。",
+            "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+            "stepGUID": "4AB5685E-F8ED-4D6E-91B2-6B7248C2C854",
+            "stepPathID": "3"
+          }
+        ],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "4AB5685E-F8ED-4D6E-91B2-6B7248C2C854",
+        "stepId": "37",
+        "stepName": "成本部长"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "4AE4ACF7-4C16-4D9D-B7AD-41DD3279FB55",
+        "stepId": "38",
+        "stepName": "成本部长"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "4CA7685A-EC83-4B25-A684-FDB95B538AD1",
+        "stepId": "28",
+        "stepName": "法务"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "553DE8AB-4E73-43D8-B3B8-E209011953C3",
+        "stepId": "40",
+        "stepName": "成本部长"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "5996701A-1950-4F2C-80C2-7A5412335A12",
+        "stepId": "2",
+        "stepName": "会签"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "5F63F29B-591E-44B1-AED3-2031440C5290",
+        "stepId": "32",
+        "stepName": "总经理"
+      },
+      {
+        "nodeDtoList": [
+          {
+            "auditorName": "陈伟忠",
+            "handleDatetime": "2015-08-29 10:10:34",
+            "handleText": "已上传盖章版协议。",
+            "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+            "stepGUID": "612F8677-13F1-4EFA-BDEC-A32A58B65631",
+            "stepPathID": "7"
+          }
+        ],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "612F8677-13F1-4EFA-BDEC-A32A58B65631",
+        "stepId": "48",
+        "stepName": "归档"
+      },
+      {
+        "nodeDtoList": [
+          {
+            "auditorName": "黎惠嫦",
+            "handleDatetime": "2015-08-06 16:43:13",
+            "handleText": "同意",
+            "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+            "stepGUID": "62FD8D27-8948-479B-AD44-5C756F69AEC0",
+            "stepPathID": "2"
+          },
+          {
+            "auditorName": "吴文权",
+            "handleDatetime": "2015-08-07 14:43:49",
+            "handleText": "同意",
+            "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+            "stepGUID": "62FD8D27-8948-479B-AD44-5C756F69AEC0",
+            "stepPathID": "2"
+          }
+        ],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "62FD8D27-8948-479B-AD44-5C756F69AEC0",
+        "stepId": "8",
+        "stepName": "会签"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "7521802F-DC6A-4C0E-8535-1980CB768BF8",
+        "stepId": "3",
+        "stepName": "会签"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "7534D0D0-DC4F-456D-A20B-CF959F06877F",
+        "stepId": "12",
+        "stepName": "法务"
+      },
+      {
+        "nodeDtoList": [
+          {
+            "auditorName": "邱银洲",
+            "handleDatetime": "2015-08-09 11:17:01",
+            "handleText": "同意。",
+            "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+            "stepGUID": "7554A4BC-0F6A-4BF6-A80E-690D5A2B004D",
+            "stepPathID": "5"
+          }
+        ],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "7554A4BC-0F6A-4BF6-A80E-690D5A2B004D",
+        "stepId": "10",
+        "stepName": "总经理"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "78753A37-6BD2-47E1-A709-ACA3AAC8B43D",
+        "stepId": "29",
+        "stepName": "总经理"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "7F9C56D2-CA40-4F82-B928-F8A890B5E6BC",
+        "stepId": "41",
+        "stepName": "成本部长"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "8E590728-8656-4898-A729-48F6565A992E",
+        "stepId": "45",
+        "stepName": "成本部长"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "9B16AB64-A014-4F00-B80B-6ED4651AA053",
+        "stepId": "14",
+        "stepName": "法务"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "9B61AEE1-8E42-4815-8096-C6B52835113C",
+        "stepId": "46",
+        "stepName": "项目法务"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "A410BBA7-F422-4469-B1D2-FFB26E75D8C4",
+        "stepId": "43",
+        "stepName": "法务"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "AA6E3B28-B798-45BF-BFBC-B5D9E918C624",
+        "stepId": "4",
+        "stepName": "总经理"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "AC93BE1D-9410-406A-BFD3-958003204EB9",
+        "stepId": "13",
+        "stepName": "会签"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "B5937E22-A7BE-4414-8B5C-D1E05FA52829",
+        "stepId": "25",
+        "stepName": "法务"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "B7490033-4C1B-40B1-A775-70662E88686D",
+        "stepId": "15",
+        "stepName": "总经理"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "B76C9DB7-66B2-4677-8AC4-79C94C43CBF3",
+        "stepId": "24",
+        "stepName": "会签"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "C0BF5E79-7ECC-40C1-B827-5A165EBCE836",
+        "stepId": "21",
+        "stepName": "法务"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "C6D7B68B-3825-4A70-A4B3-62255B392B1B",
+        "stepId": "16",
+        "stepName": "总经理"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "D363B95F-F0A0-450D-BE43-3FCB5AED3349",
+        "stepId": "36",
+        "stepName": "成本部长"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "D71A5221-F94D-46D6-81E1-72FB70D57FD7",
+        "stepId": "22",
+        "stepName": "会签"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "D9AC8C2F-F691-47FD-9B0B-E016B2AD612E",
+        "stepId": "26",
+        "stepName": "总经理"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "DEA5BF0C-7524-4CBB-814D-AB63785B81DD",
+        "stepId": "17",
+        "stepName": "会签"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "F431C43C-5173-46BE-9B92-0AA9A7F9E5ED",
+        "stepId": "27",
+        "stepName": "会签"
+      },
+      {
+        "nodeDtoList": [],
+        "processGUID": "530756C2-5390-44A1-BC05-6BA250C33689",
+        "stepGUID": "F53DCA9D-AA86-4BE7-9457-C1F44CE77390",
+        "stepId": "39",
+        "stepName": "成本部长"
+      }
+    ]
+  },
+  "success": true,
+  "timestamp": 1639031165045
+}

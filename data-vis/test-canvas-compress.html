@@ -57,7 +57,7 @@
             const ctx = canvas.getContext('2d');
             ctx.clearRect(0,0,maxW,maxH);//情况画布
             ctx.drawImage(image,0,0,maxW,maxH);//画布填充图片
-            const compressImage = canvas.toDataURL('image/jpeg',0.1);//获取压缩，类型，压缩比例
+            const compressImage = canvas.toDataURL('image/jpeg',0.9);//获取压缩，类型，压缩比例
             callback && callback(compressImage);
             console.log(compressImage)
             const _image = new Image()
@@ -97,9 +97,6 @@
         }
         //压缩图片
         converImageToBase64(file,(base64Image)=>compress(base64Image,uploadToServer))
-
-
-
 
     })
   </script>

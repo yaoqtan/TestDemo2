@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $.ajax({
+        //  url: "https://signin.mideazy.com/v1/tgticket/st?tgticket=访问4A系统获取到的token",  生产环境
+        url: "https://signinuat.mideazy.com/v1/tgticket/st?tgticket=TGT-123455-tErRXCB9oGaB89L5o3W7x6tnvFyu87fgphBOBhtAULkZPXH1nq1OrDZ-CIK-amP8zkImvxl7946",  // 测试环境
+        type: 'GET',
+        timeout: 2000,
+        dataType: "jsonp",
+        jsonp: "callback",
+        async: true,
+        success: function (data) {
+         console.log(data)
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+          console.log(XMLHttpRequest,textStatus,errorThrown)
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+</body>
+</html>

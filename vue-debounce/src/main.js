@@ -11,6 +11,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import './utils/dialog'
 import Directive from './utils/directive'
+import request from './utils/request'
 Directive.initDirective(Vue);
 //Vue.use(scroll)
 //Vue.use(scroll,{componentName: 'scroll-seamless'})
@@ -25,7 +26,7 @@ Vue.prototype.$vuescrollConfig = {
 };
 
 Vue.config.productionTip = false
-
+Object.defineProperty(Vue.prototype, '$Http', { value: request })
 new Vue({
   router,
   store,

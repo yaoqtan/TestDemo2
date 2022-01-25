@@ -7,6 +7,9 @@ import DemoScroll from '../views/DemoScroll.vue'
 import AttrListeners from '../views/AttrListeners.vue'
 import TextComputed from '../views/TextComputed.vue'
 import InputCustom from '../views/InputCustom.vue'
+import ElDialogName from '../views/ElDialogName.vue'
+import MouseMovement from '../views/MouseMovement.vue'
+import AxiosDemo from '../views/AxiosDemo'
 
 Vue.use(VueRouter)
 
@@ -74,6 +77,30 @@ Vue.use(VueRouter)
       path: '/inputCustom',
       name: 'inputCustom',
       component: InputCustom,
+      meta:{
+        keepAlive:true
+      },
+    },
+    {
+      path: '/el_dialog',
+      name: 'elDialogName',
+      component: ElDialogName,
+      meta:{
+        keepAlive:true
+      },
+    },
+    {
+      path: '/mouse_movement',
+      name: 'MouseMovement',
+      component: MouseMovement,
+      meta:{
+        keepAlive:true
+      },
+    },
+    {
+      path: '/axios_demo',
+      name: 'AxiosDemo',
+      component: AxiosDemo,
       meta:{
         keepAlive:true
       },

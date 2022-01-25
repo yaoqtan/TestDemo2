@@ -22,8 +22,9 @@
       },Promise.resolve([]))
 
      }
-     reduceToFetch(arr,callApi)
-
+     reduceToFetch(arr,callApi).then(res=>{
+       console.log(res)
+     })
 
 
 

@@ -15,7 +15,7 @@
       <a-range-picker/>
 
     </scroll>
-    <el-dialog
+    <!-- <el-dialog
         title="提示"
         :visible="dialogVisible"
         width="30%"
@@ -26,7 +26,7 @@
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
 
   </div>
 </template>
@@ -35,8 +35,8 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import scroll from 'vue-seamless-scroll'
-import axios from 'axios'
-import pinyin from 'pinyin'
+// import axios from 'axios'
+// import pinyin from 'pinyin'
 
 export default {
   name: 'Home',
@@ -54,16 +54,16 @@ export default {
     console.log('beforeCreate1')
   },
   created(){
-    axios.get(`/graphql?query=${this.getQuery()}`).then(res => {
-      console.log("返回值: 2", res.data);
-    }).catch(err=>console.log(err));
-    axios.get(`/json`).then(res => {
-      console.log("json", res);
-    }).catch(err=>console.log(err));
-    console.log('created1')
-    console.log(pinyin('we',{
-      style:pinyin.STYLE_NORMAL,
-    }))
+    // axios.get(`/graphql?query=${this.getQuery()}`).then(res => {
+    //   console.log("返回值: 2", res.data);
+    // }).catch(err=>console.log(err));
+    // axios.get(`/json`).then(res => {
+    //   console.log("json", res);
+    // }).catch(err=>console.log(err));
+    // console.log('created1')
+    // console.log(pinyin('we',{
+    //   style:pinyin.STYLE_NORMAL,
+    // }))
   },
   computed:{
     testData(){

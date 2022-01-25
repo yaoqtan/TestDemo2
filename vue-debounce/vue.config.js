@@ -7,11 +7,10 @@ module.exports = {
         open:true,
         port:8889,
         proxy: {
-            '': {
-                target:'http://localhost:4000', //GraphQL/graphqlx 小demo
+            'test': {
+                target:'http://localhost:8091/',//'http://localhost:4000', //GraphQL/graphqlx 小demo
                 ws:true,
                 changeOrigin: true,
-
             },
         }
     },

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @click="test" >
+  <div id="app">
     <div id="nav" >
       <router-link to="/">Home</router-link> |
 
@@ -10,12 +10,15 @@
 
       <router-link to="/attrListeners">AttrListeners</router-link> |
       <router-link to="/textComputed">TextComputed</router-link> |
-      <router-link to="/inputCustom">inputCustom</router-link>
+      <router-link to="/inputCustom">inputCustom</router-link> |
+      <router-link to="/el_dialog">Eldialog</router-link> |
+      <router-link to="/mouse_movement">MouseMovement</router-link> |
+      <router-link to="/axios_demo">axios</router-link>
 
     </div>
-    <div class="test"  :style="{top:pageY,left:pageX}">
+    <!-- <div class="test"  :style="{top:pageY,left:pageX}">
       test
-    </div>
+    </div> -->
     <!-- <div >
       <router-link to="/">Home</router-link> |
       
@@ -43,16 +46,16 @@
 export default {
   data(){
     return{
-      pageY:0,
-      pageX:0
+      // pageY:0,
+      // pageX:0
     }
   },
   methods:{
-    test(e){
-      console.log(e)
-      this.pageY=e.y+'px'
-      this.pageX=e.x+'px'
-    }
+    // test(e){
+    //   console.log(e)
+    //   this.pageY=e.y+'px'
+    //   this.pageX=e.x+'px'
+    // }
   }
 }
 </script>
@@ -61,7 +64,7 @@ export default {
 
 
 <style>
-.test{
+/* .test{
   position: fixed;
   background: red;
   width: 100px;
@@ -69,13 +72,14 @@ export default {
   top:0;
   bottom:0
 
-}
+} */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height: 100vh;
 }
 
 #nav {
